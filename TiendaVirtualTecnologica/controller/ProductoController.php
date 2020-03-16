@@ -13,7 +13,7 @@ class ProductoController {
         $tipoImagen = $_FILES['imagen']['type'];
         $tamaño = $_FILES['imagen']['size'];
 
-        $pathParcial = "/TiendaVirtualTecnologica2/TiendaVirtualTecnologica/public/img/";
+        $pathParcial = "/TiendaTecnoligicaVirtual1/TiendaVirtualTecnologica/public/img/";
         if ($tamaño <= 3000000) {
             if ($tipoImagen == 'image/jpg' || $tipoImagen == 'image/jpeg' || $tipoImagen == 'image/png') {
                 $carpetaDestino = $_SERVER['DOCUMENT_ROOT'].$pathParcial;

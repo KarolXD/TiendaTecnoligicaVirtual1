@@ -51,11 +51,11 @@ var guardarP = function () {
                 $("#alertControl").html('<div class="alert alert-success" id="alert">' + response + '</div>');
 
                 window.setTimeout(function () {
-                    $(".alert").fadeTo(500, 0).slideUp(500, function () {
+                    $(".alert").fadeTo(5000000, 0).slideUp(50000000, function () {
                         $(this).remove();
                     });
 
-                }, 300);
+                }, 3000000000);
 
             }
         });

@@ -22,11 +22,11 @@ class productoData {
 
 
     public function registrarProducto($nombre, $precio, $descripcion, $rutaImg, $cantidad, $categoria,$subcategoria) {
-        $data = array($nombre,1, $precio,$cantidad, $rutaImg, $descripcion, $categoria,$subcategoria);
+        $data = array($nombre, $precio,$cantidad, $rutaImg, $descripcion, $categoria,$subcategoria);
 
-        $consulta = $this->db->prepare('INSERT INTO producto(nombreProducto,codigoProducto,precio, '
+        $consulta = $this->db->prepare('INSERT INTO producto(nombreProducto,precio, '
                 . 'cantidad, rutaImagen, descripcion,codigoCategoria,codigoSubCategoria)'
-                . ' VALUES(?,?,?,?,?,?,?,?)');
+                . ' VALUES(?,?,?,?,?,?,?)');
 
         $consulta->execute($data);
         echo $consulta->errorInfo()[2];
