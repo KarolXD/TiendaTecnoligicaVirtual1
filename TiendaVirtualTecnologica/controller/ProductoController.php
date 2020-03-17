@@ -111,5 +111,22 @@ class ProductoController {
         $PD = new productoData();
         echo json_encode($PD->listarSubCategorias());
     }
+    
+    
+    
+    
+    public function eliminarProducto() {
+        require 'model/data/productoData.php';
+        $PD = new productoData();
+        $id = filter_input(INPUT_GET, 'codigoProducto');
+        $PD->eliminarProducto($id);
+        echo 'Eliminado';
+        $data['xd'] =$PD->listarProductos();        
+        $this->view->show("menuProductoView.php", $data);   
+        
+    }
+    
+    
+    
 
 }

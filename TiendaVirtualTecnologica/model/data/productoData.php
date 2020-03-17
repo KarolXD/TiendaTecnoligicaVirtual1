@@ -74,5 +74,16 @@ class productoData {
         $consulta->CloseCursor();
         return $resultado;
     }
+    
+    
+    
+    public function eliminarProducto($codigo) {
+       $consulta = $this->db->prepare('DELETE FROM producto WHERE codigoProducto = "'.$codigo.'"');
+        $consulta->execute();
+        $resultado = $consulta->fetchAll();
+        $consulta->CloseCursor();
+        return $resultado;
+    }
+    
 
 }

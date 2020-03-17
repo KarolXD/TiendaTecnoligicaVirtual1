@@ -34,7 +34,7 @@ require 'public/headerMenuP.php';
                 <tr>
 
                     <td>  <a  class="btn btn-warning" href='?controlador=Producto&accion=filtrarProductoById&codigoProducto=<?php echo $item[0] ?>'>Actualizar</a> </td>
-                    <td>   <a  class="btn btn-danger" href="?controlador=Producto&accion=eliminarProductoView&id">Eliminar</a> </td>
+                    <td>   <a  class="btn btn-danger" href="?controlador=Producto&accion=eliminarProducto&codigoProducto=<?php echo $item[0] ?>">Eliminar</a> </td>
                     <td scope="row"><?php echo $item[0] ?></td>
                     <td><?php echo $item[1] ?></td>
                     <td><?php echo $item[2] ?></td>
