@@ -37,8 +37,13 @@ require 'public/headerMenuP.php';
                     <td>   <a  class="btn btn-danger" href="?controlador=Producto&accion=eliminarProducto&codigoProducto=<?php echo $item[0] ?>">Eliminar</a> </td>
                     <td scope="row"><?php echo $item[0] ?></td>
                     <td><?php echo $item[1] ?></td>
-                    <td><?php echo $item[2] ?></td>
-                
+
+                    <td> 
+
+                        <img alt="sin img" height="100" width="100" src = "<?php echo ($item[2]) ?>"/>  
+
+                    </td>
+
                     <td><?php echo $item[3] ?></td>
                     <td><?php echo $item[4] ?></td>
                     <td><?php echo $item[5] ?></td>
@@ -48,11 +53,11 @@ require 'public/headerMenuP.php';
 
 
                 </tr>
-                     </tbody>
-                <?php
-            }
-            ?>
-   
+            </tbody>
+            <?php
+        }
+        ?>
+
     </table>
 </div>
 <br>

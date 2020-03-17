@@ -11,7 +11,7 @@
  *
  * @author Maikel
  */
-class productoData {
+ class productoData {
 
     protected $db;
 
@@ -31,21 +31,14 @@ class productoData {
         echo $consulta->errorInfo()[2];
     }
 
-//    public function modificarProducto($nombre, $precio, $descripcion, $rutaImg, $cantidad, $categoria, $subcategoria, $codigo) {
-//        $data = array($nombre, $precio, $cantidad, $rutaImg, $descripcion, $categoria, $subcategoria,$codigo);
-//
-//        $consulta = $this->db->prepare('update producto set nombreProducto=?,precio=?,cantidad=?,rutaImagen=?, descripcion=?,codigoCategoria=?,codigoSubCategoria=? where codigoProducto=?');
-//        $consulta->execute($data);
-//        echo $consulta->errorInfo()[2];
-//    }
+    public function modificarProducto( $ruta,$nombre, $precio, $descripcion, $cantidad, $categoria, $subcategoria, $codigo) {
+        $data = array($ruta,$nombre, $precio, $cantidad, $descripcion, $categoria, $subcategoria,$codigo);
 
-    public function modificarProducto($nombre, $precio, $descripcion, $cantidad, $categoria, $subcategoria, $codigo) {
-        $consulta = $this->db->prepare('update producto set nombreProducto="'.$nombre.'", precio="'.$precio.'",descripcion="'.$descripcion.'",cantidad="'.$cantidad.'",codigoCategoria="'.$categoria.'",codigoSubCategoria="'.$subcategoria.'" where codigoProducto="'.$codigo.'"');
-        $consulta->execute();
-        $resultado = $consulta->fetchAll();
-        $consulta->CloseCursor();
-        return $resultado;
+        $consulta = $this->db->prepare('update producto set  rutaImagen=? ,nombreProducto=?,precio=?,cantidad=?, descripcion=?,codigoCategoria=?,codigoSubCategoria=? where codigoProducto=?');
+        $consulta->execute($data);
+        echo $consulta->errorInfo()[2];
     }
+
      public function filtrarProductoById($codigo) {
        $consulta = $this->db->prepare('Select codigoProducto,nombreProducto,precio,descripcion,cantidad,codigoSubCategoria,codigoCategoria from producto where codigoProducto="'.$codigo.'" ');
         $consulta->execute();

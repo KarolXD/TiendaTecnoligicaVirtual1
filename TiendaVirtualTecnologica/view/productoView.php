@@ -53,7 +53,7 @@ require 'public/headerMenuP.php';
                 <div class="form-group row">
                 <div class="custom-file">
                     <input type="file" class="custom-file-input" name="imagen" id="customFile">
-                    <label class="custom-file-label" for="imagen">Choose file</label>
+                    <label class="custom-file-label" for="imagen">Selecciona una imagen</label>
                 </div>
                 </div>
                 <div class="form-group row">
