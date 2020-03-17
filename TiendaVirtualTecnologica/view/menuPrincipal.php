@@ -5,6 +5,8 @@
 include_once 'public/headerMenuP.php';
 ?>
 
+
+<a  class="btn btn-info" href="?controlador=Producto&accion=menuProductoView"> Administrar Pagina </a>
 <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
   <div class="carousel-inner">
     <div class="carousel-item active">

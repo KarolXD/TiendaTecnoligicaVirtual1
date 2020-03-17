@@ -12,7 +12,7 @@ class DefaultController{
        
         // llamar modelo para traer datos
 
-        $this->view->show("menuProductoView.php", null);//indexView
+        $this->view->show("menuPrincipal.php", null);//indexView
 
                
         
