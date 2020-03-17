@@ -9,7 +9,7 @@
 /**
  * Description of productoData
  *
- * @author Maikel
+ * @author Karol
  */
  class productoData {
 
@@ -61,11 +61,16 @@
     }
 
     public function listarProductos() {
-        $consulta = $this->db->prepare('Select codigoProducto,nombreProducto, rutaImagen,precio,descripcion,cantidad,codigoSubCategoria,codigoCategoria from producto');
+//        $consulta = $this->db->prepare('Select codigoProducto,nombreProducto, rutaImagen,precio,descripcion,cantidad,codigoSubCategoria,codigoCategoria from producto');
+//        $consulta->execute();
+//        $resultado = $consulta->fetchAll();
+//        $consulta->CloseCursor();
+//        return $resultado;
+        
+       $consulta = $this->db->prepare('Select codigoProducto,nombreProducto, rutaImagen,precio,descripcion,cantidad,codigoSubCategoria,codigoCategoria from producto');
         $consulta->execute();
-        $resultado = $consulta->fetchAll();
-        $consulta->CloseCursor();
-        return $resultado;
+
+        return $consulta->fetchALL(PDO::FETCH_ASSOC);
     }
     
     

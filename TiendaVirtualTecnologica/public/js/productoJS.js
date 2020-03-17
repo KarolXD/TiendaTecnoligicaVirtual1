@@ -1,5 +1,34 @@
 
 $(document).ready(function () {
+    $.ajax({
+        type: 'POST',
+        url: "?controlador=Producto&accion=obtenerProductos",
+        dataType: "json"})
+            .done(function (resultado) {
+                var filas = "";
+
+                $.each(resultado, function (index, val) {
+                    var columnaEliminar = "<td> <a  class='btn btn-danger' href='?controlador=Producto&accion=eliminarProducto&codigoProducto=" + val.codigoProducto + "' >Eliminar </a></td>";
+                    var columnaModificar = "<td> <a  class='btn btn-warning' href='?controlador=Producto&accion=filtrarProductoById&codigoProducto=" + val.codigoProducto + "'> Modificar </a> </td>";
+                    var columnaCodigo = "<td>" + val.codigoProducto + "</td>";
+                    var columnaNombre = "<td>" + val.nombreProducto + "</td>";
+                    var columnaRutaImagen = "<td  >  <img  height='100' width='100'  src=" + val.rutaImagen + " /></td>";
+                    var columnaPrecio = "<td>" + val.precio + "</td>";
+                    var columnaDecripcion = "<td>" + val.descripcion + "</td>";
+                    var columnaCantidad = "<td>" + val.cantidad + "</td>";
+                    var columnaSubCategoria = "<td>" + val.codigoSubCategoria + "</td>";
+                    var columnaCategoria = "<td>" + val.codigoCategoria + "</td>";
+                    filas += "<tr>" + columnaEliminar + columnaModificar + columnaCodigo + columnaNombre + columnaRutaImagen + columnaPrecio + columnaDecripcion + columnaCantidad + columnaSubCategoria + columnaCategoria + "</tr>";
+
+
+                });
+                $("#tblProductos tbody").empty();
+                $("#tblProductos tbody").append(filas);
+
+                console.log(resultado);
+            });
+
+
 
     $.ajax({
         type: 'POST',
@@ -12,7 +41,7 @@ $(document).ready(function () {
 
         }
     });
-    
+
     $.ajax({
         type: 'POST',
         url: "?controlador=Producto&accion=obtenerSubCategorias",

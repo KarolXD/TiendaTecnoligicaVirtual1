@@ -12,10 +12,10 @@ class ProductoController {
 
 
     public function menuProductoView() {
-        require 'model/data/productoData.php';
-        $PD = new productoData();
-        $data['xd'] = $PD->listarProductos();
-        $this->view->show("menuProductoView.php", $data);
+//        require 'model/data/productoData.php';
+//        $PD = new productoData();
+//        $data['xd'] = $PD->listarProductos();
+        $this->view->show("menuProductoView.php");
     }
 
     public function filtrarProductoById() {
@@ -26,16 +26,6 @@ class ProductoController {
         $this->view->show("actualizarProductoView.php", $data);
     }
 
-//    public function modificarProducto() {
-// 
-//        require 'model/data/productoData.php';
-//        $PD = new productoData();
-//        $PD->modificarProducto($_POST['Nombre'], $_POST['Precio'], $_POST['descripcion'], $_POST['Cantidad'], $_POST['Categoria'], $_POST['SubCategoria'], $_POST['codigoProducto']);
-//        $data['actualizarProductos'] = $PD->filtrarProductoById($_POST['codigoProducto']);
-//        $this->view->show("actualizarProductoView.php", $data);
-//
-//    }
-    
     public function modificarProducto() {
    
         $date = new DateTime();
@@ -114,6 +104,11 @@ class ProductoController {
         require 'model/data/productoData.php';
         $PD = new productoData();
         echo json_encode($PD->listarSubCategorias());
+    }
+       public function obtenerProductos() {
+        require 'model/data/productoData.php';
+        $PD = new productoData();
+        echo json_encode($PD->listarProductos());
     }
     
     

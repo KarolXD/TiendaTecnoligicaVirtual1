@@ -11,7 +11,7 @@ require 'public/headerMenuP.php';
 </center>
 <br>
 <div class="table-responsive-sm">
-    <table class="table table-bordered">
+    <table class="table table-bordered" id="tblProductos">
         <thead>
             <tr>
                 <th scope="col">Eliminar</th>
@@ -26,37 +26,18 @@ require 'public/headerMenuP.php';
                 <th scope="col">Categoria</th>
             </tr>
         </thead>
-        <?php
-        foreach ($vars['xd'] as $item) {
-            ?>
-            <tbody>
 
-                <tr>
+        <tbody>
 
-                    <td>  <a  class="btn btn-warning" href='?controlador=Producto&accion=filtrarProductoById&codigoProducto=<?php echo $item[0] ?>'>Actualizar</a> </td>
-                    <td>   <a  class="btn btn-danger" href="?controlador=Producto&accion=eliminarProducto&codigoProducto=<?php echo $item[0] ?>">Eliminar</a> </td>
-                    <td scope="row"><?php echo $item[0] ?></td>
-                    <td><?php echo $item[1] ?></td>
-
-                    <td> 
-
-                        <img alt="sin img" height="100" width="100" src = "<?php echo ($item[2]) ?>"/>  
-
-                    </td>
-
-                    <td><?php echo $item[3] ?></td>
-                    <td><?php echo $item[4] ?></td>
-                    <td><?php echo $item[5] ?></td>
-                    <td><?php echo $item[6] ?></td>
-                    <td><?php echo $item[7] ?></td>
+            <tr >
 
 
 
-                </tr>
-            </tbody>
-            <?php
-        }
-        ?>
+
+
+            </tr>
+        </tbody>
+
 
     </table>
 </div>
