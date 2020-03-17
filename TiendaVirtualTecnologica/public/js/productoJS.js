@@ -118,12 +118,12 @@ var actualizarP = function () {
 
                 $("#alertControl").html('<div class="alert alert-success" id="alert">' + 'Se ha modificado exitosamente' + '</div>');
 
-//                window.setTimeout(function () {
-//                    $(".alert").fadeTo(5000000, 0).slideUp(50000000, function () {
-//                        $(this).remove();
-//                    });
-//
-//                }, 3000000000);
+                window.setTimeout(function () {
+                    $(".alert").fadeTo(5000000, 0).slideUp(50000000, function () {
+                        $(this).remove();
+                    });
+
+                }, 3000000000);
 
             }
         });

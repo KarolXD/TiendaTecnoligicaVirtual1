@@ -15,31 +15,31 @@ require 'public/headerMenuP.php';
                         <div class="form-group row">
                             <label class="col-lg-3 col-form-label form-control-label">Id</label>
                             <div class="col-lg-9">
-                                <input class="form-control"  value="<?php echo $item[0] ?>"  readonly="" id="codigoProducto" name="codigoProducto"type="number" placeholder="Escribe el nombre del Producto">
+                                <input class="form-control"  required value="<?php echo $item[0] ?>"  readonly="" id="codigoProducto" name="codigoProducto"type="number" placeholder="Escribe el nombre del Producto">
                             </div>
                         </div>
                         <div class="form-group row">
                             <label class="col-lg-3 col-form-label form-control-label">Nombre</label>
                             <div class="col-lg-9">
-                                <input class="form-control"  value="<?php echo $item[1] ?>" id="Nombre" name="Nombre"type="text" placeholder="Escribe el nombre del Producto">
+                                <input class="form-control" required  value="<?php echo $item[1] ?>" id="Nombre" name="Nombre"type="text" placeholder="Escribe el nombre del Producto">
                             </div>
                         </div>
                         <div class="form-group row">
                             <label class="col-lg-3 col-form-label form-control-label">Precio</label>
                             <div class="col-lg-9">
-                                <input class="form-control" value="<?php echo $item[2] ?>" id="Precio" name="Precio" type="number" placeholder="Escribe el precio del Producto">
+                                <input class="form-control" required value="<?php echo $item[2] ?>" id="Precio" name="Precio" type="number" placeholder="Escribe el precio del Producto">
                             </div>
                         </div>
                         <div class="form-group row">
                             <label class="col-lg-3 col-form-label form-control-label">Descripción</label>
                             <div class="col-lg-9">
-                                <input class="form-control" value="<?php echo $item[3] ?>" id="descripcion" name="descripcion" type="text" placeholder="Escribe la descripción del Producto">
+                                <input class="form-control" required value="<?php echo $item[3] ?>" id="descripcion" name="descripcion" type="text" placeholder="Escribe la descripción del Producto">
                             </div>
                         </div>
                         <div class="form-group row">
                             <label class="col-lg-3 col-form-label form-control-label">Cantidad</label>
                             <div class="col-lg-9">
-                                <input class="form-control"  value="<?php echo $item[4] ?>" id="Cantidad" name="Cantidad" type="number" placeholder="Escribe la cantidad del Producto">
+                                <input class="form-control" required value="<?php echo $item[4] ?>" id="Cantidad" name="Cantidad" type="number" placeholder="Escribe la cantidad del Producto">
                             </div>
                         </div>
                         <div class="form-group row">
@@ -63,7 +63,7 @@ require 'public/headerMenuP.php';
                     ?>
                     <div class="form-group row">
                         <div class="custom-file">
-                            <input type="file" class="custom-file-input" name="s" id="customFile">
+                            <input  required=""type="file" class="custom-file-input" name="s" id="customFile">
                             <label class="custom-file-label" for="s"> Selecciona una imagen</label>
                         </div>
                     </div>
