@@ -12,9 +12,6 @@ class ProductoController {
 
 
     public function menuProductoView() {
-//        require 'model/data/productoData.php';
-//        $PD = new productoData();
-//        $data['xd'] = $PD->listarProductos();
         $this->view->show("menuProductoView.php");
     }
 
@@ -46,8 +43,8 @@ class ProductoController {
         $PD = new productoData();
                 $PD->modificarProducto($rutaFinal, $_POST['Nombre'], $_POST['Precio'], $_POST['descripcion'], $_POST['Cantidad'], $_POST['Categoria'], $_POST['SubCategoria'], $_POST['codigoProducto']);
         $data['actualizarProductos'] = $PD->filtrarProductoById($_POST['codigoProducto']);
-        $this->view->show("actualizarProductoView.php", $data);
-//
+//        $this->view->show("actualizarProductoView.php", $data);
+////
                   echo 'Success';
               } else {
                    echo 'Ocurrió un error al subir la imagen, intente otra vez';
@@ -119,10 +116,9 @@ class ProductoController {
         $PD = new productoData();
         $id = filter_input(INPUT_GET, 'codigoProducto');
         $PD->eliminarProducto($id);
-        echo 'Eliminado';
-        $data['xd'] =$PD->listarProductos();        
-        $this->view->show("menuProductoView.php", $data);   
-        
+//        $data['xd'] =$PD->listarProductos();        
+      $this->view->show("menuProductoView.php",null);   
+//        
     }
     
     
