@@ -6,6 +6,68 @@ class ProductoController {
         $this->view = new View();
     }
 
+    public function registrarProductoView() {
+        $this->view->show("productoView.php", null);
+    }
+
+
+    public function menuProductoView() {
+        require 'model/data/productoData.php';
+        $PD = new productoData();
+        $data['xd'] = $PD->listarProductos();
+        $this->view->show("menuProductoView.php", $data);
+    }
+
+    public function filtrarProductoById() {
+        require 'model/data/productoData.php';
+        $PD = new productoData();
+        $id = filter_input(INPUT_GET, 'codigoProducto');
+        $data['actualizarProductos'] = $PD->filtrarProductoById($id);
+        $this->view->show("actualizarProductoView.php", $data);
+    }
+
+    public function modificarProducto() {
+ 
+        require 'model/data/productoData.php';
+        $PD = new productoData();
+        $PD->modificarProducto($_POST['Nombre'], $_POST['Precio'], $_POST['d'], $_POST['Cantidad'], $_POST['Categoria'], $_POST['SubCategoria'], $_POST['codigoProducto']);
+        $data['actualizarProductos'] = $PD->filtrarProductoById($_POST['codigoProducto']);
+        $this->view->show("actualizarProductoView.php", $data);
+
+    }
+    
+//    public function modificarProducto() {
+//        $date = new DateTime();
+//        $indicaro = $date->getTimestamp();
+//        $nombreImagen = $_FILES['customFile']['name'];
+//        $tipoImagen = $_FILES['customFile']['type'];
+//        $tamaño = $_FILES['customFile']['size'];
+//
+//        $pathParcial = "/TiendaTecnoligicaVirtual1/TiendaVirtualTecnologica/public/img/";
+//        if ($tamaño <= 3000000) {
+//            if ($tipoImagen == 'image/jpg' || $tipoImagen == 'image/jpeg' || $tipoImagen == 'image/png') {
+//                $carpetaDestino = $_SERVER['DOCUMENT_ROOT'] . $pathParcial;
+//                //echo $carpetaDestino;
+//                if (move_uploaded_file($_FILES['rutaImagen']['tmp_name'], $carpetaDestino . $indicaro . $nombreImagen)) {
+//                    require 'model/data/productoData.php';
+//                    $rutaFinal = $pathParcial . $indicaro . $nombreImagen;
+//                    $PD = new productoData();
+//                    $PD->modificarProducto($rutaFinal, $_POST['Nombre'], $_POST['Precio'], $_POST['d'], $_POST['Cantidad'], $_POST['Categoria'], $_POST['SubCategoria'], $_POST['codigoProducto']);
+//                    $data['actualizarProductos'] = $PD->filtrarProductoById($_POST['codigoProducto']);
+//                    $this->view->show("actualizarProductoView.php", $data);
+//
+//                    echo 'Success';
+//                } else {
+//                    echo 'Ocurrió un error al subir la imagen, intente otra vez';
+//                }
+//            } else {
+//                echo 'El formato del archivo debe ser .PNG , .JPG o .JPEG';
+//            }
+//        } else {
+//            echo 'El archivo superó el limite de tamaño(2MB)';
+//        }
+//    }
+
     public function guardarProducto() {
         $date = new DateTime();
         $indicaro = $date->getTimestamp();
@@ -16,16 +78,16 @@ class ProductoController {
         $pathParcial = "/TiendaTecnoligicaVirtual1/TiendaVirtualTecnologica/public/img/";
         if ($tamaño <= 3000000) {
             if ($tipoImagen == 'image/jpg' || $tipoImagen == 'image/jpeg' || $tipoImagen == 'image/png') {
-                $carpetaDestino = $_SERVER['DOCUMENT_ROOT'].$pathParcial;
+                $carpetaDestino = $_SERVER['DOCUMENT_ROOT'] . $pathParcial;
                 //echo $carpetaDestino;
-                if (move_uploaded_file($_FILES['imagen']['tmp_name'], $carpetaDestino.$indicaro.$nombreImagen)) {
+                if (move_uploaded_file($_FILES['imagen']['tmp_name'], $carpetaDestino . $indicaro . $nombreImagen)) {
                     require 'model/data/productoData.php';
-                    $rutaFinal=$pathParcial.$indicaro.$nombreImagen;
+                    $rutaFinal = $pathParcial . $indicaro . $nombreImagen;
                     $PD = new productoData();
-                    $PD-> registrarProducto($_POST['Nombre'], $_POST['Precio'],
-                            $_POST['Descripcion'],$rutaFinal ,
-                            $_POST['Cantidad'],$_POST['Categoria'],$_POST['SubCategoria']);
-                    
+                    $PD->registrarProducto($_POST['Nombre'], $_POST['Precio'],
+                            $_POST['Descripcion'], $rutaFinal,
+                            $_POST['Cantidad'], $_POST['Categoria'], $_POST['SubCategoria']);
+
                     echo 'Success';
                 } else {
                     echo 'Ocurrió un error al subir la imagen, intente otra vez';
@@ -37,20 +99,17 @@ class ProductoController {
             echo 'El archivo superó el limite de tamaño(2MB)';
         }
     }
-    
+
     public function obtenerCategorias() {
         require 'model/data/productoData.php';
-        $PD= new productoData();
+        $PD = new productoData();
         echo json_encode($PD->listarCategorias());
     }
-    
 
     public function obtenerSubCategorias() {
         require 'model/data/productoData.php';
-        $PD= new productoData();
+        $PD = new productoData();
         echo json_encode($PD->listarSubCategorias());
     }
-    
-    
 
 }

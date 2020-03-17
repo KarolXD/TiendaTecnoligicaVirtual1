@@ -1,5 +1,6 @@
 
 $(document).ready(function () {
+
     $.ajax({
         type: 'POST',
         url: "?controlador=Producto&accion=obtenerCategorias",
