@@ -24,7 +24,7 @@ require 'public/headerMenuP.php';
                 <div class="form-group row">
                     <label class="col-lg-3 col-form-label form-control-label">Descripción</label>
                     <div class="col-lg-9">
-                        <input class="form-control" id="Descripcion" name="Descripcion" type="text">
+                        <input class="form-control" id="Descripcionprecio" name="Descripcion" type="text">
                     </div>
                 </div>
                 <div class="form-group row">
@@ -66,7 +66,7 @@ require 'public/headerMenuP.php';
                       <a class="btn btn-primary" href="?controlador=Producto&accion=menuProductoView" > Regresar</a>
                       </div>
                     <label class="col-lg-3 col-form-label form-control-label"></label>
-                    <div class="col-md-3" id="alertControl"></div>
+                    <div class="col-md-12" id="alertControl"></div>
                 </div>
 
             </form>
