@@ -49,6 +49,25 @@ class productoData {
         echo $consulta->errorInfo()[2];
     }
 
+    public function registrarSubCategorias($nombreSubCategoria) {
+        $data = array($nombreSubCategoria);
+
+        $consulta = $this->db->prepare('INSERT INTO subCategoria(nombreSubCategoria) '
+                . ' VALUES(?)');
+
+        $consulta->execute($data);
+        echo $consulta->errorInfo()[2];
+    }
+
+    public function modificarSubCategorias($nombreSubCategoria,$codigoSubCategoria) {
+        $data = array($nombreSubCategoria,$codigoSubCategoria);
+        $consulta = $this->db->prepare('update subCategoria set nombreSubCategoria=? where codigoSubCategoria=?');
+        $consulta->execute($data);
+        echo $consulta->errorInfo()[2];
+    }
+
+    
+    
     public function modificarProducto($ruta, $nombre, $precio, $descripcion, $cantidad, $categoria, $subcategoria, $codigo) {
         $data = array($ruta, $nombre, $precio, $cantidad, $descripcion, $categoria, $subcategoria, $codigo);
         $consulta = $this->db->prepare('update producto set  rutaImagen=? ,nombreProducto=?,precio=?,cantidad=?, descripcion=?,codigoCategoria=?,codigoSubCategoria=? where codigoProducto=?');
@@ -71,6 +90,14 @@ class productoData {
         $consulta->CloseCursor();
         return $resultado;
     }
+    
+    public function filtrarSubCategoriaById($codigo) {
+        $consulta = $this->db->prepare('Select codigoSubCategoria,nombreSubCategoria from subCategoria where codigoSubCategoria="' . $codigo . '" ');
+        $consulta->execute();
+        $resultado = $consulta->fetchAll();
+        $consulta->CloseCursor();
+        return $resultado;
+    }
 
     public function listarCategorias() {
         $consulta = $this->db->prepare('Select codigoCategoria,nombreCategoria from categoria');
@@ -79,7 +106,7 @@ class productoData {
     }
 
     public function listarSubCategorias() {
-        $consulta = $this->db->prepare('Select codigoSubCategoria,nombreSubCategoria from subcategoria');
+        $consulta = $this->db->prepare('Select codigoSubCategoria,nombreSubCategoria from subCategoria');
         $consulta->execute();
 
         return $consulta->fetchALL(PDO::FETCH_ASSOC);
@@ -87,7 +114,7 @@ class productoData {
 
     public function listarProductos() {
         $consulta = $this->db->prepare('Select codigoProducto,nombreProducto, rutaImagen,precio,descripcion,cantidad,s.nombreSubCategoria,c.nombreCategoria from producto
- join categoria c join subCategoria s ');
+        join categoria c join subCategoria s ');
         $consulta->execute();
         return $consulta->fetchALL(PDO::FETCH_ASSOC);
     }
@@ -101,6 +128,14 @@ class productoData {
     }
       public function eliminarCategoria($codigo) {
         $consulta = $this->db->prepare('DELETE FROM categoria WHERE codigoCategoria = "' . $codigo . '"');
+        $consulta->execute();
+        $resultado = $consulta->fetchAll();
+        $consulta->CloseCursor();
+        return $resultado;
+    }
+    
+    public function eliminarSubCategoria($codigo) {
+        $consulta = $this->db->prepare('DELETE FROM subCategoria WHERE codigoSubCategoria = "' . $codigo . '"');
         $consulta->execute();
         $resultado = $consulta->fetchAll();
         $consulta->CloseCursor();

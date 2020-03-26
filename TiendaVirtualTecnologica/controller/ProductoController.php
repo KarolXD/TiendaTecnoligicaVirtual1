@@ -13,6 +13,11 @@ class ProductoController {
     public function registrarCategoriaView() {
         $this->view->show("registrarCategoriaView.php");
     }
+    
+     public function registrarSubCategoriaView() {
+        $this->view->show("registrarSubCategoriaView.php");
+    }
+    
 
     public function filtrarCategoriaById() {
         require 'model/data/productoData.php';
@@ -21,9 +26,21 @@ class ProductoController {
         $data['actualizarCategorias'] = $PD->filtrarCategoriaById($id);
         $this->view->show("actualizarCategoriaView.php", $data);
     }
+    
+     public function filtrarSubCategoriaById() {
+        require 'model/data/productoData.php';
+        $PD = new productoData();
+        $id = filter_input(INPUT_GET, 'codigoSubCategoria');
+        $data['actualizarSubCategorias'] = $PD->filtrarSubCategoriaById($id);
+        $this->view->show("actualizarSubCategoriaView.php", $data);
+    }
 
     public function menuCategoriaView() {
         $this->view->show("menuCategoriaView.php");
+    }
+    
+    public function menuSubCategoriaView() {
+        $this->view->show("menuSubCategoriaView.php");
     }
 
     public function menuProductoView() {
@@ -124,6 +141,15 @@ class ProductoController {
 
         echo 'Registrado';
     }
+    
+    public function registrarSubCategorias() {
+        require 'model/data/productoData.php';
+
+        $PD = new productoData();
+        $PD->registrarSubCategorias($_POST['nombreSubCategoria']);
+
+        echo 'Registrado';
+    }
 
     public function modificarCategorias() {
         require 'model/data/productoData.php';
@@ -131,8 +157,21 @@ class ProductoController {
         $PD->modificarCategorias($_POST['nombreCategoria'],$_POST['codigoCategoria']);
         echo 'Modificado';
     }
+    
+    public function modificarSubCategorias() {
+        require 'model/data/productoData.php';
+        $PD = new productoData();
+        $PD->modificarSubCategorias($_POST['nombreSubCategoria'],$_POST['codigoSubCategoria']);
+        echo 'Modificado';
+    }
 
     public function obtenerSubCategorias() {
+        require 'model/data/productoData.php';
+        $PD = new productoData();
+        echo json_encode($PD->listarSubCategorias());
+    }
+    
+    public function obtenerSubCategorias2() {
         require 'model/data/productoData.php';
         $PD = new productoData();
         echo json_encode($PD->listarSubCategorias());
@@ -159,6 +198,15 @@ class ProductoController {
         $id = filter_input(INPUT_GET, 'codigoCategoria');
         $PD->eliminarCategoria($id);
           $this->view->show("menuCategoriaView.php");
+      echo 'Eliminado';
+    }
+    
+     public function eliminarSubCategoria() {
+        require 'model/data/productoData.php';
+        $PD = new productoData();
+        $id = filter_input(INPUT_GET, 'codigoSubCategoria');
+        $PD->eliminarSubCategoria($id);
+          $this->view->show("menuSubCategoriaView.php");
       echo 'Eliminado';
     }
 
