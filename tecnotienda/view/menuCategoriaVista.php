@@ -6,7 +6,7 @@ require 'public/headerMenuP.php';
     <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Filtrar </button>
 </form>
 <center>
-    <a href="?controlador=Producto&accion=registrarCategoriaView"> Registrar Categoria</a>
+    <a href="?controlador=Producto&accion=registrarCategoriaVista"> Registrar Categoria</a>
 </center>
 <br>
 <div class="table-responsive-sm">

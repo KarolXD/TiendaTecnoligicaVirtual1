@@ -26,7 +26,7 @@ include_once 'public/headerMenuP.php';
             <div class="form-group">
                 <center>
                     <input name="submit" type="submit" value=" Modificar " class="btn btn-info">
-                    <a href="?controlador=Producto&accion=menuSubCategoriaView" class="btn btn-info" >Regresar</a>
+                    <a href="?controlador=Producto&accion=menuSubCategoriaVista" class="btn btn-info" >Regresar</a>
                 </center>
             </div>
                      <label class="col-lg-3 col-form-label form-control-label"></label>

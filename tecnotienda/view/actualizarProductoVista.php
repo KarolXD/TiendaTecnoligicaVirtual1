@@ -74,7 +74,7 @@ require 'public/headerMenuP.php';
 
                         </div>
                         <div class="col-lg-2">
-                            <a class="btn btn-primary" href="?controlador=Producto&accion=menuProductoView" > Regresar</a>
+                            <a class="btn btn-primary" href="?controlador=Producto&accion=menuProductoVista" > Regresar</a>
                         </div>
                         <label class="col-lg-3 col-form-label form-control-label"></label>
                         <div class="col-md-3" id="alertControl"></div>

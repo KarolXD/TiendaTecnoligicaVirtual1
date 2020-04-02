@@ -59,9 +59,9 @@
                                 Producto
                             </button>
                             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                <a class="dropdown-item" href="?controlador=Producto&accion=menuProductoView">Producto</a>
-                                <a class="dropdown-item" href="?controlador=Producto&accion=menuCategoriaView">Categoria</a>
-                                <a class="dropdown-item" href="?controlador=Producto&accion=menuSubCategoriaView">Subcategoria</a>
+                                <a class="dropdown-item" href="?controlador=Producto&accion=menuProductoVista">Producto</a>
+                                <a class="dropdown-item" href="?controlador=Producto&accion=menuCategoriaVista">Categoria</a>
+                                <a class="dropdown-item" href="?controlador=Producto&accion=menuSubCategoriaVista">Subcategoria</a>
                             </div>
                         </div>
 
