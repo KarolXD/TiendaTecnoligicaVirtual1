@@ -11,7 +11,7 @@
 
             <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
             <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-           <script src="public/js/productoJS.js"></script>
+            <script src="public/js/productoJS.js"></script>
 
         </head>
         <body>
@@ -23,8 +23,8 @@
 
                 <nav class="navbar navbar-light navbar-brand">
                     <form class="form-inline">
-                        <a class="btn btn-sm btn-outline-secondary" href="?controlador=Item&accion=loginCliente" type="button">Iniciar Session</a>
-                        <a class="btn btn-sm btn-outline-secondary"  href="?controlador=Item&accion=mostrarRegistrarCliente"type="button">Registrarme</a>
+                        <a class="btn btn-sm btn-outline-secondary" href="?controlador=Cliente&accion=loginCliente" type="button">Iniciar Session</a>
+                        <a class="btn btn-sm btn-outline-secondary"  href="?controlador=Cliente&accion=registrarClienteVista"type="button">Registrarme</a>
                     </form>
                 </nav>
 
@@ -41,7 +41,7 @@
 
 
 
-                       
+
 
                         <div class="dropdown">
                             <button class="btn btn-outline-info my-2 my-sm-0 dropdown-toggle" href="#homeSubmenu"  id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -60,16 +60,16 @@
                             </button>
                             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                 <a class="dropdown-item" href="?controlador=Producto&accion=menuProductoVista">Producto</a>
-                                <a class="dropdown-item" href="?controlador=Producto&accion=menuCategoriaVista">Categoria</a>
-                                <a class="dropdown-item" href="?controlador=Producto&accion=menuSubCategoriaVista">Subcategoria</a>
+                                <a class="dropdown-item" href="?controlador=Categoria&accion=menuCategoriaVista">Categoria</a>
+                                <a class="dropdown-item" href="?controlador=SubCategoria&accion=menuSubCategoriaVista">Sub Categoria</a>
                             </div>
                         </div>
 
-                           <button class=" btn btn-outline-info my-2 my-sm-0 " >
-                                Publicidad
-                            </button>
-                      
-                                <div class="dropdown">
+                        <button class=" btn btn-outline-info my-2 my-sm-0 " >
+                            Publicidad
+                        </button>
+
+                        <div class="dropdown">
                             <button class=" btn btn-outline-info my-2 my-sm-0 dropdown-toggle" href=""  id="dropdownMenuButton3" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 Combos
                             </button>
@@ -79,19 +79,28 @@
                                 <a class="dropdown-item" href="#">Promociones</a>
                             </div>
                         </div>
-                           <button class=" btn btn-outline-info my-2 my-sm-0" >
-                                Detalles Pago
+                           <div class="dropdown">
+                            <button class=" btn btn-outline-info my-2 my-sm-0 dropdown-toggle" href=""  id="dropdownMenuButton3" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Clientes
                             </button>
-                           <button class=" btn btn-outline-info my-2 my-sm-0 " >
-                                Carrito
-                            </button>
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton3">
+                                <a class="dropdown-item" href="?controlador=Cliente&accion=menuClientes">Administrar Clientes</a>
+                                <a class="dropdown-item" href="#">Administrar Proveedores</a>
+                            </div>
+                        </div>
+                        <button class=" btn btn-outline-info my-2 my-sm-0" >
+                            Detalles Pago
+                        </button>
+                        <button class=" btn btn-outline-info my-2 my-sm-0 " >
+                            Carrito
+                        </button>
                         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                             <span class="navbar-toggler-icon"></span>
                         </button>
                         <div class="collapse navbar-collapse" id="navbarNav">
                             <ul class="navbar-nav ml-auto">
                                 <li class="nav-item active">
-                                    <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                                    <a class="nav-link" href="#">Inicio <span class="sr-only">(current)</span></a>
                                 </li>
 
                                 <li class="nav-item">

@@ -1,39 +1,108 @@
 <?php
+
 require 'public/headerMenuP.php';
 ?>
-<form class="form-inline my-2 my-lg-0">
-    <input class="form-control mr-sm-2" type="search" placeholder="Filtrar por nombre" aria-label="Search">
-    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Filtrar </button>
-</form>
+
 <center>
-    <a href="?controlador=Producto&accion=registrarSubCategoriaVista"> Registrar SubCategoria</a>
+    <a href="?controlador=SubCategoria&accion=registrarSubCategoriaVista"> Registrar una Sub Categoria</a>
+
 </center>
 <br>
-<div class="table-responsive-sm">
-    <table class="table table-bordered" id="tblSubCategorias">
-        <thead>
-            <tr>
-                <th scope="col">Eliminar</th>
-                <th scope="col">Modificar</th>
-                <th scope="col">#Codigo</th>       
-                <th scope="col">SubCategoria</th>
-            </tr>
-        </thead>
+<div class="container">
+        <center><h5>Mis Sub Categorias!</h5></center>
+        <hr style="color: #47748b"
+    <div class="row">
+        <div class="table-responsive">
+            <table class="table table-hover table-bordered" id="tblSubCategorias">
+                <hr style="color: #6d7fcc">
+                <thead>
+                    <tr>
+                        <th scope="col">Eliminar</th>
+                        <th scope="col">Modificar</th>
+                        <th scope="col">#Codigo</th>       
+                        <th scope="col">SubCategoria</th>
+                        <th scope="col">Categoria</th>
+                    </tr>
+                </thead>
 
-        <tbody>
+                <tbody>
 
-            <tr>
-
-
+                    <tr>
 
 
 
-            </tr>
-        </tbody>
+                    </tr>
+                </tbody>
 
 
-    </table>
+            </table>
+        </div>
+    </div>
 </div>
+<div class="auto" id="auto" style="display: none"><div  id="alertControl" style="opacity: none"></div></div>
 
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<script src="./public/js/jquery-3.3.1.js" type="text/javascript"></script>
+<script type="text/javascript">
+//No se asusten!!!!!!!!!!!Tengo que pasar esto a un archivo JS :s lo sse lo se
+    function eliminar(valor) {
+        var subcategoriaid = valor;
+        swal({
+            title: "Estás seguro?",
+            text: "Una vez eliminado este registro, no podrás dar marcha atrás!",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+        })
+                .then((willDelete) => {
+                    if (willDelete) {
+                        ajaxEliminarSubCategoria(subcategoriaid);
+                    } else {
+                        swal("Cancelado", "Dato no Eliminado :)", "error");
+
+
+                    }
+                });
+
+    }
+    function ajaxEliminarSubCategoria(subcategoriaid) {
+        $.ajax({
+            url: '?controlador=SubCategoria&accion=eliminarSubCategoria',
+            type: 'POST',
+            dataType: 'html',
+            data: "subcategoriaid=" + subcategoriaid,
+            beforeSend: function () {
+                $("#alertControl").html('<div class="alert alert-success" id="alert"> Procesando... </div>');
+                window.setTimeout(function () {
+                    $(".alert").fadeTo(500, 0).slideUp(500, function () {
+                        $(this).remove();
+                    });
+                }, 300);
+            }
+        })
+                .done(function (data) {
+                    console.log(data);
+                    $("#alertControl").html('<div class="alert alert-success" id="alert">' + data + '</div>');
+
+                    window.setTimeout(function () {
+                        $(".alert").fadeTo(5000000, 0).slideUp(50000000, function () {
+                            $(this).remove();
+                        });
+
+                    }, 3000000000);
+                    swal("Cancelado", "Dato  Eliminado :)", "error");
+
+                })
+                .fail(function () {
+                    console.log('Error');
+                    swal("Cancelado", "Dato no Eliminado :)", "error");
+                })
+                .always(function () {
+                    console.log("complete");
+                });
+    }
+
+</script>
 <?php
+
 require 'public/footerMenuP.php';

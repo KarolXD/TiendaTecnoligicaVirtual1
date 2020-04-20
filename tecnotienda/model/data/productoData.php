@@ -20,127 +20,64 @@ class productoData {
         $this->db = SPDO::singleton();
     }
 
-
-        public function registrarProducto($nombre, $precio,$cantidad, $rutaImg,$descripcion, $categoria, $subcategoria) {
-        $data = array($nombre, $precio,$cantidad, $rutaImg,$descripcion, $categoria, $subcategoria);
-
-        $consulta = $this->db->prepare('INSERT INTO producto(nombreProducto,precio, '
-                . 'cantidad, rutaImagen, descripcion,codigoCategoria,codigoSubCategoria)'
-                . ' VALUES(?,?,?,?,?,?,?)');
+    public function registrarProducto($nombre, $precio, $cantidad, $rutaImg, $descripcion, $subcategoria) {
+        $data = array($nombre, $precio, $cantidad, $rutaImg, $descripcion, $subcategoria);
+        $consulta = $this->db->prepare('INSERT INTO tbproducto(tbproductonombre,tbproductoprecio, '
+                . 'tbproductocantidad, tbproductoimagen,tbproductodescripcion,tbproductosubcategoriaid)'
+                . ' VALUES(?,?,?,?,?,?)');
 
         $consulta->execute($data);
         echo $consulta->errorInfo()[2];
     }
 
-    public function registrarCategorias($nombreCategoria) {
-        $data = array($nombreCategoria);
-
-        $consulta = $this->db->prepare('INSERT INTO categoria(nombreCategoria) '
-                . ' VALUES(?)');
-
+    public function modificarProducto($ruta, $nombre, $precio, $cantidad, $descripcion,$subcategoria, $idproducto) {
+        $data = array($ruta, $nombre, $precio, $cantidad, $descripcion, $subcategoria, $idproducto);
+     $consulta = $this->db->prepare('update tbproducto set  tbproductoimagen=? ,tbproductonombre=?,tbproductoprecio=?,tbproductocantidad=?, tbproductodescripcion=?,tbproductosubcategoriaid=? where tbproductoid=?');
         $consulta->execute($data);
         echo $consulta->errorInfo()[2];
     }
 
-    public function modificarCategorias($nombreCategoria,$codigoCategoria) {
-        $data = array($nombreCategoria,$codigoCategoria);
-        $consulta = $this->db->prepare('update categoria set nombreCategoria=? where codigoCategoria=?');
-        $consulta->execute($data);
-        echo $consulta->errorInfo()[2];
-    }
-
-    public function registrarSubCategorias($nombreSubCategoria) {
-        $data = array($nombreSubCategoria);
-
-        $consulta = $this->db->prepare('INSERT INTO subCategoria(nombreSubCategoria) '
-                . ' VALUES(?)');
-
-        $consulta->execute($data);
-        echo $consulta->errorInfo()[2];
-    }
-
-    public function modificarSubCategorias($nombreSubCategoria,$codigoSubCategoria) {
-        $data = array($nombreSubCategoria,$codigoSubCategoria);
-        $consulta = $this->db->prepare('update subCategoria set nombreSubCategoria=? where codigoSubCategoria=?');
-        $consulta->execute($data);
-        echo $consulta->errorInfo()[2];
-    }
-
-    
-    
-    public function modificarProducto($ruta, $nombre, $precio, $descripcion, $cantidad, $categoria, $subcategoria, $codigo) {
-        $data = array($ruta, $nombre, $precio, $cantidad, $descripcion, $categoria, $subcategoria, $codigo);
-        $consulta = $this->db->prepare('update producto set  rutaImagen=? ,nombreProducto=?,precio=?,cantidad=?, descripcion=?,codigoCategoria=?,codigoSubCategoria=? where codigoProducto=?');
-        $consulta->execute($data);
-        echo $consulta->errorInfo()[2];
-    }
-
-    public function filtrarProductoById($codigo) {
-        $consulta = $this->db->prepare('Select codigoProducto,nombreProducto,precio,descripcion,cantidad,codigoSubCategoria,codigoCategoria from producto where codigoProducto="' . $codigo . '" ');
+    public function filtrarProductoById($idproducto) {
+        $consulta = $this->db->prepare('select p.tbproductoid,p.tbproductonombre,p.tbproductoimagen, p.tbproductoprecio,p.tbproductodescripcion,p.tbproductocantidad ,s.tbsubcategorianombre from  tbproducto p join tbsubcategoria s where p.tbproductosubcategoriaid=s.tbsubcategoriaid and p.tbproductoid="' . $idproducto . '"');
         $consulta->execute();
         $resultado = $consulta->fetchAll();
         $consulta->CloseCursor();
         return $resultado;
-    }
-
-    public function filtrarCategoriaById($codigo) {
-        $consulta = $this->db->prepare('Select codigoCategoria,nombreCategoria from categoria where codigoCategoria="' . $codigo . '" ');
-        $consulta->execute();
-        $resultado = $consulta->fetchAll();
-        $consulta->CloseCursor();
-        return $resultado;
-    }
-    
-    public function filtrarSubCategoriaById($codigo) {
-        $consulta = $this->db->prepare('Select codigoSubCategoria,nombreSubCategoria from subCategoria where codigoSubCategoria="' . $codigo . '" ');
-        $consulta->execute();
-        $resultado = $consulta->fetchAll();
-        $consulta->CloseCursor();
-        return $resultado;
-    }
-
-    public function listarCategorias() {
-        $consulta = $this->db->prepare('Select codigoCategoria,nombreCategoria from categoria');
-        $consulta->execute();
-        return $consulta->fetchALL(PDO::FETCH_ASSOC);
-    }
-
-    public function listarSubCategorias() {
-        $consulta = $this->db->prepare('Select codigoSubCategoria,nombreSubCategoria from subCategoria');
-        $consulta->execute();
-
-        return $consulta->fetchALL(PDO::FETCH_ASSOC);
     }
 
     public function listarProductos() {
-        $consulta = $this->db->prepare('Select codigoProducto,nombreProducto, rutaImagen,precio,descripcion,cantidad,s.nombreSubCategoria,c.nombreCategoria from producto
-        join categoria c join subCategoria s ');
+        $consulta = $this->db->prepare('select p.tbproductoid,p.tbproductonombre,p.tbproductoimagen, p.tbproductoprecio,p.tbproductodescripcion,p.tbproductocantidad ,s.tbsubcategorianombre from  tbproducto p join tbsubcategoria s where p.tbproductosubcategoriaid=s.tbsubcategoriaid');
         $consulta->execute();
         return $consulta->fetchALL(PDO::FETCH_ASSOC);
     }
 
-    public function eliminarProducto($codigo) {
-        $consulta = $this->db->prepare('DELETE FROM producto WHERE codigoProducto = "' . $codigo . '"');
+    public function eliminacionProducto($idproducto) {
+        $consulta = $this->db->prepare('DELETE FROM tbproducto WHERE tbproductoid = "' . $idproducto . '"');
         $consulta->execute();
         $resultado = $consulta->fetchAll();
         $consulta->CloseCursor();
         return $resultado;
     }
-      public function eliminarCategoria($codigo) {
-        $consulta = $this->db->prepare('DELETE FROM categoria WHERE codigoCategoria = "' . $codigo . '"');
-        $consulta->execute();
-        $resultado = $consulta->fetchAll();
-        $consulta->CloseCursor();
-        return $resultado;
-    }
+      
     
-    public function eliminarSubCategoria($codigo) {
-        $consulta = $this->db->prepare('DELETE FROM subCategoria WHERE codigoSubCategoria = "' . $codigo . '"');
-        $consulta->execute();
-        $resultado = $consulta->fetchAll();
-        $consulta->CloseCursor();
-        return $resultado;
+    public function eliminarProducto($idproducto) {
+        $sql = 'SELECT COUNT(tbproductosubcategoriaid) as total FROM tbproducto where tbproductoid="' . $idproducto . '"';
+        $del = $this->db->prepare($sql);
+        $del->execute();
+        $count = $del->fetch();
+        echo $count['total'];
+        if ($count['total'] <= 0) {
+            $this->eliminacionProducto($idproducto);
+            echo '<div class="alert alert-primary" role="alert"> Registro eliminado—!</div>';
+            print('<div class="alert alert-primary" role="alert"> Producto Eliminadot!</div>');
+        } else if ($count['total'] > 0) {
+            echo '<div class="alert alert-danger" role="alert"> No es posible eliminar este registro.Lo siento—!</div>';
+            echo '<script>  alert("Lo sentimos, no podemos borrar este registro.En una Producto existe la subCategoria que deseas borrar' . $count['total'] . '");</script>';
+        } else if ($count['total'] == null) {
+            echo '<script>  alert("Datos nulos");</script>';
+        }
+        $del->CloseCursor();
+        return $del;
     }
-
 
 }

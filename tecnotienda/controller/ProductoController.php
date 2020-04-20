@@ -6,75 +6,44 @@ class ProductoController {
         $this->view = new View();
     }
 
-    public function registrarProductoView() {
-        $this->view->show("productoView.php", null);
+    public function registrarProductoVista() {
+        $this->view->show("productoVista.php", null);
     }
 
-    public function registrarCategoriaView() {
-        $this->view->show("registrarCategoriaView.php");
-    }
-    
-     public function registrarSubCategoriaView() {
-        $this->view->show("registrarSubCategoriaView.php");
-    }
-    
-
-    public function filtrarCategoriaById() {
-        require 'model/data/productoData.php';
-        $PD = new productoData();
-        $id = filter_input(INPUT_GET, 'codigoCategoria');
-        $data['actualizarCategorias'] = $PD->filtrarCategoriaById($id);
-        $this->view->show("actualizarCategoriaView.php", $data);
-    }
-    
-     public function filtrarSubCategoriaById() {
-        require 'model/data/productoData.php';
-        $PD = new productoData();
-        $id = filter_input(INPUT_GET, 'codigoSubCategoria');
-        $data['actualizarSubCategorias'] = $PD->filtrarSubCategoriaById($id);
-        $this->view->show("actualizarSubCategoriaView.php", $data);
-    }
-
-    public function menuCategoriaView() {
-        $this->view->show("menuCategoriaView.php");
-    }
-    
-    public function menuSubCategoriaView() {
-        $this->view->show("menuSubCategoriaView.php");
-    }
-
-    public function menuProductoView() {
-        $this->view->show("menuProductoView.php");
+    public function menuProductoVista() {
+        $this->view->show("menuProductoVista.php");
     }
 
     public function filtrarProductoById() {
         require 'model/data/productoData.php';
         $PD = new productoData();
-        $id = filter_input(INPUT_GET, 'codigoProducto');
+        $id = filter_input(INPUT_GET, 'productoid');
         $data['actualizarProductos'] = $PD->filtrarProductoById($id);
-        $this->view->show("actualizarProductoView.php", $data);
+        $this->view->show("actualizarProductoVista.php", $data);
     }
 
     public function modificarProducto() {
 
         $date = new DateTime();
         $indicaro = $date->getTimestamp();
+        echo '<script>  alert("hola1 ");</script>';
+        $nombreImagen = $_FILES["imagen"]['name'];
+        $tipoImagen = $_FILES["imagen"]['type'];
+        $tamaño = $_FILES['imagen']['size'];
 
-        $nombreImagen = $_FILES["s"]['name'];
-        $tipoImagen = $_FILES["s"]['type'];
-        $tamaño = $_FILES['s']['size'];
-
-        $pathParcial = "/TiendaTecnoligicaVirtual1/TiendaVirtualTecnologica/public/img/";
+        $pathParcial = "/TiendaTecnoligicaVirtual1/tecnotienda/public/img/";
         if ($tamaño <= 3000000) {
             if ($tipoImagen == 'image/jpg' || $tipoImagen == 'image/jpeg' || $tipoImagen == 'image/png') {
                 $carpetaDestino = $_SERVER['DOCUMENT_ROOT'] . $pathParcial;
                 //echo $carpetaDestino;
-                if (move_uploaded_file($_FILES['s']['tmp_name'], $carpetaDestino . $indicaro . $nombreImagen)) {
+
+                if (move_uploaded_file($_FILES['imagen']['tmp_name'], $carpetaDestino . $indicaro . $nombreImagen)) {
                     require 'model/data/productoData.php';
+                 
                     $rutaFinal = $pathParcial . $indicaro . $nombreImagen;
                     $PD = new productoData();
-                    $PD->modificarProducto($rutaFinal, $_POST['Nombre'], $_POST['Precio'], $_POST['descripcion'], $_POST['Cantidad'], $_POST['Categoria'], $_POST['SubCategoria'], $_POST['codigoProducto']);
-                    $data['actualizarProductos'] = $PD->filtrarProductoById($_POST['codigoProducto']);
+                    $PD->modificarProducto($rutaFinal, $_POST['Nombre'], $_POST['Precio'], $_POST['Cantidad'], $_POST['Descripcion'], $_POST['subcategoriaid'], $_POST['productoid']);
+                    $data['actualizarProductos'] = $PD->filtrarProductoById($_POST['productoid']);
                     echo 'Success';
                 } else {
                     echo 'Ocurrió un error al subir la imagen, intente otra vez';
@@ -95,8 +64,7 @@ class ProductoController {
 
         $tipoImagen = $_FILES['imagen']['type'];
         $tamaño = $_FILES['imagen']['size'];
-
-        $pathParcial = "/TiendaTecnoligicaVirtual1/TiendaVirtualTecnologica/public/img/";
+        $pathParcial = "/TiendaTecnoligicaVirtual1/tecnotienda/public/img/";
         if ($tamaño <= 3000000) {
             if ($tipoImagen == 'image/jpg' || $tipoImagen == 'image/jpeg' || $tipoImagen == 'image/png') {
                 $carpetaDestino = $_SERVER['DOCUMENT_ROOT'] . $pathParcial;
@@ -107,7 +75,7 @@ class ProductoController {
                     $PD = new productoData();
                     $PD->registrarProducto($_POST['Nombre'], $_POST['Precio'], $_POST['Cantidad']
                             , $rutaFinal, $_POST['Descripcion']
-                            , $_POST['Categoria'], $_POST['SubCategoria']);
+                            , $_POST['subcategoriaid']);
 
                     echo 'Success';
                 } else {
@@ -121,62 +89,6 @@ class ProductoController {
         }
     }
 
-    public function obtenerCategorias() {
-        require 'model/data/productoData.php';
-        $PD = new productoData();
-        echo json_encode($PD->listarCategorias());
-    }
-
-    public function obtenerCategorias2() {
-        require 'model/data/productoData.php';
-        $PD = new productoData();
-        echo json_encode($PD->listarCategorias());
-    }
-
-    public function registrarCategorias() {
-        require 'model/data/productoData.php';
-
-        $PD = new productoData();
-        $PD->registrarCategorias($_POST['nombreCategoria']);
-
-        echo 'Registrado';
-    }
-    
-    public function registrarSubCategorias() {
-        require 'model/data/productoData.php';
-
-        $PD = new productoData();
-        $PD->registrarSubCategorias($_POST['nombreSubCategoria']);
-
-        echo 'Registrado';
-    }
-
-    public function modificarCategorias() {
-        require 'model/data/productoData.php';
-        $PD = new productoData();
-        $PD->modificarCategorias($_POST['nombreCategoria'],$_POST['codigoCategoria']);
-        echo 'Modificado';
-    }
-    
-    public function modificarSubCategorias() {
-        require 'model/data/productoData.php';
-        $PD = new productoData();
-        $PD->modificarSubCategorias($_POST['nombreSubCategoria'],$_POST['codigoSubCategoria']);
-        echo 'Modificado';
-    }
-
-    public function obtenerSubCategorias() {
-        require 'model/data/productoData.php';
-        $PD = new productoData();
-        echo json_encode($PD->listarSubCategorias());
-    }
-    
-    public function obtenerSubCategorias2() {
-        require 'model/data/productoData.php';
-        $PD = new productoData();
-        echo json_encode($PD->listarSubCategorias());
-    }
-
     public function obtenerProductos() {
         require 'model/data/productoData.php';
         $PD = new productoData();
@@ -186,28 +98,9 @@ class ProductoController {
     public function eliminarProducto() {
         require 'model/data/productoData.php';
         $PD = new productoData();
-        $id = filter_input(INPUT_GET, 'codigoProducto');
-        $PD->eliminarProducto($id);      
-        $this->view->show("menuProductoView.php", null);
+        $PD->eliminarProducto($_POST['productoid']);
+        $this->view->show("menuProductoVista.php", null);
 //        
-    }
-
-    public function eliminarCategoria() {
-        require 'model/data/productoData.php';
-        $PD = new productoData();
-        $id = filter_input(INPUT_GET, 'codigoCategoria');
-        $PD->eliminarCategoria($id);
-          $this->view->show("menuCategoriaView.php");
-      echo 'Eliminado';
-    }
-    
-     public function eliminarSubCategoria() {
-        require 'model/data/productoData.php';
-        $PD = new productoData();
-        $id = filter_input(INPUT_GET, 'codigoSubCategoria');
-        $PD->eliminarSubCategoria($id);
-          $this->view->show("menuSubCategoriaView.php");
-      echo 'Eliminado';
     }
 
 }
