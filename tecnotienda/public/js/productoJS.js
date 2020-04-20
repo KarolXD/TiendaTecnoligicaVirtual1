@@ -8,7 +8,7 @@ $(document).ready(function () {
                 var filas = "";
                 $.each(resultado, function (index, val) {
                     var columnaEliminar = "<td> <a  class='btn btn-danger' >Eliminar. </a></td>";
-                    var columnaModificar = "<td> <a class='btn btn-warning'> Modificar. </a> </td>";
+                    var columnaModificar = "<td> <a class='btn btn-warning' href='?controlador=Cliente&accion=filtrarClienteById&clienteid=" + val.tbclienteid + "'> Modificar. </a> </td>";
                     var columnaCodigo = "<td>" + val.tbclienteid + "</td>";
                     var columnaNombre = "<td>" + val.tbclientenombre + "</td>";
                     var columnaApellido1 = "<td>" + val.tbclienteapellido1 + "</td>";
@@ -18,8 +18,6 @@ $(document).ready(function () {
                     var telefono1 = "<td>" + val.tbclientetelefono1 + "</td>";
                     var telefono2 = "<td>" + val.tbclientetelefono2 + "</td>";
                     var direccion = "<td>" + val.tbclientedireccion + "</td>";
-                   // var contrasenia = "<td>" + val.tbclientecontrasenia + "</td>";
-                    //var tipoUsuario = "<td>" + val.tbclientetipousuario + "</td>";
 
                     filas += "<tr>" + columnaEliminar + columnaModificar + columnaCodigo + columnaNombre + columnaApellido1 + columnaApellido2 + columnaCorreo1 + columnaCorreo2
                             + telefono1 + telefono2 + direccion  + "</tr>";
@@ -123,6 +121,7 @@ $(document).ready(function () {
     modificarCategorias();
     modificarSubCategorias();
     guardarCliente();
+    modificarCliente();
 
 });
 
@@ -369,6 +368,41 @@ var guardarCliente= function () {
                 console.log(response);
 
                 $("#alertControl").html('<div class="alert alert-success" id="alert">' + "Registrado con exito" + '</div>');
+
+                window.setTimeout(function () {
+                    $(".alert").fadeTo(5000000, 0).slideUp(50000000, function () {
+                        $(this).remove();
+                    });
+
+                }, 3000000000);
+
+            }
+        });
+    });
+};
+var modificarCliente= function () {
+    $("#formularioClienteM").on('submit', function (e) {
+        e.preventDefault();
+        $.ajax({
+            type: 'POST',
+            url: "?controlador=Cliente&accion=modificarCliente",
+            data: new FormData(this),
+            contentType: false,
+            cache: false,
+            processData: false,
+            beforeSend: function () {
+
+                $("#alertControl").html('<div class="alert alert-success" id="alert"> Procesando... </div>');
+                window.setTimeout(function () {
+                    $(".alert").fadeTo(500, 0).slideUp(500, function () {
+                        $(this).remove();
+                    });
+                }, 3000);
+            },
+            success: function (response) {
+                console.log(response);
+
+                $("#alertControl").html('<div class="alert alert-success" id="alert">' + "Modificado con exito" + '</div>');
 
                 window.setTimeout(function () {
                     $(".alert").fadeTo(5000000, 0).slideUp(50000000, function () {

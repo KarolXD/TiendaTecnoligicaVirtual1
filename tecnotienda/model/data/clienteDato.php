@@ -29,16 +29,24 @@ class clienteDato {
         echo $consulta->errorInfo()[2];
     }
 
-    public function modificarCliente($codigoCliente, $nombre, $apellido1, $apellido2, $correo, $contrasenia, $tipoUsuario) {
-        $consulta = $this->db->prepare('update  cliente  set codigoPersona=' . $codigoCliente . ', nombre=' . $nombre . ', apellido1=' . $apellido1 . ', apellido2=' . $apellido2 . ', correo=' . $correo . ', contrasenia=' . $contrasenia . ', tipoUsuario=' . $tipoUsuario . ')');
+    public function modificarCliente($nombre, $apellido1, $apellido2, $correo1, $correo2, $telefono1, $telefono2, $direccion, $contrasenia,$clienteid) {
+   $data = array( $nombre, $apellido1, $apellido2, $correo1, $correo2, $telefono1, $telefono2, $direccion, $contrasenia,$clienteid);
+        $consulta = $this->db->prepare(' UPDATE tbcliente  SET tbclientenombre=?,tbclienteapellido1=?,tbclienteapellido2=?,tbclientecorreo1=?,tbclientecorreo2=?,tbclientetelefono1=?,tbclientetelefono2=?,tbclientedireccion=?,tbclientecontrasenia=? where tbclienteid=?');
+        $consulta->execute($data);
+        echo $consulta->errorInfo()[2];
+    }
+
+    
+    public function eliminarCliente($clienteid) {
+        $consulta = $this->db->prepare('delete from cliente where codigoPersona= "' . $clienteid . '"');
         $consulta->execute();
         $resultado = $consulta->fetchAll();
         $consulta->CloseCursor();
         return $resultado;
     }
-
-    public function eliminarCliente($codigoCliente) {
-        $consulta = $this->db->prepare('delete from cliente where codigoPersona= "' . $codigoCliente . '"');
+     public function filtrarClienteById($clienteid) {
+        $consulta = $this->db->prepare('select  tbclienteid,tbclientenombre,tbclienteapellido1,tbclienteapellido2,tbclientecorreo1,'
+                . 'tbclientecorreo2,tbclientetelefono1,tbclientetelefono2,tbclientedireccion , tbclientecontrasenia from tbcliente where tbclienteid="'.$clienteid.'"');
         $consulta->execute();
         $resultado = $consulta->fetchAll();
         $consulta->CloseCursor();
