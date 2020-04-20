@@ -7,8 +7,8 @@ $(document).ready(function () {
             .done(function (resultado) {
                 var filas = "";
                 $.each(resultado, function (index, val) {
-                    var columnaEliminar = "<td> <a  class='btn btn-primary' >Enviar Correo. </a></td>";
-                    var columnaModificar = "<td> <a class='btn btn-warning'> Ver Información. </a> </td>";
+                    var columnaEliminar = "<td> <a  class='btn btn-danger' >Eliminar. </a></td>";
+                    var columnaModificar = "<td> <a class='btn btn-warning'> Modificar. </a> </td>";
                     var columnaCodigo = "<td>" + val.tbclienteid + "</td>";
                     var columnaNombre = "<td>" + val.tbclientenombre + "</td>";
                     var columnaApellido1 = "<td>" + val.tbclienteapellido1 + "</td>";

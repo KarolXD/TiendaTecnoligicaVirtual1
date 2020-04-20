@@ -90,7 +90,7 @@ require 'public/headerMenuP.php';
                         });
 
                     }, 3000000000);
-                    swal("Cancelado", "Dato  Eliminado :)", "error");
+                   // swal("Cancelado", "Dato  Eliminado :)", "error");
 
                 })
                 .fail(function () {

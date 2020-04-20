@@ -31,7 +31,7 @@ class SubCategoriaController {
     public function eliminarSubCategoria() {
         require 'model/data/subcategoriaDato.php';
         $PD = new subcategoriaDato();
-          echo '<script> alert("hola"); </script>';
+          //echo '<script> alert("hola"); </script>';
         $PD->eliminacionSubCategoria($_POST['subcategoriaid']);
         $this->view->show("menuSubCategoriaVista.php");
     }

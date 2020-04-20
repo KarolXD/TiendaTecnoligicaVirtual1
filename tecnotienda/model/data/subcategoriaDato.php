@@ -48,7 +48,7 @@ class subcategoriaDato {
             $this->modificarSubCategorias($subcategorianombre, $categorianombre, $subcategoriaid);
             print('<div class="alert alert-warning" role="alert">  Se ha modificado Exitosamente!</div>');
         } else if ($count['total'] > 0) {
-              print('<div class="alert alert-warning" role="alert">  Se ha modificado Exitosamente!</div>');
+              echo ('<div class="alert alert-warning" role="alert">  Se ha modificado Exitosamente!</div>');
                $this->modificarSubCategorias($subcategorianombre, $categorianombre, $subcategoriaid);
             $consulta = $this->db->prepare('update  tbproducto  set tbproductosubcategoriaid = "' . $subcategoriaid . '"   where tbproductosubcategoriaid= "'.$subcategoriaid.'"');
             $consulta->execute();
@@ -84,7 +84,7 @@ class subcategoriaDato {
             print('<div class="alert alert-primary" role="alert"> Registro Eliminado!</div>');
         } else if ($count['total'] > 0) {
             echo '<div class="alert alert-danger" role="alert"> No es posible eliminar este registro.Lo siento—!</div>';
-            echo '<script>  alert("Lo sentimos, no podemos borrar este registro.En una Producto existe la subCategoria que deseas borrar' . $count['total'] . '");</script>';
+            echo '<script>  alert("Lo sentimos, no podemos borrar este registro.En un Producto existe la subCategoria que deseas borrar ");</script>';
         } else if ($count['total'] == null) {
             echo '<script>  alert("Datos nulos");</script>';
         }

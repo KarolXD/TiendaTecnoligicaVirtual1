@@ -72,7 +72,7 @@ class productoData {
             print('<div class="alert alert-primary" role="alert"> Producto Eliminadot!</div>');
         } else if ($count['total'] > 0) {
             echo '<div class="alert alert-danger" role="alert"> No es posible eliminar este registro.Lo siento—!</div>';
-            echo '<script>  alert("Lo sentimos, no podemos borrar este registro.En una Producto existe la subCategoria que deseas borrar' . $count['total'] . '");</script>';
+            echo '<script>  alert("Lo sentimos, no podemos borrar este registro.Existe una SubCategoria asociada a este producto");</script>';
         } else if ($count['total'] == null) {
             echo '<script>  alert("Datos nulos");</script>';
         }
