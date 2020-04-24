@@ -10,8 +10,7 @@ require 'public/headerMenuP.php';
 <br>
 <div class="container">
         <center><h5>Mis Sub Categorias!</h5></center>
-        <hr style="color: #47748b"
-    <div class="row">
+   <div class="row">
         <div class="table-responsive">
             <table class="table table-hover table-bordered" id="tblSubCategorias">
                 <hr style="color: #6d7fcc">

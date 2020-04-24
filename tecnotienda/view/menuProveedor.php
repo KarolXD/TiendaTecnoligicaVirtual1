@@ -8,28 +8,30 @@ require 'public/headerMenuP.php';
 </form>
     </center>
 <center>
-    <a href="?controlador=Producto&accion=registrarProductoVista"> Registrar Producto</a>
+    <a href="?controlador=Proveedor&accion=registrarProveedor"> Registrar Proveedor</a>
 </center>
 <br>
 <div class="container">
-        <center><h5>Mis Productos!</h5></center>
+        <center><h5>Mis Proveedores!</h5></center>
     <div class="row">
       
                 <hr style="color: #47748b"
         <div class="table-responsive">
           
-                <table id="tblProducto" class="table table-hover table-bordered">
+                <table id="tblProveector" class="table table-hover table-bordered">
                 <thead>
                     <tr>
                         <th scope="col">Eliminar</th>
                         <th scope="col">Modificar</th>
-                        <th scope="col">#Codigo</th>
-                        <th scope="col">Nombre</th>
-                        <th scope="col">Imagen</th>
-                        <th scope="col">Precio</th>
-                        <th scope="col">Descripción</th>
-                        <th scope="col">Cantidad</th>
-                        <th scope="col">SubCategoria</th>
+                        <th scope="col">#Cédula Juridica</th>
+                        <th scope="col">Nombre Empresa</th>
+                        <th scope="col">Fax</th>
+                        <th scope="col">Codigo Postal</th>
+                        <th scope="col">Correo</th>
+                        <th scope="col">SitioWeb</th>
+                        <th scope="col">contacto</th>
+                        <th scope="col">Telefono</th>
+                         <th scope="col">Dirección Fisica</th>
                   
                     </tr>
                 </thead>
@@ -45,13 +47,13 @@ require 'public/headerMenuP.php';
 
 <div class="auto" id="auto" style="display: none"><div  id="alertControl" style="opacity: none"></div></div>
 
+
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <script src="./public/js/jquery-3.3.1.js" type="text/javascript"></script>
 <script type="text/javascript">
 //No se asusten!!!!!!!!!!!Tengo que pasar esto a un archivo JS :s lo sse lo se
     function eliminar(valor) {
-        
-        var productoid = valor;
+        var proveedorid = valor;
         swal({
             title: "Estás seguro?",
             text: "Una vez eliminado este registro, no podrás dar marcha atrás!",
@@ -61,7 +63,7 @@ require 'public/headerMenuP.php';
         })
                 .then((willDelete) => {
                     if (willDelete) {
-                        ajaxEliminarProducto(productoid);
+                        ajaxEliminarProveedor(proveedorid);
                     } else {
                         swal("Cancelado", "Dato no Eliminado :)", "error");
 
@@ -70,12 +72,12 @@ require 'public/headerMenuP.php';
                 });
 
     }
-    function ajaxEliminarProducto(productoid) {
+    function ajaxEliminarProveedor(proveedorid) {
         $.ajax({
-            url: '?controlador=Producto&accion=eliminarProducto',
+            url: '?controlador=Proveedor&accion=eliminarProveedor',
             type: 'POST',
             dataType: 'html',
-            data: "productoid=" + productoid,
+            data: "proveedorid=" + proveedorid,
             beforeSend: function () {
                 $("#alertControl").html('<div class="alert alert-success" id="alert"> Procesando... </div>');
                 window.setTimeout(function () {
@@ -95,7 +97,7 @@ require 'public/headerMenuP.php';
                         });
 
                     }, 3000000000);
-                  //  swal("Cancelado", "Dato  Eliminado :)", "error");
+                   // swal("Cancelado", "Dato  Eliminado :)", "error");
 
                 })
                 .fail(function () {
@@ -109,4 +111,5 @@ require 'public/headerMenuP.php';
 
 </script>
 <?php
+
 require 'public/footerMenuP.php';

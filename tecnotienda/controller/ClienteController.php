@@ -76,8 +76,14 @@ class ClienteController {
         $this->view->show("actualizarClienteVista.php", $data);
     }
 
+      public function eliminarCliente() {
+         require 'model/data/clienteDato.php';
+        $PD = new clienteDato();
+          //echo '<script> alert("hola"); </script>';
+        $PD->eliminarCliente($_POST['clienteid']);
+      $this->view->show("menuClientes.php");
 }
-
+}
 //fin
 // fin clase
 ?>

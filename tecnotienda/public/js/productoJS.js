@@ -1,5 +1,33 @@
 
 $(document).ready(function () {
+        $.ajax({
+        type: 'POST',
+        url: "?controlador=Proveedor&accion=listarProveedor",
+        dataType: "json"})
+            .done(function (resultado) {
+                var filas = "";
+                $.each(resultado, function (index, val) {
+                 
+                    var columnaEliminar = "<td> <a  class='btn btn-danger' onclick='return  eliminar(" + val.tbproveedorid + ")' >Eliminar </a></td>";
+                    var columnaModificar = "<td> <a class='btn btn-warning' href='?controlador=Proveedor&accion=filtrarProveedorById&proveedorid=" + val.tbproveedorid + "'> Modificar. </a> </td>";
+                    var columna1 = "<td>" + val.tbproveedorid + "</td>";
+                    var columna2 = "<td>" + val.tbproveedornombreempresa + "</td>";
+                    var columna3 = "<td>" + val.tbproveedorfax + "</td>";
+                    var columna4 = "<td>" + val.tbproveedorapartadopostal + "</td>";
+                    var columna5 = "<td>" + val.tbproveedorcorreo + "</td>";
+                    var columna6 = "<td>" + val.tbproveedorsitioweb + "</td>";
+                    var columna7= "<td>" + val.tbproveedorpersonadecontacto + "</td>";
+                    var columna8 = "<td>" + val.tbproveedornumerotelefono + "</td>";
+                    var columna9= "<td>" + val.tbproveedordireccionfisicaempresa + "</td>";
+
+                    filas += "<tr>" + columnaEliminar + columnaModificar + columna1 + columna2 + columna3 + columna4  + columna5
+                            + columna6 + columna7 + columna8+columna9  + "</tr>";
+                });
+                $("#tblProveector tbody").empty();
+                $("#tblProveector tbody").append(filas);
+
+                console.log(resultado);
+            });
        $.ajax({
         type: 'POST',
         url: "?controlador=Cliente&accion=listarClientes",
@@ -7,7 +35,8 @@ $(document).ready(function () {
             .done(function (resultado) {
                 var filas = "";
                 $.each(resultado, function (index, val) {
-                    var columnaEliminar = "<td> <a  class='btn btn-danger' >Eliminar. </a></td>";
+                    
+                    var columnaEliminar = "<td> <a  class='btn btn-danger' onclick='return  eliminar(" + val.tbclienteid + ")' >Eliminar </a></td>";
                     var columnaModificar = "<td> <a class='btn btn-warning' href='?controlador=Cliente&accion=filtrarClienteById&clienteid=" + val.tbclienteid + "'> Modificar. </a> </td>";
                     var columnaCodigo = "<td>" + val.tbclienteid + "</td>";
                     var columnaNombre = "<td>" + val.tbclientenombre + "</td>";
@@ -122,7 +151,8 @@ $(document).ready(function () {
     modificarSubCategorias();
     guardarCliente();
     modificarCliente();
-
+guardarProveedor();
+modificarProveedor();
 });
 
 
@@ -386,6 +416,78 @@ var modificarCliente= function () {
         $.ajax({
             type: 'POST',
             url: "?controlador=Cliente&accion=modificarCliente",
+            data: new FormData(this),
+            contentType: false,
+            cache: false,
+            processData: false,
+            beforeSend: function () {
+
+                $("#alertControl").html('<div class="alert alert-success" id="alert"> Procesando... </div>');
+                window.setTimeout(function () {
+                    $(".alert").fadeTo(500, 0).slideUp(500, function () {
+                        $(this).remove();
+                    });
+                }, 3000);
+            },
+            success: function (response) {
+                console.log(response);
+
+                $("#alertControl").html('<div class="alert alert-success" id="alert">' + "Modificado con exito" + '</div>');
+
+                window.setTimeout(function () {
+                    $(".alert").fadeTo(5000000, 0).slideUp(50000000, function () {
+                        $(this).remove();
+                    });
+
+                }, 3000000000);
+
+            }
+        });
+    });
+};
+
+var guardarProveedor= function () {
+    $("#formularioGuardarProveedor").on('submit', function (e) {
+        e.preventDefault();
+        $.ajax({
+            type: 'POST',
+            url: "?controlador=Proveedor&accion=guardarProveedor",
+            data: new FormData(this),
+            contentType: false,
+            cache: false,
+            processData: false,
+            beforeSend: function () {
+
+                $("#alertControl").html('<div class="alert alert-success" id="alert"> Procesando... </div>');
+                window.setTimeout(function () {
+                    $(".alert").fadeTo(500, 0).slideUp(500, function () {
+                        $(this).remove();
+                    });
+                }, 3000);
+            },
+            success: function (response) {
+                console.log(response);
+
+                $("#alertControl").html('<div class="alert alert-success" id="alert">' + "Registrado con exito" + '</div>');
+
+                window.setTimeout(function () {
+                    $(".alert").fadeTo(5000000, 0).slideUp(50000000, function () {
+                        $(this).remove();
+                    });
+
+                }, 3000000000);
+
+            }
+        });
+    });
+};
+
+var  modificarProveedor= function () {
+    $("#formularioModificarProveedor").on('submit', function (e) {
+        e.preventDefault();
+        $.ajax({
+            type: 'POST',
+            url: "?controlador=Proveedor&accion=modificarProveedor",
             data: new FormData(this),
             contentType: false,
             cache: false,

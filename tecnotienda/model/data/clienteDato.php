@@ -38,7 +38,7 @@ class clienteDato {
 
     
     public function eliminarCliente($clienteid) {
-        $consulta = $this->db->prepare('delete from cliente where codigoPersona= "' . $clienteid . '"');
+        $consulta = $this->db->prepare('delete from tbcliente where tbclienteid= "' . $clienteid . '"');
         $consulta->execute();
         $resultado = $consulta->fetchAll();
         $consulta->CloseCursor();
