@@ -22,13 +22,47 @@ class clienteDato {
     }
 
 
-    public function registrarCliente($clienteid, $nombre, $apellido1, $apellido2, $correo1, $correo2, $telefono1, $telefono2, $direccion, $contrasenia, $tipoUsuario) {
-        $data = array($clienteid, $nombre, $apellido1, $apellido2, $correo1, $correo2, $telefono1, $telefono2, $direccion, $contrasenia, $tipoUsuario);
-        $consulta = $this->db->prepare('insert into tbcliente(tbclienteid,tbclientenombre,tbclienteapellido1,tbclienteapellido2,tbclientecorreo1,tbclientecorreo2,tbclientetelefono1,tbclientetelefono2,tbclientedireccion,tbclientecontrasenia,tbclientetipousuario) values (?,?,?,?,?,?,?,?,?,?,?)');
+    public function registrarCliente($usuario, $contrasenia, $estado) {
+        $data = array($usuario, $contrasenia, $estado);
+        $consulta = $this->db->prepare('insert into tbcliente(tbclienteusuario,tbclientecontrasennia,tbclienteactivo) values (?,?,?)');
         $consulta->execute($data);
         echo $consulta->errorInfo()[2];
     }
 
+    public function listarCorreo() {
+        $consulta = $this->db->prepare('select tbcorreoid, clienteid,tbcorreoatributo,tbcorreovalor from tbcorreo');
+        $consulta->execute();
+        $resultado = $consulta->fetchAll();
+        $consulta->CloseCursor();
+        return $resultado;
+    }
+    
+    public function actualizarCorreo($clienteid,$valor,$correoid){
+        $data = array($clienteid,$valor,$correoid);  
+        $consulta = $this->db->prepare('update  tbcorreo set clienteid=?, tbcorreoatributo=? where tbcorreoid=?');
+        $consulta->execute($data);
+        echo $consulta->errorInfo()[2];
+        
+    }
+     public function filtarCorreoById($correoid) {
+        $consulta = $this->db->prepare('select tbcorreoid, clienteid,tbcorreoatributo,tbcorreovalor from tbcorreo where tbcorreoid="'.$correoid.'"');
+        $consulta->execute();
+        $resultado = $consulta->fetchAll();
+        $consulta->CloseCursor();
+        return $resultado;
+    }
+    
+    
+    
+        public function registrarCorreo($clienteid, $valor,$valorInicial) {
+        $data = array($clienteid, $valor,$valorInicial);
+        $consulta = $this->db->prepare('insert into  tbcorreo (clienteid,tbcorreoatributo,tbcorreovalor)  values (?,?,?)');
+        $consulta->execute($data);
+        echo $consulta->errorInfo()[2];
+    }
+
+    
+    
     public function modificarCliente($nombre, $apellido1, $apellido2, $correo1, $correo2, $telefono1, $telefono2, $direccion, $contrasenia,$clienteid) {
    $data = array( $nombre, $apellido1, $apellido2, $correo1, $correo2, $telefono1, $telefono2, $direccion, $contrasenia,$clienteid);
         $consulta = $this->db->prepare(' UPDATE tbcliente  SET tbclientenombre=?,tbclienteapellido1=?,tbclienteapellido2=?,tbclientecorreo1=?,tbclientecorreo2=?,tbclientetelefono1=?,tbclientetelefono2=?,tbclientedireccion=?,tbclientecontrasenia=? where tbclienteid=?');

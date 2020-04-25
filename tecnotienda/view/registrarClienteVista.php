@@ -3,73 +3,109 @@ include_once 'public/header.php';
 ?>
 
 <div class="container">
+    
+          <a href="?controlador=Cliente&accion=listarCorreo" class="btn btn-info" >Listar</a>
     <div class="row">
 
-        <div class="col-md-4"></div>
-        <div class="col-sm-4" >
+        <div class="col-md-2"></div>
 
-            <form id="formularioCliente" method="post" autocomplete="off" class="form" enctype="multipart/form-data">
-           
-                    <center><h5>Registrar mis datos</h5></center>
-                    <hr style="color: #47748b">
-                    <div class="form-group">
-                        <label for="username">Identificación</label>
-                        <input type="text" class="form-control" id="codigoPersona" name="codigoPersona" aria-describedby="emailHelp" placeholder="Identifiación" required="">
+        <div class="col-md-6" >
+            <center>
+          
+                <div class="form-group">
+                    <form action="?controlador=Cliente&accion=registrarCliente"  method="post" name="" id="">
+                        <div class="table-responsive">
+                            <table class="table table-bordered" id="dynamic_field">
+                                <tr>
+                                    <td><input type="text" name="name[]" placeholder="Escriba su correo" class="form-control name_list" /></td>
+                                    <td><button type="button" name="add" id="add" onclick="sumar();" class="btn btn-success" >Agregar un correo más </button></td>
+                                </tr>
+                            </table>
+                            <div class="form-group">
+                             
+                                <input type="text" class="form-control" id="usuario" name="usuario" aria-describedby="emailHelp" placeholder="Usuario" required="">
+                            </div>
 
-                    </div>
-                    <div class="form-group">
-                        <label for="username">Mi Nombre</label>
-                        <input type="text" class="form-control" id="nombre" name="nombre" aria-describedby="emailHelp" placeholder="Nombre " required="">
-                    </div>
+                            <input type="submit" name="submit"  id="submit" class="btn btn-info" value="Submit" />
+                              <a href="?controlador=Cliente&accion=menuPrincipal" class="btn btn-info" >Regresar</a>
+                        </div>
+
+                    </form>
 
 
-                    <div class="form-group">
-                        <label for="username">Mi Primer Apellido</label>
-                        <input type="text" class="form-control" id="apellido1" name="apellido1" aria-describedby="emailHelp" placeholder="Apellido1 " required>
-                    </div>
-                    <div class="form-group">
-                        <label for="username">Mi Segundo Apellido</label>
-                        <input type="text" class="form-control" id="apellido2" name="apellido2" aria-describedby="emailHelp" placeholder="Apellido2" required> 
-                    </div>
-                    <div class="form-group">
-                        <label for="username">Mis Correo </label>
-                        <input type="text" class="form-control" id="correo1" name="correo1" aria-describedby="emailHelp" placeholder=" Correo 1" required>
-                        <br>
-                        <input type="text" class="form-control" id="correo2" name="correo2" aria-describedby="emailHelp" placeholder=" Correo 2" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="username">Mis Telefonos</label>
-                        <input type="tel" class="form-control" id="telefono1" name="telefono1"  placeholder="Telefono 2" required>
-                        <br>
-                        <input type="tel" class="form-control" id="telefono2" name="telefono2"  placeholder="Telefono 1" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="text">Mi Direccion</label>
-                        <input type="text" class="form-control" id="direccion" name="direccion" placeholder="Contraseña" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="password">Mi Contraseña</label>
-                        <input type="password" class="form-control" id="contrasenia" name="contrasenia" placeholder="Contraseña" required>
-                    </div>
-                    <label class="col-lg-3 col-form-label form-control-label"></label>
-                    <div class="col-md-12"  name="alertControl" id="alertControl"></div>
-                    <div class="form-group">
-                        <center>
-                            <input name="submit" type="submit" value=" Acceder " class="btn btn-info">
-                            <a href="?controlador=Cliente&accion=menuPrincipal" class="btn btn-info" >Regresar</a>
-                        </center>
-                    </div>
-         
-            </form>
+                </div>
+
+            </center>
         </div>
+        <div class="col-md-2"></div>
 
-        <div class="col-md-4"></div>
     </div>
+    <?php
+   
+$pizza  = "piece1,piece2,piece3,piece4,piece5,piece6";
+$pieces = explode(",", $pizza);
+echo $pieces[0]; // piece1
+echo $pieces[1]; // piece2
+
+?>
+
 </div>
 <br>
 <br>
 <br>
 
+
+
+
+<script>
+    var n = 1;
+    function sumar() {
+        n = n + 1;
+        $('#contadorcorreo').val(n);
+
+    }
+    function borrar() {
+        n = n - 1;
+        $('#contadorcorreo').val(n);
+    }
+
+</script>
+<script>
+    $(document).ready(function () {
+        var i = 1;
+        $('#add').click(function () {
+            i++;
+
+            $('#dynamic_field').append('<tr id="row' + i + '"><td><input type="text" name="name[]" placeholder="Ingrese su correo" class="form-control name_list" /></td><td><button type="button" onclick="eliminar()" name="remove" id="' + i + '" class="btn btn-danger btn_remove">X</button></td></tr>');
+            //  document. getElementById("contadorcorreo").value(i);
+
+        });
+
+        $(document).on('click', '.btn_remove', function () {
+            var button_id = $(this).attr("id");
+
+            $('#row' + button_id + '').remove();
+            borrar();
+
+        });
+
+
+//        $('#submit').click(function () {
+//            $.ajax({
+//                url: "?controlador=Cliente&accion=registrarCliente",
+//                method: "POST",
+//                data: $('#add_name').serialize(),
+//                success: function (data)
+//                {
+//
+//                    alert(data);
+//                    $('#add_name')[0].reset();
+//                }
+//            });
+//        });
+
+    });
+</script>
 
 <?php
 include_once 'public/footer.php';
