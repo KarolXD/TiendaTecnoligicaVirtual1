@@ -30,7 +30,7 @@ class clienteDato {
     }
 
     public function listarCorreo() {
-        $consulta = $this->db->prepare('select tbcorreoid, clienteid,tbcorreoatributo,tbcorreovalor from tbcorreo');
+        $consulta = $this->db->prepare('select tbcorreoid, tbclienteusuario,tbcorreoatributo,tbcorreovalor from tbcorreo');
         $consulta->execute();
         $resultado = $consulta->fetchAll();
         $consulta->CloseCursor();
@@ -39,13 +39,13 @@ class clienteDato {
     
     public function actualizarCorreo($clienteid,$valor,$correoid){
         $data = array($clienteid,$valor,$correoid);  
-        $consulta = $this->db->prepare('update  tbcorreo set clienteid=?, tbcorreoatributo=? where tbcorreoid=?');
+        $consulta = $this->db->prepare('update  tbcorreo set tbclienteusuario=?, tbcorreoatributo=? where tbcorreoid=?');
         $consulta->execute($data);
         echo $consulta->errorInfo()[2];
         
     }
      public function filtarCorreoById($correoid) {
-        $consulta = $this->db->prepare('select tbcorreoid, clienteid,tbcorreoatributo,tbcorreovalor from tbcorreo where tbcorreoid="'.$correoid.'"');
+        $consulta = $this->db->prepare('select tbcorreoid, tbclienteusuario,tbcorreoatributo,tbcorreovalor from tbcorreo where tbcorreoid="'.$correoid.'"');
         $consulta->execute();
         $resultado = $consulta->fetchAll();
         $consulta->CloseCursor();
@@ -56,7 +56,7 @@ class clienteDato {
     
         public function registrarCorreo($clienteid, $valor,$valorInicial) {
         $data = array($clienteid, $valor,$valorInicial);
-        $consulta = $this->db->prepare('insert into  tbcorreo (clienteid,tbcorreoatributo,tbcorreovalor)  values (?,?,?)');
+        $consulta = $this->db->prepare('insert into  tbcorreo (tbclienteusuario,tbcorreoatributo,tbcorreovalor)  values (?,?,?)');
         $consulta->execute($data);
         echo $consulta->errorInfo()[2];
     }
