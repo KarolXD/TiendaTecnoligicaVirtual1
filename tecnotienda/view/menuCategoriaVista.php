@@ -1,5 +1,4 @@
 <?php
-
 require 'public/headerMenuP.php';
 ?>
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
@@ -17,11 +16,39 @@ require 'public/headerMenuP.php';
                     <th scope="col">Modificar</th>
                     <th scope="col">#Codigo</th>
                     <th scope="col">Categoria</th>
+                    <th scope="col">Descripcion</th>
+                    <th scope="col">Usuario</th>
+                    <th scope="col">fecha</th>
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                </tr>
+            <tbody>
+
+
+                <?php
+                foreach ($vars['listado'] as $item) {
+                    ?>
+                    <tr>
+                        <td>  <a  class="btn btn-danger" href='?controlador=Cliente&accion=metodoEliminarPersona&correoid=<?php echo $item[0] ?>'> Eliminar
+
+                            </a> </td>
+                        <td>  <a  class="btn btn-warning" href='?controlador=Categoria&accion=filtrarCategoriaById&categoriaid=<?php echo $item[0] ?>'> Modificar
+
+                            </a> </td>
+                        <td><?php echo $item[0] ?></td>
+                        <td><?php echo $item[1] ?></td>
+                        <td><?php echo $item[2] ?></td>
+                        <td><?php echo $item[3] ?></td>
+                        <td><?php echo $item[4] ?></td>
+
+                    </tr>
+
+                    <?php
+                }
+                ?>
+
+            </tbody>
+
             </tbody>
 
 
@@ -102,5 +129,4 @@ require 'public/headerMenuP.php';
 
 
 <?php
-
 require 'public/footerMenuP.php';

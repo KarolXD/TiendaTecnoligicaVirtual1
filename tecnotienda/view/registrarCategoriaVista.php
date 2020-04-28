@@ -8,13 +8,25 @@ include_once 'public/headerMenuP.php';
         <div class="col-md-4">
             <h5>  <center>Registrar una Categoria </center></h5>
             <hr style="color: #47748b">
-            <form id="formularioCategorias" method="post" autocomplete="off" class="form" enctype="multipart/form-data">
+            <form action="?controlador=Categoria&accion=registrarCategoria" method="post" autocomplete="off" class="form" enctype="multipart/form-data">
 
                 <div class="form-group">
                     <label for="username"> Escribe el nombre de una Categoria</label>
                     <input type="text" class="form-control" id="categorianombre" name="categorianombre" placeholder="Categoria" required="">
                 </div>
-
+                <div class="form-group">
+                    <label for="username"> Escribe una descripción</label>
+                    <input type="text" class="form-control" id="categoriadescripcion" name="categoriadescripcion" placeholder="Descripción" required="">
+                </div>
+                <div class="form-group">
+                    <label for="username"> Escribe el nombre de una fecha</label>
+                    <input type="date" class="form-control" id="categoriafecha" name="categoriafecha" placeholder="Descripción" required="">
+                </div>
+                <div class="form-group">
+                    <label for="username"> Usuario que agregó categoria</label>
+                    <select  name="usuarioid" id="usuarioid" class="form-control">
+                    </select>
+                </div>
 
 
                 <div class="form-group">

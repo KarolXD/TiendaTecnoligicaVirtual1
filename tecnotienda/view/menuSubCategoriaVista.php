@@ -1,5 +1,4 @@
 <?php
-
 require 'public/headerMenuP.php';
 ?>
 
@@ -9,9 +8,9 @@ require 'public/headerMenuP.php';
 </center>
 <br>
 <div class="container">
-        <center><h5>Mis Sub Categorias!</h5></center>
-   <div class="row">
-       
+    <center><h5>Mis Sub Categorias!</h5></center>
+    <div class="row">
+
         <div class="table-responsive">
             <table class="table table-hover table-bordered" id="tblSubCategorias">
                 <hr style="color: #6d7fcc">
@@ -20,18 +19,39 @@ require 'public/headerMenuP.php';
                         <th scope="col">Eliminar</th>
                         <th scope="col">Modificar</th>
                         <th scope="col">#Codigo</th>       
-                        <th scope="col">SubCategoria</th>
-                        <th scope="col">Categoria</th>
+                        <th scope="col"> Categoria</th>
+                        <th scope="col">Sub Categoria</th>
+                        <th scope="col">Usuario</th>
+                        <th scope="col">Descripción</th>
+                        <th scope="col">Fecha</th>
                     </tr>
                 </thead>
 
                 <tbody>
 
-                    <tr>
+                    <?php
+                    foreach ($vars['listado'] as $item) {
+                        ?>
+                        <tr>
+                            <td>  <a  class="btn btn-danger" href='?controlador=SubCategoria&accion=metodoEliminarPersona&subcategoriaid=<?php echo $item[0] ?>'> Eliminar
+
+                                </a> </td>
+                            <td>  <a  class="btn btn-warning" href='?controlador=SubCategoria&accion=filtrarSubCategoriaById&subcategoriaid=<?php echo $item[0] ?>'> Modificar
+
+                                </a> </td>
+                            <td><?php echo $item[0] ?></td>
+                            <td><?php echo $item[1] ?></td>
+                            <td><?php echo $item[3] ?></td>
+                            <td><?php echo $item[2] ?></td>
+                            <td><?php echo $item[4] ?></td>
+                            <td><?php echo $item[5] ?></td>
 
 
+                        </tr>
 
-                    </tr>
+                        <?php
+                    }
+                    ?>
                 </tbody>
 
 
@@ -90,7 +110,7 @@ require 'public/headerMenuP.php';
                         });
 
                     }, 3000000000);
-                   // swal("Cancelado", "Dato  Eliminado :)", "error");
+                    // swal("Cancelado", "Dato  Eliminado :)", "error");
 
                 })
                 .fail(function () {
@@ -104,5 +124,4 @@ require 'public/headerMenuP.php';
 
 </script>
 <?php
-
 require 'public/footerMenuP.php';

@@ -21,23 +21,45 @@ class subcategoriaDato {
         $this->db = SPDO::singleton();
     }
 
-    public function registrarSubCategorias($subcategorianombre, $categorianombre) {
-          //echo '<script>  alert("Es  B ' . $categorianombre. '");</script>';
-        $data = array($subcategorianombre, $categorianombre);
-        $consulta = $this->db->prepare('INSERT INTO tbsubcategoria (tbsubcategorianombre,tbcategoriaid) '
-                . ' VALUES(?,?)');
-        $consulta->execute($data);
-        echo $consulta->errorInfo()[2];
+    public function registrarSubCategorias($subcategorianombre, $categoriaid, $subcategoriadescripcion, $usuarioid, $subcategoriafecha) {
+
+        $sql = 'SELECT COUNT(*) as total FROM tbsubcategoria where tbsubcategorianombre="' . $subcategorianombre . '"';
+        $del = $this->db->prepare($sql);
+        $del->execute();
+        $count = $del->fetch();
+        echo $count['total'];
+        if ($count['total'] > 0) {
+            echo '<script>  alert(" Sub Categoria EXISTENTE.Imposible registrarla");</script>';
+        } else {
+            $data = array($subcategorianombre, $categoriaid, $subcategoriadescripcion, $usuarioid, $subcategoriafecha, 0);
+            $consulta = $this->db->prepare('INSERT INTO tbsubcategoria (tbsubcategorianombre,tbcategoriaid,tbsubcategoriadescripcion,tbusuarioid,tbsubcategoriafecha,tbsubcategoriaestado ) '
+                    . ' VALUES(?,?,?,?,?,?)');
+            $consulta->execute($data);
+            echo $consulta->errorInfo()[2];
+            echo '<script>  alert(" Sub Categoria Registrada");</script>';
+        }
     }
 
-    public function modificarSubCategorias($subcategorianombre, $categorianombre, $subcategoriaid) {
-        $data = array($subcategorianombre, $categorianombre, $subcategoriaid);
-        $consulta = $this->db->prepare('update tbsubcategoria set tbsubcategorianombre=? ,tbcategoriaid=? where tbsubcategoriaid=? ');
-        $consulta->execute($data);
-        echo $consulta->errorInfo()[2];
+    public function modificarSubCategorias($subcategorianombre, $categoriaid, $subcategoriadescripcion, $usuarioid, $subcategoriafecha, $subcategoriaid) {
+        $sql = 'SELECT COUNT(*) as total FROM tbsubcategoria where tbsubcategorianombre="' . $subcategorianombre . '"';
+        $del = $this->db->prepare($sql);
+        $del->execute();
+        $count = $del->fetch();
+        echo $count['total'];
+        if ($count['total'] >= 1) {
+
+            echo '<script>  alert(" Sub Categoria Existente");</script>';
+        } else {
+
+            $data = array($subcategorianombre, $categoriaid, $subcategoriadescripcion, $usuarioid, $subcategoriafecha, $subcategoriaid);
+            $consulta = $this->db->prepare('update tbsubcategoria set tbsubcategorianombre=? ,tbcategoriaid=?,tbsubcategoriadescripcion=?,tbusuarioid=?,tbsubcategoriafecha=? where tbsubcategoriaid=? ');
+            $consulta->execute($data);
+            echo $consulta->errorInfo()[2];
+            echo '<script>  alert(" Sub Categoria Modificada");</script>';
+        }
     }
-    
-     public function modificiacionSubCategoria($subcategorianombre, $categorianombre, $subcategoriaid) {
+
+    public function modificiacionSubCategoria($subcategorianombre, $categorianombre, $subcategoriaid) {
         $sql = 'SELECT COUNT(*) as total FROM tbproducto where tbproductosubcategoriaid="' . $subcategoriaid . '"';
         $del = $this->db->prepare($sql);
         $del->execute();
@@ -48,9 +70,9 @@ class subcategoriaDato {
             $this->modificarSubCategorias($subcategorianombre, $categorianombre, $subcategoriaid);
             print('<div class="alert alert-warning" role="alert">  Se ha modificado Exitosamente!</div>');
         } else if ($count['total'] > 0) {
-              echo ('<div class="alert alert-warning" role="alert">  Se ha modificado Exitosamente!</div>');
-               $this->modificarSubCategorias($subcategorianombre, $categorianombre, $subcategoriaid);
-            $consulta = $this->db->prepare('update  tbproducto  set tbproductosubcategoriaid = "' . $subcategoriaid . '"   where tbproductosubcategoriaid= "'.$subcategoriaid.'"');
+            echo ('<div class="alert alert-warning" role="alert">  Se ha modificado Exitosamente!</div>');
+            $this->modificarSubCategorias($subcategorianombre, $categorianombre, $subcategoriaid);
+            $consulta = $this->db->prepare('update  tbproducto  set tbproductosubcategoriaid = "' . $subcategoriaid . '"   where tbproductosubcategoriaid= "' . $subcategoriaid . '"');
             $consulta->execute();
             $resultado = $consulta->fetchAll();
             $consulta->CloseCursor();
@@ -93,8 +115,9 @@ class subcategoriaDato {
     }
 
     public function filtrarSubCategoriaById($subcategoriaid) {
-        $consulta = $this->db->prepare('select  s.tbsubcategoriaid,s.tbsubcategorianombre,c.tbcategorianombre  from tbcategoria c join  tbsubcategoria s 
-where c.tbcategoriaid=s.tbcategoriaid and  s.tbsubcategoriaid="' . $subcategoriaid . '" ');
+        $consulta = $this->db->prepare('select s.tbsubcategoriaid,c.tbcategorianombre,s.tbsubcategorianombre,s.tbsubcategoriadescripcion,
+            s.tbusuarioid,s.tbsubcategoriafecha, s.tbcategoriaid
+ from tbsubcategoria s join tbcategoria c on s.tbcategoriaid=c.tbcategoriaid where s.tbcategoriaid=c.tbcategoriaid and   s.tbsubcategoriaid="' . $subcategoriaid . '" ');
         $consulta->execute();
         $resultado = $consulta->fetchAll();
         $consulta->CloseCursor();
@@ -102,14 +125,17 @@ where c.tbcategoriaid=s.tbcategoriaid and  s.tbsubcategoriaid="' . $subcategoria
     }
 
     public function listarSubCategorias() {
-        $consulta = $this->db->prepare('select  s.tbsubcategoriaid,s.tbsubcategorianombre,c.tbcategorianombre  from tbcategoria c join  tbsubcategoria s 
-where c.tbcategoriaid=s.tbcategoriaid ');
+        $consulta = $this->db->prepare('
+select s.tbsubcategoriaid,c.tbcategorianombre,s.tbusuarioid,s.tbsubcategorianombre,s.tbsubcategoriadescripcion,s.tbsubcategoriafecha
+ from tbsubcategoria s join tbcategoria c on s.tbcategoriaid=c.tbcategoriaid where s.tbcategoriaid=c.tbcategoriaid');
         $consulta->execute();
-        return $consulta->fetchALL(PDO::FETCH_ASSOC);
+        $resultado = $consulta->fetchAll();
+        $consulta->CloseCursor();
+        return $resultado;
     }
 
     public function obtenerSubCategorias() {
-        $consulta = $this->db->prepare('select  tbsubcategoriaid,tbsubcategorianombre  from  tbsubcategoria  ');
+        $consulta = $this->db->prepare('select  tbsubcategoriaid,tbsubcategorianombre  from  tbsubcategoria ');
         $consulta->execute();
         return $consulta->fetchALL(PDO::FETCH_ASSOC);
     }

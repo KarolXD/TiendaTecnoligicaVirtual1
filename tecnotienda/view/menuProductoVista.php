@@ -1,47 +1,88 @@
 <?php
 require 'public/headerMenuP.php';
 ?>
-<center>
-<form class="form-inline my-10 my-lg-0">
-    <input class="form-control" type="search" placeholder="Filtrar por nombre" aria-label="Search">
-    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Filtrar </button>
-</form>
-    </center>
+
+<div class="container">
+    <center>
+
+
+ <form class="form-inline my-2 my-lg-0"  method="post" action="?controlador=Producto&accion=filtrarBySubCategoria">
+<!--        <input class="form-control mr-sm-2"   name="subcategorianombre" id="subcategorianombre"type="search" placeholder="Search" aria-label="Search">
+   -->
+      <select name="subcategorianombre" id="subcategorianombre"  class="form-control mr-sm-2">  </select>
+        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Filtrar por Sub Categoria</button>
+     
+    </form>
+</center>
 <center>
     <a href="?controlador=Producto&accion=registrarProductoVista"> Registrar Producto</a>
 </center>
 <br>
-<div class="container">
-        <center><h5>Mis Productos!</h5></center>
+    <center><h5>Mis Productos!</h5></center>
     <div class="row">
-      
-                <hr style="color: #47748b"
-        <div class="table-responsive">
-          
-                <table id="tblProducto" class="table table-hover table-bordered">
-                <thead>
-                    <tr>
-                        <th scope="col">Eliminar</th>
-                        <th scope="col">Modificar</th>
-                        <th scope="col">#Codigo</th>
-                        <th scope="col">Nombre</th>
-                        <th scope="col">Imagen</th>
-                        <th scope="col">Precio</th>
-                        <th scope="col">Descripción</th>
-                        <th scope="col">Cantidad</th>
-                        <th scope="col">SubCategoria</th>
-                  
+
+        <hr style="color: #47748b"
+            <div class="table-responsive">
+
+        <table id="tblProducto" class="table table-hover table-bordered">
+            <thead>
+                <tr>
+                    <th scope="col">Detalles</th>
+                    <th scope="col">Eliminar</th>
+                    <th scope="col">Modificar</th>
+                    <th scope="col">#Id Producto</th>
+                    <th scope="col">Código Barras</th>
+                    <th scope="col">Categoria</th>
+                    <th scope="col">Sub Categoria</th>
+                    <th scope="col">Titulo</th>
+                   
+
+                </tr>
+            </thead>
+            <tbody>
+                <?php
+                foreach ($vars['listado'] as $item) {
+                    ?>
+                <tr>
+                        <td>  <a  class="btn btn-info" href='?controlador=Producto&accion=detallesProducto&productoid=<?php echo $item[0] ?>'> Detalles
+
+                            </a> </td>
+                            
+                        <td>  <a  class="btn btn-danger"   return "eliminar('<?php echo $item[0] ?>')"> Eliminar
+
+                            </a> </td>
+                            
+                        <td>  <a  class="btn btn-warning" href='?controlador=Producto&accion=filtrarProductoById&productoid=<?php echo $item[0] ?>'>  Producto
+
+                            </a>
+                            <a  class="btn btn-warning" href='?controlador=Producto&accion=filtrarProductoPrecioById&productoid=<?php echo $item[0] ?>'>  Precios
+
+                            </a>
+                            <a  class="btn btn-warning" href='?controlador=Producto&accion=filtrarProductoCaracteristicaById&productoid=<?php echo $item[0] ?>'>  Caracteristicas
+
+                            </a>
+                            <a  class=" btn btn-warning" href='?controlador=Producto&accion=filtrarProductoImagenById&productoid=<?php echo $item[0] ?>'>  Imagenes
+
+                            </a>
+                        </td>
+
+                        <td><?php echo $item[0] ?></td>
+                        <td><?php echo $item[1] ?></td>
+                        <td><?php echo $item[2] ?></td>
+                        <td><?php echo $item[3] ?></td>
+                        <td><?php echo $item[4] ?></td>
+                      
+
                     </tr>
-                </thead>
-                <tbody>
-                    <tr >
-                    </tr>
-                </tbody>
+                    <?php
+                }
+                ?>
+            </tbody>
 
 
-            </table>
-        </div>
+        </table>
     </div>
+</div>
 
 <div class="auto" id="auto" style="display: none"><div  id="alertControl" style="opacity: none"></div></div>
 
@@ -50,7 +91,7 @@ require 'public/headerMenuP.php';
 <script type="text/javascript">
 //No se asusten!!!!!!!!!!!Tengo que pasar esto a un archivo JS :s lo sse lo se
     function eliminar(valor) {
-        
+
         var productoid = valor;
         swal({
             title: "Estás seguro?",
@@ -95,7 +136,7 @@ require 'public/headerMenuP.php';
                         });
 
                     }, 3000000000);
-                  //  swal("Cancelado", "Dato  Eliminado :)", "error");
+                    //  swal("Cancelado", "Dato  Eliminado :)", "error");
 
                 })
                 .fail(function () {

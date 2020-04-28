@@ -26,7 +26,7 @@ require 'public/headerMenuP.php';
 
                 <tbody>
 
-                    <tr>
+                    
                         <?php
                         foreach ($vars['listado'] as $item) {
                             ?>
@@ -47,7 +47,7 @@ require 'public/headerMenuP.php';
                         <?php
                     }
                     ?>
-                    </tr>
+                   
                 </tbody>
 
 

@@ -11,9 +11,9 @@ include_once 'public/header.php';
         <div class="col-md-4"></div>
         <div class="col-md-4">
 
-            <form action="?controlador=Cliente&accion=inicioSesionAdmin" method="POST" class="border p-3 form">
-                 <center><h5>Iniciar Session</h5></center>
-               <hr style="color: #47748b">
+            <form action="?controlador=Cliente&accion=loginCli" method="POST" class="border p-3 form">
+                <center><h5>Iniciar Session</h5></center>
+                <hr style="color: #47748b">
                 <div class="form-group">
                     <!--                <label for="username">Nombre Administrador</label>-->
                     <input type="text" class="form-control" id="username" name="username" aria-describedby="emailHelp" placeholder="Nombre Usuario">
@@ -23,13 +23,14 @@ include_once 'public/header.php';
                 <div class="form-group">
                     <!--                <label for="password">Contraseña</label>-->
                     <input type="password" class="form-control" id="password" name="password" placeholder="Contraseña">
-<br>
+                    <br>
 
                     <center>   <a href="?controlador=Cliente&accion=loginAdmin">Iniciar Session como Admin</a></center>
                 </div>
                 <div class="form-group">
                     <center>
-                        <a class="btn btn-sm btn-outline-secondary"  name="submit" type="submit" value=" Acceder "> Acceder</a>
+
+                        <input type="submit" name="submit"  id="submit" class="btn btn-sm btn-outline-secondary"  value="Acceder" />
                         <a class="btn btn-sm btn-outline-secondary"  href="?controlador=Cliente&accion=menuPrincipal">Regresar</a>
                     </center>
 

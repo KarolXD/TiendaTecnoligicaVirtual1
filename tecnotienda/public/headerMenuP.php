@@ -7,43 +7,32 @@
             <meta charset="utf-8">
             <link rel="icon" type="image/png" href="./public/img/logo.png" />
             <meta name="viewport" content="width=device-width, initial-scale=1">
+
             <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
-            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-           <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-
-            
-
-         	
+           <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+            <script src="./public/js/productoJS.js" type="text/javascript"></script>
+            <script src="./public/js/js_provincias.js" type="text/javascript"></script>
         </head>
         <body>
-
-
-
-
             <header>
 
                 <nav class="navbar navbar-light navbar-brand">
                     <form class="form-inline">
                         <a class="btn btn-sm btn-outline-secondary" href="?controlador=Cliente&accion=loginCliente" type="button">Iniciar Session</a>
                         <a class="btn btn-sm btn-outline-secondary"  href="?controlador=Cliente&accion=registrarClienteVista"type="button">Registrarme</a>
+                        <a class="btn btn-sm btn-outline-secondary"  href="?controlador=Proveedor&accion=registrarProveedorVista"type="button">Proveedor</a>
+                        <a class="btn btn-sm btn-outline-secondary"  href="?controlador=Cliente&accion=loginCliente"type="button">Login Cliente</a> 
                     </form>
                 </nav>
-
                 <nav class="navbar navbar-light bg-light">
                     <a class="navbar-brand" href="#">
                         <img src="./public/img/logo.png" width="30" height="30" class="d-inline-block align-top" alt="">
                         Tienda Tecnologica Virtual
                     </a>
                 </nav>
-
                 <div class="line"></div>
                 <div class="content">
                     <nav class="navbar navbar-expand-lg navbar-light bg-light">
-
-
-
-
-
                         <div class="dropdown">
                             <button class="btn btn-outline-info my-2 my-sm-0 dropdown-toggle" href="#homeSubmenu"  id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 Inicio
@@ -80,13 +69,13 @@
                                 <a class="dropdown-item" href="#">Promociones</a>
                             </div>
                         </div>
-                           <div class="dropdown">
+                        <div class="dropdown">
                             <button class=" btn btn-outline-info my-2 my-sm-0 dropdown-toggle" href=""  id="dropdownMenuButton3" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 Clientes
                             </button>
                             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton3">
-                                <a class="dropdown-item" href="?controlador=Cliente&accion=menuClientes">Administrar Clientes</a>
-                                <a class="dropdown-item" href="?controlador=Proveedor&accion=menuProveedor">Administrar Proveedores</a>
+                                <a class="dropdown-item" href="?controlador=Cliente&accion=listarClientes">Administrar Clientes</a>
+                                <a class="dropdown-item" href="?controlador=Proveedor&accion=listarProveedor">Administrar Proveedores</a>
                             </div>
                         </div>
                         <button class=" btn btn-outline-info my-2 my-sm-0" >
