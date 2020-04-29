@@ -19,7 +19,10 @@ class ProveedorController {
     }
     
      public function menuProveedor() {
-        $this->view->show("menuProveedor.php");
+           require 'model/data/proveedorDato.php';
+        $items = new proveedorDato();
+        $dato['listado'] = $items->listarDatosProveedor();
+        $this->view->show("menuProveedor.php",$dato);
     }
 
     public function registrarProveedorVista() {

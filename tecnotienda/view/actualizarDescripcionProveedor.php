@@ -1,5 +1,5 @@
 <?php
-include_once 'public/header.php';
+include_once 'public/headerMenuP.php';
 ?>
 
 <div class="container">
@@ -17,7 +17,7 @@ include_once 'public/header.php';
 
 
                             <input type="submit" name="submit"  id="submit" class="btn btn-info" value="Submit" />
-                            <a href="?controlador=Cliente&accion=menuPrincipal" class="btn btn-info" >Regresar</a>
+                            <a href="?controlador=Proveedor&accion=menuProveedor" class="btn btn-info" >Regresar</a>
 
                             <?php
                         }
@@ -35,5 +35,5 @@ include_once 'public/header.php';
 <br>
 
 <?php
-include_once 'public/footer.php';
+include_once 'public/footerMenuP.php';
 ?>

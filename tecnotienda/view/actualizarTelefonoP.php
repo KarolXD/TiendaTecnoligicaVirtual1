@@ -32,7 +32,7 @@ include_once 'public/header.php';
                                    
                                 </div>
                                 <input type="submit" name="submit"  id="submit" class="btn btn-info" value="Submit" />
-                                <a href="?controlador=Proveedor&accion=menuPrincipal" class="btn btn-info" >Regresar</a>
+                                <a href="?controlador=Proveedor&accion=menuProveedor" class="btn btn-info" >Regresar</a>
                             </div> <?php
                         }
                         ?>
