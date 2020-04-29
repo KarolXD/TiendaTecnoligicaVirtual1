@@ -19,6 +19,12 @@ include_once 'public/header.php';
                         <div class="form-group">
                             <input type="text" class="form-control" id="contra" name="contra" aria-describedby="emailHelp" placeholder="Contraseña" required="">
                         </div>
+                        <div class="form-group">
+                            <input type="text" class="form-control" id="empresa" name="empresa" aria-describedby="emailHelp" placeholder="Nombre Empresa" required="">
+                        </div>
+                        <div class="form-group">
+                            <input type="text" class="form-control" id="descripcion" name="descripcion" aria-describedby="emailHelp" placeholder="Detalle" required="">
+                        </div>
                         <div class="form-group" style="display: none">
                             <input type="number" class="form-control" id="estado" name="estado" aria-describedby="emailHelp" value="0" required="">
                         </div>

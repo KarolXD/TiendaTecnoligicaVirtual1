@@ -47,6 +47,13 @@ class ClienteController {
         $dato['listado'] = $items->listarDatosCliente();
         $this->view->show("MenuClientes.php", $dato);
     }
+    
+    public function listarClientesDetalle() {
+        require 'model/data/clienteDato.php';
+        $items = new clienteDato();
+        $dato['listado'] = $items->listarDatosCliente();
+        $this->view->show("detalleCliente.php", $dato);
+    }
 
     public function listarCorreo() {
         require 'model/data/clienteDato.php';

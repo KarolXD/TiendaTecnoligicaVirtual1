@@ -2,19 +2,15 @@
 require 'public/headerMenuP.php';
 ?>
 
-<center>
-    <a href="?controlador=SubCategoria&accion=registrarSubCategoriaVista"> Registrar una Sub Categoria</a>
-
-</center>
 <br>
 <div class="container">
-    <center><h5>Mis Sub Categorias!</h5></center>
     <div class="row">
         <div class="table-responsive">
             <table class="table table-hover table-bordered" id="tblSubCategorias">
                 <hr style="color: #6d7fcc">
                 <thead>
                     <tr>
+                        <th scope="col">Detalle</th>
                         <th scope="col">Eliminar</th>
                         <th scope="col">Modificar</th>    
                         <th scope="col">Id Cliente</th>
@@ -37,6 +33,8 @@ require 'public/headerMenuP.php';
                         foreach ($vars['listado'] as $item) {
                             ?>
                         <tr>
+                             <td>  <a  class="btn btn-danger" href='?controlador=Cliente&accion=listarClientesDetalle'> Detalle  </a> </td>
+                           
                             <td>  <a  class="btn btn-danger" href='?controlador=Cliente&accion=eliminarCliente&clienteid=<?php echo $item[0] ?>'> Eliminar  </a> </td>
                             <td> 
                                 <a  class="btn btn-danger" href='?controlador=Cliente&accion=filtarClienteById&clienteid=<?php echo $item[0] ?>'> Actualizar Correo </a> 

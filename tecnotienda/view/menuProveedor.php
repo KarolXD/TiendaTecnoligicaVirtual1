@@ -11,9 +11,12 @@ require 'public/headerMenuP.php';
                 <hr style="color: #6d7fcc">
                 <thead>
                     <tr>
+                        <th scope="col">Detalle</th>
                         <th scope="col">Eliminar</th>
                         <th scope="col">Modificar</th>    
                         <th scope="col">Id Proveedor</th>
+                        <th scope="col">Empresa</th>
+                        <th scope="col">Descripcion</th>
                         <th scope="col">Correos</th>
                         <th scope="col">Telefonos</th>
 
@@ -27,17 +30,24 @@ require 'public/headerMenuP.php';
                         foreach ($vars['listado'] as $item) {
                             ?>
                         <tr>
+                            <td>  <a  class="btn btn-danger" href='?controlador=Proveedor&accion=listarProveedorDetalle'> Detalle
+
+                                </a> </td>
                             <td>  <a  class="btn btn-danger" href='?controlador=Proveedor&accion=eliminarCliente&clienteid=<?php echo $item[0] ?>'> Eliminar
 
                                 </a> </td>
                             <td> 
                                 <a  class="btn btn-danger" href='?controlador=Proveedor&accion=filtarClienteById&clienteid=<?php echo $item[0] ?>'> Actualizar Correo </a> 
-                                -
+
                                 <a  class="btn btn-danger" href='?controlador=Proveedor&accion=filtarClienteById2&clienteid=<?php echo $item[0] ?>'> Actualizar Telefono </a> 
+
+                                <a  class="btn btn-danger" href='?controlador=Proveedor&accion=filtarClienteById3&clienteid=<?php echo $item[0] ?>'> Actualizar Detalle</a> 
                             </td>
                             <td><?php echo $item[0] ?></td>
                             <td><?php echo $item[1] ?></td>
                             <td><?php echo $item[2] ?></td>
+                            <td><?php echo $item[3] ?></td>
+                            <td><?php echo $item[4] ?></td>
 
                         </tr>
 
@@ -61,4 +71,4 @@ require 'public/headerMenuP.php';
 
     <?php
     require 'public/footerMenuP.php';
-    
+    ?>

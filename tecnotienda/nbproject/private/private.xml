@@ -19,6 +19,17 @@
         </file>
     </editor-bookmarks>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group/>
+        <group>
+            <file>file:/C:/Program%20Files%20(x86)/EasyPHP-Devserver-17/eds-www/tecnotienda/tecnotienda/view/menuClientes.php</file>
+            <file>file:/C:/Program%20Files%20(x86)/EasyPHP-Devserver-17/eds-www/tecnotienda/tecnotienda/controller/ProveedorController.php</file>
+            <file>file:/C:/Program%20Files%20(x86)/EasyPHP-Devserver-17/eds-www/tecnotienda/tecnotienda/view/menuProveedor.php</file>
+            <file>file:/C:/Program%20Files%20(x86)/EasyPHP-Devserver-17/eds-www/tecnotienda/tecnotienda/model/data/proveedorDato.php</file>
+            <file>file:/C:/Program%20Files%20(x86)/EasyPHP-Devserver-17/eds-www/tecnotienda/tecnotienda/view/detalleCliente.php</file>
+            <file>file:/C:/Program%20Files%20(x86)/EasyPHP-Devserver-17/eds-www/tecnotienda/tecnotienda/view/registrarProveedor.php</file>
+            <file>file:/C:/Program%20Files%20(x86)/EasyPHP-Devserver-17/eds-www/tecnotienda/tecnotienda/public/headerMenuP.php</file>
+            <file>file:/C:/Program%20Files%20(x86)/EasyPHP-Devserver-17/eds-www/tecnotienda/tecnotienda/view/actualizarDescripcionProveedor.php</file>
+            <file>file:/C:/Program%20Files%20(x86)/EasyPHP-Devserver-17/eds-www/tecnotienda/tecnotienda/controller/ClienteController.php</file>
+            <file>file:/C:/Program%20Files%20(x86)/EasyPHP-Devserver-17/eds-www/tecnotienda/tecnotienda/view/detalleProveedor.php</file>
+        </group>
     </open-files>
 </project-private>

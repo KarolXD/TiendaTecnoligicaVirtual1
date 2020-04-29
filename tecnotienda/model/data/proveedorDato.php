@@ -21,11 +21,10 @@ class proveedorDato {
         require 'libs/SPDO.php';
         $this->db = SPDO::singleton();
     }
-    
-    
-    public function registrarProveedor($usuario, $contrasenia, $estado) {
-        $data = array($usuario, $contrasenia, $estado);
-        $consulta = $this->db->prepare('insert into tbproveedor(tbproveedorusuario,tbproveedorcontrasena,tbproveedorestado) values (?,?,?)');
+
+    public function registrarProveedor($usuario, $contrasenia, $empresa, $descrip, $estado) {
+        $data = array($usuario, $contrasenia, $empresa, $descrip, $estado);
+        $consulta = $this->db->prepare('insert into tbproveedor(tbproveedorusuario,tbproveedorcontrasena,tbempresa,tbdescripcion,tbproveedorestado) values (?,?,?,?,?)');
         $consulta->execute($data);
         echo $consulta->errorInfo()[2];
     }
@@ -45,7 +44,8 @@ class proveedorDato {
     }
 
     public function listarDatosProveedor() {
-        $consulta = $this->db->prepare('select proveedor.tbproveedorusuario,correo.tbcorreoatributo,telefono.tbtelefononumero
+        $consulta = $this->db->prepare('select proveedor.tbproveedorusuario,proveedor.tbempresa,proveedor.tbdescripcion,
+            correo.tbcorreoatributo,telefono.tbtelefononumero
  from tbproveedor proveedor
 join tbcorreo correo on correo.tbclienteusuario=proveedor.tbproveedorusuario 
 join tbtelefono telefono on telefono.tbclienteusuario=proveedor.tbproveedorusuario
@@ -86,6 +86,39 @@ join bdtecnotienda.tbcorreo correo on correo.tbclienteusuario=cliente.tbproveedo
         $consulta->CloseCursor();
         return $resultado;
     }
+
+    public function filtarClienteById3($clienteid) {
+        $consulta = $this->db->prepare('select tbproveedorusuario,tbdescripcion from tbproveedor where tbproveedorusuario="' . $clienteid . '"');
+        $consulta->execute();
+        $resultado = $consulta->fetchAll();
+        $consulta->CloseCursor();
+        return $resultado;
+    }
+
+    public function actualizarTelefono($correoid, $valor) {
+        $consulta = $this->db->prepare('update  tbtelefono set tbtelefononumero= "' . $valor . '" where tbtelefononid= "' . $correoid . '"');
+        $consulta->execute();
+        $resultado = $consulta->fetchAll();
+        $consulta->CloseCursor();
+        return $resultado;
+    }
+
+    public function actualizarCorreo($correoid, $valor) {
+        $consulta = $this->db->prepare('update  tbcorreo set tbcorreoatributo="' . $valor . '" where tbcorreoid= "' . $correoid . '"');
+        $consulta->execute();
+        $resultado = $consulta->fetchAll();
+        $consulta->CloseCursor();
+        return $resultado;
+    }
+
+    public function actualizarDetalle($correoid, $valor) {
+        $consulta = $this->db->prepare('update bdtecnotienda.tbproveedor set tbdescripcion="' . $valor . '" where tbproveedorusuario= "' . $correoid . '"');
+        $consulta->execute();
+        $resultado = $consulta->fetchAll();
+        $consulta->CloseCursor();
+        return $resultado;
+    }
+
 //
 //     public function guardarProveedor($proveedornombreempresa,$proveedorfax,$proveedorapartadopostal,$proveedorcorreo,$proveedorsitioweb,$proveedorpersonadecontacto,$proveedornumerotelefono,$proveedordireccionfisicaempresa,$proveedorid) {
 //          $data = array($proveedornombreempresa,$proveedorfax,$proveedorapartadopostal,$proveedorcorreo,$proveedorsitioweb,$proveedorpersonadecontacto,$proveedornumerotelefono,$proveedordireccionfisicaempresa,$proveedorid);
@@ -123,5 +156,4 @@ join bdtecnotienda.tbcorreo correo on correo.tbclienteusuario=cliente.tbproveedo
 //        $consulta->execute();
 //        return $consulta->fetchALL(PDO::FETCH_ASSOC);
 //    }
-
 }

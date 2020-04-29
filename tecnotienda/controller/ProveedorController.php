@@ -32,6 +32,13 @@ class ProveedorController {
         $dato['listado'] = $items->listarDatosProveedor();
         $this->view->show("menuProveedor.php", $dato);
     }
+    
+    public function listarProveedorDetalle() {
+        require 'model/data/proveedorDato.php';
+        $items = new proveedorDato();
+        $dato['listado'] = $items->listarDatosProveedor();
+        $this->view->show("detalleProveedor.php", $dato);
+    }
 
     public function eliminarCliente() {
         require 'model/data/proveedorDato.php';
@@ -47,6 +54,8 @@ class ProveedorController {
         require 'model/data/proveedorDato.php';
         $items = new proveedorDato();
         $usuario = $_POST["usuario"];
+        $empresa = $_POST["empresa"];
+        $descrip = $_POST["descripcion"];
         $valor = "";
         $valor2 = "";
         $temp = "";
@@ -69,7 +78,7 @@ class ProveedorController {
 
         $items->registrarCorreo($usuario, $valor, $temp);
         $items->registrarTelefono($usuario, $valor2);
-        $items->registrarProveedor($usuario, $contra, $estado);
+        $items->registrarProveedor($usuario, $contra,$empresa,$descrip, $estado);
 
         $this->view->show("registrarProveedor.php");
     }
@@ -92,6 +101,17 @@ class ProveedorController {
         $this->view->show("menuProveedor.php", $dato);
     }
 
+    public function actualizarDatosDetalle() {
+        require 'model/data/proveedorDato.php';
+        $items = new proveedorDato();
+        $correoid = $_POST["clienteid"];
+        $valor = $_POST["descripcion"];
+        
+        $items->actualizarDetalle($correoid, $valor);
+
+        $dato['listado'] = $items->listarDatosProveedor($correoid);
+        $this->view->show("menuProveedor.php", $dato);
+    }
     public function actualizarDatosTelefono() {
         require 'model/data/proveedorDato.php';
         $items = new proveedorDato();
@@ -127,6 +147,13 @@ class ProveedorController {
         $this->view->show("actualizarTelefonoP.php", $dato);
     }
     
+    public function filtarClienteById3() {
+        require 'model/data/proveedorDato.php';
+        $items = new proveedorDato();
+        $clienteid = $_GET["clienteid"];
+        $dato['listado'] = $items->filtarClienteById3($clienteid);
+        $this->view->show("actualizarDescripcionProveedor.php", $dato);
+    }
 
 //    public function menuProveedor() {
 //        $this->view->show("menuProveedor.php");
