@@ -96,14 +96,15 @@ class categoriaDato {
         return $resultado;
     }
        public function obtenerNombreCategorias() {
-        $consulta = $this->db->prepare('Select tbcategorianombre from tbcategoria');
+        $consulta = $this->db->prepare('Select tbcategoriaid,tbcategorianombre from tbcategoria');
         $consulta->execute();
         $resultado = $consulta->fetchAll();
         $consulta->CloseCursor();
         return $resultado;
     }
     public function obtenerSubNombreCategorias(){
-         $consulta = $this->db->prepare('Select tbsubcategorianombre from tbsubcategoria');
+         $consulta = $this->db->prepare('Select tbsubcategorianombre from tbsubcategoria
+order by tbcategoriaid asc');
             $consulta->execute();
         $resultado = $consulta->fetchAll();
         $consulta->CloseCursor();

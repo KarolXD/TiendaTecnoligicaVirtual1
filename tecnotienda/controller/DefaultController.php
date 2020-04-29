@@ -13,6 +13,7 @@ class DefaultController{
         // llamar modelo para traer datos
         require 'model/data/categoriaDato.php';
         $PD = new categoriaDato();
+        $data['subcategoria']=$PD->obtenerSubNombreCategorias();
         $data['listado'] = $PD->obtenerNombreCategorias();
         $this->view->show("menuUsuario.php", $data); //indexView
     } // acciondefault

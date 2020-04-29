@@ -1,210 +1,160 @@
 
 <?php
-
 include_once 'public/headerUsuario.php';
 ?>
-<div>
-    
-    
-        <div class="content">
 
-  <nav class="navbar navbar-expand-lg navbar-light bg-light">
-                <div class="dropdown">
-<!--
-          
-                    <?php
-                    foreach ($vars['listado'] as $item) {
-                        ?>
+
+<div class="content">
+
+    <style type="text/css">
+        * { padding: 0; margin: auto; text-align: center; }
+        #cabecera { background-color: #fff0f0; }  
+        h1 { font: bold 1.5em arial; padding: 0.5em; }
+        #navegador { background-color: #663366; padding: 0.5em; }
+        #navegador li { margin: 0px 5px; padding: 0.1em 1em 0.5em 1em; 
+                        background-color: #9933cc; width: 12%;float: left;
+                        list-style-type: none;   }
+        #navegador li:hover { background-color: #990033; }
+        #navegador li a:link, #navegador li a:visited { 
+            color: #feffe4; text-decoration: none; }
+        #navegador li a:hover, #navegador li a:active { 
+            color:#ffd7a9 ; text-decoration: none; }
+        .borrar { clear: both; }	
+        #principal h2 { font: bold 1.5em arial; padding: 0.5em }
+        #principal p { font: normal 0.9em arial; text-align: justify;
+                       text-indent: 3em; padding: 0.5em 2em; }
+        </style>
+        <script type="text/javascript" >
+
+
+
+
+        //guardar los datos en arrays:
+            var titulos = new Array();
+            var enlaces = new Array();
                      <?php
-                    foreach ($vars['listado2'] as $item2) {
-                        ?>
+                foreach ($vars['subcategoria'] as $item) {
+                    ?>
+        //Datos de los submenús
+            titulos[0] = new Array(
+                    "<?php echo $item[0] ?>",
+                    "Subsección uno uno",
+                    "Subsección uno dos",
+                    "Subsección uno tres",
+                    "Subsección uno cuatro");
+            enlaces[0] = new Array("#", "#", "#", "#");
+            titulos[1] = new Array(
+                    "Subsección dos uno",
+                    "Subsección dos dos",
+                    "Subsección dos tres",
+                    "Subsección dos cuatro",
+                    "Subsección dos cinco");
+            enlaces[1] = new Array("#", "#", "#", "#", "#");
+            titulos[2] = new Array(
+                    "Subsección tres uno",
+                    "Subsección tres dos",
+                    "Subsección tres tres",
+                    "Subsección tres cuatro",
+                    "Subsección tres cinco");
+            enlaces[2] = new Array("#", "#", "#", "#", "#");
+            titulos[3] = new Array(
+                    "Subsección cuatro uno",
+                    "Subsección cuatro dos",
+                    "Subsección cuatro tres");
+            enlaces[3] = new Array("#", "#", "#");
+        //arrays para guardar elementos de la lista y submenús:
+            var menu = new Array()
+            var submenu = new Array()
 
-                        <button class="btn btn-outline-info my-2 my-sm-0 dropdown-toggle" href="#homeSubmenu"  id="dropdown<?php echo $item[0]?>" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <?php echo $item[0] ?>
+            window.onload = function () {
+        //BARRA DE NAVEGACIÓN: Crear desplegables:
+                for (i = 0; i < titulos.length; i++) {
+                    //localizar elementos principales
+                    menu[i] = document.getElementById("seccion" + i);
+                    //crear elemento menu desplegable
+                    menu[i].innerHTML += "<div id='subseccion" + i + "'></div>"
+                    //localizar elemento menu desplegable
+                    submenu[i] = document.getElementById('subseccion' + i);
+                    //escribir menu desplegable
+                    for (j = 0; j < titulos[i].length; j++) {
+                        submenu[i].innerHTML += "<p><a href='" + enlaces[i][j] + "'>" + titulos[i][j] + "</a></p>";
+                    }
+                    //estilo de los submenús
+                    menu[i].style.position = "relative";
+                    submenu[i].style.position = "absolute";
+                    submenu[i].style.top = "100%";
+                    submenu[i].style.left = "0px";
+                    submenu[i].style.backgroundColor = "#41338b";
+                    submenu[i].style.font = "normal 0.8em arial";
+                    submenu[i].style.padding = "0.2em 0.5em";
+                    submenu[i].style.display = "none"
+                }
+        //eventos para ver - ocultar menu
+                for (i = 0; i < titulos.length; i++) {
+                    menu[i].onmouseover = ver;
+                    menu[i].onmouseout = ocultar;
+                }
+            }
+        //función para ver los menús desplegables.
+            function ver() {
+                muestra = this.getElementsByTagName("div")[0];
+                muestra.style.display = "block"
+            }
+        //funcion para ocultar los menús desplegables.
+            function ocultar() {
+                oculta = this.getElementsByTagName("div")[0];
+                oculta.style.display = "none"
+            }
+              <?php
+                }
+                    ?>
+        </script>
 
-                        </button> 
+        <body>
+            <div id="cabecera">
+            <h1>Mi página</h1>
+        </div>
+        <div id="navegador">
+            <ul>
+                         <?php
+                foreach ($vars['listado'] as $item) {
+                    ?>
 
-                        <div class="dropdown-menu" aria-labelledby="dropdown<?php echo $item[0] ?>" >
-                            <a class="dropdown-item" href="#"><?php echo $item2[0] ?>"</a>
-                           
-                        </div>
-                    </div>
+                    <li id="seccion<?php echo $item[0] ?>"><a href="#"><?php echo $item[1] ?></a></li>
+
                     <?php
                 }
-                    }
                 ?>
-
-
-
-                            <div class="dropdown">
-                                <button class=" btn btn-outline-info my-2 my-sm-0 dropdown-toggle" href=""  id="hola" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    Producto
-                                </button>
-                                <div class="dropdown-menu" aria-labelledby="hola">
-                                    <a class="dropdown-item" href="?controlador=Producto&accion=menuProductoVista">Producto</a>
-                                    <a class="dropdown-item" href="?controlador=Categoria&accion=menuCategoriaVista">Categoria</a>
-                                    <a class="dropdown-item" href="?controlador=SubCategoria&accion=menuSubCategoriaVista">Sub Categoria</a>
-                                </div>
-                            </div>
-
-                            <button class=" btn btn-outline-info my-2 my-sm-0 " >
-                                Publicidad
-                            </button>
-
-                            <div class="dropdown">
-                                <button class=" btn btn-outline-info my-2 my-sm-0 dropdown-toggle" href=""  id="dropdownMenuButton3" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    Combos
-                                </button>
-                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton3">
-                                    <a class="dropdown-item" href="#">Ofertas</a>
-                                    <a class="dropdown-item" href="#">Descuentos</a>
-                                    <a class="dropdown-item" href="#">Promociones</a>
-                                </div>
-                            </div>
-                            <div class="dropdown">
-                                <button class=" btn btn-outline-info my-2 my-sm-0 dropdown-toggle" href=""  id="dropdownMenuButton3" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    Clientes
-                                </button>
-                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton3">
-                                    <a class="dropdown-item" href="?controlador=Cliente&accion=listarClientes">Administrar Clientes</a>
-                                    <a class="dropdown-item" href="?controlador=Proveedor&accion=listarProveedor">Administrar Proveedores</a>
-                                </div>
-                            </div>
-                            <button class=" btn btn-outline-info my-2 my-sm-0" >
-                                Detalles Pago
-                            </button>
-                            <button class=" btn btn-outline-info my-2 my-sm-0 " >
-                                Carrito
-                            </button>
-                            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                                <span class="navbar-toggler-icon"></span>
-                            </button>
-                            <div class="collapse navbar-collapse" id="navbarNav">
-                                <ul class="navbar-nav ml-auto">
-                                    <li class="nav-item active">
-                                        <a class="nav-link" href="#">Inicio <span class="sr-only">(current)</span></a>
-                                    </li>
-
-                                    <li class="nav-item">
-                                                            <a class="nav-link " href="#">Cerrar</a>
-                                                        </li>
-                                                    </ul>
--->
-
-
-  <div id="header">
-      <ul class="nav">
-          <ul class="subNav">
-          </ul>
-      </ul>
-  </div>
-                </div>
-  </nav>
-
-
-        </div>
-
-
-
-    </div>  
-
-<script>
-var ttMenuGral = [
-                    {
-                        "cSistema": "PMS",
-                        "cMenu": "Ama Llaves",
-                        "cSubMenu": "",
-                        "cOpcion": "",
-                        "cPrograma": "",
-                        "iSec": 6,
-                        "lexiste": false,
-                        "cRowID": "0x000000000000048d",
-                        "lError": false,
-                        "cErrDesc": ""
-                    },
-                    {
-                        "cSistema": "PMS",
-                        "cMenu": "Auditoria",
-                        "cSubMenu": "",
-                        "cOpcion": "",
-                        "cPrograma": "",
-                        "iSec": 5,
-                        "lexiste": false,
-                        "cRowID": "0x0000000000000488",
-                        "lError": false,
-                        "cErrDesc": ""
-                    },
                   
-                  ];
-                 subMenuGral=[
-                    {
-                        "cSistema": "PMS",
-                        "cMenu": "Ama Llaves",
-                        "cSubMenu": "Estado de Cuartos",
-                        "cOpcion": "",
-                        "cPrograma": "amallaves/estado_cuartos",
-                        "iSec": 601,
-                        "lexiste": false,
-                        "cRowID": "0x000000000000049d",
-                        "lError": false,
-                        "cErrDesc": ""
-                    },
-                    {
-                        "cSistema": "PMS",
-                        "cMenu": "Ama Llaves",
-                        "cSubMenu": "Fuera de Orden",
-                        "cOpcion": "",
-                        "cPrograma": "amallaves/fuera_orden",
-                        "iSec": 604,
-                        "lexiste": false,
-                        "cRowID": "0x000000000000049c",
-                        "lError": false,
-                        "cErrDesc": ""
-                    },
-                    {
-                        "cSistema": "PMS",
-                        "cMenu": "Auditoria",
-                        "cSubMenu": "Fuera de Servicio",
-                        "cOpcion": "",
-                        "cPrograma": "amallaves/fuera_servicio",
-                        "iSec": 503,
-                        "lexiste": false,
-                        "cRowID": "0x0000000000000488",
-                        "lError": false,
-                        "cErrDesc": ""
-                    }
-                ]
+                    <li id="seccion2"><a href="#">1</a></li>
+                    <li id="seccion1"><a href="#"> 2  </a></li>
+                    <li id="seccion0"><a href="#">3</a></li>
+                      <li id="seccion3"><a href="#">4</a></li>
+           
+            </ul>
+            <div class="borrar"></div>
+        </div>
+        <div id="principal">
+            <h2>Cuerpo principal de la página</h2>
+            <p>Lorem ipsum ad his scripta blandit partiendo, eum fastidii accumsan euripidis 
+                in, eum liber hendrerit an. Qui ut wisi vocibus suscipiantur, quo dicit ridens 
+                inciderint id. Quo mundi lobortis reformidans eu, legimus senserit definiebas an eos. 
+                Eu sit tincidunt incorrupte definitionem, vis mutat affert percipit cu, eirmod 
+                consectetuer signiferumque eu per. In usu latine equidem dolores. Quo no falli 
+                viris intellegam, ut fugit veritus placerat per.</p>
 
+            <p>Ius id vidit volumus mandamus, vide veritus democritum te nec, ei eos debet 
+                libris consulatu. No mei ferri graeco dicunt, ad cum veri accommodare. 
+                Sed at malis omnesque delicata, usu et iusto zzril meliore. Dicunt maiorum 
+                eloquentiam cum cu, sit summo dolor essent te. Ne quodsi nusquam legendos has, 
+                ea dicit voluptua eloquentiam pro, ad sit quas qualisque. Eos vocibus 
+                deserunt quaestio ei.</p>
+        </div>
+    </body>
 
-crearMenu(ttMenuGral);
-crearSubMenu(subMenuGral);
+</div>
 
-function crearMenu(menu){
-  console.log(menu)
-  for (var i = 0; i < menu.length; i++) {
-//pintamos los menus y aca menu le damos de class el menu[i].cMenu,
-// para utilizarlo en el momento de agregar el submenu
-  var className = menu[i].cMenu.replace(" ","");
-    $(".nav").append("<li   class="+className+">"+menu[i].cMenu+"</li>");
-}
-}
-
-function crearSubMenu(menu){
-  for (var i = 0; i < menu.length; i++) {
-//obtenemos la class que le dimos en la function pasada para 
-//agregar el  submenu
-  var className = menu[i].cMenu.replace(" ","");
-    if(i == 0){
-//agregamos un <ul> el cual va hacer el contenedor del submenu
-        $("."+className).append('<ul class="subNav"></ul>')   
-    }
-//y por ultimo agregamos los item al submenu
-    $("."+className +" ul").append("<li   class="+className+">"+menu[i].cSubMenu+"</li>")
-}
-}
-</script>
 <?php
-
 include_once 'public/footerUsuario.php';
 
 
