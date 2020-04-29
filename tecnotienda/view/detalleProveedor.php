@@ -12,15 +12,41 @@ require 'public/headerMenuP.php';
             foreach ($vars['listado'] as $item) {
                 ?>
                 <center>
-                    <a>Identificacion: <?php echo $item[0] ?></a>
+                    <p>Identificacion: <?php echo $item[0] ?></p>
                     </br>
-                    <a>Empresa: <?php echo $item[1] ?></a>
+                    <p>Empresa: <?php echo $item[1] ?></p>
                     </br>
-                    <a>Detalle: <?php echo $item[2] ?></a>
+                    <p>Detalle: <?php echo $item[2] ?></p>
                     </br>
-                    <a>Correos: <?php echo $item[3] ?></a>
+                    
+                    
+                    <p>Correo:</p>
+                    <?php
+                    $pizza = ($item[3]);
+                    $pieces = explode(",", $pizza);
+                    $contadorComas = substr_count($pizza, ',');
+                    for ($i = 0; $i <= $contadorComas - 1; $i++) {
+                        ?>
+                        <p> <?php echo $pieces[$i] ?></p>  
+
+                        <?php
+                    }
+                    ?>
+
                     </br>
-                    <a>Telefonos: <?php echo $item[4] ?></a>
+                    <p>Telefono:</p>
+
+                    <?php
+                    $pizza2 = ($item[4]);
+                    $piecess = explode(",", $pizza2);
+                    $contadorComass = substr_count($pizza2, ',');
+                    for ($y = 0; $y <= $contadorComass - 1; $y++) {
+                        ?>
+                        <p> <?php echo $piecess[$y] ?></p>  
+
+                        <?php
+                    }
+                    ?>
                 </center>
                 <?php
             }

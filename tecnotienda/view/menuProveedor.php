@@ -5,11 +5,11 @@ require 'public/headerMenuP.php';
 
 <br>
 <div class="container">
-          <center>  <a class="btn btn-sm btn-outline-secondary"  href="?controlador=Proveedor&accion=registrarProveedorVista"type="button">Registrar Proveedor</a></center>
+    <center>  <a class="btn btn-sm btn-outline-secondary"  href="?controlador=Proveedor&accion=registrarProveedorVista"type="button">Registrar Proveedor</a></center>
     <br>
     <center><h5>Lista de Proveedores</h5></center>
     <div class="row">
-       <div class="table-responsive">
+        <div class="table-responsive">
             <table class="table table-hover table-bordered" id="tblSubCategorias">
                 <hr style="color: #6d7fcc">
                 <thead>
@@ -49,8 +49,29 @@ require 'public/headerMenuP.php';
                             <td><?php echo $item[0] ?></td>
                             <td><?php echo $item[1] ?></td>
                             <td><?php echo $item[2] ?></td>
-                            <td><?php echo $item[3] ?></td>
-                            <td><?php echo $item[4] ?></td>
+                            <?php
+                            $pizza = ($item[3]);
+                            $pieces = explode(",", $pizza);
+                            $contadorComas = substr_count($pizza, ',');
+                            for ($i = 0; $i <= $contadorComas - 1; $i++) {
+                                ?>
+                                <td> <?php echo $pieces[$i] ?></td>  
+
+                                <?php
+                            }
+                            ?>
+
+                            <?php
+                            $pizza2 = ($item[4]);
+                            $piecess = explode(",", $pizza2);
+                            $contadorComass = substr_count($pizza2, ',');
+                            for ($y = 0; $y <= $contadorComass - 1; $y++) {
+                                ?>
+                                <td> <?php echo $piecess[$y] ?></td>  
+
+                                <?php
+                            }
+                            ?>
 
                         </tr>
 
@@ -72,5 +93,5 @@ require 'public/headerMenuP.php';
 <script src="./public/js/jquery-3.3.1.js" type="text/javascript"></script>
 
 
- <?php
+<?php
 require 'public/footerMenuP.php';

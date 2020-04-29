@@ -4,7 +4,7 @@ require 'public/headerMenuP.php';
 
 <br>
 <div class="container">
-        <br>
+    <br>
     <center><h5>Lista de Clientes</h5></center>
     <div class="row">
         <div class="table-responsive">
@@ -35,17 +35,40 @@ require 'public/headerMenuP.php';
                         foreach ($vars['listado'] as $item) {
                             ?>
                         <tr>
-                             <td>  <a  class="btn btn-info" href='?controlador=Cliente&accion=listarClientesDetalle'> Detalle  </a> </td>
-                           
+                            <td>  <a  class="btn btn-info" href='?controlador=Cliente&accion=listarClientesDetalle'> Detalle  </a> </td>
+
                             <td>  <a  class="btn btn-danger" href='?controlador=Cliente&accion=eliminarCliente&clienteid=<?php echo $item[0] ?>'> Eliminar  </a> </td>
                             <td> 
                                 <a  class="btn btn-warning" href='?controlador=Cliente&accion=filtarClienteById&clienteid=<?php echo $item[0] ?>'> Actualizar Correo </a> 
-                                
+
                                 <a  class="btn btn-warning" href='?controlador=Cliente&accion=filtarClienteById2&clienteid=<?php echo $item[0] ?>'> Actualizar Telefono </a> 
                             </td>
                             <td><?php echo $item[0] ?></td>
-                            <td><?php echo $item[1] ?></td>
-                            <td><?php echo $item[2] ?></td>
+
+                            <?php
+                            $pizza = ($item[1]);
+                            $pieces = explode(",", $pizza);
+                            $contadorComas = substr_count($pizza, ',');
+                            for ($i = 0; $i <= $contadorComas - 1; $i++) {
+                                ?>
+                                <td> <?php echo $pieces[$i] ?></td>  
+
+                                <?php
+                            }
+                            ?>
+
+                            <?php
+                            $pizza2 = ($item[2]);
+                            $piecess = explode(",", $pizza2);
+                            $contadorComass = substr_count($pizza2, ',');
+                            for ($y = 0; $y <= $contadorComass - 1; $y++) {
+                                ?>
+                                <td> <?php echo $piecess[$y] ?></td>  
+
+                                <?php
+                            }
+                            ?>
+
                             <td><?php echo $item[3] ?></td>
                             <td><?php echo $item[4] ?></td>
                             <td><?php echo $item[5] ?></td>
@@ -73,6 +96,6 @@ require 'public/headerMenuP.php';
 <script src="./public/js/jquery-3.3.1.js" type="text/javascript"></script>
 
 
-    <?php
-    require 'public/footerMenuP.php';
-       ?>
+<?php
+require 'public/footerMenuP.php';
+?>
