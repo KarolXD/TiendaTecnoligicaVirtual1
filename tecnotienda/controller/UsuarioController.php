@@ -24,4 +24,22 @@ class UsuarioController {
         $PD = new usuarioDato();
         echo json_encode($PD->obtenerUsuarios(1));
     }
+
+    
+       public function menuUsuario() {
+       require 'model/data/categoriaDato.php';
+        $PD = new categoriaDato();
+        $data['listado']= $PD->obtenerNombreCategorias();
+        $data2['listado2']= $PD->obtenerSubNombreCategorias();
+        $this->view->show("menuUsuario.php",$data);
+    }
+//           public function headerUsuario() {
+//       require 'model/data/categoriaDato.php';
+//        $PD = new categoriaDato();
+//        $data['listado']= ($PD->obtenerNombreCategorias());
+//        $this->view->show("headerUsuario.php",$data);
+//    }
+    
+    
+    
 }

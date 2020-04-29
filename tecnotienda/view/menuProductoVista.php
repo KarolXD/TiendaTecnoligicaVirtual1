@@ -18,7 +18,7 @@ require 'public/headerMenuP.php';
     <a href="?controlador=Producto&accion=registrarProductoVista"> Registrar Producto</a>
 </center>
 <br>
-    <center><h5>Mis Productos!</h5></center>
+    <center><h5>Lista de Productos!</h5></center>
     <div class="row">
 
         <hr style="color: #47748b"
@@ -43,28 +43,28 @@ require 'public/headerMenuP.php';
                 <?php
                 foreach ($vars['listado'] as $item) {
                     ?>
-                <tr>
-                        <td>  <a  class="btn btn-info" href='?controlador=Producto&accion=detallesProducto&productoid=<?php echo $item[0] ?>'> Detalles
+                    <tr>
+                            <td>  <a  class="btn btn-outline-info" href='?controlador=Producto&accion=detallesProducto&productoid=<?php echo $item[0] ?>'> Detalles
 
-                            </a> </td>
-                            
-                        <td>  <a  class="btn btn-danger"   return "eliminar('<?php echo $item[0] ?>')"> Eliminar
+                                </a> </td>
+                                
+                            <td>  <a  class="btn btn-outline-danger"   return "eliminar('<?php echo $item[0] ?>')"> Eliminar
 
-                            </a> </td>
-                            
-                        <td>  <a  class="btn btn-warning" href='?controlador=Producto&accion=filtrarProductoById&productoid=<?php echo $item[0] ?>'>  Producto
+                                </a> </td>
+                                
+                            <td>  <a  class="btn  btn-outline-warning" href='?controlador=Producto&accion=filtrarProductoById&productoid=<?php echo $item[0] ?>'>  Producto
 
-                            </a>
-                            <a  class="btn btn-warning" href='?controlador=Producto&accion=filtrarProductoPrecioById&productoid=<?php echo $item[0] ?>'>  Precios
+                                </a>
+                                <a  class="btn btn-outline-warning" href='?controlador=Producto&accion=filtrarProductoPrecioById&productoid=<?php echo $item[0] ?>'>  Precios
 
-                            </a>
-                            <a  class="btn btn-warning" href='?controlador=Producto&accion=filtrarProductoCaracteristicaById&productoid=<?php echo $item[0] ?>'>  Caracteristicas
+                                </a>
+                                <a  class="btn btn-outline-warning" href='?controlador=Producto&accion=filtrarProductoCaracteristicaById&productoid=<?php echo $item[0] ?>'>  Caracteristicas
 
-                            </a>
-                            <a  class=" btn btn-warning" href='?controlador=Producto&accion=filtrarProductoImagenById&productoid=<?php echo $item[0] ?>'>  Imagenes
+                                </a>
+                                <a  class=" btn btn-outline-warning" href='?controlador=Producto&accion=filtrarProductoImagenById&productoid=<?php echo $item[0] ?>'>  Imagenes
 
-                            </a>
-                        </td>
+                                </a>
+                            </td>
 
                         <td><?php echo $item[0] ?></td>
                         <td><?php echo $item[1] ?></td>

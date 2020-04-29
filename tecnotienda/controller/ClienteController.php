@@ -11,7 +11,7 @@ class ClienteController {
         $this->view->show("loginCliente.php");
     }
 
-    public function loginCli() {
+    public function loginClientee() {
         require 'model/data/clienteDato.php';
         $items = new clienteDato();
         $clienteid = $_POST["username"];
@@ -22,6 +22,21 @@ class ClienteController {
             $this->view->show("loginAdmin.php", $dato);
         } else {
             $this->view->show("loginCliente.php", $dato);
+        }
+    }
+    
+        
+       public function loginUsuario() {
+        require 'model/data/usuarioDato.php';
+        $items = new usuarioDato();
+        $clienteid = $_POST["username"];
+        $contra = $_POST["password"];
+        $dato = $items->loginUsuario($clienteid, $contra);
+
+        if ($dato == 1) {
+            $this->view->show("menuPrincipal.php");
+        } else {
+            $this->view->show("loginAdmin.php");
         }
     }
 

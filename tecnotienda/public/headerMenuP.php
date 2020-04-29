@@ -19,9 +19,7 @@
                 <nav class="navbar navbar-light navbar-brand">
                     <form class="form-inline">
                         <a class="btn btn-sm btn-outline-secondary" href="?controlador=Cliente&accion=loginCliente" type="button">Iniciar Session</a>
-                        <a class="btn btn-sm btn-outline-secondary"  href="?controlador=Cliente&accion=registrarClienteVista"type="button">Registrarme</a>
-                        <a class="btn btn-sm btn-outline-secondary"  href="?controlador=Proveedor&accion=registrarProveedorVista"type="button">Proveedor</a>
-                        <a class="btn btn-sm btn-outline-secondary"  href="?controlador=Cliente&accion=loginCliente"type="button">Login Cliente</a> 
+                     
                     </form>
                 </nav>
                 <nav class="navbar navbar-light bg-light">

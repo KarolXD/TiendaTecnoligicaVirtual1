@@ -5,8 +5,11 @@ require 'public/headerMenuP.php';
 
 <br>
 <div class="container">
+          <center>  <a class="btn btn-sm btn-outline-secondary"  href="?controlador=Proveedor&accion=registrarProveedorVista"type="button">Registrar Proveedor</a></center>
+    <br>
+    <center><h5>Lista de Proveedores</h5></center>
     <div class="row">
-        <div class="table-responsive">
+       <div class="table-responsive">
             <table class="table table-hover table-bordered" id="tblSubCategorias">
                 <hr style="color: #6d7fcc">
                 <thead>
@@ -30,18 +33,18 @@ require 'public/headerMenuP.php';
                         foreach ($vars['listado'] as $item) {
                             ?>
                         <tr>
-                            <td>  <a  class="btn btn-danger" href='?controlador=Proveedor&accion=listarProveedorDetalle'> Detalle
+                            <td>  <a  class="btn btn-outline-info" href='?controlador=Proveedor&accion=listarProveedorDetalle'> Detalle
 
                                 </a> </td>
-                            <td>  <a  class="btn btn-danger" href='?controlador=Proveedor&accion=eliminarCliente&clienteid=<?php echo $item[0] ?>'> Eliminar
+                            <td>  <a  class="btn btn-outline-danger" href='?controlador=Proveedor&accion=eliminarCliente&clienteid=<?php echo $item[0] ?>'> Eliminar
 
                                 </a> </td>
                             <td> 
-                                <a  class="btn btn-danger" href='?controlador=Proveedor&accion=filtarClienteById&clienteid=<?php echo $item[0] ?>'> Actualizar Correo </a> 
+                                <a  class="btn btn-outline-warning" href='?controlador=Proveedor&accion=filtarClienteById&clienteid=<?php echo $item[0] ?>'> Actualizar Correo </a> 
 
-                                <a  class="btn btn-danger" href='?controlador=Proveedor&accion=filtarClienteById2&clienteid=<?php echo $item[0] ?>'> Actualizar Telefono </a> 
+                                <a  class="btn btn-outline-warning" href='?controlador=Proveedor&accion=filtarClienteById2&clienteid=<?php echo $item[0] ?>'> Actualizar Telefono </a> 
 
-                                <a  class="btn btn-danger" href='?controlador=Proveedor&accion=filtarClienteById3&clienteid=<?php echo $item[0] ?>'> Actualizar Detalle</a> 
+                                <a  class="btn btn-outline-warning" href='?controlador=Proveedor&accion=filtarClienteById3&clienteid=<?php echo $item[0] ?>'> Actualizar Detalle</a> 
                             </td>
                             <td><?php echo $item[0] ?></td>
                             <td><?php echo $item[1] ?></td>
@@ -67,8 +70,7 @@ require 'public/headerMenuP.php';
 
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <script src="./public/js/jquery-3.3.1.js" type="text/javascript"></script>
-<script type="text/javascript">
 
-    <?php
-    require 'public/footerMenuP.php';
-    ?>
+
+ <?php
+require 'public/footerMenuP.php';

@@ -2,13 +2,15 @@
 require 'public/headerMenuP.php';
 ?>
 
-<center>
-    <a href="?controlador=SubCategoria&accion=registrarSubCategoriaVista"> Registrar una Sub Categoria</a>
 
-</center>
 <br>
 <div class="container">
-    <center><h5>Mis Sub Categorias!</h5></center>
+    <center><h5>Lista de Sub Categorias</h5></center>
+    <br>
+    <center>
+    <a href="?controlador=SubCategoria&accion=registrarSubCategoriaVista"> Registrar una nueva sub Categoria</a>
+
+</center>
     <div class="row">
 
         <div class="table-responsive">

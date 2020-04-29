@@ -2,10 +2,10 @@
 require 'public/headerMenuP.php';
 ?>
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-<center> <a href="?controlador=Categoria&accion=registrarCategoriaVista"> Registrar una Categoria</a> </center>
+<center> <a href="?controlador=Categoria&accion=registrarCategoriaVista"> Registrar nueva Categoria</a> </center>
 <br>
 <div class="container">
-    <center><h5>Mis Categorias!</h5></center>
+    <center><h5>Lista de Categorias!</h5></center>
     <hr style="color: #47748b"
         <div class="row">
     <div class="table-responsive">

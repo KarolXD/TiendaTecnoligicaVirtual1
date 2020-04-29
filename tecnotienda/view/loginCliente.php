@@ -11,7 +11,7 @@ include_once 'public/header.php';
         <div class="col-md-4"></div>
         <div class="col-md-4">
 
-            <form action="?controlador=Cliente&accion=loginCli" method="POST" class="border p-3 form">
+            <form action="?controlador=Cliente&accion=loginClientee" method="POST" class="border p-3 form">
                 <center><h5>Iniciar Session</h5></center>
                 <hr style="color: #47748b">
                 <div class="form-group">

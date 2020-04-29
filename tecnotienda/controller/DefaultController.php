@@ -11,11 +11,10 @@ class DefaultController{
     public function acciondefault(){
        
         // llamar modelo para traer datos
-
-        $this->view->show("menuPrincipal.php", null);//indexView
-
-               
-        
+        require 'model/data/categoriaDato.php';
+        $PD = new categoriaDato();
+        $data['listado'] = $PD->obtenerNombreCategorias();
+        $this->view->show("menuUsuario.php", $data); //indexView
     } // acciondefault
     
 } // fin clase
