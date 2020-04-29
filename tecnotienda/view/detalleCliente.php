@@ -12,23 +12,47 @@ require 'public/headerMenuP.php';
             foreach ($vars['listado'] as $item) {
                 ?>
                 <center>
-                    <a>Identificacion: <?php echo $item[0] ?></a>
+                    <p>Identificacion: <?php echo $item[0] ?></p>
                     </br>
-                    <a>Correo: <?php echo $item[1] ?></a>
+
+                    <p>Correo:</p>
+                    <?php
+                    $pizza = ($item[1]);
+                    $pieces = explode(",", $pizza);
+                    $contadorComas = substr_count($pizza, ',');
+                    for ($i = 0; $i <= $contadorComas - 1; $i++) {
+                        ?>
+                        <p><?php echo $pieces[$i] ?></p>  
+
+                        <?php
+                    }
+                    ?>
+
                     </br>
-                    <a>Telefono: <?php echo $item[2] ?></a>
+                    <p>Telefono:</p>
+                     <?php
+                    $pizza2 = ($item[2]);
+                    $piecess = explode(",", $pizza2);
+                    $contadorComass = substr_count($pizza2, ',');
+                    for ($y = 0; $y <= $contadorComass - 1; $y++) {
+                        ?>
+                        <p> <?php echo $piecess[$y] ?></p>  
+
+                        <?php
+                    }
+                    ?>
                     </br>
-                    <a>Provincia: <?php echo $item[3] ?></a>
+                    <p>Provincia: <?php echo $item[3] ?></p>
                     </br>
-                    <a>Canton: <?php echo $item[4] ?></a>
+                    <p>Canton: <?php echo $item[4] ?></p>
                     </br>
-                    <a>Distrito: <?php echo $item[5] ?></a>
+                    <p>Distrito: <?php echo $item[5] ?></p>
                     </br>
-                    <a>Descripcion: <?php echo $item[6] ?></a>
+                    <p>Descripcion: <?php echo $item[6] ?></p>
                     </br>
-                    <a>Banco: <?php echo $item[7] ?></a>
+                    <p>Banco: <?php echo $item[7] ?></p>
                     </br>
-                    <a>Número Cuenta: <?php echo $item[8] ?></a>
+                    <p>Número Cuenta: <?php echo $item[8] ?></p>
                 </center>
                 <?php
             }
