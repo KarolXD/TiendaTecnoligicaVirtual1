@@ -134,6 +134,34 @@ select s.tbsubcategoriaid,c.tbcategorianombre,s.tbusuarioid,s.tbsubcategorianomb
         return $resultado;
     }
 
+    public function listaMenuSubcategoria($categoriaid) {
+        $consulta = $this->db->prepare('
+select  tbsubcategoriaid,tbsubcategorianombre  from  tbsubcategoria  where tbcategoriaid="' . $categoriaid . '"');
+        $consulta->execute();
+        $resultado = $consulta->fetchAll();
+        $consulta->CloseCursor();
+        return $resultado;
+    }
+
+    public function listadetalleSubcategoria($subcategoriaid) {
+        $consulta = $this->db->prepare('select i.tbproductoimagenruta,c.tbproductocaracteristicastitulo, pr.tbproductoprecioventa,
+s.tbsubcategorianombre,p.tbproductoid
+ from  tbsubcategoria s
+join tbproducto p on  s.tbsubcategoriaid=p.tbproductosubcategoria
+join tbproductoprecio pr on pr.tbproductoid=p.tbproductoid
+join tbproductoimagen i on i.tbproductoid=p.tbproductoid
+join tbproductocaracteristica c on c.tbproductoid=p.tbproductoid
+where 
+s.tbsubcategoriaid=p.tbproductosubcategoria and
+pr.tbproductoid=p.tbproductoid and
+i.tbproductoid=p.tbproductoid and
+c.tbproductoid=p.tbproductoid and s.tbsubcategoriaid="' . $subcategoriaid . '"');
+        $consulta->execute();
+        $resultado = $consulta->fetchAll();
+        $consulta->CloseCursor();
+        return $resultado;
+    }
+
     public function obtenerSubCategorias() {
         $consulta = $this->db->prepare('select  tbsubcategoriaid,tbsubcategorianombre  from  tbsubcategoria ');
         $consulta->execute();

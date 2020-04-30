@@ -12,8 +12,8 @@
  * @author Karol
  */
 class SubCategoriaController {
-    
-        public function __construct() {
+
+    public function __construct() {
         $this->view = new View();
     }
 
@@ -31,7 +31,7 @@ class SubCategoriaController {
     public function eliminarSubCategoria() {
         require 'model/data/subcategoriaDato.php';
         $PD = new subcategoriaDato();
-          //echo '<script> alert("hola"); </script>';
+        //echo '<script> alert("hola"); </script>';
         $PD->eliminacionSubCategoria($_POST['subcategoriaid']);
         $this->view->show("menuSubCategoriaVista.php");
     }
@@ -45,40 +45,53 @@ class SubCategoriaController {
             $PD->modificarSubCategorias($_POST['subcategorianombre'], $_POST['categoriaid1'], $_POST['subcategoriadescripcion'], $_POST['usuarioid'], $_POST['subcategoriafecha'], $_POST['subcategoriaid']);
         } else if ($_POST['usuarioid'] == 'Selecciona:') {
             $PD->modificarSubCategorias($_POST['subcategorianombre'], $_POST['categoriaid'], $_POST['subcategoriadescripcion'], $_POST['usuarioid1'], $_POST['subcategoriafecha'], $_POST['subcategoriaid']);
-        } else    if ($_POST['categoriaid'] != 'Selecciona:' && $_POST['usuarioid'] != 'Selecciona:') {
+        } else if ($_POST['categoriaid'] != 'Selecciona:' && $_POST['usuarioid'] != 'Selecciona:') {
             $PD->modificarSubCategorias($_POST['subcategorianombre'], $_POST['categoriaid'], $_POST['subcategoriadescripcion'], $_POST['usuarioid'], $_POST['subcategoriafecha'], $_POST['subcategoriaid']);
         }
-     //$PD->modificarSubCategorias($_POST['subcategorianombre'], $_POST['categoriaid'], $_POST['subcategoriadescripcion'], $_POST['usuarioid'], $_POST['subcategoriafecha'], $_POST['subcategoriaid']);
-       
+        //$PD->modificarSubCategorias($_POST['subcategorianombre'], $_POST['categoriaid'], $_POST['subcategoriadescripcion'], $_POST['usuarioid'], $_POST['subcategoriafecha'], $_POST['subcategoriaid']);
+
         $data['actualizarSubCategorias'] = $PD->filtrarSubCategoriaById($_POST['subcategoriaid']);
         $this->view->show("actualizarSubCategoriaVista.php", $data);
     }
 
     public function menuSubCategoriaVista() {
-       require 'model/data/subcategoriaDato.php';
+        require 'model/data/subcategoriaDato.php';
         $PD = new subcategoriaDato();
-          $data['listado']= ($PD->listarSubCategorias());
-        $this->view->show("menuSubCategoriaVista.php",$data);
+        $data['listado'] = ($PD->listarSubCategorias());
+        $this->view->show("menuSubCategoriaVista.php", $data);
     }
 
-    
+    public function mostrarSubCategorias() {
+        require 'model/data/subcategoriaDato.php';
+        $PD = new subcategoriaDato();
+        $data['listado'] = ($PD->listaMenuSubcategoria($_GET['categoriaid']));
+        $this->view->show("mostrarSubCategorias.php", $data);
+    }
+
+    public function mostrardetallesSubCategoria() {
+        require 'model/data/subcategoriaDato.php';
+        $PD = new subcategoriaDato();
+        $data['listado'] = ($PD->listadetalleSubcategoria($_GET['subcategoriaid']));
+        $this->view->show("mostrardetallesSubCategoria.php", $data);
+    }
+
     public function listarSubCategorias() {
         require 'model/data/subcategoriaDato.php';
         $PD = new subcategoriaDato();
         echo json_encode($PD->listarSubCategorias());
     }
-      public function obtenerSubCategorias() {
+
+    public function obtenerSubCategorias() {
         require 'model/data/subcategoriaDato.php';
         $PD = new subcategoriaDato();
         echo json_encode($PD->obtenerSubCategorias());
     }
-    
 
     public function registrarSubCategorias() {
         require 'model/data/subcategoriaDato.php';
         $PD = new subcategoriaDato();
-        $PD->registrarSubCategorias($_POST['subcategorianombre'], $_POST['categoriaid'],$_POST['subcategoriadescripcion'],$_POST['usuarioid'], $_POST['subcategoriafecha']);
-         $this->view->show("registrarSubCategoriaVista.php");
+        $PD->registrarSubCategorias($_POST['subcategorianombre'], $_POST['categoriaid'], $_POST['subcategoriadescripcion'], $_POST['usuarioid'], $_POST['subcategoriafecha']);
+        $this->view->show("registrarSubCategoriaVista.php");
     }
 
 }
