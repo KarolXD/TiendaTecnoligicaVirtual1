@@ -5,54 +5,58 @@ include_once 'public/headerUsuario.php';
 
 <div class="container">
     <br><br><br>
+  <center style="background-color: #6d7fcc">    <font style="text-transform: uppercase;">   <p class="card-text"><strong> Echale un vistazo a nuestro contenido </strong>  </p>    </font> 
+                </center>
+
+    <br><br>
+
+
     <div class="row">
-
-
         <?php
         foreach ($vars['listado'] as $item) {
             ?>
-            <div class="col-sm-6"></div>   
-            <div class="col-sm-6">
-                Sub Categorias: <?php echo$item[3] ?>  </div> </div>
 
-        <br><br>
-        <div class="row">
-            <div class="card-group">
 
-                <div class="card">
-                    <br>
-
-                    <center  style="border-bottom-style: groove"><a href="#"> <h5  class="card-title" ><?php echo$item[1] ?></h5></a></center>
-                    <br>
-                    <?php
-                    $pizza = ($item[0]);
-                    $pieces = explode(",", $pizza);
-                    $contadorComas = substr_count($pizza, ',');
-                    for ($i = 0; $i <= 1 - 1; $i++) {
-                        ?>
-
-                    <a href="#"> <img width="30" height="210"  class="card-img-top" src="<?php echo $pieces[$i] ?>" alt="Card image cap"> </a>
-                        <?php
-                    }
+            <div class="card" style="width: 18rem;">
+              
+                <center style="background-color: #6d7fcc">    <font style="text-transform: uppercase;">   <p class="card-text"> <strong><?php echo$item[3] ?>   </strong> </p>    </font> 
+                </center>
+            
+             
+                <hr style="border-top: 1px solid black;">
+                <?php
+                $pizza = ($item[0]);
+                $pieces = explode(",", $pizza);
+                $contadorComas = substr_count($pizza, ',');
+                for ($i = 0; $i <= 1 - 1; $i++) {
                     ?>
 
-                    <div class="card-body">
-                        <center>  <font size="5"> <p class="card-text" style="border-bottom-style: groove">Precio: $<?php echo$item[2] ?></p></font></center>
 
+                    <img src="<?php echo $pieces[$i] ?>" class="card-img-top" width="80" height="130" alt="...">
+                    <?php
+                }
+                ?>
 
-                        <p class="card-text"><small class="text-muted"><?php echo$item[4] ?></small></p>
-                    </div>
+                <div class="card-body">
+                  
+                    <p class="card-text">Precio: <img src="./public/img/money.png" alt="...">  <font size="5"><?php echo$item[2] ?></font>  </p>
+                    <hr style="border-top: 1px solid black;">
+                      <h5 class="card-title"><?php echo$item[1] ?>  </h5>
                 </div>
-
-
+                <hr style="border-top: 5px solid black;">
             </div>
 
+
+            <hr style="border-top: 5px solid black;">
 
             <?php
         }
         ?>
+
     </div>
-  
+
+
+
 </div>
 
 <br><br><br><br><br>

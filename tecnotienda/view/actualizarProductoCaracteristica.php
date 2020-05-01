@@ -85,7 +85,7 @@ require 'public/headerMenuP.php';
 </div>
     </div>
 <br>  
-
+<!--
 <div class="row" >
 
     <div class="col-sm-4" ></div>
@@ -98,9 +98,9 @@ require 'public/headerMenuP.php';
     </div>
     <div class="col-sm-4" ></div>
 
-</div>
+</div>-->
 
-<div class="row" >
+<!--<div class="row" >
 
     <div class="col-sm-3" ></div>
 
@@ -132,7 +132,7 @@ require 'public/headerMenuP.php';
         </center>
     </div>
 
-</div>
+</div>-->
 
 <br>
 <div class="row" >
@@ -142,8 +142,8 @@ require 'public/headerMenuP.php';
         <center>    
             <div>
                 
-                <button  type="submit" class="btn btn-success">Agregar más caracteristicas </button>
-                <br><br>
+<!--                <button  type="submit" class="btn btn-success">Agregar más caracteristicas </button>
+                <br><br>-->
                   <a class="btn btn-info" href="?controlador=Producto&accion=menuProductoVista" > Regresar al menú</a> </div></center> 
         
             </div>
