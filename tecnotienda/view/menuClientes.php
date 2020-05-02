@@ -6,10 +6,12 @@ require 'public/headerMenuP.php';
 <div class="container">
     <br>
     <center><h5>Lista de Clientes</h5></center>
+    <hr style="color: #999">
+    <br>
     <div class="row">
         <div class="table-responsive">
             <table class="table table-hover table-bordered" id="tblSubCategorias">
-                <hr style="color: #6d7fcc">
+            
                 <thead>
                     <tr>
                         <th scope="col">Detalle</th>
@@ -35,13 +37,14 @@ require 'public/headerMenuP.php';
                         foreach ($vars['listado'] as $item) {
                             ?>
                         <tr>
-                            <td>  <a  class="btn btn-info" href='?controlador=Cliente&accion=listarClientesDetalle'> Detalle  </a> </td>
+                            <td>  <a  class="btn btn-outline-warning" href='?controlador=Cliente&accion=listarClientesDetalle'> Detalle  </a> </td>
 
-                            <td>  <a  class="btn btn-danger" href='?controlador=Cliente&accion=eliminarCliente&clienteid=<?php echo $item[0] ?>'> Eliminar  </a> </td>
+                            <td>  <a  class="btn btn-outline-danger" href='?controlador=Cliente&accion=eliminarCliente&clienteid=<?php echo $item[0] ?>'> Eliminar  </a> </td>
+                           
                             <td> 
-                                <a  class="btn btn-warning" href='?controlador=Cliente&accion=filtarClienteById&clienteid=<?php echo $item[0] ?>'> Actualizar Correo </a> 
+                                <a  class="btn btn-outline-warning" href='?controlador=Cliente&accion=filtarClienteById&clienteid=<?php echo $item[0] ?>'>  Correo </a> 
 
-                                <a  class="btn btn-warning" href='?controlador=Cliente&accion=filtarClienteById2&clienteid=<?php echo $item[0] ?>'> Actualizar Telefono </a> 
+                                <a  class="btn btn-outline-warning" href='?controlador=Cliente&accion=filtarClienteById2&clienteid=<?php echo $item[0] ?>'>  Telefono </a> 
                             </td>
                             <td><?php echo $item[0] ?></td>
 

@@ -4,15 +4,16 @@ include_once 'public/header.php';
 <div class="container">
  <div class="row">
 
-        <div class="col-md-2"></div>
+        <div class="col-md-4"></div>
 
-        <div class="col-md-6" >
+        <div class="col-md-4" >
             <center>
 
                 <div class="form-group">
                     <form action="?controlador=Proveedor&accion=registrarProveedor"   method="post" id="formulario1" name="formulario1">
 
-                        <h3>Usuario</h3>
+                        <h4><center>Ingresar Proveedores</center></h4>
+                             <hr style="color: #47748b">
                         <div class="form-group">
                             <input type="number" class="form-control" id="usuario" name="usuario" aria-describedby="emailHelp" placeholder="Usuario" required="">
                         </div>
@@ -34,14 +35,14 @@ include_once 'public/header.php';
                             <table class="table table-bordered" id="dynamic_field">
                                 <tr>
                                     <td><input type="email" name="name[]" placeholder="Escriba su correo" class="form-control name_list" /></td>
-                                    <td><button type="button" name="add" id="add"  class="btn btn-success" >Agregar un correo más </button></td>
+                                    <td><button type="button" name="add" id="add"  class="btn btn-success" ><strong> +</strong> </button></td>
                                 </tr>
                             </table>
 
                             <table class="table table-bordered" id="dynamic_fieldd">
                                 <tr>
                                     <td><input type="number" name="names[]" placeholder="Escriba su telefono" class="form-control name_list" /></td>
-                                    <td><button type="button" name="addd" id="addd"  class="btn btn-success" >Agregar un telefono más </button></td>
+                                    <td><button type="button" name="addd" id="addd"  class="btn btn-success" ><strong>+</strong> </button></td>
                                 </tr>
                             </table>      
 
@@ -56,7 +57,7 @@ include_once 'public/header.php';
 
             </center>
         </div>
-        <div class="col-md-2"></div>
+        <div class="col-md-4"></div>
 
     </div>
 

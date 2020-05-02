@@ -40,11 +40,11 @@ require 'public/headerMenuP.php';
 
                                 </a> </td>
                             <td> 
-                                <a  class="btn btn-outline-warning" href='?controlador=Proveedor&accion=filtarClienteById&clienteid=<?php echo $item[0] ?>'> Actualizar Correo </a> 
+                                <a  class="btn btn-outline-warning" href='?controlador=Proveedor&accion=filtarClienteById&clienteid=<?php echo $item[0] ?>'>  Correo </a> 
 
-                                <a  class="btn btn-outline-warning" href='?controlador=Proveedor&accion=filtarClienteById2&clienteid=<?php echo $item[0] ?>'> Actualizar Telefono </a> 
+                                <a  class="btn btn-outline-warning" href='?controlador=Proveedor&accion=filtarClienteById2&clienteid=<?php echo $item[0] ?>'>  Telefono </a> 
 
-                                <a  class="btn btn-outline-warning" href='?controlador=Proveedor&accion=filtarClienteById3&clienteid=<?php echo $item[0] ?>'> Actualizar Detalle</a> 
+                                <a  class="btn btn-outline-warning" href='?controlador=Proveedor&accion=filtarClienteById3&clienteid=<?php echo $item[0] ?>'>  Descripción</a> 
                             </td>
                             <td><?php echo $item[0] ?></td>
                             <td><?php echo $item[1] ?></td>

@@ -92,7 +92,7 @@
                                 </li>
 
                                 <li class="nav-item">
-                                    <a class="nav-link " href="#">Cerrar</a>
+                                    <a class="nav-link " href="?controlador=Cliente&accion=loginAdmin">Cerrar</a>
                                 </li>
                             </ul>
                         </div>

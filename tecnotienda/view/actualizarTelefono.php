@@ -4,26 +4,30 @@ include_once 'public/header.php';
 
 <div class="container">
     <div class="row">
-        <div class="col-md-2"></div>
-        <div class="col-md-6" >
+        <div class="col-md-4"></div>
+        <div class="col-md-4" >
+              <br>
+            <h4><center>Modificar Teléfono</center></h4>
+            <hr style="color: #47748b">
+            <br>
             <center>
-                <div class="form-group">
+               
                     <form action="?controlador=Cliente&accion=actualizarDatosTelefono"  method="post" name="" id="">
                         <?php
                         foreach ($vars['listado'] as $item) {
                             ?>
-                            <div class="table-responsive">
+                           
                                 <div class="form-group">
-                                    <h4>Id Cliente</h4>  
+                                    <label class="form-control-label">Id Cliente</label>  
                                     <input type="number" class="form-control" id="clienteid"  value= "<?php echo $item[0] ?>" name="clienteid" aria-describedby="emailHelp" readonly="" placeholder="ID CLIENTE" required="">
-
+  </div> <div class="form-group">
                                     <?php
                                     $pizza = ($item[1]);
                                     $pieces = explode(",", $pizza);
                                     $contadorComas = substr_count($pizza, ',');
                                     for ($i = 0; $i <= $contadorComas - 1; $i++) {
                                         ?>
-                                        <h4>Telefonos</h4>
+                                        <label class="form-control-label">Telefonos</label>
                                         <input type="text" class="form-control"   value= "<?php echo $pieces[$i] ?>" name="correo[]" aria-describedby="emailHelp" placeholder="Correos" >     <?php
                                     }
                                     ?>
@@ -32,12 +36,12 @@ include_once 'public/header.php';
                                    
                                 </div>
                                 <input type="submit" name="submit"  id="submit" class="btn btn-info" value="Submit" />
-                                <a href="?controlador=Cliente&accion=menuPrincipal" class="btn btn-info" >Regresar</a>
-                            </div> <?php
+                                <a href="?controlador=Cliente&accion=listarClientes" class="btn btn-info" >Regresar</a>
+                         <?php
                         }
                         ?>
                     </form>
-                </div>
+            
             </center>
         </div>
         <div class="col-md-2"></div>

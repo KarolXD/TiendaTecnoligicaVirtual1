@@ -6,18 +6,22 @@ require 'public/headerMenuP.php';
 <br>
 <div class="container">
     <div class="row">
-        <div class="table-responsive">
-
+           <div class="col-md-4"></div>
+        <div class="col-md-4">
+         <br>
+             <center><h5 style="background-color: #aaa">Detalle sobre el Proveedor</h5></center>
+    <hr style="color: #999">
+    <br>
             <?php
             foreach ($vars['listado'] as $item) {
                 ?>
-                <center>
+               
                     <p>Identificacion: <?php echo $item[0] ?></p>
-                    </br>
+                   <hr style="color: #999">
                     <p>Empresa: <?php echo $item[1] ?></p>
-                    </br>
+                      <hr style="color: #999">
                     <p>Detalle: <?php echo $item[2] ?></p>
-                    </br>
+                      <hr style="color: #999">
                     
                     
                     <p>Correo:</p>
@@ -33,7 +37,7 @@ require 'public/headerMenuP.php';
                     }
                     ?>
 
-                    </br>
+                      <hr style="color: #999">
                     <p>Telefono:</p>
 
                     <?php
@@ -47,19 +51,19 @@ require 'public/headerMenuP.php';
                         <?php
                     }
                     ?>
-                </center>
+             <hr style="color: #999">
                 <?php
             }
             ?>
+             <br><br>
+      <a href="?controlador=Proveedor&accion=listarProveedor" class="btn btn-outline-info" >Regresar</a>
+     
         </div>
+              <div class="col-md-4"></div>
     </div>
 </div>
-<div class="auto" id="auto" style="display: none"><div  id="alertControl" style="opacity: none"></div></div>
 
-<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-<script src="./public/js/jquery-3.3.1.js" type="text/javascript"></script>
-<script type="text/javascript">
-
+  <br><br>
     <?php
     require 'public/footerMenuP.php';
     ?>

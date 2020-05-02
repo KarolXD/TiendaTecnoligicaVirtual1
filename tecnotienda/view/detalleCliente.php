@@ -6,15 +6,20 @@ require 'public/headerMenuP.php';
 <br>
 <div class="container">
     <div class="row">
-        <div class="table-responsive">
+        <div class="col-md-4"></div>
+        <div class="col-md-4">
+             <br>
+             <center><h5 style="background-color: #aaa">Detalle sobre el Cliente</h5></center>
+    <hr style="color: #999">
+    <br>
 
             <?php
             foreach ($vars['listado'] as $item) {
                 ?>
-                <center>
+<!--                <center>-->
                     <p>Identificacion: <?php echo $item[0] ?></p>
-                    </br>
 
+   <hr style="color: #999">
                     <p>Correo:</p>
                     <?php
                     $pizza = ($item[1]);
@@ -27,10 +32,10 @@ require 'public/headerMenuP.php';
                         <?php
                     }
                     ?>
+   <hr style="color: #999">
 
-                    </br>
                     <p>Telefono:</p>
-                     <?php
+                    <?php
                     $pizza2 = ($item[2]);
                     $piecess = explode(",", $pizza2);
                     $contadorComass = substr_count($pizza2, ',');
@@ -40,35 +45,35 @@ require 'public/headerMenuP.php';
 
                         <?php
                     }
-                    ?>
-                    </br>
+                    ?>   <hr style="color: #999">
+
                     <p>Provincia: <?php echo $item[3] ?></p>
-                    </br>
+   <hr style="color: #999">
                     <p>Canton: <?php echo $item[4] ?></p>
-                    </br>
+   <hr style="color: #999">
                     <p>Distrito: <?php echo $item[5] ?></p>
-                    </br>
-                    <p>Descripcion: <?php echo $item[6] ?></p>
-                    </br>
+   <hr style="color: #999">
+                    <p>Otras señas: <?php echo $item[6] ?></p>
+   <hr style="color: #999">
                     <p>Banco: <?php echo $item[7] ?></p>
-                    </br>
+   <hr style="color: #999">
                     <p>Número Cuenta: <?php echo $item[8] ?></p>
-                </center>
+                       <hr style="color: #999">
+<!--                </center>-->
                 <?php
             }
             ?>
-
-            </tbody>
+<br><br>
+      <a href="?controlador=Cliente&accion=listarClientes" class="btn btn-outline-info" >Regresar</a>
+            
 
 
         </div>
     </div>
+    <div class="col-md-4"></div>
 </div>
-<div class="auto" id="auto" style="display: none"><div  id="alertControl" style="opacity: none"></div></div>
+<br><br>
 
-<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-<script src="./public/js/jquery-3.3.1.js" type="text/javascript"></script>
-<script type="text/javascript">
 
     <?php
     require 'public/footerMenuP.php';
