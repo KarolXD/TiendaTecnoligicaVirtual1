@@ -15,7 +15,7 @@ include_once 'public/headerUsuario.php';
         <?php
         foreach ($vars['listado'] as $item) {
             ?>
-
+    
 
             <div class="card" style="width: 18rem;">
               
@@ -32,7 +32,7 @@ include_once 'public/headerUsuario.php';
                     ?>
 
 
-                    <img src="<?php echo $pieces[$i] ?>" class="card-img-top" width="80" height="130" alt="...">
+                <a href="?controlador=Producto&accion=mostrarDetallesProducto&productoid=<?php echo$item[4] ?>"> <img src="<?php echo $pieces[$i] ?>" class="card-img-top" width="80" height="130" alt="..."> </a>
                     <?php
                 }
                 ?>
@@ -41,7 +41,7 @@ include_once 'public/headerUsuario.php';
                   
                     <p class="card-text">Precio: <img src="./public/img/money.png" alt="...">  <font size="5"><?php echo$item[2] ?></font>  </p>
                     <hr style="border-top: 1px solid black;">
-                      <h5 class="card-title"><?php echo$item[1] ?>  </h5>
+                    <a href="?controlador=Producto&accion=mostrarDetallesProducto&productoid=<?php echo$item[4] ?>">  <h5 class="card-title"><?php echo$item[1] ?>  </h5> </a>
                 </div>
                 <hr style="border-top: 5px solid black;">
             </div>
@@ -49,17 +49,23 @@ include_once 'public/headerUsuario.php';
 
             <hr style="border-top: 5px solid black;">
 
+         <br>
+   
+ 
             <?php
+            
         }
         ?>
 
     </div>
-
-
-
+                
+    <br>
+    <br><br><br><br><br>
+<center><a  href="?controlador=SubCategoria&accion=mostrarSubCategorias&categoriaid=<?php echo$item[5] ?>" class="btn btn-info"> Regresar</a></center>
+     
 </div>
 
-<br><br><br><br><br>
+
 <br><br><br><br><br>
 <br><br><br><br><br>
 

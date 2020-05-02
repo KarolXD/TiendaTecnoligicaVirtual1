@@ -145,7 +145,7 @@ select  tbsubcategoriaid,tbsubcategorianombre  from  tbsubcategoria  where tbcat
 
     public function listadetalleSubcategoria($subcategoriaid) {
         $consulta = $this->db->prepare('select i.tbproductoimagenruta,c.tbproductocaracteristicastitulo, pr.tbproductoprecioventa,
-s.tbsubcategorianombre,p.tbproductoid
+s.tbsubcategorianombre,p.tbproductoid, s.tbcategoriaid
  from  tbsubcategoria s
 join tbproducto p on  s.tbsubcategoriaid=p.tbproductosubcategoria
 join tbproductoprecio pr on pr.tbproductoid=p.tbproductoid

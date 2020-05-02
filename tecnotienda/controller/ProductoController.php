@@ -13,11 +13,17 @@ class ProductoController {
     public function filtrarBySubCategoria(){
       require 'model/data/productoData.php';
         $PD = new productoData();
-     
         $data['listado'] = $PD->filtrarBySubCategoria($_POST['subcategorianombre']);
         $this->view->show("menuProductoVista.php", $data);       
     }
     
+    public function mostrarDetallesProducto() {
+        require 'model/data/productoData.php';
+        $PD = new productoData();
+       $data['listado'] = $PD->mostrardetallesProducto($_GET['productoid']);
+        $this->view->show("mostrarDetallesProducto.php",$data);
+    }
+
     public function detallesProducto() {
         require 'model/data/productoData.php';
         $PD = new productoData();
@@ -181,18 +187,20 @@ class ProductoController {
         $valoratributo = "";
         $array_num = count($productocaracteristicavalor);
         if ((!empty($_POST["caracteristicacriterio"]) && is_array($_POST["caracteristicavalor"]))) {
-            for ($i = 0; $i < $array_num; $i++) {
-                $valorcriterio .= $productocaracteristicacriterio[$i] . ",";
-                $valoratributo .= $productocaracteristicavalor[$i] . ",";
+            for ($k = 0; $k < $array_num; $k++) {
+                $valorcriterio .= $productocaracteristicacriterio[$k] . ",";
+                $valoratributo .= $productocaracteristicavalor[$k] . ",";
             }
         }
 
-
-        $ruta = $_FILES['imagenesruta'];
-        $productoimagenesnombre = $_POST['imagenesnombre'];
-        $array_num1 = count($productoimagenesnombre);
-
-        $valornombre = "";
+    $valornombre = "";
+      $productoimagenesnombre = $_POST['imagenesnombre'];
+        $array_num2 = count($productoimagenesnombre);
+        for ($j = 0; $j < $array_num2; $j++) {
+            $valornombre .= $productoimagenesnombre[$j] . ",";
+        }
+        $array_num1 = count($_FILES['imagenesruta']['name']);
+    
         $rutaFinal = "";
         $flag = false;
         $date = new DateTime();
@@ -204,38 +212,30 @@ class ProductoController {
         $pathParcial = "/tecnotienda/tecnotienda/public/img/";
         $tmp_name_array = $_FILES['imagenesruta']['tmp_name'];
         $carpetaDestino = $_SERVER['DOCUMENT_ROOT'] . $pathParcial;
-
-
+        
         for ($i = 0; $i < $array_num1; $i++) {
-            if (move_uploaded_file($tmp_name_array[$i], $carpetaDestino . $indicaro . $nombreImagen[$i])) {
-                //    i (move_uploaded_file($_FILES[$ruta[$i]].$tmp_name_array[$i], $carpetaDestino[$i] . $indicaro[$i] . $nombreImagen[$i])) {
-
-                $rutaFinal .= $pathParcial . $indicaro . $nombreImagen[$i] . ",";
-
-                $valornombre .= $productoimagenesnombre[$i] . ",";
+             if (move_uploaded_file($_FILES['imagenesruta']['tmp_name'][$i], $carpetaDestino . $indicaro . $nombreImagen[$i])) {
+       //     if (move_uploaded_file($tmp_name_array[$i], $carpetaDestino . $indicaro . $nombreImagen[$i])) {
+               $rutaFinal .= $pathParcial . $indicaro . $nombreImagen[$i] . ",";
                 $flag = true;
                 echo 'Success';
             } else {
                 echo 'Ocurrió un error al subir la imagen, intente otra vez';
             }
         }
-
-
-
-        $resultado1 = $PD->registrarProducto($productocodigobarras, $productocantidadgarantizada, $productocantidaddevuelto, $productosubcategoriaid, $productoestado, $productoactivo);
-        echo $resultado1;
+       $resultado1 = $PD->registrarProducto($productocodigobarras, $productocantidadgarantizada, $productocantidaddevuelto, $productosubcategoriaid, $productoestado, $productoactivo);
+     
         if ($resultado1 == 1) {
-            $message = 'Códifo no existente, por ende puede registrar';
-            echo "<script type='text/javascript'>alert('$message');</script>";
-
+            $message = 'Puedo  registrar';
+             echo "<script type='text/javascript'>alert('$message');</script>";
             $resultado2 = $PD->registrarproductoprecio($productocodigobarras, $productopreciocompra, $productopreciofechacompra, $productoprecioventa, $productopreciofechaventa, $productoprecioganacia);
             $resultado3 = $PD->registrarproductocaracteristicas($productocodigobarras, $valorcriterio, $valoratributo, $productocaractericticatitulo);
 
             if ($flag == true) {
-                $PD->registrarproductoimagen($productocodigobarras, $valornombre, $rutaFinal);
+             $PD->registrarproductoimagen($productocodigobarras, $valornombre, $rutaFinal);
             }
         } else {
-            $message = ' no existente, por ende NO puede registrar';
+            $message = ' NO puede registrar';
             echo "<script type='text/javascript'>alert('$message');</script>";
         }
 

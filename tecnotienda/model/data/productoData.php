@@ -147,7 +147,27 @@ and  imagen.tbproductoid=producto.tbproductoid
         $consulta->CloseCursor();
         return $resultado;
     }
+    
+    
+    public function mostrardetallesProducto($idproducto) {
+        $consulta = $this->db->prepare('select 
+sub.tbsubcategorianombre,precio.tbproductoprecioventa,
+caracteristica.tbproductocartacteristicascriterio, caracteristica.tbproductocaracteristicasvalor,
+caracteristica.tbproductocaracteristicastitulo,imagen.tbproductoimagennombre,imagen.tbproductoimagenruta, producto.tbproductoestado,sub.tbsubcategoriaid
+from tbproducto producto join tbproductoprecio precio on producto.tbproductoid=precio.tbproductoid
+join tbproductocaracteristica caracteristica on caracteristica.tbproductoid=precio.tbproductoid
+join tbproductoimagen imagen on imagen.tbproductoid=producto.tbproductoid
+join tbsubcategoria sub on sub.tbsubcategoriaid=producto.tbproductosubcategoria
+where  producto.tbproductoid=precio.tbproductoid and caracteristica.tbproductoid=precio.tbproductoid
+and  imagen.tbproductoid=producto.tbproductoid
+ and  producto.tbproductoid=
 
+"' . $idproducto . '"');
+        $consulta->execute();
+        $resultado = $consulta->fetchAll();
+        $consulta->CloseCursor();
+        return $resultado;
+    }
     public function filtrarProductoById($idproducto) {
         $consulta = $this->db->prepare('select  p.tbproductoid, p.tbproductocodigobarras,p.tbproductocantidadgarantiasaplicadas, p.tbproductocantidaddevoluciones,
 p.tbproductoestado, s.tbsubcategorianombre
