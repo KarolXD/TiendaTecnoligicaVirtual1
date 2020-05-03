@@ -3,31 +3,34 @@ require 'public/headerMenuP.php';
 ?>
 
 <div class="container">
-    <center>
 
 
- <form class="form-inline my-2 my-lg-0"  method="post" action="?controlador=Producto&accion=filtrarBySubCategoria">
-<!--        <input class="form-control mr-sm-2"   name="subcategorianombre" id="subcategorianombre"type="search" placeholder="Search" aria-label="Search">
-   -->
-      <select name="subcategorianombre" id="subcategorianombre"  class="form-control mr-sm-2">  </select>
-        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Filtrar por Sub Categoria</button>
-     
+
+    <form class="form-inline my-2 my-lg-0"  method="post" action="?controlador=Producto&accion=filtrarBySubCategoria">
+        <center>
+            <select name="subcategorianombre" id="subcategorianombre"  class="form-control mr-sm-2">  </select>
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Filtrar por Sub Categoria</button>
+        </center>
     </form>
-</center>
-<center>
-    <a href="?controlador=Producto&accion=registrarProductoVista"> Registrar Producto</a>
-</center>
-<br>
-    <center><h5>Lista de Productos!</h5></center>
-    <div class="row">
 
-        <hr style="color: #47748b"
-            <div class="table-responsive">
+
+    <br>
+    <hr style="color: #47748b">
+    <center><h5>Lista de Productos!</h5></center>
+    <hr style="color: #47748b"
+        <div class="row">
+    <center>
+        <a href="?controlador=Producto&accion=registrarProductoVista" class="bg-light"> Registrar nuevo producto</a>
+    </center>
+    <br>
+
+    <div class="table-responsive">
 
         <table id="tblProducto" class="table table-hover table-bordered">
             <thead>
                 <tr>
                     <th scope="col">Detalles</th>
+
                     <th scope="col">Eliminar</th>
                     <th scope="col">Modificar</th>
                     <th scope="col">#Id Producto</th>
@@ -35,7 +38,7 @@ require 'public/headerMenuP.php';
                     <th scope="col">Categoria</th>
                     <th scope="col">Sub Categoria</th>
                     <th scope="col">Titulo</th>
-                   
+
 
                 </tr>
             </thead>
@@ -44,34 +47,34 @@ require 'public/headerMenuP.php';
                 foreach ($vars['listado'] as $item) {
                     ?>
                     <tr>
-                            <td>  <a  class="btn btn-outline-info" href='?controlador=Producto&accion=detallesProducto&productoid=<?php echo $item[0] ?>'> Detalles
+                        <td>  <a  class="btn btn-outline-info" href='?controlador=Producto&accion=detallesProducto&productoid=<?php echo $item[0] ?>'> Detalles
 
-                                </a> </td>
-                                
-                            <td>  <a  class="btn btn-outline-danger"   return "eliminar('<?php echo $item[0] ?>')"> Eliminar
+                            </a> </td>
 
-                                </a> </td>
-                                
-                            <td>  <a  class="btn  btn-outline-warning" href='?controlador=Producto&accion=filtrarProductoById&productoid=<?php echo $item[0] ?>'>  Producto
+                        <td>  <a  class="btn btn-outline-danger"   return "eliminar('<?php echo $item[0] ?>')"> Eliminar
 
-                                </a>
-                                <a  class="btn btn-outline-warning" href='?controlador=Producto&accion=filtrarProductoPrecioById&productoid=<?php echo $item[0] ?>'>  Precios
+                            </a> </td>
 
-                                </a>
-                                <a  class="btn btn-outline-warning" href='?controlador=Producto&accion=filtrarProductoCaracteristicaById&productoid=<?php echo $item[0] ?>'>  Caracteristicas
+                        <td>  <a  class="btn  btn-outline-warning" href='?controlador=Producto&accion=filtrarProductoById&productoid=<?php echo $item[0] ?>'>  Producto
 
-                                </a>
-                                <a  class=" btn btn-outline-warning" href='?controlador=Producto&accion=filtrarProductoImagenById&productoid=<?php echo $item[0] ?>'>  Imagenes
+                            </a>
+                            <a  class="btn btn-outline-warning" href='?controlador=Producto&accion=filtrarProductoPrecioById&productoid=<?php echo $item[0] ?>'>  Precios
 
-                                </a>
-                            </td>
+                            </a>
+                            <a  class="btn btn-outline-warning" href='?controlador=Producto&accion=filtrarProductoCaracteristicaById&productoid=<?php echo $item[0] ?>'>  Caracteristicas
+
+                            </a>
+                            <a  class=" btn btn-outline-warning" href='?controlador=Producto&accion=filtrarProductoImagenById&productoid=<?php echo $item[0] ?>'>  Imagenes
+
+                            </a>
+                        </td>
 
                         <td><?php echo $item[0] ?></td>
                         <td><?php echo $item[1] ?></td>
                         <td><?php echo $item[2] ?></td>
                         <td><?php echo $item[3] ?></td>
                         <td><?php echo $item[4] ?></td>
-                      
+
 
                     </tr>
                     <?php
@@ -79,8 +82,8 @@ require 'public/headerMenuP.php';
                 ?>
             </tbody>
 
-
         </table>
+
     </div>
 </div>
 

@@ -1,12 +1,23 @@
 create database bdtecnotienda;
 use bdtecnotienda;
 
+create table tbproveedor
+(
+tbproveedorusuario varchar(40),
+tbproveedorcontrasena varchar(40),
+tbempresa varchar(40),
+tbdescripcion varchar(40),
+tbproveedorestado int,
+  PRIMARY KEY (tbproveedorusuario) 
+)
+
 create table tbusuario(
 tbusuarionombre varchar(50) not null,
 tbusuariocontrasennia varchar(50) not null,
 tbusuariotipousuario int not null,
 tbusuarioactivo int not null,
 CONSTRAINT PK_tbusuario PRIMARY KEY (tbusuarionombre));
+
 Create table tbcategoria(
 tbcategoriaid int auto_increment not null,
 tbusuarioid varchar(50) not null,

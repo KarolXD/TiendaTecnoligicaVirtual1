@@ -77,8 +77,10 @@ class ProductoController {
         $imagenesnombre = $_POST["imagenesnombre"];
         $valornombre = "";
         $array_num = count($imagenesnombre);
+       $array_num2 = count($_FILES['imagenesruta']['name']);
 
 
+        
         if ($_FILES != null) {
 
             $rutaFinal = "";
@@ -95,18 +97,19 @@ class ProductoController {
             for ($i = 0; $i < $array_num; $i++) {
                 if (move_uploaded_file($tmp_name_array[$i], $carpetaDestino . $indicaro . $nombreImagen[$i])) {
                     $rutaFinal .= $pathParcial . $indicaro . $nombreImagen[$i] . ",";
-                    $valornombre .= $imagenesnombre[$i] . ",";
+                   // 
                     $flag = true;
                     echo 'Success';
                 } else {
                     // echo 'Ocurrió un error al subir la imagen, intente otra vez';
-                    for ($i = 0; $i < $array_num; $i++) {
-                        $valornombre .= $imagenesnombre[$i] . ",";
-                    }
+                 
                     $PD->modificarproductoimagen2($valornombre, $_POST["productoid"]);
                 }
             }
             if ($flag) {
+                for ($j = 0; $j < $array_num2; $j++) {
+                    $valornombre .= $imagenesnombre[$j] . ",";
+                }
                 $PD->modificarproductoimagen($valornombre, $rutaFinal, $_POST["productoid"]);
             } else {
                 
@@ -139,14 +142,23 @@ class ProductoController {
 
         $valorcriterio = "";
         $valoratributo = "";
+        
         $array_num = count($criterio);
-        if ((!empty($_POST["productocriterio"]) && is_array($_POST["productovalor"]))) {
+        $array_num2 = count($valor);
+        if ((!empty($_POST["productocriterio"]) && is_array($_POST["productocriterio"]))) {
             for ($i = 0; $i < $array_num; $i++) {
                 $valorcriterio .= $criterio[$i] . ",";
-                $valoratributo .= $valor[$i] . ",";
+          //      $valoratributo .= $valor[$i] . ",";
             }
         }
 
+           if ((!empty($_POST["productovalor"]) && is_array($_POST["productovalor"]))) {
+            for ($j = 0; $j < $array_num2; $j++) {
+             //   $valorcriterio .= $criterio[$i] . ",";
+                $valoratributo .= $valor[$j] . ",";
+            }
+        }
+        
         $PD->modificarProductoCaracteristica($valorcriterio, $valoratributo, $_POST["productocaracteristicatitulo"], $_POST["productoid"]);
         $data['listado'] = $PD->filtrarProductoCaracteristicaById($_POST["productoid"]);
         $this->view->show("actualizarProductoCaracteristica.php", $data);
@@ -185,20 +197,28 @@ class ProductoController {
         $productocaracteristicavalor = $_POST['caracteristicavalor']; //vector
         $valorcriterio = "";
         $valoratributo = "";
+        
         $array_num = count($productocaracteristicavalor);
-        if ((!empty($_POST["caracteristicacriterio"]) && is_array($_POST["caracteristicavalor"]))) {
-            for ($k = 0; $k < $array_num; $k++) {
+        $array_num2 = count($productocaracteristicacriterio);
+        if ((!empty($_POST["caracteristicacriterio"]) && is_array($_POST["caracteristicacriterio"]))) {
+            for ($k = 0; $k < $array_num2; $k++) {
                 $valorcriterio .= $productocaracteristicacriterio[$k] . ",";
-                $valoratributo .= $productocaracteristicavalor[$k] . ",";
+             //   $valoratributo .= $productocaracteristicavalor[$k] . ",";
             }
         }
+        
+           if ((!empty($_POST["caracteristicavalor"]) && is_array($_POST["caracteristicavalor"]))) {
+            for ($ka = 0; $ka < $array_num; $ka++) {
+               // $valorcriterio .= $productocaracteristicacriterio[$k] . ",";
+                $valoratributo .= $productocaracteristicavalor[$ka] . ",";
+            }
+        }
+        
 
-    $valornombre = "";
+       $valornombre = "";
       $productoimagenesnombre = $_POST['imagenesnombre'];
         $array_num2 = count($productoimagenesnombre);
-        for ($j = 0; $j < $array_num2; $j++) {
-            $valornombre .= $productoimagenesnombre[$j] . ",";
-        }
+       
         $array_num1 = count($_FILES['imagenesruta']['name']);
     
         $rutaFinal = "";
@@ -224,16 +244,17 @@ class ProductoController {
             }
         }
        $resultado1 = $PD->registrarProducto($productocodigobarras, $productocantidadgarantizada, $productocantidaddevuelto, $productosubcategoriaid, $productoestado, $productoactivo);
-     
-        if ($resultado1 == 1) {
-            $message = 'Puedo  registrar';
-             echo "<script type='text/javascript'>alert('$message');</script>";
+
+        if ($resultado1 == 1 && $flag == true) {
+
             $resultado2 = $PD->registrarproductoprecio($productocodigobarras, $productopreciocompra, $productopreciofechacompra, $productoprecioventa, $productopreciofechaventa, $productoprecioganacia);
             $resultado3 = $PD->registrarproductocaracteristicas($productocodigobarras, $valorcriterio, $valoratributo, $productocaractericticatitulo);
-
-            if ($flag == true) {
-             $PD->registrarproductoimagen($productocodigobarras, $valornombre, $rutaFinal);
+            for ($j = 0; $j < $array_num2; $j++) {
+                $valornombre .= $productoimagenesnombre[$j] . ",";
+                $PD->registrarproductoimagen($productocodigobarras, $valornombre, $rutaFinal);
             }
+                        $message = 'Se ha registrado exitosamente';
+            echo "<script type='text/javascript'>alert('$message');</script>";
         } else {
             $message = ' NO puede registrar';
             echo "<script type='text/javascript'>alert('$message');</script>";
