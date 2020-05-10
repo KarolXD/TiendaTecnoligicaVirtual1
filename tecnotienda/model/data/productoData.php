@@ -19,9 +19,54 @@ class productoData {
         require 'libs/SPDO.php';
         $this->db = SPDO::singleton();
     }
+    
+    public function actualizarGarantiasProducto(){
+        
+    }
+    
+    public function guardarGarantia($productoid, $cantidadGarantia) {
+        $consulta = $this->db->prepare('INSERT INTO tbgarantia(tbproductoid,tbgarantiacantidad) VALUES(' . $productoid . ',' . $cantidadGarantia . ')');
+        $consulta->execute();
+        $resultado = $consulta->fetchAll();
+
+        if ($consulta->execute()) {
+            $consulta1 = $this->db->prepare('update tbproducto  set tbproductocantidadgarantiasaplicadas= ' . $cantidadGarantia . '  where tbproductocodigobarras=' . $productoid . ' ');
+            $consulta1->execute();
+            $resultado1 = $consulta1->fetchAll();
+
+            if ($consulta1->execute()) {
+                return 1;
+            } else {
+                return 0;
+            }
+        } else {
+            return 0;
+        }
+        $consulta->CloseCursor();
+    }
+
+    public function guardarDevolucion($productoid, $cantidadDevolucion) {
+        $consulta = $this->db->prepare('INSERT INTO tbdevolucion(tbproductoid,tbdevolucioncantidad) VALUES(' . $productoid . ',' . $cantidadDevolucion . ')');
+        $consulta->execute();
+        $resultado = $consulta->fetchAll();
+        if ($consulta->execute()) {
+            $consulta1 = $this->db->prepare('update tbproducto  set tbproductocantidaddevoluciones= ' . $cantidadDevolucion . '  where tbproductocodigobarras=' . $productoid . ' ');
+            $consulta1->execute();
+            $resultado1 = $consulta1->fetchAll();
+            if ($consulta1->execute()) {
+                return 1;
+            } else {
+                return 0;
+            }
+        } else {
+            return 0;
+        }
+        $consulta->CloseCursor();
+    }
+
     public function modificarProducto($productoproductocodigobarras, $productocantidadgarantizada, $productocantidaddevuelto, $productosubcategoriaid, $productoestado,$productoid) {
         $data = array($productoproductocodigobarras, $productocantidadgarantizada, $productocantidaddevuelto, $productosubcategoriaid, $productoestado,$productoid);
-        $consulta = $this->db->prepare('update tbproducto set  tbproductocodigobarras=? ,tbproductocantidadgarantiasaplicadas=?,tbproductocantidaddevoluciones=?,tbproductosubcategoria=?, tbproductoestado=? where tbproductoid=?');
+        $consulta = $this->db->prepare('update tbproducto set  tbproductocodigobarras=? ,tbproductocantidadgarantiasaplicadas=?,tbproductocantidaddevoluciones=?,tbsubcategoriaid=?, tbproductoestado=? where tbproductoid=?');
         $consulta->execute($data);
         echo $consulta->errorInfo()[2];
     }
@@ -32,7 +77,7 @@ class productoData {
         $consulta->execute($data);
         echo $consulta->errorInfo()[2];
     }
-    public function registrarProducto($productoproductocodigobarras, $productocantidadgarantizada, $productocantidaddevuelto, $productosubcategoriaid, $productoestado, $productoactiovo) {
+    public function registrarProducto($productosubcategoriaid,$productoproductocodigobarras, $productocantidadgarantizada, $productocantidaddevuelto, $productoestado, $productoactiovo) {
         $sql = 'SELECT COUNT(*) as total FROM tbproducto where tbproductocodigobarras="' . $productoproductocodigobarras . '"';
         $del = $this->db->prepare($sql);
         $del->execute();
@@ -41,9 +86,9 @@ class productoData {
             echo '<script>  alert("Código de barras ya existente");</script>';
             return 0;
         } else {
-            $data = array($productoproductocodigobarras, $productocantidadgarantizada, $productocantidaddevuelto, $productosubcategoriaid, $productoestado,$productoactiovo);
-            $consulta = $this->db->prepare('INSERT INTO tbproducto(tbproductocodigobarras,tbproductocantidadgarantiasaplicadas, '
-                    . 'tbproductocantidaddevoluciones, tbproductosubcategoria,tbproductoestado,tbproductoactivo)'
+            $data = array($productosubcategoriaid,$productoproductocodigobarras, $productocantidadgarantizada, $productocantidaddevuelto, $productoestado,$productoactiovo);
+            $consulta = $this->db->prepare('INSERT INTO tbproducto(tbsubcategoriaid,tbproductocodigobarras,tbproductocantidadgarantiasaplicadas, '
+                    . 'tbproductocantidaddevoluciones,tbproductoestado,tbproductoactivo)'
                     . ' VALUES(?,?,?,?,?,?)');
             $consulta->execute($data);
             $consulta->errorInfo()[2];
@@ -52,17 +97,17 @@ class productoData {
         }
     }
 
-    public function registrarproductoimagen($productoproductocodigobarras, $tbproductoimagennombre, $tbproductoimagenruta) {
+    public function registrarproductoimagen($productoproductocodigobarras, $productoimagennombre, $productoimagenruta,$productoimagenestado) {
         $consulta = $this->db->prepare(' select  @productoid:=tbproductoid from tbproducto where tbproductocodigobarras="' . $productoproductocodigobarras . '";
-      INSERT INTO tbproductoimagen(tbproductoid,tbproductoimagennombre,tbproductoimagenruta) VALUES(@productoid,"' . $tbproductoimagennombre . '","' . $tbproductoimagenruta . '")');
+      INSERT INTO tbproductoimagen(tbproductoid,tbproductoimagennombre,tbproductoimagenruta,tbproductoimagenestado) VALUES(@productoid,"' . $productoimagennombre . '","' . $productoimagenruta . '","'.$productoimagenestado.'")');
         $consulta->execute();
         $resultado = $consulta->fetchAll();
         $consulta->CloseCursor();
         return $resultado;
     }
 
-    public function modificarproductoimagen($tbproductoimagennombre, $tbproductoimagenruta, $productoid) {
-        $data = array($tbproductoimagennombre, $tbproductoimagenruta, $productoid);
+    public function modificarproductoimagen($productoimagennombre, $productoimagenruta, $productoid) {
+        $data = array($productoimagennombre, $productoimagenruta, $productoid);
 
         $consulta = $this->db->prepare('
       update  tbproductoimagen  set tbproductoimagennombre=?,tbproductoimagenruta=? where tbproductoid=?');
@@ -72,8 +117,8 @@ class productoData {
         return 1;
     }
     
-     public function modificarproductoimagen2($tbproductoimagennombre, $productoid) {
-        $data = array($tbproductoimagennombre, $productoid);
+     public function modificarproductoimagen2($productoimagennombre, $productoid) {
+        $data = array($productoimagennombre, $productoid);
 
         $consulta = $this->db->prepare('
       update  tbproductoimagen  set tbproductoimagennombre=? where tbproductoid=?');
@@ -135,7 +180,7 @@ caracteristica.tbproductocaracteristicastitulo,imagen.tbproductoimagennombre,ima
 from tbproducto producto join tbproductoprecio precio on producto.tbproductoid=precio.tbproductoid
 join tbproductocaracteristica caracteristica on caracteristica.tbproductoid=precio.tbproductoid
 join tbproductoimagen imagen on imagen.tbproductoid=producto.tbproductoid
-join tbsubcategoria sub on sub.tbsubcategoriaid=producto.tbproductosubcategoria
+join tbsubcategoria sub on sub.tbsubcategoriaid=producto.tbsubcategoriaid
 where  producto.tbproductoid=precio.tbproductoid and caracteristica.tbproductoid=precio.tbproductoid
 and  imagen.tbproductoid=producto.tbproductoid
  
@@ -157,7 +202,7 @@ caracteristica.tbproductocaracteristicastitulo,imagen.tbproductoimagennombre,ima
 from tbproducto producto join tbproductoprecio precio on producto.tbproductoid=precio.tbproductoid
 join tbproductocaracteristica caracteristica on caracteristica.tbproductoid=precio.tbproductoid
 join tbproductoimagen imagen on imagen.tbproductoid=producto.tbproductoid
-join tbsubcategoria sub on sub.tbsubcategoriaid=producto.tbproductosubcategoria
+join tbsubcategoria sub on sub.tbsubcategoriaid=producto.tbsubcategoriaid
 where  producto.tbproductoid=precio.tbproductoid and caracteristica.tbproductoid=precio.tbproductoid
 and  imagen.tbproductoid=producto.tbproductoid
  and  producto.tbproductoid=
@@ -171,8 +216,8 @@ and  imagen.tbproductoid=producto.tbproductoid
     public function filtrarProductoById($idproducto) {
         $consulta = $this->db->prepare('select  p.tbproductoid, p.tbproductocodigobarras,p.tbproductocantidadgarantiasaplicadas, p.tbproductocantidaddevoluciones,
 p.tbproductoestado, s.tbsubcategorianombre
- from tbproducto p join tbsubcategoria s on p.tbproductosubcategoria=s.tbsubcategoriaid 
- where p.tbproductosubcategoria=s.tbsubcategoriaid 
+ from tbproducto p join tbsubcategoria s on p.tbsubcategoriaid=s.tbsubcategoriaid 
+ where p.tbsubcategoriaid=s.tbsubcategoriaid 
  and  p.tbproductoid="' . $idproducto . '"');
         $consulta->execute();
         $resultado = $consulta->fetchAll();
@@ -214,9 +259,9 @@ s.tbsubcategorianombre, c.tbproductocaracteristicastitulo
 from tbproducto p join tbproductoprecio pp on p.tbproductoid=pp.tbproductoid
 join tbproductocaracteristica c on c.tbproductoid=p.tbproductoid
 join tbproductoimagen i on i.tbproductoid=p.tbproductoid
-join tbsubcategoria s on s.tbsubcategoriaid=p.tbproductosubcategoria
+join tbsubcategoria s on s.tbsubcategoriaid=p.tbsubcategoriaid
 join tbcategoria cat   on cat.tbcategoriaid=s.tbcategoriaid
-where c.tbproductoid=p.tbproductoid and  i.tbproductoid=p.tbproductoid and s.tbsubcategoriaid=p.tbproductosubcategoria
+where c.tbproductoid=p.tbproductoid and  i.tbproductoid=p.tbproductoid and s.tbsubcategoriaid=p.tbsubcategoriaid
 and  p.tbproductoactivo=0 and cat.tbcategoriaid=s.tbcategoriaid');
         $consulta->execute();
         $resultado = $consulta->fetchAll();
@@ -230,9 +275,9 @@ s.tbsubcategorianombre, c.tbproductocaracteristicastitulo
 from tbproducto p join tbproductoprecio pp on p.tbproductoid=pp.tbproductoid
 join tbproductocaracteristica c on c.tbproductoid=p.tbproductoid
 join tbproductoimagen i on i.tbproductoid=p.tbproductoid
-join tbsubcategoria s on s.tbsubcategoriaid=p.tbproductosubcategoria
+join tbsubcategoria s on s.tbsubcategoriaid=p.tbsubcategoriaid
 join tbcategoria cat   on cat.tbcategoriaid=s.tbcategoriaid
-where c.tbproductoid=p.tbproductoid and  i.tbproductoid=p.tbproductoid and s.tbsubcategoriaid=p.tbproductosubcategoria
+where c.tbproductoid=p.tbproductoid and  i.tbproductoid=p.tbproductoid and s.tbsubcategoriaid=p.tbsubcategoriaid
 and  p.tbproductoactivo=0 and cat.tbcategoriaid=s.tbcategoriaid and  s.tbsubcategorianombre LIKE "' . $subcategorianombre . '" ');
         $consulta->execute();
         $resultado = $consulta->fetchAll();
@@ -246,9 +291,9 @@ s.tbsubcategorianombre
 from tbproducto p join tbproductoprecio pp on p.tbproductoid=pp.tbproductoid
 join tbproductocaracteristica c on c.tbproductoid=p.tbproductoid
 join tbproductoimagen i on i.tbproductoid=p.tbproductoid
-join tbsubcategoria s on s.tbsubcategoriaid=p.tbproductosubcategoria
+join tbsubcategoria s on s.tbsubcategoriaid=p.tbsubcategoriaid
 join tbcategoria cat   on cat.tbcategoriaid=s.tbcategoriaid
-where c.tbproductoid=p.tbproductoid and  i.tbproductoid=p.tbproductoid and s.tbsubcategoriaid=p.tbproductosubcategoria
+where c.tbproductoid=p.tbproductoid and  i.tbproductoid=p.tbproductoid and s.tbsubcategoriaid=p.tbsubcategoriaid
 and  p.tbproductoactivo=0 and cat.tbcategoriaid=s.tbcategoriaid 
 GROUP BY s.tbsubcategorianombre');
         $consulta->execute();
@@ -257,32 +302,16 @@ GROUP BY s.tbsubcategorianombre');
         return $resultado;
     }
 
-    public function eliminacionProducto($idproducto) {
-        $consulta = $this->db->prepare('DELETE FROM tbproducto WHERE tbproductoid = "' . $idproducto . '"');
+    public function eliminarProducto($idproducto) {
+        $consulta = $this->db->prepare('update   tbproducto set  tbproductoactivo=1 WHERE tbproductoid = "' . $idproducto . '"');
         $consulta->execute();
         $resultado = $consulta->fetchAll();
         $consulta->CloseCursor();
-        return $resultado;
-    }
-
-    public function eliminarProducto($idproducto) {
-        $sql = 'SELECT COUNT(tbproductosubcategoriaid) as total FROM tbproducto where tbproductoid="' . $idproducto . '"';
-        $del = $this->db->prepare($sql);
-        $del->execute();
-        $count = $del->fetch();
-        echo $count['total'];
-        if ($count['total'] <= 0) {
-            $this->eliminacionProducto($idproducto);
-            echo '<div class="alert alert-primary" role="alert"> Registro eliminado—!</div>';
-            print('<div class="alert alert-primary" role="alert"> Producto Eliminadot!</div>');
-        } else if ($count['total'] > 0) {
-            echo '<div class="alert alert-danger" role="alert"> No es posible eliminar este registro.Lo siento—!</div>';
-            echo '<script>  alert("Lo sentimos, no podemos borrar este registro.Existe una SubCategoria asociada a este producto");</script>';
-        } else if ($count['total'] == null) {
-            echo '<script>  alert("Datos nulos");</script>';
+        if ($consulta->execute()) {
+            return 1;
+        } else {
+            return 0;
         }
-        $del->CloseCursor();
-        return $del;
     }
 
 }

@@ -6,6 +6,17 @@ class ClienteController {
         $this->view = new View();
     }
 
+    public function cerrarSession() {
+        session_start();
+
+        if (session_destroy()) {
+            echo "Sesión destruida correctamente";
+        } else {
+            echo "Error al destruir la sesión";
+        }
+        $this->view->show("loginAdmin.php");
+    }
+
     public function loginCliente() {
 
         $this->view->show("loginCliente.php");
@@ -16,26 +27,41 @@ class ClienteController {
         $items = new clienteDato();
         $clienteid = $_POST["username"];
         $contra = $_POST["password"];
+
+        $_SESSION['usuario'] = $clienteid;
         $dato = $items->loginCliente($clienteid, $contra);
 
         if ($dato == 1) {
+            echo '<script src="./public/js/jquery-3.3.1.js" type="text/javascript"> </script>  <script>   $(function() {   $("#alertControl").html("<div > <strong>Advertencia!</strong>  Inicio de session correcto</div> ");  });</script>';
+
             $this->view->show("loginAdmin.php", $dato);
         } else {
+            echo '<script src="./public/js/jquery-3.3.1.js" type="text/javascript"> </script>  <script>   $(function() {   $("#alertControl").html("<div > <strong>Advertencia!</strong> Usuario y/o Contraseña INCORRECTA </div> ");  });</script>';
             $this->view->show("loginCliente.php", $dato);
         }
     }
-    
-        
-       public function loginUsuario() {
+
+    public function loginUsuario() {
         require 'model/data/usuarioDato.php';
         $items = new usuarioDato();
         $clienteid = $_POST["username"];
         $contra = $_POST["password"];
+
         $dato = $items->loginUsuario($clienteid, $contra);
 
         if ($dato == 1) {
+            session_start();
+            if (!isset($_SESSION['usuario'])) {
+                $_SESSION['usuario'] = '';
+            }
+
+            $_SESSION['usuario'] = $clienteid;
+            echo '<script src="./public/js/jquery-3.3.1.js" type="text/javascript"> </script>  <script>   $(function() {   $("#alertControl").html("<div > <strong>Advertencia!</strong>  Inicio de session correcto</div> ");  });</script>';
+
             $this->view->show("menuPrincipal.php");
         } else {
+            echo '<script src="./public/js/jquery-3.3.1.js" type="text/javascript"> </script>  <script>   $(function() {   $("#alertControl").html("<div > <strong>Advertencia!</strong> Usuario y/o Contraseña INCORRECTA </div> ");  });</script>';
+
             $this->view->show("loginAdmin.php");
         }
     }
@@ -62,7 +88,7 @@ class ClienteController {
         $dato['listado'] = $items->listarDatosCliente();
         $this->view->show("MenuClientes.php", $dato);
     }
-    
+
     public function listarClientesDetalle() {
         require 'model/data/clienteDato.php';
         $items = new clienteDato();
@@ -201,10 +227,11 @@ class ClienteController {
             $temp2 .= "0" . ",";
         }
         $items->registrarCorreo($usuario, $valor, $temp);
-        $items->registrarTelefono($usuario, $valor2);
+        $items->registrarTelefono($usuario, $valor2, $temp2);
         $items->registrarCliente($usuario, $contra, $estado);
         $items->registrarDireccion($usuario, $provincia, $canton, $distrito, $descripcion);
         $items->registrarCuentaBancaria($usuario, $banco, $numerocuenta);
+        $items->registrarClienteCategorizacion($usuario, $usuario);
 
         $this->view->show("registrarClienteVista.php");
     }
@@ -218,118 +245,6 @@ class ClienteController {
         $this->view->show("MenuClientes.php", $dato);
     }
 
-//
-//    public function loginCliente() {
-//
-//        $this->view->show("loginCliente.php");
-//    }
-//
-//    public function loginAdmin() {
-//        $this->view->show("loginAdmin.php");
-//    }
-//
-//    public function registrarClienteVista() {
-//        $this->view->show("registrarClienteVista.php");
-//    }
-//
-//    public function menuPrincipal() {
-//        $this->view->show("menuPrincipal.php");
-//    }
-//
-//    public function menuClientes() {
-//        $this->view->show("menuClientes.php");
-//    }
-//
-//    public function listarClientes() {
-//        require 'model/data/clienteDato.php';
-//        $PD = new clienteDato();
-//        echo json_encode($PD->listarClientes());
-//    }
-//
-//    
-//    public function listarCorreo(){
-//         require 'model/data/clienteDato.php';
-//        $items = new clienteDato();   
-//       $dato['listado']= $items->listarCorreo();
-//      $this->view->show("MenuCorreo.php",$dato);
-//    }
-//    public function filtarCorreoById(){
-//       require 'model/data/clienteDato.php';
-//        $items = new clienteDato();
-//        $correoid = $_GET["correoid"];
-//           $dato['listado']=$items->filtarCorreoById($correoid);
-//          $this->view->show("actualizarCorreo.php",$dato);
-//    }
-//     public function actualizarCorreo() {
-//        require 'model/data/clienteDato.php';
-//        $items = new clienteDato();
-//        $valor = "";
-//        $clienteid = $_POST["clienteid"];
-//        $correoid = $_POST["correoid"];
-//        $correos = $_POST["correo"];
-//        $array_num = count($correos);
-//        echo $array_num;
-//        for ($i = 0; $i < $array_num; $i++) {
-//            $valor .= $correos[$i] . ",";
-//        }
-//        $items->actualizarCorreo($clienteid,$valor,$correoid);
-//        
-//         $dato['listado']=$items->filtarCorreoById($correoid);
-//          $this->view->show("actualizarCorreo.php",$dato);
-//    }
-//
-//    public function registrarCliente() {
-//
-//        require 'model/data/clienteDato.php';
-//        $items = new clienteDato();
-//        $usuario = $_POST["usuario"];
-//        $valor=""; $est="";
-//        $correos = $_POST["name"];
-//         $array_num = count($correos);
-//              
-//            for ($i = 0; $i < $array_num; $i++) {
-//                $valor.=$correos[$i].",";
-//                $est.="0".",";            
-//            }
-//                $items->registrarCorreo($usuario, $valor, $est);
-//     //        $items->registrarCliente($usuario,$contrasenia,$estado);
-//        
-//    
-//        
-//        $this->view->show("registrarClienteVista.php");
-//    }
-//
-//    public function modificarCliente() {
-//        require 'model/data/clienteDato.php';
-//        $PD = new clienteDato();
-//        $clienteid = $_POST["codigoPersona"];
-//        $nombre = $_POST["nombre"];
-//        $apellido1 = $_POST["apellido1"];
-//        $apellido2 = $_POST["apellido2"];
-//        $correo1 = $_POST["correo1"];
-//        $correo2 = $_POST["correo2"];
-//        $telefono1 = $_POST["telefono1"];
-//        $telefono2 = $_POST["telefono2"];
-//        $contrasenia = $_POST["contrasenia"];
-//        $direccion = $_POST["direccion"];
-//        $PD->modificarCliente($nombre, $apellido1, $apellido2, $correo1, $correo2, $telefono1, $telefono2, $direccion, $contrasenia, $clienteid);
-//        echo 'Modificado';
-//    }
-//
-//    public function filtrarClienteById() {
-//        require 'model/data/clienteDato.php';
-//        $PD = new clienteDato();
-//        $data['actualizarCliente'] = $PD->filtrarClienteById($_GET['clienteid']);
-//        $this->view->show("actualizarClienteVista.php", $data);
-//    }
-//
-//      public function eliminarCliente() {
-//         require 'model/data/clienteDato.php';
-//        $PD = new clienteDato();
-//          //echo '<script> alert("hola"); </script>';
-//        $PD->eliminarCliente($_POST['clienteid']);
-//      $this->view->show("menuClientes.php");
-//}
 }
 
 //fin

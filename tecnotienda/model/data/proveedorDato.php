@@ -13,7 +13,6 @@
  */
 class proveedorDato {
 
-    //put your code here
 
     protected $db;
 
@@ -23,34 +22,57 @@ class proveedorDato {
     }
 
     public function registrarProveedor($usuario, $contrasenia, $empresa, $descrip, $estado) {
-        $data = array($usuario, $contrasenia, $empresa, $descrip, $estado);
-        $consulta = $this->db->prepare('insert into tbproveedor(tbproveedorusuario,tbproveedorcontrasena,tbempresa,tbdescripcion,tbproveedorestado) values (?,?,?,?,?)');
-        $consulta->execute($data);
-        echo $consulta->errorInfo()[2];
+
+        $sql = 'SELECT COUNT(*) as total FROM tbproveedor where tbproveedorusuario="' . $usuario . '"';
+        $del = $this->db->prepare($sql);
+        $del->execute();
+        $count = $del->fetch();
+
+        if ($del->execute()) {
+            if ($count['total'] > 0) {//si es mayor a 1 NO INGRESE
+                return 0;
+            } else {///ingresese
+                $data = array($usuario, $contrasenia, $empresa, $descrip, $estado);
+                $consulta = $this->db->prepare('insert into tbproveedor(tbproveedorusuario,tbproveedorcontrasena,tbempresa,tbdescripcion,tbproveedorestado) values (?,?,?,?,?)');
+                $consulta->execute($data);
+                echo $consulta->errorInfo()[2];
+                return 1;
+            }
+        } else {
+            return -1;
+        }
     }
 
     public function registrarCorreo($clienteid, $valor, $valorInicial) {
         $data = array($clienteid, $valor, $valorInicial);
-        $consulta = $this->db->prepare('insert into  tbcorreo (tbclienteusuario,tbcorreoatributo,tbcorreovalor)  values (?,?,?)');
+        $consulta = $this->db->prepare('insert into  tbcorreo (tbtbclienteid,tbcorreoatributo,tbcorreovalor)  values (?,?,?)');
         $consulta->execute($data);
         echo $consulta->errorInfo()[2];
+           
     }
 
-    public function registrarTelefono($clienteid, $valor) {
-        $data = array($clienteid, $valor);
-        $consulta = $this->db->prepare('insert into  tbtelefono (tbclienteusuario,tbtelefononumero)  values (?,?)');
+    public function registrarTelefono($clienteid, $valor, $valorInicial) {
+        $data = array($clienteid, $valor, $valorInicial);
+        $consulta = $this->db->prepare('insert into  tbtelefono (tbtbclienteid,tbtelefonoatributo,tbtelefonovalor)  values (?,?,?)');
         $consulta->execute($data);
         echo $consulta->errorInfo()[2];
     }
 
     public function listarDatosProveedor() {
-        $consulta = $this->db->prepare('select proveedor.tbproveedorusuario,proveedor.tbempresa,proveedor.tbdescripcion,
-            correo.tbcorreoatributo,telefono.tbtelefononumero
- from tbproveedor proveedor
-join tbcorreo correo on correo.tbclienteusuario=proveedor.tbproveedorusuario 
-join tbtelefono telefono on telefono.tbclienteusuario=proveedor.tbproveedorusuario
-where proveedor.tbproveedorusuario = correo.tbclienteusuario and 
-proveedor.tbproveedorusuario = telefono.tbclienteusuario and proveedor.tbproveedorestado = 0;');
+        $consulta = $this->db->prepare('select 
+proveedor.tbproveedorid,
+proveedor.tbproveedorusuario,
+proveedor.tbempresa,
+proveedor.tbdescripcion,
+correo.tbcorreoatributo,
+telefono.tbtelefonoatributo
+from tbproveedor proveedor
+join tbcorreo correo on correo.tbtbclienteid=proveedor.tbproveedorusuario 
+join tbtelefono telefono on telefono.tbtbclienteid=proveedor.tbproveedorusuario
+where 
+proveedor.tbproveedorusuario = correo.tbtbclienteid and 
+proveedor.tbproveedorusuario = telefono.tbtbclienteid and 
+proveedor.tbproveedorestado = 0;');
         $consulta->execute();
         $resultado = $consulta->fetchAll();
         $consulta->CloseCursor();
@@ -58,7 +80,7 @@ proveedor.tbproveedorusuario = telefono.tbclienteusuario and proveedor.tbproveed
     }
 
     public function quitarCliente($clienteid) {
-        $consulta = $this->db->prepare('update bdtecnotienda.tbproveedor set tbproveedorestado=1 where tbproveedorusuario = "' . $clienteid . '"');
+        $consulta = $this->db->prepare('update bdtecnotienda.tbproveedor set tbproveedorestado=1 where tbproveedorid = "' . $clienteid . '"');
         $consulta->execute();
         $resultado = $consulta->fetchAll();
         $consulta->CloseCursor();
@@ -66,8 +88,13 @@ proveedor.tbproveedorusuario = telefono.tbclienteusuario and proveedor.tbproveed
     }
 
     public function filtarClienteById($clienteid) {
-        $consulta = $this->db->prepare('SELECT cliente.tbproveedorusuario,correo.tbcorreoatributo,correo.tbcorreoid FROM tbproveedor cliente 
-join bdtecnotienda.tbcorreo correo on correo.tbclienteusuario=cliente.tbproveedorusuario where cliente.tbproveedorusuario ="' . $clienteid . '"');
+        $consulta = $this->db->prepare('SELECT cliente.tbproveedorid,
+cliente.tbproveedorusuario,
+correo.tbcorreoatributo,
+correo.tbcorreoid
+FROM tbproveedor cliente 
+join bdtecnotienda.tbcorreo correo on correo.tbtbclienteid=cliente.tbproveedorusuario 
+where cliente.tbproveedorid = "' . $clienteid . '"');
         $consulta->execute();
         $resultado = $consulta->fetchAll();
         $consulta->CloseCursor();
@@ -75,12 +102,14 @@ join bdtecnotienda.tbcorreo correo on correo.tbclienteusuario=cliente.tbproveedo
     }
 
     public function filtarClienteById2($clienteid) {
-        $consulta = $this->db->prepare('SELECT  cliente.tbproveedorusuario,
-		telefono.tbtelefononumero,
-                telefono.tbtelefononid
-                FROM bdtecnotienda.tbproveedor cliente
-                join bdtecnotienda.tbtelefono telefono on telefono.tbclienteusuario=cliente.tbproveedorusuario 
-                where cliente.tbproveedorusuario = "' . $clienteid . '"');
+        $consulta = $this->db->prepare('SELECT  
+ cliente.tbproveedorid,
+cliente.tbproveedorusuario,
+telefono.tbtelefonoatributo,
+telefono.tbtelefononid
+FROM bdtecnotienda.tbproveedor cliente
+join bdtecnotienda.tbtelefono telefono on telefono.tbtbclienteid=cliente.tbproveedorusuario 
+where cliente.tbproveedorid = "' . $clienteid . '"');
         $consulta->execute();
         $resultado = $consulta->fetchAll();
         $consulta->CloseCursor();
@@ -88,7 +117,11 @@ join bdtecnotienda.tbcorreo correo on correo.tbclienteusuario=cliente.tbproveedo
     }
 
     public function filtarClienteById3($clienteid) {
-        $consulta = $this->db->prepare('select tbproveedorusuario,tbdescripcion from tbproveedor where tbproveedorusuario="' . $clienteid . '"');
+        $consulta = $this->db->prepare('select 
+tbproveedorid,
+ tbproveedorusuario,
+ tbdescripcion 
+ from tbproveedor where tbproveedorid="' . $clienteid . '"');
         $consulta->execute();
         $resultado = $consulta->fetchAll();
         $consulta->CloseCursor();
@@ -96,7 +129,7 @@ join bdtecnotienda.tbcorreo correo on correo.tbclienteusuario=cliente.tbproveedo
     }
 
     public function actualizarTelefono($correoid, $valor) {
-        $consulta = $this->db->prepare('update  tbtelefono set tbtelefononumero= "' . $valor . '" where tbtelefononid= "' . $correoid . '"');
+        $consulta = $this->db->prepare('update  tbtelefono set tbtelefonoatributo= "' . $valor . '" where tbtelefononid= "' . $correoid . '"');
         $consulta->execute();
         $resultado = $consulta->fetchAll();
         $consulta->CloseCursor();

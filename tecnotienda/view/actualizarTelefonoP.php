@@ -7,9 +7,10 @@ include_once 'public/header.php';
         <div class="col-md-4"></div>
         <div class="col-md-4" >
             <br>
+                        <hr style="color: #47748b">
             <h4><center>Modificar Teléfono</center></h4>
             <hr style="color: #47748b">
-            <br>
+           
             <center>
 
                 <form action="?controlador=Proveedor&accion=actualizarDatosTelefono"  method="post" name="" id="">
@@ -18,11 +19,11 @@ include_once 'public/header.php';
                         ?>
 
                         <div class="form-group">
-                            <label class="form-control-label">Identificación Cliente</label>  
-                            <input type="number" class="form-control" id="clienteid"  value= "<?php echo $item[0] ?>" name="clienteid" aria-describedby="emailHelp" readonly="" placeholder="ID CLIENTE" required="">
+                            <input type="hidden" class="form-control" id="id"  value= "<?php echo $item[0] ?>" name="id" aria-describedby="emailHelp" readonly="" placeholder="ID CLIENTE" required="">
+                        <input type="hidden" class="form-control" id="clienteid"  value= "<?php echo $item[1] ?>" name="clienteid" aria-describedby="emailHelp" readonly="" placeholder="ID CLIENTE" required="">
                         </div>     <div class="form-group">
                             <?php
-                            $pizza = ($item[1]);
+                            $pizza = ($item[2]);
                             $pieces = explode(",", $pizza);
                             $contadorComas = substr_count($pizza, ',');
                             for ($i = 0; $i <= $contadorComas - 1; $i++) {
@@ -32,7 +33,7 @@ include_once 'public/header.php';
                             }
                             ?>
 
-                            <input type="hidden" class="form-control" id="correoid"  value= "<?php echo $item[2] ?>" name="correoid" aria-describedby="emailHelp" readonly="" required="">
+                            <input type="hidden" class="form-control" id="correoid"  value= "<?php echo $item[3] ?>" name="correoid" aria-describedby="emailHelp" readonly="" required="">
 
                         </div>
                         <input type="submit" name="submit"  id="submit" class="btn btn-info" value="Submit" />

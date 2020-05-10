@@ -72,14 +72,14 @@ require 'public/headerMenuP.php';
         <?php
         foreach ($vars['listado'] as $item) {
             ?>
-            <div class="animated infinite bounceOut">
+            <div class="animated infinite bounceOut slow">
                 <center>  <label class="bg-light"> 
                         <font  SIZE=5 style="text-transform: uppercase;"> <strong><?php echo $item[11] ?> </strong> </font>
                     </label></center>
             </div>
 
             <br>
-            <div class="animated infinite bounceInRight">
+            <div class="animated infinite bounceInRight slow">
             <center>  <p class="bg-light estado"  ><strong>Estado del Producto: <?php echo $item[14] ?></strong></p> </center>
 </div>
             <!--    <div class="container">-->
@@ -173,23 +173,23 @@ require 'public/headerMenuP.php';
 
             <div class="row">
 
+                    <div class="col-sm-4">
+                        <center class="">        <p class="bg-light"> <strong>Datos sobre el producto </strong></p></center>
+
+                        <p class="bg-light">Código de barras: <?php echo $item[0] ?></p> 
+                        <hr style="color: #47748b">
+                        <p class="bg-light">Garantias Aplicadas: <?php echo $item[1] ?></p> 
+                        <hr style="color: #47748b">
+                        <p class="bg-light">Cantidad devoluciones: <?php echo $item[2] ?></p> 
+                        <hr style="color: #47748b">
+                        <p class="bg-light">Sub Categoria: <?php echo $item[3] ?></p> 
+
+
+
+                    </div>
+
                 <div class="col-sm-4">
-                    <center class="animated  infinite bounce">        <p class="bg-light">Datos sobre el producto</p></center>
-                    <ul>
-                        <p class="bg-light"><li><strong>Código de barras: <?php echo $item[0] ?></strong></li></p> 
-                        <hr style="color: #47748b">
-                        <p class="bg-light"><li><strong>Garantias Aplicadas: <?php echo $item[1] ?></strong></li></p> 
-                        <hr style="color: #47748b">
-                        <p class="bg-light"><li><strong>Cantidad devoluciones: <?php echo $item[2] ?></strong></li></p> 
-                        <hr style="color: #47748b">
-                        <p class="bg-light"><li><strong>Sub Categoria: <?php echo $item[3] ?></strong></li></p> 
-
-
-                    </ul>
-                </div>
-
-                <div class="col-sm-4">
-                    <center class="animated  infinite bounce">    <p class="bg-light"> Caracteristicas sobre el producto</p></center>
+                    <center class="">    <p class="bg-light"><strong>  Caracteristicas sobre el producto </strong> </p></center>
                     <?php
                     $contenido3 = ($item[12]);
                     $total3 = explode(",", $contenido3);
@@ -198,10 +198,10 @@ require 'public/headerMenuP.php';
 
                     for ($d = 0; $d <= $contadorComas3 - 1; $d++) {
                         ?>
-                        <ul>
-                            <p class="bg-light"><li><strong> <?php echo $total3[$d] ?></strong></li></p> 
+                   
+                            <p class="bg-light"> <?php echo $total3[$d] ?></p> 
                             <hr style="color: #47748b">
-                        </ul>
+                             <br>
                         <?php
                     }
                     ?>
@@ -210,20 +210,19 @@ require 'public/headerMenuP.php';
 
                 <div class="col-sm-4">
 
-                    <ul>
-                        <center class="animated  infinite bounce"> <p class="bg-light"> Datos sobre el precio</p></center>
-                        <p class="bg-light"><li> <strong>Precio de Compra: <?php echo $item[4] ?></strong></li></p> 
+                        <center class=""> <p class="bg-light"> <strong> Datos sobre el precio </strong></p></center>
+                        <p class="bg-light">Precio de Compra: <?php echo $item[4] ?></p> 
                         <hr style="color: #47748b">
-                        <p class="bg-light"><li> <strong>Fecha de Compra: <?php echo $item[5] ?></strong></li></p> 
+                        <p class="bg-light">Fecha de Compra: <?php echo $item[5] ?></p> 
                         <hr style="color: #47748b">
-                        <p class="bg-light"><li> <strong>Precio venta: <?php echo $item[6] ?></strong></li></p>  
+                        <p class="bg-light">Precio venta: <?php echo $item[6] ?></p>  
                         <hr style="color: #47748b">
 
-                        <p class="bg-light"><li> <strong>Fecha de Venta: <?php echo $item[7] ?></strong></li></p> 
+                        <p class="bg-light"> Fecha de Venta: <?php echo $item[7] ?></p> 
                         <hr style="color: #47748b">
-                        <p class="bg-light"><li> <strong>Ganancia: <?php echo $item[8] ?> %</strong></li></p> 
+                        <p class="bg-light">Ganancia: <?php echo $item[8] ?> %</p> 
                         <hr style="color: #47748b">
-                    </ul>
+   
                 </div>
             </div>
 

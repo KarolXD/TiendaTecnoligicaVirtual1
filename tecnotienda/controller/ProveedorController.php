@@ -1,16 +1,8 @@
+
+
 <?php
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 
-/**
- * Description of ProveedorController
- *
- * @author Karol
- */
 class ProveedorController {
 
     //put your code here
@@ -79,9 +71,23 @@ class ProveedorController {
             $temp2 .= "0" . ",";
         }
 
-        $items->registrarCorreo($usuario, $valor, $temp);
-        $items->registrarTelefono($usuario, $valor2);
-        $items->registrarProveedor($usuario, $contra,$empresa,$descrip, $estado);
+        
+         $resultado = $items->registrarProveedor($usuario, $contra, $empresa, $descrip, $estado);
+
+        if ($resultado == 1) {
+            
+         $items->registrarCorreo($usuario, $valor, $temp);
+        $items->registrarTelefono($usuario, $valor2, $temp2);
+               echo '<script src="./public/js/jquery-3.3.1.js" type="text/javascript"> </script>  <script>   $(function() {   $("#alertControl").html("<div > <strong>Mensaje!</strong> Registrado Correctamente </div> ");  });</script>';
+     
+        } else if ($resultado == 0) {//existe
+                   echo '<script src="./public/js/jquery-3.3.1.js" type="text/javascript"> </script>  <script>   $(function() {   $("#alertControl").html("<div > <strong>Advertencia!</strong> Proveedor existente </div> ");  });</script>';
+     
+        } else {
+               echo '<script src="./public/js/jquery-3.3.1.js" type="text/javascript"> </script>  <script>   $(function() {   $("#alertControl").html("<div > <strong>Advertencia!</strong> Proveedor no registrado </div> ");  });</script>';
+     
+        }
+ 
 
         $this->view->show("registrarProveedor.php");
     }
@@ -157,51 +163,5 @@ class ProveedorController {
         $dato['listado'] = $items->filtarClienteById3($clienteid);
         $this->view->show("actualizarDescripcionProveedor.php", $dato);
     }
-
-//    public function menuProveedor() {
-//        $this->view->show("menuProveedor.php");
-//    }
-//
-//    public function registrarProveedor() {
-//        $this->view->show("registrarProveedor.php");
-//    }
-//
-//    public function guardarProveedor() {
-//        require 'model/data/proveedorDato.php';
-//        $PD = new proveedorDato();
-//        $PD->guardarProveedor($_POST['proveedornombreempresa'], $_POST['proveedorfax'], $_POST['proveedorapartadopostal'], $_POST['proveedorcorreo'],
-//                $_POST['proveedorsitioweb'], $_POST['proveedorpersonadecontacto'], $_POST['proveedornumerotelefono'], $_POST['proveedordireccionfisicaempresa'], $_POST['proveedorid']);
-//        echo 'Registrado';
-//    }
-//    
-//    
-//       public function modificarProveedor() {
-//        require 'model/data/proveedorDato.php';
-//        $PD = new proveedorDato();
-//        $PD->modificarProveedor($_POST['proveedornombreempresa'], $_POST['proveedorfax'], $_POST['proveedorapartadopostal'], $_POST['proveedorcorreo'],
-//                $_POST['proveedorsitioweb'], $_POST['proveedorpersonadecontacto'], $_POST['proveedornumerotelefono'], $_POST['proveedordireccionfisicaempresa'], $_POST['proveedorid']);
-//        echo 'Registrado';
-//    }
-//        public function filtrarProveedorById() {
-//         require 'model/data/proveedorDato.php';
-//        $PD = new proveedorDato();
-//        $data['actualizarProveedores'] = $PD->filtrarProveedorById($_GET['proveedorid']);
-//        $this->view->show("actualizarProveedor.php", $data);
-//    }
-//
-//
-//    public function listarProveedor() {
-//        require 'model/data/proveedorDato.php';
-//        $PD = new proveedorDato();
-//        echo json_encode($PD->listarProveedor());
-//    }
-//    
-//      public function eliminarProveedor() {
-//        require 'model/data/proveedorDato.php';
-//        $PD = new proveedorDato();
-//          //echo '<script> alert("hola"); </script>';
-//        $PD->eliminarProveedor($_POST['proveedorid']);
-//        $this->view->show("menuProveedor.php");
-//    }
 
 }

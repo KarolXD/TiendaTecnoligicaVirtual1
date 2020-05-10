@@ -1,16 +1,29 @@
-
-
 <?php
-
 include_once 'public/headerMenuP.php';
 ?>
-<div>
+<div style="background-color: #cccccc">
     
 
+    <div class="container animated infinite bounceInRight">
+        <div class="row">
 
-    </div>  
+            <div class="col-md-12  alert-info">
+                <label class=""> <font size="34" > Sitio Administradivo Bienvenido a   Tecno Tienda </font></label>
+
+
+            </div>
+       </div>
+
+    </div>
+
+
+    
+<br><br><br><br><br>
+<br><br><br><br><br>
+<br><br><br><br><br>
+<br><br><br><br><br>
+</div>
 <?php
-
 include_once 'public/footerMenuP.php';
 ?>
 

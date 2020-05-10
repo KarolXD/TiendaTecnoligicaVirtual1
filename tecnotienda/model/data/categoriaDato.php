@@ -25,34 +25,39 @@ class categoriaDato {
         $del = $this->db->prepare($sql);
         $del->execute();
         $count = $del->fetch();
-
-        if ($count['total'] > 0) {
-            return 0;
+        if ($del->execute()) {
+            if ($count['total'] > 0) {
+                return 0;
+            } else {
+                $data = array($categorianombre, $categoriadescripcion, 0, $categoriafecha);
+                $consulta = $this->db->prepare('select  @usuarioid:=tbusuarioid from tbusuario where tbusuarionombre="' . $usuarioid . '";  INSERT INTO tbcategoria (tbcategorianombre,tbusuarioid,tbcategoriadescripcion,tbcategoriaestado,tbcategoriafecha) '
+                        . ' VALUES(?,@usuarioid,?,?,?)');
+                $consulta->execute($data);
+                $consulta->errorInfo()[2];
+                return 1;
+            }
         } else {
-
-            $data = array($categorianombre, $usuarioid, $categoriadescripcion, 0, $categoriafecha);
-            $consulta = $this->db->prepare('INSERT INTO tbcategoria (tbcategorianombre,tbusuarioid,tbcategoriadescripcion,tbcategoriaestado,tbcategoriafecha) '
-                    . ' VALUES(?,?,?,?,?)');
-            $consulta->execute($data);
-            echo $consulta->errorInfo()[2];
-            return 1;
+            return -1;
         }
     }
 
     public function modificarCategorias($nombrecategoria, $usuarioid, $categoriadescripcion, $categoriafecha, $idcategoria) {
-        $sql = 'SELECT COUNT(*) as total FROM tbcategoria where tbcategorianombre="' . $nombrecategoria . '" ';
-        $del = $this->db->prepare($sql);
-        $del->execute();
-        $count = $del->fetch();
-     //   echo $count['total'];
-        if ($count['total'] >1) {
-            echo '<script>  alert("Imposible modificarlo. Categoria existente");</script>';
+//        $sql = 'SELECT COUNT(*) as total FROM tbcategoria where tbcategorianombre="' . $nombrecategoria . '" ';
+//        $del = $this->db->prepare($sql);
+//        $del->execute();
+//        $count = $del->fetch();
+//        if ($count['total'] > 1) {
+//            echo '<script>  alert("Imposible modificarlo. Categoria existente");</script>';
+//        } else {
+        $data = array($nombrecategoria, $usuarioid, $categoriadescripcion, $categoriafecha, $idcategoria);
+        $consulta = $this->db->prepare('update tbcategoria set tbcategorianombre=?,tbusuarioid=?,tbcategoriadescripcion=?,tbcategoriafecha=? where tbcategoriaid=?');
+        $consulta->execute($data);
+        if ($consulta->execute()) {
+            return 1;
         } else {
-            $data = array($nombrecategoria, $usuarioid, $categoriadescripcion, $categoriafecha, $idcategoria);
-            $consulta = $this->db->prepare('update tbcategoria set tbcategorianombre=?,tbusuarioid=?,tbcategoriadescripcion=?,tbcategoriafecha=? where tbcategoriaid=?');
-            $consulta->execute($data);
-            echo '<script>  alert("Se ha modificado");</script>';
+            return -1;
         }
+        //}
     }
 
     public function verificarModificarCategorias($nombrecategoria, $idcategoria) {
@@ -74,7 +79,7 @@ class categoriaDato {
     }
 
     public function filtrarCategoriaById($categoriaid) {
-        $consulta = $this->db->prepare('Select tbcategoriaid, tbcategorianombre,tbcategoriadescripcion,tbcategoriafecha,tbusuarioid  from tbcategoria where tbcategoriaid="' . $categoriaid . '" ');
+        $consulta = $this->db->prepare('Select tbcategoriaid, tbcategorianombre,tbcategoriadescripcion,tbcategoriafecha,tbusuarioid  from tbcategoria where  tbcategoriaestado=0 and tbcategoriaid="' . $categoriaid . '" ');
         $consulta->execute();
         $resultado = $consulta->fetchAll();
         $consulta->CloseCursor();
@@ -82,21 +87,23 @@ class categoriaDato {
     }
 
     public function listarCategorias() {
-        $consulta = $this->db->prepare('Select tbcategoriaid,tbcategorianombre ,tbcategoriadescripcion, tbusuarioid,tbcategoriafecha from tbcategoria');
+        $consulta = $this->db->prepare('
+Select tbcategoriaid,tbcategorianombre ,tbcategoriadescripcion, u.tbusuarionombre,tbcategoriafecha from tbcategoria
+c join tbusuario u on c.tbusuarioid=u.tbusuarioid where c.tbusuarioid=u.tbusuarioid  and tbcategoriaestado=0 ');
            $consulta->execute();
         $resultado = $consulta->fetchAll();
         $consulta->CloseCursor();
         return $resultado;
     }
      public function obtenerCategorias() {
-        $consulta = $this->db->prepare('Select tbcategoriaid,tbcategorianombre from tbcategoria');
+        $consulta = $this->db->prepare('Select tbcategoriaid,tbcategorianombre from tbcategoria where tbcategoriaestado=0');
            $consulta->execute();
         $resultado = $consulta->fetchAll();
         $consulta->CloseCursor();
         return $resultado;
     }
        public function obtenerNombreCategorias() {
-        $consulta = $this->db->prepare('Select tbcategoriaid,tbcategorianombre from tbcategoria');
+        $consulta = $this->db->prepare('Select tbcategoriaid,tbcategorianombre from tbcategoria where tbcategoriaestado=0');
         $consulta->execute();
         $resultado = $consulta->fetchAll();
         $consulta->CloseCursor();
@@ -105,38 +112,40 @@ class categoriaDato {
     }
     
     
-    public function obtenerSubNombreCategorias(){
-         $consulta = $this->db->prepare('Select  tbsubcategorianombre from tbsubcategoria
+    public function obtenerSubNombreCategorias() {
+        $consulta = $this->db->prepare('Select  tbsubcategorianombre from tbsubcategoria where tbcategoriaestado=0
 ');
-            $consulta->execute();
+        $consulta->execute();
         $resultado = $consulta->fetchAll();
         $consulta->CloseCursor();
-        return $resultado;  
+     
+
+        if ($consulta->execute()) {
+               return 1;
+        } else {
+               return -1;
+        }
     }
-    
 
     public function verificarCategoria($categoriaid) {
-        $sql = 'SELECT COUNT(tbsubcategoriaid) as total FROM tbsubcategoria where tbcategoriaid="' . $categoriaid . '"';
+        $sql = 'SELECT COUNT(*) as total FROM tbsubcategoria where tbcategoriaid="' . $categoriaid . '" and tbsubcategoriaestado=0';
         $del = $this->db->prepare($sql);
         $del->execute();
         $count = $del->fetch();
-        echo $count['total'];
-        if ($count['total'] <= 0) {
-            echo '<script>  alert("Es posible eliminarlo ' . $count['total'] . '");</script>';
-            $this->eliminarCategoria($categoriaid);
-            print('<div class="alert alert-primary" role="alert">  This is a primary alert—check it out!</div>');
-        } else if ($count['total'] > 0) {
-            echo '<div class="alert alert-primary" role="alert">  This is a primary alert—check it out!</div>';
-            echo '<script>  alert("Lo sentimos, no podemos borrar este registro.En una SubCategoria Existe la caregoria que deseas borrar' . $count['total'] . '");</script>';
-        } else if ($count['total'] == null) {
-            echo '<script>  alert("Datos nulos");</script>';
-        }
-        $del->CloseCursor();
-        return $del;
+        if ($del->execute()) {
+            if ($count['total'] <= 0) {
+             $this->eliminarCategoria($categoriaid);
+                return 1;
+            } else if ($count['total'] > 0) {
+              return 0;
+            }
+            $del->CloseCursor();
+        } else
+            return -1;
     }
 
     public function eliminarCategoria($categoriaid) {
-        $consulta = $this->db->prepare('DELETE FROM tbcategoria WHERE tbcategoriaid = "' . $categoriaid . '"');
+        $consulta = $this->db->prepare('update  tbcategoria  set tbcategoriaestado=1 WHERE tbcategoriaid = "' . $categoriaid . '"');
         $consulta->execute();
         $resultado = $consulta->fetchAll();
         $consulta->CloseCursor();

@@ -1,5 +1,6 @@
 <?php
 
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -9,7 +10,7 @@
 /**
  * Description of UsuarioController
  *
- * @author Usuario
+ * @author Jahanel
  */
 class UsuarioController {
     //put your code here
@@ -18,7 +19,17 @@ class UsuarioController {
     public function __construct() {
         $this->view = new View();
     }
-    
+
+      public function cerrarSession() {
+      session_start();
+
+        if (session_destroy()) {
+            echo "Sesión destruida correctamente";
+        } else {
+            echo "Error al destruir la sesión";
+        }
+      header("Location: menuUsuario.php ");
+    }
       public function obtenerUsuarios() {
         require 'model/data/usuarioDato.php';
         $PD = new usuarioDato();
@@ -35,12 +46,7 @@ class UsuarioController {
         $PD = new categoriaDato();
         echo json_encode($PD->obtenerNombreCategorias());
     }
-//           public function headerUsuario() {
-//       require 'model/data/categoriaDato.php';
-//        $PD = new categoriaDato();
-//        $data['listado']= ($PD->obtenerNombreCategorias());
-//        $this->view->show("headerUsuario.php",$data);
-//    }
+
     
     
     

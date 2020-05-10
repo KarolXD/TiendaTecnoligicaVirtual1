@@ -6,6 +6,7 @@ include_once 'public/headerMenuP.php';
     <div class="row">
         <div class="col-md-4"></div>
         <div class="col-md-4">
+                <hr style="color: #47748b">
             <h5>  <center>Registrar una Categoria </center></h5>
             <hr style="color: #47748b">
             <form action="?controlador=Categoria&accion=registrarCategoria" method="post" autocomplete="off" class="form" enctype="multipart/form-data">
@@ -18,15 +19,18 @@ include_once 'public/headerMenuP.php';
                     <label for="username"> Escribe una descripción</label>
                     <input type="text" class="form-control" id="categoriadescripcion" name="categoriadescripcion" placeholder="Descripción" required="">
                 </div>
-                <div class="form-group">
+                    <div class="form-group ">
+                    <input  type="hidden" name="usuarioid"   id="usuarioid"  value="<?php    echo $_SESSION["usuario"];?>">
+                </div>
+<!--                <div class="form-group">
                     <label for="username"> Escribe el nombre de una fecha</label>
                     <input type="date" class="form-control" id="categoriafecha" name="categoriafecha" placeholder="Descripción" required="">
-                </div>
-                <div class="form-group">
+                </div>-->
+<!--                <div class="form-group">
                     <label for="username"> Usuario que agregó categoria</label>
                     <select  name="usuarioid" id="usuarioid" class="form-control">
                     </select>
-                </div>
+                </div>-->
 
 
                 <div class="form-group">
@@ -35,7 +39,9 @@ include_once 'public/headerMenuP.php';
                         <a href="?controlador=Categoria&accion=menuCategoriaVista" class="btn btn-info" >Regresar</a>
                     </center>
                 </div>
-                <div  name="alertControl" id="alertControl"></div>
+               
+                      <div  class="alertControl alert alert-primary" name="alertControl" id="alertControl"> </div>
+                
             </form>
         </div>
         <div class="col-md-4"></div>

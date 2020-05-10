@@ -16,7 +16,7 @@ require 'public/headerMenuP.php';
                     <tr>
                         <th scope="col">Detalle</th>
                         <th scope="col">Eliminar</th>
-                        <th scope="col">Modificar</th>    
+                        <th scope="col">Modificar</th>  
                         <th scope="col">Id Cliente</th>
                         <th scope="col">Correos</th>
                         <th scope="col">Telefonos</th>
@@ -37,7 +37,7 @@ require 'public/headerMenuP.php';
                         foreach ($vars['listado'] as $item) {
                             ?>
                         <tr>
-                            <td>  <a  class="btn btn-outline-warning" href='?controlador=Cliente&accion=listarClientesDetalle'> Detalle  </a> </td>
+                            <td>  <a  class="btn btn-outline-info" href='?controlador=Cliente&accion=listarClientesDetalle'> Detalle  </a> </td>
 
                             <td>  <a  class="btn btn-outline-danger" href='?controlador=Cliente&accion=eliminarCliente&clienteid=<?php echo $item[0] ?>'> Eliminar  </a> </td>
                            
@@ -46,38 +46,41 @@ require 'public/headerMenuP.php';
 
                                 <a  class="btn btn-outline-warning" href='?controlador=Cliente&accion=filtarClienteById2&clienteid=<?php echo $item[0] ?>'>  Telefono </a> 
                             </td>
-                            <td><?php echo $item[0] ?></td>
-
+                            <td><?php echo $item[1] ?></td>
+   <td>
                             <?php
-                            $pizza = ($item[1]);
+                            $pizza = ($item[2]);
                             $pieces = explode(",", $pizza);
                             $contadorComas = substr_count($pizza, ',');
+                           
                             for ($i = 0; $i <= $contadorComas - 1; $i++) {
                                 ?>
-                                <td> <?php echo $pieces[$i] ?></td>  
+                               <?php echo $pieces[$i] ?>
 
                                 <?php
                             }
+                        
                             ?>
-
+    </td>  
+       <td> 
                             <?php
-                            $pizza2 = ($item[2]);
+                            $pizza2 = ($item[3]);
                             $piecess = explode(",", $pizza2);
                             $contadorComass = substr_count($pizza2, ',');
                             for ($y = 0; $y <= $contadorComass - 1; $y++) {
                                 ?>
-                                <td> <?php echo $piecess[$y] ?></td>  
+                             <?php echo $piecess[$y] ?>
 
                                 <?php
                             }
                             ?>
-
-                            <td><?php echo $item[3] ?></td>
+</td>  
                             <td><?php echo $item[4] ?></td>
                             <td><?php echo $item[5] ?></td>
                             <td><?php echo $item[6] ?></td>
                             <td><?php echo $item[7] ?></td>
                             <td><?php echo $item[8] ?></td>
+                            <td><?php echo $item[9] ?></td>
 
                         </tr>
 

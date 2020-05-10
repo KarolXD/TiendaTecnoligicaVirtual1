@@ -21,15 +21,17 @@ include_once 'public/headerMenuP.php';
                     <label for="username">Añade una descripción</label>
                     <input type="text" class="form-control" id="subcategoriadescripcion" name="subcategoriadescripcion" aria-describedby="emailHelp" placeholder="Nombre SubCategoria" required="">
                 </div>
-
+               
                 <div class="form-group ">
-                    <label class="">Añade un Usuario</label>
-                    <select class="form-control" name="usuarioid"   id="usuarioid"></select>
+                    <input  type="hidden" name="usuarioid"   id="usuarioid"  value="<?php    echo $_SESSION["usuario"];?>">
                 </div>
-                <div class="form-group">
-                    <label for="username">Añade una fecha</label>
-                    <input type="date" class="form-control" id="subcategoriafecha" name="subcategoriafecha" aria-describedby="emailHelp" placeholder="Nombre SubCategoria" required="">
+                <!--                <div class="form-group">
+                                    <label for="username">Añade una fecha</label>
+                                    <input type="date" class="form-control" id="subcategoriafecha" name="subcategoriafecha" aria-describedby="emailHelp" placeholder="Nombre SubCategoria" required="">
+                                </div>-->
+                <div class="form-group ">   <div  class="alertControl alert alert-primary" name="alertControl" id="alertControl"> </div>
                 </div>
+
                 <div class="form-group">
                     <center>
                         <input name="submit" type="submit" value=" Registrar " class="btn btn-info">
@@ -47,7 +49,9 @@ include_once 'public/headerMenuP.php';
 </div>
 
 
-
+<script>
+    subcategoriafecha.min = new Date().toISOString().split("T")[0];
+</script>
 
 <?php
 include_once 'public/footerMenuP.php';

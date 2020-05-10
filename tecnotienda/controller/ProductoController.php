@@ -9,6 +9,39 @@ class ProductoController {
     public function registrarProductoVista() {
         $this->view->show("registrarproductovista.php", null);
     }
+      public function registrarDevolucion() {
+        $this->view->show("registrarDevolucion.php", null);
+    }
+    
+ public function registrarGarantia() {
+        $this->view->show("registrarGarantia.php", null);
+    }
+
+    public function guardarGarantia() {
+        require 'model/data/productoData.php';
+        $PD = new productoData();
+        $resultado = $PD->guardarGarantia($_POST['productoid'], $_POST['productocantidadgarantias']);
+
+        if ($resultado == 1) {
+            echo '<script src="./public/js/jquery-3.3.1.js" type="text/javascript"> </script>  <script>   $(function() {   $("#alertControl").html("<div > <strong>Mensaje!</strong> Garantia  Registrada </div> ");  });</script>';
+        } else {
+            echo '<script src="./public/js/jquery-3.3.1.js" type="text/javascript"> </script>  <script>   $(function() {   $("#alertControl").html("<div > <strong>Mensaje!</strong> Garantia  No registrada </div> ");  });</script>';
+        }
+
+        $this->view->show("registrarGarantia.php", null);
+    }
+
+    public function guardarDevolucion() {
+        require 'model/data/productoData.php';
+        $PD = new productoData();
+        $resultado = $PD->guardarDevolucion($_POST['productoid'], $_POST['productocantidaddevuelto']);
+        if ($resultado == 1) {
+            echo '<script src="./public/js/jquery-3.3.1.js" type="text/javascript"> </script>  <script>   $(function() {   $("#alertControl").html("<div > <strong>Mensaje!</strong> Devolución  Registrada </div> ");  });</script>';
+        } else {
+            echo '<script src="./public/js/jquery-3.3.1.js" type="text/javascript"> </script>  <script>   $(function() {   $("#alertControl").html("<div > <strong>Mensaje!</strong> Devolución  NO registrada </div> ");  });</script>';
+        }
+        $this->view->show("registrarDevolucion.php", null);
+    }
 
     public function filtrarBySubCategoria(){
       require 'model/data/productoData.php';
@@ -78,11 +111,7 @@ class ProductoController {
         $valornombre = "";
         $array_num = count($imagenesnombre);
        $array_num2 = count($_FILES['imagenesruta']['name']);
-
-
-        
         if ($_FILES != null) {
-
             $rutaFinal = "";
             $flag = false;
             $date = new DateTime();
@@ -101,8 +130,6 @@ class ProductoController {
                     $flag = true;
                     echo 'Success';
                 } else {
-                    // echo 'Ocurrió un error al subir la imagen, intente otra vez';
-                 
                     $PD->modificarproductoimagen2($valornombre, $_POST["productoid"]);
                 }
             }
@@ -177,8 +204,8 @@ class ProductoController {
         $PD = new productoData();
         //producto
         $productocodigobarras = $_POST['productocodigobarras'];
-        $productocantidadgarantizada = $_POST['productocantidadgarantizada'];
-        $productocantidaddevuelto = $_POST['productocantidaddevuelto'];
+        $productocantidadgarantizada = 0;
+        $productocantidaddevuelto = 0;
         $productosubcategoriaid = $_POST['subcategoriaid'];
         $productoestado = $_POST['productoestado'];
         $productoactivo = 0;
@@ -186,9 +213,9 @@ class ProductoController {
         //precio
         $productopreciocompra = $_POST['preciocompra'];
         $productopreciofechacompra = $_POST['preciofechacompra'];
-        $productoprecioventa = $_POST['precioventa'];
         $productopreciofechaventa = $_POST['preciofechaventa'];
         $productoprecioganacia = $_POST['precioganacia'];
+         $productoprecioventa = $productopreciocompra+($productopreciocompra/$productoprecioganacia);
 
 
         //caracteristicas
@@ -197,13 +224,14 @@ class ProductoController {
         $productocaracteristicavalor = $_POST['caracteristicavalor']; //vector
         $valorcriterio = "";
         $valoratributo = "";
-        
+          $estadoCriterio="";
+          $valorInicialc=0;
         $array_num = count($productocaracteristicavalor);
         $array_num2 = count($productocaracteristicacriterio);
         if ((!empty($_POST["caracteristicacriterio"]) && is_array($_POST["caracteristicacriterio"]))) {
             for ($k = 0; $k < $array_num2; $k++) {
                 $valorcriterio .= $productocaracteristicacriterio[$k] . ",";
-             //   $valoratributo .= $productocaracteristicavalor[$k] . ",";
+               $estadoCriterio .= $valorInicialc . ",";
             }
         }
         
@@ -217,12 +245,12 @@ class ProductoController {
 
        $valornombre = "";
       $productoimagenesnombre = $_POST['imagenesnombre'];
-        $array_num2 = count($productoimagenesnombre);
-       
+        $array_num3= count($productoimagenesnombre);
         $array_num1 = count($_FILES['imagenesruta']['name']);
     
         $rutaFinal = "";
         $flag = false;
+        $estadoImagen="";
         $date = new DateTime();
         $indicaro = $date->getTimestamp();
 
@@ -232,26 +260,27 @@ class ProductoController {
         $pathParcial = "/tecnotienda/tecnotienda/public/img/";
         $tmp_name_array = $_FILES['imagenesruta']['tmp_name'];
         $carpetaDestino = $_SERVER['DOCUMENT_ROOT'] . $pathParcial;
-        
+        $valorInicial=0;
         for ($i = 0; $i < $array_num1; $i++) {
              if (move_uploaded_file($_FILES['imagenesruta']['tmp_name'][$i], $carpetaDestino . $indicaro . $nombreImagen[$i])) {
        //     if (move_uploaded_file($tmp_name_array[$i], $carpetaDestino . $indicaro . $nombreImagen[$i])) {
                $rutaFinal .= $pathParcial . $indicaro . $nombreImagen[$i] . ",";
+               $estadoImagen=$valorInicial.",";
                 $flag = true;
                 echo 'Success';
             } else {
                 echo 'Ocurrió un error al subir la imagen, intente otra vez';
             }
         }
-       $resultado1 = $PD->registrarProducto($productocodigobarras, $productocantidadgarantizada, $productocantidaddevuelto, $productosubcategoriaid, $productoestado, $productoactivo);
+       $resultado1 = $PD->registrarProducto($productosubcategoriaid,$productocodigobarras, $productocantidadgarantizada, $productocantidaddevuelto, $productoestado, $productoactivo);
 
         if ($resultado1 == 1 && $flag == true) {
 
             $resultado2 = $PD->registrarproductoprecio($productocodigobarras, $productopreciocompra, $productopreciofechacompra, $productoprecioventa, $productopreciofechaventa, $productoprecioganacia);
-            $resultado3 = $PD->registrarproductocaracteristicas($productocodigobarras, $valorcriterio, $valoratributo, $productocaractericticatitulo);
-            for ($j = 0; $j < $array_num2; $j++) {
+            $resultado3 = $PD->registrarproductocaracteristicas($productocodigobarras, $valorcriterio, $valoratributo, $productocaractericticatitulo,$estadoCriterio);
+            for ($j = 0; $j < $array_num3; $j++) {
                 $valornombre .= $productoimagenesnombre[$j] . ",";
-                $PD->registrarproductoimagen($productocodigobarras, $valornombre, $rutaFinal);
+                $PD->registrarproductoimagen($productocodigobarras, $valornombre, $rutaFinal,$estadoImagen);
             }
                         $message = 'Se ha registrado exitosamente';
             echo "<script type='text/javascript'>alert('$message');</script>";
@@ -262,98 +291,6 @@ class ProductoController {
 
         $this->view->show("registrarproductovista.php", null);
     }
-
-//    public function modificarProducto() {
-//
-//        $date = new DateTime();
-//        $indicaro = $date->getTimestamp();
-//        echo '<script>  alert("hola1 ");</script>';
-//        $nombreImagen = $_FILES["imagen"]['name'];
-//        $tipoImagen = $_FILES["imagen"]['type'];
-//        $tamaño = $_FILES['imagen']['size'];
-//
-//        $pathParcial = "/tecnotienda/tecnotienda/public/img/";
-//        if ($tamaño <= 3000000) {
-//            if ($tipoImagen == 'image/jpg' || $tipoImagen == 'image/jpeg' || $tipoImagen == 'image/png') {
-//                $carpetaDestino = $_SERVER['DOCUMENT_ROOT'] . $pathParcial;
-//                //echo $carpetaDestino;
-//
-//                if (move_uploaded_file($_FILES['imagen']['tmp_name'], $carpetaDestino . $indicaro . $nombreImagen)) {
-//                    require 'model/data/productoData.php';
-//
-//                    $rutaFinal = $pathParcial . $indicaro . $nombreImagen;
-//                    $PD = new productoData();
-//                    $PD->modificarProducto($rutaFinal, $_POST['Nombre'], $_POST['Precio'], $_POST['Cantidad'], $_POST['Descripcion'], $_POST['subcategoriaid'], $_POST['productoid']);
-//                    $data['actualizarProductos'] = $PD->filtrarProductoById($_POST['productoid']);
-//                    echo 'Success';
-//                } else {
-//                    echo 'Ocurrió un error al subir la imagen, intente otra vez';
-//                }
-//            } else {
-//                echo 'El formato del archivo debe ser .PNG , .JPG o .JPEG';
-//            }
-//        } else {
-//            echo 'El archivo superó el limite de tamaño(2MB)';
-//        }
-//    }
-//    public function guardarImagenes($productocodigobarras, $productoimagennombre, $productoimagenruta) {
-//        $date = new DateTime();
-//        $indicaro = $date->getTimestamp();
-//
-//        $nombreImagen = $_FILES['imagen']['name'];
-//        $tipoImagen = $_FILES['imagen']['type'];
-//        $tamaño = $_FILES['imagen']['size'];
-//        $pathParcial = "/tecnotienda/tecnotienda/public/img/";
-//        if ($tamaño <= 3000000) {
-//            if ($tipoImagen == 'image/jpg' || $tipoImagen == 'image/jpeg' || $tipoImagen == 'image/png') {
-//                $carpetaDestino = $_SERVER['DOCUMENT_ROOT'] . $pathParcial;
-//                echo $carpetaDestino;
-//                if (move_uploaded_file($_FILES[$productoimagenruta]['tmp_name'], $carpetaDestino . $indicaro . $nombreImagen)) {
-//                    require 'model/data/productoData.php';
-//                    $rutaFinal = $pathParcial . $indicaro . $nombreImagen;
-//                    $PD = new productoData();
-//                    //    $PD->registrarProducto($productoid, $rutaFinal, $productoimagen);
-//                    $PD->registrarproductoimagen($productocodigobarras, $productoimagennombre, $rutaFinal);
-//                    echo 'Success';
-//                } else {
-//                    echo 'Ocurrió un error al subir la imagen, intente otra vez';
-//                }
-//            } else {
-//                echo 'El formato del archivo debe ser .PNG , .JPG o .JPEG';
-//            }
-//        } else {
-//            echo 'El archivo superó el limite de tamaño(2MB)';
-//        }
-//    }
-//    public function guardarProducto($productoid,$productoimagenruta,$productoimagen) {
-//        $date = new DateTime();
-//        $indicaro = $date->getTimestamp();
-//
-//        $nombreImagen = $_FILES['imagen']['name'];
-//        $tipoImagen = $_FILES['imagen']['type'];
-//        $tamaño = $_FILES['imagen']['size'];
-//        $pathParcial = "/tecnotienda/tecnotienda/public/img/";
-//        if ($tamaño <= 3000000) {
-//            if ($tipoImagen == 'image/jpg' || $tipoImagen == 'image/jpeg' || $tipoImagen == 'image/png') {
-//                $carpetaDestino = $_SERVER['DOCUMENT_ROOT'] . $pathParcial;
-//                echo $carpetaDestino;
-//                if (move_uploaded_file($_FILES['imagen']['tmp_name'], $carpetaDestino . $indicaro . $nombreImagen)) {
-//                    require 'model/data/productoData.php';
-//                    $rutaFinal = $pathParcial . $indicaro . $nombreImagen;
-//                    $PD = new productoData();
-//                    $PD->registrarProducto($productoid,$productoimagenruta,$rutaFinal);
-//
-//                    echo 'Success';
-//                } else {
-//                    echo 'Ocurrió un error al subir la imagen, intente otra vez';
-//                }
-//            } else {
-//                echo 'El formato del archivo debe ser .PNG , .JPG o .JPEG';
-//            }
-//        } else {
-//            echo 'El archivo superó el limite de tamaño(2MB)';
-//        }
-//    }
 
     public function obtenerProductos() {
         require 'model/data/productoData.php';
@@ -370,7 +307,13 @@ class ProductoController {
     public function eliminarProducto() {
         require 'model/data/productoData.php';
         $PD = new productoData();
-        $PD->eliminarProducto($_POST['productoid']);
+        $resultado = $PD->eliminarProducto($_POST['productoid']);
+
+        if ($resultado == 1) {
+            echo '<script src="./public/js/jquery-3.3.1.js" type="text/javascript"> </script>  <script>   $(function() {   $("#alertControl").html("<div > <strong>Mensaje!</strong> Producto  Eliminado </div> ");  });</script>';
+        } else {
+            echo '<script src="./public/js/jquery-3.3.1.js" type="text/javascript"> </script>  <script>   $(function() {   $("#alertControl").html("<div > <strong>Mensaje!</strong> Producto  No eliminado </div> ");  });</script>';
+        }
         $this->view->show("menuProductoVista.php", null);
 //        
     }

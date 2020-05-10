@@ -11,11 +11,12 @@ include_once 'public/header.php';
 
                 <div class="form-group">
                     <form action="?controlador=Proveedor&accion=registrarProveedor"   method="post" id="formulario1" name="formulario1">
-
+      <hr style="color: #47748b">
+                       
                         <h4><center>Ingresar Proveedores</center></h4>
                              <hr style="color: #47748b">
                         <div class="form-group">
-                            <input type="number" class="form-control" id="usuario" name="usuario" aria-describedby="emailHelp" placeholder="Usuario" required="">
+                            <input type="text" class="form-control" id="usuario" name="usuario" aria-describedby="emailHelp" placeholder="Usuario" required="">
                         </div>
                         <div class="form-group">
                             <input type="text" class="form-control" id="contra" name="contra" aria-describedby="emailHelp" placeholder="Contraseña" required="">
@@ -30,7 +31,7 @@ include_once 'public/header.php';
                             <input type="number" class="form-control" id="estado" name="estado" aria-describedby="emailHelp" value="0" required="">
                         </div>
 
-                        <h3>Correo y Telefono</h3>
+                        <label>Correo y Telefono</label>
                         <div class="table-responsive">
                             <table class="table table-bordered" id="dynamic_field">
                                 <tr>
@@ -56,6 +57,9 @@ include_once 'public/header.php';
                 </div>
 
             </center>
+            
+              <div class="form-group ">   <div  class="alertControl alert alert-primary" name="alertControl" id="alertControl"> </div>
+                    </div>
         </div>
         <div class="col-md-4"></div>
 

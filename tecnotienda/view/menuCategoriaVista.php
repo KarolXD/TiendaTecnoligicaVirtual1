@@ -1,13 +1,20 @@
 <?php
 require 'public/headerMenuP.php';
+
+
 ?>
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-<center> <a href="?controlador=Categoria&accion=registrarCategoriaVista"> Registrar nueva Categoria</a> </center>
-<br>
+
 <div class="container">
-    <center><h5>Lista de Categorias!</h5></center>
+       <hr style="color: #47748b"
+           <strong> <h5><center>Listado de Categorias</center></h5></strong>
     <hr style="color: #47748b"
+     
         <div class="row">
+   <center> <a href="?controlador=Categoria&accion=registrarCategoriaVista"> Registrar nueva Categoria</a> </center>
+<br>
+        <div  class="alertControl alert alert-primary" name="alertControl" id="alertControl"> </div>
+    
     <div class="table-responsive">
         <table class="table table-hover table-bordered" id="tblCategoria">
             <thead>
@@ -29,9 +36,10 @@ require 'public/headerMenuP.php';
                 foreach ($vars['listado'] as $item) {
                     ?>
                     <tr>
-                        <td>  <a  class="btn btn-danger" href='?controlador=Cliente&accion=metodoEliminarPersona&correoid=<?php echo $item[0] ?>'> Eliminar
+                      
+                                 <td>  <a  class="btn btn-danger" onclick="eliminar('<?php echo $item[0] ?>')" > Eliminar
 
-                            </a> </td>
+                                </a> </td>
                         <td>  <a  class="btn btn-warning" href='?controlador=Categoria&accion=filtrarCategoriaById&categoriaid=<?php echo $item[0] ?>'> Modificar
 
                             </a> </td>
@@ -55,7 +63,7 @@ require 'public/headerMenuP.php';
         </table>
     </div>
 </div>
-</div>
+
 <div class="auto" id="auto" style="display: none"><div  id="alertControl" style="opacity: none"></div></div>
 <script src="./public/js/jquery-3.3.1.js" type="text/javascript"></script>
 <script type="text/javascript">
@@ -73,7 +81,7 @@ require 'public/headerMenuP.php';
         })
                 .then((willDelete) => {
                     if (willDelete) {
-                        ajaxEliminarSubCategoria(categoriaid);
+                        ajaxEliminarCategoria(categoriaid);
                     } else {
                         swal("Cancelado", "Dato no Eliminado :)", "error");
 
@@ -85,7 +93,8 @@ require 'public/headerMenuP.php';
 
 
 
-    function ajaxEliminarSubCategoria(categoriaid) {
+    function ajaxEliminarCategoria(categoriaid) {
+     
         var parametros = {
             "categoriaid": categoriaid
 

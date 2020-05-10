@@ -28,7 +28,7 @@ require 'public/headerMenuP.php';
                     </div>
 
                     <div class="form-group ">
-                        <label class="">Productos devueltos</label>
+                        <label class="">Productos devoluciones</label>
 
                         <input class="form-control" id="productosdevueltos" value="<?php echo $item[3] ?>"  name="productosdevueltos" type="number" required="">
 

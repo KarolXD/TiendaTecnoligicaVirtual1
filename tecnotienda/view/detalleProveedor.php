@@ -16,17 +16,17 @@ require 'public/headerMenuP.php';
             foreach ($vars['listado'] as $item) {
                 ?>
                
-                    <p>Identificacion: <?php echo $item[0] ?></p>
+                    <p>Identificacion: <?php echo $item[1] ?></p>
                    <hr style="color: #999">
-                    <p>Empresa: <?php echo $item[1] ?></p>
+                    <p>Empresa: <?php echo $item[2] ?></p>
                       <hr style="color: #999">
-                    <p>Detalle: <?php echo $item[2] ?></p>
+                    <p>Detalle: <?php echo $item[3] ?></p>
                       <hr style="color: #999">
                     
                     
                     <p>Correo:</p>
                     <?php
-                    $pizza = ($item[3]);
+                    $pizza = ($item[4]);
                     $pieces = explode(",", $pizza);
                     $contadorComas = substr_count($pizza, ',');
                     for ($i = 0; $i <= $contadorComas - 1; $i++) {
@@ -41,7 +41,7 @@ require 'public/headerMenuP.php';
                     <p>Telefono:</p>
 
                     <?php
-                    $pizza2 = ($item[4]);
+                    $pizza2 = ($item[5]);
                     $piecess = explode(",", $pizza2);
                     $contadorComass = substr_count($pizza2, ',');
                     for ($y = 0; $y <= $contadorComass - 1; $y++) {

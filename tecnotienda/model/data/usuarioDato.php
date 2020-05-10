@@ -27,18 +27,22 @@ class usuarioDato {
         $consulta->execute();
         return $consulta->fetchALL(PDO::FETCH_ASSOC);
     }
-       public function loginUsuario($clienteid, $contra) {
+
+    public function loginUsuario($clienteid, $contra) {
 
         $sql = 'SELECT COUNT(*) as total FROM tbusuario where tbusuarionombre ="' . $clienteid . '" and tbusuariocontrasennia ="' . $contra . '"  and tbusuarioactivo=0 and tbusuariotipousuario=1';
         $del = $this->db->prepare($sql);
         $del->execute();
         $count = $del->fetch();
-        if ($count['total'] > 0) {
-               echo '<script>  alert("Inicia Sesion");</script>';
-               return 1;
+
+        if ($del->execute()) {
+            if ($count['total'] > 0) {
+                return 1;
+            } else {
+                return 0;
+            }
         } else {
-              echo '<script>  alert("Datos Incorrectos");</script>'; 
-              return 0;
+            return -1;
         }
     }
 

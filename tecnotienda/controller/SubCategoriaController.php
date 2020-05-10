@@ -31,8 +31,14 @@ class SubCategoriaController {
     public function eliminarSubCategoria() {
         require 'model/data/subcategoriaDato.php';
         $PD = new subcategoriaDato();
-        //echo '<script> alert("hola"); </script>';
-        $PD->eliminacionSubCategoria($_POST['subcategoriaid']);
+        $resultado = $PD->eliminacionSubCategoria($_POST['subcategoriaid']);
+        if ($resultado == 1) {
+          echo '<script src="./public/js/jquery-3.3.1.js" type="text/javascript"> </script>  <script>   $(function() {   $("#alertControl").html("<div > <strong>Mensaje!</strong> SubCategoria  Eliminada </div> ");  });</script>';
+        } else if ($resultado == 0) {
+            echo '<script src="./public/js/jquery-3.3.1.js" type="text/javascript"> </script>  <script>   $(function() {   $("#alertControl").html("<div > <strong>Advertencia!</strong> SubCategoria  No Eliminada. Existe una Sub Categoria en otra seccion </div> ");  });</script>';
+        } else {
+            echo '<script src="./public/js/jquery-3.3.1.js" type="text/javascript"> </script>  <script>   $(function() {   $("#alertControl").html("<div > <strong>Advertencia!</strong> SubCategoria  No Eliminada </div> ");  });</script>';
+        }
         $this->view->show("menuSubCategoriaVista.php");
     }
 
@@ -40,16 +46,20 @@ class SubCategoriaController {
         require 'model/data/subcategoriaDato.php';
         $PD = new subcategoriaDato();
         if ($_POST['categoriaid'] == 'Selecciona:' && $_POST['usuarioid'] == 'Selecciona:') {
-            $PD->modificarSubCategorias($_POST['subcategorianombre'], $_POST['categoriaid1'], $_POST['subcategoriadescripcion'], $_POST['usuarioid1'], $_POST['subcategoriafecha'], $_POST['subcategoriaid']);
+            $resultado = $PD->modificarSubCategorias($_POST['subcategorianombre'], $_POST['categoriaid1'], $_POST['subcategoriadescripcion'], $_POST['usuarioid1'], $_POST['subcategoriafecha'], $_POST['subcategoriaid']);
         } else if ($_POST['categoriaid'] == 'Selecciona:') {
-            $PD->modificarSubCategorias($_POST['subcategorianombre'], $_POST['categoriaid1'], $_POST['subcategoriadescripcion'], $_POST['usuarioid'], $_POST['subcategoriafecha'], $_POST['subcategoriaid']);
+            $resultado = $PD->modificarSubCategorias($_POST['subcategorianombre'], $_POST['categoriaid1'], $_POST['subcategoriadescripcion'], $_POST['usuarioid'], $_POST['subcategoriafecha'], $_POST['subcategoriaid']);
         } else if ($_POST['usuarioid'] == 'Selecciona:') {
-            $PD->modificarSubCategorias($_POST['subcategorianombre'], $_POST['categoriaid'], $_POST['subcategoriadescripcion'], $_POST['usuarioid1'], $_POST['subcategoriafecha'], $_POST['subcategoriaid']);
+            $resultado = $PD->modificarSubCategorias($_POST['subcategorianombre'], $_POST['categoriaid'], $_POST['subcategoriadescripcion'], $_POST['usuarioid1'], $_POST['subcategoriafecha'], $_POST['subcategoriaid']);
         } else if ($_POST['categoriaid'] != 'Selecciona:' && $_POST['usuarioid'] != 'Selecciona:') {
-            $PD->modificarSubCategorias($_POST['subcategorianombre'], $_POST['categoriaid'], $_POST['subcategoriadescripcion'], $_POST['usuarioid'], $_POST['subcategoriafecha'], $_POST['subcategoriaid']);
+            $resultado = $PD->modificarSubCategorias($_POST['subcategorianombre'], $_POST['categoriaid'], $_POST['subcategoriadescripcion'], $_POST['usuarioid'], $_POST['subcategoriafecha'], $_POST['subcategoriaid']);
         }
         //$PD->modificarSubCategorias($_POST['subcategorianombre'], $_POST['categoriaid'], $_POST['subcategoriadescripcion'], $_POST['usuarioid'], $_POST['subcategoriafecha'], $_POST['subcategoriaid']);
-
+        if ($resultado == 1) {
+         echo '<script src="./public/js/jquery-3.3.1.js" type="text/javascript"> </script>  <script>   $(function() {   $("#alertControl").html("<div > <strong>Mensaje!</strong> SubCategoria  Modificada </div> ");  });</script>';
+        } else {
+         echo '<script src="./public/js/jquery-3.3.1.js" type="text/javascript"> </script>  <script>   $(function() {   $("#alertControl").html("<div > <strong>Advertencia!</strong> SubCategoria  No Modificada </div> ");  });</script>';
+        }
         $data['actualizarSubCategorias'] = $PD->filtrarSubCategoriaById($_POST['subcategoriaid']);
         $this->view->show("actualizarSubCategoriaVista.php", $data);
     }
@@ -90,7 +100,15 @@ class SubCategoriaController {
     public function registrarSubCategorias() {
         require 'model/data/subcategoriaDato.php';
         $PD = new subcategoriaDato();
-        $PD->registrarSubCategorias($_POST['subcategorianombre'], $_POST['categoriaid'], $_POST['subcategoriadescripcion'], $_POST['usuarioid'], $_POST['subcategoriafecha']);
+        $fechaActual = date("Y/m/d");
+        $resultado = $PD->registrarSubCategorias($_POST['subcategorianombre'], $_POST['categoriaid'], $_POST['subcategoriadescripcion'], $_POST['usuarioid'], $fechaActual);
+        if ($resultado == 1) {
+            echo '<script src="./public/js/jquery-3.3.1.js" type="text/javascript"> </script>  <script>   $(function() {   $("#alertControl").html("<div > <strong>Mensaje!</strong> Sub Categoria  Registrada </div> ");  });</script>';
+        } else if ($resultado == 0) {
+            echo '<script src="./public/js/jquery-3.3.1.js" type="text/javascript"> </script>  <script>   $(function() {   $("#alertControl").html("<div > <strong>Advertencia!</strong> SubCategoria  EXISTENTE </div> ");  });</script>';
+        } else {
+            echo '<script src="./public/js/jquery-3.3.1.js" type="text/javascript"> </script>  <script>   $(function() {   $("#alertControl").html("<div > <strong>Advertencia!</strong> SubCategoria  No registrada </div> ");  });</script>';
+        }
         $this->view->show("registrarSubCategoriaVista.php");
     }
 

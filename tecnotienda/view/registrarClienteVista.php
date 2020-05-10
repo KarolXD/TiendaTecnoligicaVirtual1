@@ -24,7 +24,7 @@ include_once 'public/header.php';
                             <input type="number" class="form-control" id="estado" name="estado" aria-describedby="emailHelp" value="0" required="">
                         </div>
 
-                        <h3>Correo y Telefono</h3>
+                        <h3>Correos y Telefonos</h3>
                         <div class="table-responsive">
                             <table class="table table-bordered" id="dynamic_field">
                                 <tr>

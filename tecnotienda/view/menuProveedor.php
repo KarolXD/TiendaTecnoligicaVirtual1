@@ -46,33 +46,35 @@ require 'public/headerMenuP.php';
 
                                 <a  class="btn btn-outline-warning" href='?controlador=Proveedor&accion=filtarClienteById3&clienteid=<?php echo $item[0] ?>'>  Descripción</a> 
                             </td>
-                            <td><?php echo $item[0] ?></td>
                             <td><?php echo $item[1] ?></td>
                             <td><?php echo $item[2] ?></td>
+                            <td><?php echo $item[3] ?></td>
+                              <td>
                             <?php
-                            $pizza = ($item[3]);
+                            $pizza = ($item[4]);
                             $pieces = explode(",", $pizza);
                             $contadorComas = substr_count($pizza, ',');
                             for ($i = 0; $i <= $contadorComas - 1; $i++) {
                                 ?>
-                                <td> <?php echo $pieces[$i] ?></td>  
+                               <?php echo $pieces[$i] ?>
 
                                 <?php
                             }
                             ?>
-
+</td>  
+  <td> 
                             <?php
-                            $pizza2 = ($item[4]);
+                            $pizza2 = ($item[5]);
                             $piecess = explode(",", $pizza2);
                             $contadorComass = substr_count($pizza2, ',');
                             for ($y = 0; $y <= $contadorComass - 1; $y++) {
                                 ?>
-                                <td> <?php echo $piecess[$y] ?></td>  
+                              <?php echo $piecess[$y] ?>
 
                                 <?php
                             }
                             ?>
-
+</td>  
                         </tr>
 
                         <?php

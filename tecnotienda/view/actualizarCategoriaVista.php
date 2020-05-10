@@ -19,7 +19,7 @@ include_once 'public/headerMenuP.php';
                     </div>
                     <div class="form-group">
                         <label for="username"> Escribe el nombre de una Categoria</label>
-                        <input type="text" class="form-control" id="categorianombre" value="<?php echo $item[1] ?>" name="categorianombre" placeholder="Categoria" required="">
+                        <input type="text" class="form-control"   readonly="" id="categorianombre" value="<?php echo $item[1] ?>" name="categorianombre" placeholder="Categoria" required="">
                     </div>
                     <div class="form-group">
                         <label for="username"> Escribe una descripción</label>
@@ -48,7 +48,7 @@ include_once 'public/headerMenuP.php';
                             <a href="?controlador=Categoria&accion=menuCategoriaVista" class="btn btn-info" >Regresar</a>
                         </center>
                     </div>
-                    <div  name="alertControl" id="alertControl"></div>
+                    <div  class="alertControl alert alert-info" name="alertControl" id="alertControl"> </div>
                     <?php
                 }
                 ?>

@@ -3,25 +3,53 @@ require 'public/headerMenuP.php';
 ?>
 
 <div class="container">
+    <div class="row">
+        <div class="col-md-4"></div>
+        <div class="col-md-5">
+            <form class="form-inline my-2 my-lg-0"  method="post" action="?controlador=Producto&accion=filtrarBySubCategoria">
 
+                <select name="subcategorianombre" id="subcategorianombre"  class="form-control mr-sm-2">  </select>
+                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Filtrar por Sub Categoria</button>
 
+            </form>
+        </div>
 
-    <form class="form-inline my-2 my-lg-0"  method="post" action="?controlador=Producto&accion=filtrarBySubCategoria">
-        <center>
-            <select name="subcategorianombre" id="subcategorianombre"  class="form-control mr-sm-2">  </select>
-            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Filtrar por Sub Categoria</button>
-        </center>
-    </form>
-
-
+        <div class="col-md-3"></div>
+    </div>
     <br>
+
+    <div class="row">
+        <div class="col-md-4">
+            <center>
+                <a href="?controlador=Producto&accion=registrarProductoVista" class="bg-light"> Registrar nuevo producto</a>
+
+
+            </center>
+        </div>
+        <div class="col-md-4">
+
+
+            <center>
+                <a href="?controlador=Producto&accion=registrarDevolucion" class="bg-light"> Registrar nueva devolución</a>
+            </center>
+
+        </div>
+
+        <div class="col-md-4">
+
+            <center>
+                <a href="?controlador=Producto&accion=registrarGarantia" class="bg-light"> Registrar nueva garantia</a>
+            </center>
+        </div>
+    </div>
+    <br>
+    <div  class="alertControl alert alert-primary" name="alertControl" id="alertControl"> </div>
+
     <hr style="color: #47748b">
     <center><h5>Lista de Productos!</h5></center>
     <hr style="color: #47748b"
         <div class="row">
-    <center>
-        <a href="?controlador=Producto&accion=registrarProductoVista" class="bg-light"> Registrar nuevo producto</a>
-    </center>
+
     <br>
 
     <div class="table-responsive">
@@ -51,7 +79,7 @@ require 'public/headerMenuP.php';
 
                             </a> </td>
 
-                        <td>  <a  class="btn btn-outline-danger"   return "eliminar('<?php echo $item[0] ?>')"> Eliminar
+                            <td>  <a  class="btn btn-outline-danger"   onclick= "eliminar('<?php echo $item[0] ?>')"> Eliminar
 
                             </a> </td>
 
@@ -114,19 +142,21 @@ require 'public/headerMenuP.php';
                 });
 
     }
+    
+
     function ajaxEliminarProducto(productoid) {
+        var parametros = {
+            "productoid": productoid
+        };
         $.ajax({
-            url: '?controlador=Producto&accion=eliminarProducto',
-            type: 'POST',
-            dataType: 'html',
-            data: "productoid=" + productoid,
+            data: parametros, //datos que se envian a traves de ajax
+          url: '?controlador=Producto&accion=eliminarProducto',
+            type: 'post', //método de envio
             beforeSend: function () {
-                $("#alertControl").html('<div class="alert alert-success" id="alert"> Procesando... </div>');
-                window.setTimeout(function () {
-                    $(".alert").fadeTo(500, 0).slideUp(500, function () {
-                        $(this).remove();
-                    });
-                }, 300);
+                $("#resultado").html("Procesando, espere por favor...");
+            },
+            success: function (response) { //una vez que el archivo recibe el request lo procesa y lo devuelve
+                $("#resultado").html(response);
             }
         })
                 .done(function (data) {
@@ -139,7 +169,7 @@ require 'public/headerMenuP.php';
                         });
 
                     }, 3000000000);
-                    //  swal("Cancelado", "Dato  Eliminado :)", "error");
+
 
                 })
                 .fail(function () {
@@ -147,9 +177,11 @@ require 'public/headerMenuP.php';
                     swal("Cancelado", "Dato no Eliminado :)", "error");
                 })
                 .always(function () {
-                    console.log("complete");
+                    console.log("complete" + productoid);
                 });
     }
+
+  
 
 </script>
 <?php

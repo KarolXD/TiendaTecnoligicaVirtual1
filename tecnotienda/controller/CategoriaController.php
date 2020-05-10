@@ -1,16 +1,6 @@
 <?php
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 
-/**
- * Description of CategoriaController
- *
- * @author Usuario
- */
 class CategoriaController {
 
     //put your code here
@@ -18,45 +8,56 @@ class CategoriaController {
         $this->view = new View();
     }
 
-//
-//    public function verificarCategoria() {
-//        require 'model/data/categoriaDato.php';
-//        $PD = new categoriaDato();
-//        $PD->verificarCategoria($_POST['categoriaid']);
-//        $this->view->show("menuCategoriaVista.php");
-//    }
-//
-//  
-//   
-//
+    public function verificarCategoria() {
+        require 'model/data/categoriaDato.php';
+        $PD = new categoriaDato();
+        $resultado = $PD->verificarCategoria($_POST['categoriaid']);
+        if ($resultado == 1) {
+            echo '<script src="./public/js/jquery-3.3.1.js" type="text/javascript"> </script>  <script>   $(function() {   $("#alertControl").html("<div > <strong>Mensaje!</strong> Categoria  Eliminada </div> ");  });</script>';
+        } else if ($resultado == 0) {
+            echo '<script src="./public/js/jquery-3.3.1.js" type="text/javascript"> </script>  <script>   $(function() {   $("#alertControl").html("<div > <strong>Advertencia!</strong> No es posible eliminar esta categoria! Existe una relación  </div> ");  });</script>';
+        } else {
+            echo '<script src="./public/js/jquery-3.3.1.js" type="text/javascript"> </script>  <script>   $(function() {   $("#alertControl").html("<div > <strong>Advertencia!</strong> Categoria no eliminada </div> ");  });</script>';
+        }
+        $this->view->show("menuCategoriaVista.php");
+    }
+
     public function obtenerCategorias() {
         require 'model/data/categoriaDato.php';
         $PD = new categoriaDato();
         echo json_encode($PD->obtenerCategorias());
     }
 
-
     public function modificarCategoria() {
         require 'model/data/categoriaDato.php';
         $PD = new categoriaDato();
-        if ($_POST['usuarioid']!="Selecciona:"){
-        $PD->modificarCategorias($_POST['categorianombre'], $_POST['usuarioid'], $_POST['categoriadescripcion'], $_POST['categoriafecha'], $_POST['categoriaid']);
-        }else{
-        $PD->modificarCategorias($_POST['categorianombre'], $_POST['usuarioid1'], $_POST['categoriadescripcion'], $_POST['categoriafecha'], $_POST['categoriaid']);
-       }
+        if ($_POST['usuarioid'] != "Selecciona:") {
+            $resultado = $PD->modificarCategorias($_POST['categorianombre'], $_POST['usuarioid'], $_POST['categoriadescripcion'], $_POST['categoriafecha'], $_POST['categoriaid']);
+        } else {
+            $resultado = $PD->modificarCategorias($_POST['categorianombre'], $_POST['usuarioid1'], $_POST['categoriadescripcion'], $_POST['categoriafecha'], $_POST['categoriaid']);
+        }
         $data['actualizarCategorias'] = $PD->filtrarCategoriaById($_POST["categoriaid"]);
+        if ($resultado == 1) {
+         echo '<script src="./public/js/jquery-3.3.1.js" type="text/javascript"> </script>  <script>   $(function() {   $("#alertControl").html("<div > <strong>Mensaje!</strong> Categoria  modificada </div> ");  });</script>';  
+      } else {
+        echo '<script src="./public/js/jquery-3.3.1.js" type="text/javascript"> </script>  <script>   $(function() {   $("#alertControl").html("<div > <strong>Advertencia!</strong> Categoria no modificada </div> ");  });</script>';
+           
+        }
         $this->view->show("actualizarCategoriaVista.php", $data);
     }
 
     public function registrarCategoria() {
         require 'model/data/categoriaDato.php';
         $PD1 = new categoriaDato();
-        $resul = $PD1->registrarCategoria($_POST['categorianombre'], $_POST['usuarioid'], $_POST['categoriadescripcion'], $_POST['categoriafecha']);
+        $fechaActual = date("Y/m/d");
+        $resul = $PD1->registrarCategoria($_POST['categorianombre'], $_POST['usuarioid'], $_POST['categoriadescripcion'], $fechaActual);
 
         if ($resul == 1) {
-            echo('   <div class="container"> <div class="row"> <div class="col-lg-12 ">   <div class="alert alert-info" role="alert">  <strong>En hora buena!</strong> Categoria Registrada </div> </div> </div> </div> ');
+            echo '<script src="./public/js/jquery-3.3.1.js" type="text/javascript"> </script>  <script>   $(function() {   $("#alertControl").html("<div > <strong>Mensaje!</strong> Categoria  Registrada </div> ");  });</script>';
+        } else if ($resul == 0) {
+            echo '<script src="./public/js/jquery-3.3.1.js" type="text/javascript"> </script>  <script>   $(function() {   $("#alertControl").html("<div > <strong>Advertencia!</strong> Categoria  EXISTENTE </div> ");  });</script>';
         } else {
-            echo('   <div class="container"> <div class="row"> <div class="col-lg-12 ">   <div class="alert alert-danger" role="alert">  <strong>Imposible registrarla!</strong> Categoria existente </div> </div> </div> </div> ');
+            echo '<script src="./public/js/jquery-3.3.1.js" type="text/javascript"> </script>  <script>   $(function() {   $("#alertControl").html("<div > <strong>Mensaje!</strong> Categoria  NO registrada </div> ");  });</script>';
         }
         $this->view->show("registrarCategoriaVista.php");
     }

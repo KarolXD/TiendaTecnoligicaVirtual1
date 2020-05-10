@@ -1,8 +1,7 @@
 <?php
 require 'public/headerUsuario.php';
 ?>
-<link href="./public/css/animate.css" rel="stylesheet" type="text/css"/>
-<link href="./public/css/animate.min.css" rel="stylesheet" type="text/css"/>
+
 <body>
     <div class="container " 
          >
@@ -68,13 +67,13 @@ require 'public/headerUsuario.php';
         <?php
         foreach ($vars['listado'] as $item) {
             ?>
-            <div class="animated infinite bounceIn">
+            <div class="animated infinite bounceIn slow">
             <center>  <label class="bg-light"> 
                     <font  SIZE=5 style="text-transform: uppercase;"> <strong><?php echo $item[4] ?> </strong> </font>
                 </label></center>
             <br>
             </div>
-              <div class="animated infinite bounceInRight">
+              <div class="animated infinite bounceInRight slow">
             <center>  <p class="bg-light"><strong>Estado del Producto: <?php echo $item[7] ?></strong></p> </center>
             </div>
 
