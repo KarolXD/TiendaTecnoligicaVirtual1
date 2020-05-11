@@ -76,8 +76,10 @@ require 'public/headerMenuP.php';
 
     <div class="col-sm-4" ></div>
     <div class="col-sm-4" >
-          <center>   <div class="form-group ">
-            <button class="btn btn-warning" type="submit" value="Modificar">Modificar caracteristicas</button>
+         <div  class="alertControl alert alert-primary" name="alertControl" id="alertControl"> </div>
+
+            <div class="form-group ">
+            <button class="btn btn-warning" type="submit" value="Modificar">Modificar caracteristicas del Producto</button>
           
     </div>
             <div class="col-sm-4" ></div>

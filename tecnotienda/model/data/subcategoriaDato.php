@@ -24,32 +24,34 @@ class subcategoriaDato {
     public function registrarSubCategorias($subcategorianombre, $categoriaid, $subcategoriadescripcion, $usuarioid, $subcategoriafecha) {
         $sql = 'SELECT COUNT(*) as total FROM tbsubcategoria where tbsubcategorianombre="' . $subcategorianombre . '"';
         $del = $this->db->prepare($sql);
-        $del->execute();
-        $count = $del->fetch();
         if ($del->execute()) {
+              $count = $del->fetch();
             if ($count['total'] > 0) {
                 return 0;
             } else {
                 $data = array($subcategorianombre, $categoriaid, $subcategoriadescripcion, $subcategoriafecha, 0);
-                $consulta = $this->db->prepare('select  @usuarioid:=tbusuarioid from tbusuario where tbusuarionombre="'.$usuarioid.'";   INSERT INTO tbsubcategoria (tbsubcategorianombre,tbcategoriaid,tbsubcategoriadescripcion,tbusuarioid,tbsubcategoriafecha,tbsubcategoriaestado ) '
+                $consulta = $this->db->prepare('select  @usuarioid:=tbusuarioid from tbusuario where tbusuarionombre="' . $usuarioid . '";   INSERT INTO tbsubcategoria (tbsubcategorianombre,tbcategoriaid,tbsubcategoriadescripcion,tbusuarioid,tbsubcategoriafecha,tbsubcategoriaestado ) '
                         . ' VALUES(?,?,?,@usuarioid,?,?)');
-                $consulta->execute($data);
-                echo $consulta->errorInfo()[2];
-                return 1;
+                if ($consulta->execute($data)) {
+                    $consulta->errorInfo()[2];
+                    return 1;
+                } else {
+                    return -1;
+                }
             }
         }
         return -1;
     }
 
     public function modificarSubCategorias($subcategorianombre, $categoriaid, $subcategoriadescripcion, $usuarioid, $subcategoriafecha, $subcategoriaid) {
-        $data = array($subcategorianombre, $categoriaid, $subcategoriadescripcion, $usuarioid, $subcategoriafecha, $subcategoriaid);
-        $consulta = $this->db->prepare('update tbsubcategoria set tbsubcategorianombre=? ,tbcategoriaid=?,tbsubcategoriadescripcion=?,tbusuarioid=?,tbsubcategoriafecha=? where tbsubcategoriaid=? ');
-        $consulta->execute($data);
-        echo $consulta->errorInfo()[2];
-        if( $consulta->execute()){
-           return 1; 
-        }else{
-           return 0; 
+        $data = array($subcategorianombre, $categoriaid, $subcategoriadescripcion, $subcategoriafecha, $subcategoriaid);
+        $consulta = $this->db->prepare('select  @usuarioid:=tbusuarioid from tbusuario where tbusuarionombre="' . $usuarioid . '";  update tbsubcategoria set tbsubcategorianombre=? ,tbcategoriaid=?,tbsubcategoriadescripcion=?, tbusuarioid=@usuarioid, tbsubcategoriafecha=? where tbsubcategoriaid=? ');
+
+        if ($consulta->execute($data)) {
+            $consulta->errorInfo()[2];
+            return 1;
+        } else {
+            return -1;
         }
     }
 //
@@ -89,9 +91,10 @@ class subcategoriaDato {
     public function eliminacionSubCategoria($subcategoriaid) {
         $sql = 'SELECT COUNT(*) as total FROM tbproducto where tbsubcategoriaid="' . $subcategoriaid . '"  and tbproductoactivo=0 ';
         $del = $this->db->prepare($sql);
-        $del->execute();
-        $count = $del->fetch();
+  
+     
         if ($del->execute()) {
+               $count = $del->fetch();
             if ($count['total'] == 0) {
                 $this->eliminarSubCategoria($subcategoriaid);
                 return 1;

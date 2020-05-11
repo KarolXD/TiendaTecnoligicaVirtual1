@@ -19,8 +19,8 @@ include_once 'public/header.php';
                         ?>
 
                         <div class="form-group">
-                            <input type="hidden" class="form-control" id="id"  value= "<?php echo $item[0] ?>" name="id" aria-describedby="emailHelp" readonly="" placeholder="ID CLIENTE" required="">
-                        <input type="hidden" class="form-control" id="clienteid"  value= "<?php echo $item[1] ?>" name="clienteid" aria-describedby="emailHelp" readonly="" placeholder="ID CLIENTE" required="">
+                            <input type="number" class="form-control" id="id"  value= "<?php echo $item[0] ?>" name="id" aria-describedby="emailHelp" readonly="" placeholder="ID CLIENTE" required="">
+                            <input type="number" class="form-control" id="clienteid"  value= "<?php echo $item[1] ?>" name="clienteid" aria-describedby="emailHelp" readonly="" placeholder="ID CLIENTE" required="">
                         </div>     <div class="form-group">
                             <?php
                             $pizza = ($item[2]);
@@ -29,15 +29,19 @@ include_once 'public/header.php';
                             for ($i = 0; $i <= $contadorComas - 1; $i++) {
                                 ?>
                                 <label class="form-control-label">Telefonos</label>
-                                <input type="text" class="form-control"   value= "<?php echo $pieces[$i] ?>" name="correo[]" aria-describedby="emailHelp" placeholder="Correos" >     <?php
+                                <input  class="form-control" type="tel"   minlength="8" required=" " value= "<?php echo $pieces[$i] ?>" name="correo[]" aria-describedby="emailHelp" placeholder="Correos" >     <?php
                             }
                             ?>
 
                             <input type="hidden" class="form-control" id="correoid"  value= "<?php echo $item[3] ?>" name="correoid" aria-describedby="emailHelp" readonly="" required="">
 
                         </div>
-                        <input type="submit" name="submit"  id="submit" class="btn btn-info" value="Submit" />
+                               <div class="form-group ">   <div  class="alertControl alert alert-primary" name="alertControl" id="alertControl"> </div>
+                    </div>
+                             <div class="form-group "> 
+                        <input type="submit" name="submit"  id="submit" class="btn btn-warning" value="Modificar Telefono" />
                         <a href="?controlador=Proveedor&accion=menuProveedor" class="btn btn-info" >Regresar</a>
+                            </div>
                         <?php
                     }
                     ?>

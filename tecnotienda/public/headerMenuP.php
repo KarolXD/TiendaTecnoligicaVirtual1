@@ -29,6 +29,8 @@
                         if ($_SESSION['usuario'] == null || $_SESSION['usuario'] == "") {
                             echo '<div class="alert alert-danger" role="alert">
  Usted no tiene PERMISOS!
+    <center>   <a href="?controlador=Cliente&accion=loginAdmin">Iniciar Session como Admin</a></center>
+           
 </div>';
                             //Sessions are not available
                             die();
@@ -92,11 +94,13 @@
                         </div>
                         <div class="dropdown">
                             <button class=" btn btn-outline-info my-2 my-sm-0 dropdown-toggle" href=""  id="dropdownMenuButton3" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                Clientes
+                                Usuarios
                             </button>
                             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton3">
                                 <a class="dropdown-item" href="?controlador=Cliente&accion=listarClientes">Administrar Clientes</a>
                                 <a class="dropdown-item" href="?controlador=Proveedor&accion=listarProveedor">Administrar Proveedores</a>
+                                           <a class="dropdown-item" href="?controlador=Usuario&accion=listarUsuarios">Administrar Administradores</a>
+                      
                             </div>
                         </div>
                         <button class=" btn btn-outline-info my-2 my-sm-0" >

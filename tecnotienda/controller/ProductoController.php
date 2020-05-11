@@ -122,26 +122,31 @@ class ProductoController {
             $pathParcial = "/tecnotienda/tecnotienda/public/img/";
             $tmp_name_array = $_FILES['imagenesruta']['tmp_name'];
             $carpetaDestino = $_SERVER['DOCUMENT_ROOT'] . $pathParcial;
-
+            for ($j = 0; $j < $array_num2; $j++) {
+                $valornombre .= $imagenesnombre[$j] . ",";
+            }
             for ($i = 0; $i < $array_num; $i++) {
                 if (move_uploaded_file($tmp_name_array[$i], $carpetaDestino . $indicaro . $nombreImagen[$i])) {
                     $rutaFinal .= $pathParcial . $indicaro . $nombreImagen[$i] . ",";
-                   // 
+                    // 
                     $flag = true;
                     echo 'Success';
                 } else {
-                    $PD->modificarproductoimagen2($valornombre, $_POST["productoid"]);
+                    $resultado = $PD->modificarproductoimagen2($valornombre, $_POST["productoid"]);
                 }
             }
             if ($flag) {
-                for ($j = 0; $j < $array_num2; $j++) {
-                    $valornombre .= $imagenesnombre[$j] . ",";
-                }
-                $PD->modificarproductoimagen($valornombre, $rutaFinal, $_POST["productoid"]);
+                $resultado = $PD->modificarproductoimagen($valornombre, $rutaFinal, $_POST["productoid"]);
             } else {
                 
             }
         }
+        if ($resultado == 1) {
+            echo '<script src="./public/js/jquery-3.3.1.js" type="text/javascript"> </script>  <script>   $(function() {   $("#alertControl").html("<div > <strong>Mensaje!</strong>  Caracteristicas de la imagen han sido modificadas </div> ");  });</script>';
+        } else {
+            echo '<script src="./public/js/jquery-3.3.1.js" type="text/javascript"> </script>  <script>   $(function() {   $("#alertControl").html("<div > <strong>Mensaje!</strong>  Caracteristicas de la imagen NO han sido modificadas </div> ");  });</script>';
+        }
+
 
 
         $data['listado'] = $PD->filtrarProductoImagenById($_POST["productoid"]);
@@ -186,15 +191,30 @@ class ProductoController {
             }
         }
         
-        $PD->modificarProductoCaracteristica($valorcriterio, $valoratributo, $_POST["productocaracteristicatitulo"], $_POST["productoid"]);
-        $data['listado'] = $PD->filtrarProductoCaracteristicaById($_POST["productoid"]);
+       $resultado= $PD->modificarProductoCaracteristica($valorcriterio, $valoratributo, $_POST["productocaracteristicatitulo"], $_POST["productoid"]);
+         if ($resultado == 1) {
+                   echo '<script src="./public/js/jquery-3.3.1.js" type="text/javascript"> </script>  <script>   $(function() {   $("#alertControl").html("<div > <strong>Mensaje!</strong>  Caracteristicas del producto han sido modificadas </div> ");  });</script>';
+     
+        } else {
+                echo '<script src="./public/js/jquery-3.3.1.js" type="text/javascript"> </script>  <script>   $(function() {   $("#alertControl").html("<div > <strong>Advertencia!</strong> Caracteristicas  No modificadas :( </div> ");  });</script>';
+        
+        }
+       $data['listado'] = $PD->filtrarProductoCaracteristicaById($_POST["productoid"]);
         $this->view->show("actualizarProductoCaracteristica.php", $data);
     }
 
     public function modificarProductoPrecio() {
         require 'model/data/productoData.php';
         $PD = new productoData();
-        $PD->modificarproductoprecio($_POST["preciocompra"], $_POST["preciofechacompra"], $_POST["precioventa"], $_POST["preciofechaventa"], $_POST["precioganacia"], $_POST["productoid"]);
+        $productoprecioventa = $_POST["preciocompra"] + ($_POST["preciocompra"] / $_POST["precioganacia"]);
+        $resultado = $PD->modificarproductoprecio($_POST["preciocompra"], $_POST["preciofechacompra"], $productoprecioventa, $_POST["preciofechaventa"], $_POST["precioganacia"], $_POST["productoid"]);
+        if ($resultado == 1) {
+                   echo '<script src="./public/js/jquery-3.3.1.js" type="text/javascript"> </script>  <script>   $(function() {   $("#alertControl").html("<div > <strong>Mensaje!</strong> Precio Modificado </div> ");  });</script>';
+     
+        } else {
+                echo '<script src="./public/js/jquery-3.3.1.js" type="text/javascript"> </script>  <script>   $(function() {   $("#alertControl").html("<div > <strong>Advertencia!</strong> Precio  No modificado :( </div> ");  });</script>';
+        
+        }
         $data['listado'] = $PD->filtrarProductoPrecioById($_POST["productoid"]);
         $this->view->show("actualizarProductoPrecio.php", $data);
     }
@@ -272,21 +292,26 @@ class ProductoController {
                 echo 'Ocurrió un error al subir la imagen, intente otra vez';
             }
         }
-       $resultado1 = $PD->registrarProducto($productosubcategoriaid,$productocodigobarras, $productocantidadgarantizada, $productocantidaddevuelto, $productoestado, $productoactivo);
+        $resultado1 = $PD->registrarProducto($productosubcategoriaid, $productocodigobarras, $productocantidadgarantizada, $productocantidaddevuelto, $productoestado, $productoactivo);
 
         if ($resultado1 == 1 && $flag == true) {
 
             $resultado2 = $PD->registrarproductoprecio($productocodigobarras, $productopreciocompra, $productopreciofechacompra, $productoprecioventa, $productopreciofechaventa, $productoprecioganacia);
-            $resultado3 = $PD->registrarproductocaracteristicas($productocodigobarras, $valorcriterio, $valoratributo, $productocaractericticatitulo,$estadoCriterio);
+            $resultado3 = $PD->registrarproductocaracteristicas($productocodigobarras, $valorcriterio, $valoratributo, $productocaractericticatitulo, $estadoCriterio);
             for ($j = 0; $j < $array_num3; $j++) {
                 $valornombre .= $productoimagenesnombre[$j] . ",";
-                $PD->registrarproductoimagen($productocodigobarras, $valornombre, $rutaFinal,$estadoImagen);
             }
-                        $message = 'Se ha registrado exitosamente';
-            echo "<script type='text/javascript'>alert('$message');</script>";
+            $resultado4 = $PD->registrarproductoimagen($productocodigobarras, $valornombre, $rutaFinal, $estadoImagen);
+
+            if ($resultado2 == 1 && $resultado3 == 1 && $resultado4 == 1) {
+                echo '<script src="./public/js/jquery-3.3.1.js" type="text/javascript"> </script>  <script>   $(function() {   $("#alertControl").html("<div > <strong>Mensaje!</strong> Producto registrado  </div> ");  });</script>';
+            } else {
+                echo '<script src="./public/js/jquery-3.3.1.js" type="text/javascript"> </script>  <script>   $(function() {   $("#alertControl").html("<div > <strong>Mensaje!</strong>Opps Producto NO registado :( </div> ");  });</script>';
+            }
+        } else if ($resultado1 == 0) {
+            echo '<script src="./public/js/jquery-3.3.1.js" type="text/javascript"> </script>  <script>   $(function() {   $("#alertControl").html("<div > <strong>Advertencia!</strong> Código de Barras existente :( </div> ");  });</script>';
         } else {
-            $message = ' NO puede registrar';
-            echo "<script type='text/javascript'>alert('$message');</script>";
+            echo '<script src="./public/js/jquery-3.3.1.js" type="text/javascript"> </script>  <script>   $(function() {   $("#alertControl").html("<div > <strong>Advertencia!</strong> Producto  No registrado :( </div> ");  });</script>';
         }
 
         $this->view->show("registrarproductovista.php", null);

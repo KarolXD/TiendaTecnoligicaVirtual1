@@ -112,6 +112,8 @@ require 'public/headerMenuP.php';
         }    ?>
         <center>
             <div class="form-group ">
+                 <div  class="alertControl alert alert-primary" name="alertControl" id="alertControl"> </div>
+<br>
                 <button class="btn btn-warning" type="submit" value="Registrar">Modificando Producto</button>
                 <a class="btn btn-info" href="?controlador=Producto&accion=menuProductoVista" > Regresar al menú</a>
             </div>

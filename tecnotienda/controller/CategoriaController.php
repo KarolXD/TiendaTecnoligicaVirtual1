@@ -31,18 +31,15 @@ class CategoriaController {
     public function modificarCategoria() {
         require 'model/data/categoriaDato.php';
         $PD = new categoriaDato();
-        if ($_POST['usuarioid'] != "Selecciona:") {
-            $resultado = $PD->modificarCategorias($_POST['categorianombre'], $_POST['usuarioid'], $_POST['categoriadescripcion'], $_POST['categoriafecha'], $_POST['categoriaid']);
-        } else {
-            $resultado = $PD->modificarCategorias($_POST['categorianombre'], $_POST['usuarioid1'], $_POST['categoriadescripcion'], $_POST['categoriafecha'], $_POST['categoriaid']);
-        }
-        $data['actualizarCategorias'] = $PD->filtrarCategoriaById($_POST["categoriaid"]);
+        $fechaActual = date("Y/m/d");
+        $resultado = $PD->modificarCategorias($_POST['categorianombre'], $_POST['categoriadescripcion'], $fechaActual, $_POST['categoriaid'], $_POST['usuarioid']);
         if ($resultado == 1) {
-         echo '<script src="./public/js/jquery-3.3.1.js" type="text/javascript"> </script>  <script>   $(function() {   $("#alertControl").html("<div > <strong>Mensaje!</strong> Categoria  modificada </div> ");  });</script>';  
-      } else {
-        echo '<script src="./public/js/jquery-3.3.1.js" type="text/javascript"> </script>  <script>   $(function() {   $("#alertControl").html("<div > <strong>Advertencia!</strong> Categoria no modificada </div> ");  });</script>';
-           
+            echo '<script src="./public/js/jquery-3.3.1.js" type="text/javascript"> </script>  <script>   $(function() {   $("#alertControl").html("<div > <strong>Mensaje!</strong> Categoria  modificada </div> ");  });</script>';
+        } else {
+            echo '<script src="./public/js/jquery-3.3.1.js" type="text/javascript"> </script>  <script>   $(function() {   $("#alertControl").html("<div > <strong>Advertencia!</strong> Categoria no modificada </div> ");  });</script>';
         }
+            $data['actualizarCategorias'] = $PD->filtrarCategoriaById($_POST["categoriaid"]);
+        
         $this->view->show("actualizarCategoriaVista.php", $data);
     }
 

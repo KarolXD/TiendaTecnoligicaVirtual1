@@ -16,7 +16,9 @@ include_once 'public/header.php';
                         <h4><center>Ingresar Proveedores</center></h4>
                              <hr style="color: #47748b">
                         <div class="form-group">
-                            <input type="text" class="form-control" id="usuario" name="usuario" aria-describedby="emailHelp" placeholder="Usuario" required="">
+                            Pasaporte/Cédula
+                            <input type="tel" required pattern="[0-9]{10,15}"
+         title="Solo números. Tamaño mínimo: 10. Tamaño máximo: 15"   class="form-control" id="usuario" name="usuario" aria-describedby="emailHelp" placeholder="Usuario" required="">
                         </div>
                         <div class="form-group">
                             <input type="text" class="form-control" id="contra" name="contra" aria-describedby="emailHelp" placeholder="Contraseña" required="">
@@ -35,14 +37,14 @@ include_once 'public/header.php';
                         <div class="table-responsive">
                             <table class="table table-bordered" id="dynamic_field">
                                 <tr>
-                                    <td><input type="email" name="name[]" placeholder="Escriba su correo" class="form-control name_list" /></td>
+                                    <td><input required type="email"  pattern="[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*@[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[.][a-zA-Z]{1,5}" name="name[]" placeholder="Escriba su correo" class="form-control name_list" /></td>
                                     <td><button type="button" name="add" id="add"  class="btn btn-success" ><strong> +</strong> </button></td>
                                 </tr>
                             </table>
 
                             <table class="table table-bordered" id="dynamic_fieldd">
                                 <tr>
-                                    <td><input type="number" name="names[]" placeholder="Escriba su telefono" class="form-control name_list" /></td>
+                                    <td><input type="tel"  minlength="8"  required name="names[]" placeholder="Escriba su telefono" class="form-control name_list" /></td>
                                     <td><button type="button" name="addd" id="addd"  class="btn btn-success" ><strong>+</strong> </button></td>
                                 </tr>
                             </table>      
@@ -80,7 +82,7 @@ include_once 'public/header.php';
         $('#add').click(function () {
             i++;
 
-            $('#dynamic_field').append('<tr id="row' + i + '"><td><input type="text" name="name[]" placeholder="Ingrese su correo" class="form-control name_list" /></td><td><button type="button" name="remove" id="' + i + '" class="btn btn-danger btn_remove">X</button></td></tr>');
+            $('#dynamic_field').append('<tr id="row' + i + '"><td><input type="email"  pattern="[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*@[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[.][a-zA-Z]{1,5}" required  name="name[]" placeholder="Ingrese su correo" class="form-control name_list" /></td><td><button type="button" name="remove" id="' + i + '" class="btn btn-danger btn_remove">X</button></td></tr>');
             //  document. getElementById("contadorcorreo").value(i);
 
         });
@@ -98,7 +100,7 @@ include_once 'public/header.php';
         $('#addd').click(function () {
             y++;
 
-            $('#dynamic_fieldd').append('<tr id="roww' + y + '"><td><input type="text" name="names[]" placeholder="Ingrese su telefono" class="form-control name_list" /></td><td><button type="button" name="removee" id="' + y + '" class="btn btn-danger btn_removee">X</button></td></tr>');
+            $('#dynamic_fieldd').append('<tr id="roww' + y + '"><td><input  minlength="8"  type="text" required name="names[]" placeholder="Ingrese su telefono" class="form-control name_list" /></td><td><button type="button" name="removee" id="' + y + '" class="btn btn-danger btn_removee">X</button></td></tr>');
             //  document. getElementById("contadorcorreo").value(i);
 
         });

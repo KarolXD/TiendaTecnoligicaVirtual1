@@ -35,15 +35,14 @@ include_once 'public/headerMenuP.php';
                     </div>
 
                     <div class="form-group ">
-                        <label class="">Añade un Usuario</label>
-                        <input type="text" class="form-control" readonly="" id="usuarioid1"  value="<?php echo $item[4] ?>" name="usuarioid1" aria-describedby="emailHelp" placeholder="Nombre SubCategoria" required="">
+                      
+                        <input type="hidden" class="form-control" readonly="" id="usuarioid"  value="<?php echo $_SESSION["usuario"] ?>" name="usuarioid" aria-describedby="emailHelp" placeholder="Nombre SubCategoria" required="">
                         <br>
-                        <select class="form-control" name="usuarioid"   id="usuarioid">  <option selected>Selecciona:</option></select>
                     </div>
-                    <div class="form-group">
+<!--                    <div class="form-group">
                         <label for="username">Añade una fecha</label>
                         <input type="text" class="form-control" id="subcategoriafecha" name="subcategoriafecha"  value="<?php echo $item[5] ?>" aria-describedby="emailHelp" placeholder="Nombre SubCategoria" required="">
-                    </div>
+                    </div>-->
                     <div class="form-group">
                         <center>
                             <input name="submit" type="submit" value=" Modificar " class="btn btn-warning">

@@ -66,7 +66,7 @@ require 'public/headerMenuP.php';
                     <th scope="col">Categoria</th>
                     <th scope="col">Sub Categoria</th>
                     <th scope="col">Titulo</th>
-
+                    <th scope="col">Precio </th>
 
                 </tr>
             </thead>
@@ -79,7 +79,7 @@ require 'public/headerMenuP.php';
 
                             </a> </td>
 
-                            <td>  <a  class="btn btn-outline-danger"   onclick= "eliminar('<?php echo $item[0] ?>')"> Eliminar
+                        <td>  <a  class="btn btn-outline-danger"   onclick= "eliminar('<?php echo $item[0] ?>')"> Eliminar
 
                             </a> </td>
 
@@ -102,6 +102,7 @@ require 'public/headerMenuP.php';
                         <td><?php echo $item[2] ?></td>
                         <td><?php echo $item[3] ?></td>
                         <td><?php echo $item[4] ?></td>
+                        <td><?php echo $item[5] ?></td>
 
 
                     </tr>
@@ -121,67 +122,67 @@ require 'public/headerMenuP.php';
 <script src="./public/js/jquery-3.3.1.js" type="text/javascript"></script>
 <script type="text/javascript">
 //No se asusten!!!!!!!!!!!Tengo que pasar esto a un archivo JS :s lo sse lo se
-    function eliminar(valor) {
+                        function eliminar(valor) {
 
-        var productoid = valor;
-        swal({
-            title: "Estás seguro?",
-            text: "Una vez eliminado este registro, no podrás dar marcha atrás!",
-            icon: "warning",
-            buttons: true,
-            dangerMode: true,
-        })
-                .then((willDelete) => {
-                    if (willDelete) {
-                        ajaxEliminarProducto(productoid);
-                    } else {
-                        swal("Cancelado", "Dato no Eliminado :)", "error");
-
-
-                    }
-                });
-
-    }
-    
-
-    function ajaxEliminarProducto(productoid) {
-        var parametros = {
-            "productoid": productoid
-        };
-        $.ajax({
-            data: parametros, //datos que se envian a traves de ajax
-          url: '?controlador=Producto&accion=eliminarProducto',
-            type: 'post', //método de envio
-            beforeSend: function () {
-                $("#resultado").html("Procesando, espere por favor...");
-            },
-            success: function (response) { //una vez que el archivo recibe el request lo procesa y lo devuelve
-                $("#resultado").html(response);
-            }
-        })
-                .done(function (data) {
-                    console.log(data);
-                    $("#alertControl").html('<div class="alert alert-success" id="alert">' + data + '</div>');
-
-                    window.setTimeout(function () {
-                        $(".alert").fadeTo(5000000, 0).slideUp(50000000, function () {
-                            $(this).remove();
-                        });
-
-                    }, 3000000000);
+                            var productoid = valor;
+                            swal({
+                                title: "Estás seguro?",
+                                text: "Una vez eliminado este registro, no podrás dar marcha atrás!",
+                                icon: "warning",
+                                buttons: true,
+                                dangerMode: true,
+                            })
+                                    .then((willDelete) => {
+                                        if (willDelete) {
+                                            ajaxEliminarProducto(productoid);
+                                        } else {
+                                            swal("Cancelado", "Dato no Eliminado :)", "error");
 
 
-                })
-                .fail(function () {
-                    console.log('Error');
-                    swal("Cancelado", "Dato no Eliminado :)", "error");
-                })
-                .always(function () {
-                    console.log("complete" + productoid);
-                });
-    }
+                                        }
+                                    });
 
-  
+                        }
+
+
+                        function ajaxEliminarProducto(productoid) {
+                            var parametros = {
+                                "productoid": productoid
+                            };
+                            $.ajax({
+                                data: parametros, //datos que se envian a traves de ajax
+                                url: '?controlador=Producto&accion=eliminarProducto',
+                                type: 'post', //método de envio
+                                beforeSend: function () {
+                                    $("#resultado").html("Procesando, espere por favor...");
+                                },
+                                success: function (response) { //una vez que el archivo recibe el request lo procesa y lo devuelve
+                                    $("#resultado").html(response);
+                                }
+                            })
+                                    .done(function (data) {
+                                        console.log(data);
+                                        $("#alertControl").html('<div class="alert alert-success" id="alert">' + data + '</div>');
+
+                                        window.setTimeout(function () {
+                                            $(".alert").fadeTo(5000000, 0).slideUp(50000000, function () {
+                                                $(this).remove();
+                                            });
+
+                                        }, 3000000000);
+
+
+                                    })
+                                    .fail(function () {
+                                        console.log('Error');
+                                        swal("Cancelado", "Dato no Eliminado :)", "error");
+                                    })
+                                    .always(function () {
+                                        console.log("complete" + productoid);
+                                    });
+                        }
+
+
 
 </script>
 <?php

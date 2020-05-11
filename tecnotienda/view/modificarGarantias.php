@@ -19,8 +19,10 @@ require 'public/headerMenuP.php';
                 <input class="form-control" id="productocantidadgarantias" placeholder="Cantidadesde Devueltas" name="productocantidadgarantias" type="number" required="">
 
             </div>
+                <div class="form-group ">   <div  class="alertControl alert alert-primary" name="alertControl" id="alertControl"> </div>
+                        </div>
                  <center>      <div class="form-group ">
-                <button class="btn btn-primary" type="submit" value="Registrar">Registrar Devolución</button>
+                <button class="btn btn-primary" type="submit" value="Registrar">Modificar Garantias</button>
                 <a class="btn btn-info" href="?controlador=Producto&accion=menuProductoVista" > Regresar al menú</a>
             </div>
 

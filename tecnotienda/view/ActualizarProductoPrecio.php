@@ -17,8 +17,9 @@ require 'public/headerMenuP.php';
                     <input class="form-control" id="productoid"   value="<?php echo $item[0] ?>" name="productoid"type="hidden"  required="">
                 </div>
                 <div class="form-group ">
+                    
+                    <hr style="color: #47748b">
                      <h5>  <center>Módificar Productos </center></h5>
-          
                     <hr style="color: #47748b">
                     <strong>   Datos sobre el precio </strong>
                     <hr style="color: #47748b">
@@ -41,7 +42,7 @@ require 'public/headerMenuP.php';
                     <input class="form-control" id="preciofechacompra"   value="<?php echo $item[2] ?>" name="preciofechacompra"   type="text" >
 
                 </div>
-                <div class="form-group ">
+<!--                <div class="form-group ">
                     <label class="">Precio de Venta</label>
 
                     <div class="input-group mb-3">
@@ -53,15 +54,25 @@ require 'public/headerMenuP.php';
                             <span class="input-group-text">.00</span>
                         </div>
                     </div>
-                </div>
+                </div>-->
                 <div class="form-group ">
                     <label class="">Fecha  de Venta</label>
                     <input class="form-control" id="preciofechaventa"   value="<?php echo $item[4] ?>" name="preciofechaventa" type="text" >
                 </div>
                 <div class="form-group ">
                     <label class=""> % de Ganancia</label>
-                    <input class="form-control" id="precioganacia"   value="<?php echo $item[5] ?>" name="precioganacia" type="number" required="">
-                </div>
+                    <div class="input-group ">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">%</span>
+                        </div>
+                        <input type="number" class="form-control" required=""  id="precioganacia"   value="<?php echo $item[5] ?>" name="precioganacia"  aria-label="Amount (to the nearest dollar)">
+                        <div class="input-group-append">
+                            <span class="input-group-text">0.0</span>
+                        </div>
+                        </div>
+                         </div>
+ <div  class="alertControl alert alert-primary" name="alertControl" id="alertControl"> </div>
+
                 <div class="form-group ">
                     <button class="btn btn-warning" type="submit" value="M">Modificar Producto</button>
                     <a class="btn btn-info" href="?controlador=Producto&accion=menuProductoVista" > Regresar al menú</a>

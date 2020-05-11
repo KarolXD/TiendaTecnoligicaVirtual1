@@ -42,6 +42,9 @@ include_once 'public/header.php';
                                     <input type="hidden" class="form-control" id="telefonoid"  value= "<?php echo $item[4] ?>" name="telefonoid" aria-describedby="emailHelp" readonly="" required="">
 
                                 </div>
+                                
+                                              <div class="form-group ">   <div  class="alertControl alert alert-primary" name="alertControl" id="alertControl"> </div>
+                    </div>
                                 <input type="submit" name="submit"  id="submit" class="btn btn-info" value="Submit" />
                                 <a href="?controlador=Proveedor&accion=menuProveedor" class="btn btn-info" >Regresar</a>
                             </div> <?php

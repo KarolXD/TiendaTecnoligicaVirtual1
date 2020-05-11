@@ -50,13 +50,13 @@ require 'public/headerUsuario.php';
                 }
             }
             .gallery {
-    filter:brightness(130%);
+                filter:brightness(130%);
                 animation:escalar;
                 cursor:pointer;
                 animation:escalar 1.4s infinite alternate; 
             }
             .estado{
-                
+
                 animation:escalar;
                 cursor:pointer;
                 animation:escalar 1.4s infinite alternate;   
@@ -68,13 +68,13 @@ require 'public/headerUsuario.php';
         foreach ($vars['listado'] as $item) {
             ?>
             <div class="animated infinite bounceIn slow">
-            <center>  <label class="bg-light"> 
-                    <font  SIZE=5 style="text-transform: uppercase;"> <strong><?php echo $item[4] ?> </strong> </font>
-                </label></center>
-            <br>
+                <center>  <label class="bg-light"> 
+                        <font  SIZE=5 style="text-transform: uppercase;"> <strong><?php echo $item[4] ?> </strong> </font>
+                    </label></center>
+                <br>
             </div>
-              <div class="animated infinite bounceInRight slow">
-            <center>  <p class="bg-light"><strong>Estado del Producto: <?php echo $item[7] ?></strong></p> </center>
+            <div class="animated infinite bounceInRight slow">
+                <center>  <p class="bg-light"><strong>Estado del Producto: <?php echo $item[7] ?></strong></p> </center>
             </div>
 
             <!--    <div class="container">-->
@@ -135,7 +135,7 @@ require 'public/headerUsuario.php';
 
 
 
-                    <p class="bg-light"> <strong>Precio venta: <?php echo $item[1] ?></strong></p>  
+                    <p class="bg-light">      <span class="input-group-text">Precio venta:  <strong>  ₡<?php echo $item[1] ?></strong> </span></p>  
                     <hr style="color: #47748b">
                     <p class="bg-light"><strong>Sub Categoria: <?php echo $item[0] ?></strong></p> 
                     <hr style="color: #47748b">
@@ -188,10 +188,10 @@ require 'public/headerUsuario.php';
 
 
 
-            
+
             <center><a  href="?controlador=SubCategoria&accion=mostrardetallesSubCategoria&subcategoriaid= <?php echo $item[8] ?>" class="btn btn-outline-info"> Regresar a el menú</a></center>
 
-       
+
             <br>
             <br>
             <br>
@@ -230,11 +230,6 @@ require 'public/headerUsuario.php';
             });
 
 
-
-
-
-
-            // document ready  
         });
 
 

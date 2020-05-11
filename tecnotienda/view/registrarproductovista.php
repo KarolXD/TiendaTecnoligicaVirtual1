@@ -3,13 +3,14 @@ require 'public/headerMenuP.php';
 ?>
 <div class="container">
 
-
+          
     <h5>  <center>Registra una Producto </center></h5>
     <hr style="color: #47748b">
     <form  action="?controlador=Producto&accion=registrarProductos" method="POST"  enctype="multipart/form-data">
         <div class="row">
             <div class="col-md-4"></div>
             <div class="col-md-4">
+       <div  class="alertControl alert alert-primary" name="alertControl" id="alertControl"> </div>
 
                 <div class="form-group">
                     <label class="">Código de Barras</label>

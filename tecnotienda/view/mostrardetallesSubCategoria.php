@@ -67,9 +67,10 @@ include_once 'public/headerUsuario.php';
                 }
                 ?>
 
+                    
                 <div class="card-body">
 
-                    <p class="card-text "> <img src="./public/img/money.png" alt="..."> <strong> <font size="4"><?php echo$item[2] ?></font></strong>  </p>
+                    <p class="card-text ">     <strong> <font size="6"> <span class="input-group-append">₡ <?php echo$item[2] ?> </span></font></strong>  </p>
                     <hr style="border-top: 1px solid black;">
                     <a class="etiqueta"  href="?controlador=Producto&accion=mostrarDetallesProducto&productoid=<?php echo$item[4] ?>">  <h5 class="card-title"><?php echo$item[1] ?>  </h5> </a>
                 </div>

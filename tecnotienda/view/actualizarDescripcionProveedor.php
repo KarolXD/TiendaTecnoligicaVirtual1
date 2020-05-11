@@ -21,7 +21,8 @@ include_once 'public/headerMenuP.php';
                             <input type="hidden" class="form-control" id="clienteid"  value= "<?php echo $item[1] ?>" name="clienteid" aria-describedby="emailHelp" readonly="" placeholder="ID CLIENTE" required="">
                             <input type="text" class="form-control" id="descripcion"  value= "<?php echo $item[2] ?>" name="descripcion" aria-describedby="emailHelp" placeholder="Detalle" required="">
                         </div>
-
+              <div class="form-group ">   <div  class="alertControl alert alert-primary" name="alertControl" id="alertControl"> </div>
+                    </div>
                         <div class="form-group">
                             <input type="submit" name="submit"  id="submit" class="btn btn-warning" value="Modificar" />
                             <a href="?controlador=Proveedor&accion=menuProveedor" class="btn btn-info" >Regresar</a>
