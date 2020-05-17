@@ -18,7 +18,7 @@ include_once 'public/headerUsuario.php';
    filter:brightness(120%);
             animation:escalar;
             cursor:pointer;
-            animation:escalar 1.4s infinite alternate; 
+           
         }
         .titulo{
             
@@ -74,6 +74,9 @@ include_once 'public/headerUsuario.php';
                     <hr style="border-top: 1px solid black;">
                     <a class="etiqueta"  href="?controlador=Producto&accion=mostrarDetallesProducto&productoid=<?php echo$item[4] ?>">  <h5 class="card-title"><?php echo$item[1] ?>  </h5> </a>
                 </div>
+                   <a class="btn nav-link" href="?controlador=Cliente&accion=loginCliente">Comprar</a>
+                             
+
                 <hr style="border-top: 5px solid black;">
             </div>
 

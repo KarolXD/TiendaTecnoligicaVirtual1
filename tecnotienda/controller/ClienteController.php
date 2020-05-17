@@ -33,7 +33,7 @@ class ClienteController {
 
         if ($dato == 1) {
             echo '<script src="./public/js/jquery-3.3.1.js" type="text/javascript"> </script>  <script>   $(function() {   $("#alertControl").html("<div > <strong>Advertencia!</strong>  Inicio de session correcto</div> ");  });</script>';
-            $this->view->show("loginAdmin.php", $dato);
+            $this->view->show("compraArticulo.php", $dato);
         } else {
             echo '<script src="./public/js/jquery-3.3.1.js" type="text/javascript"> </script>  <script>   $(function() {   $("#alertControl").html("<div > <strong>Advertencia!</strong> Usuario y/o Contraseña INCORRECTA </div> ");  });</script>';
             $this->view->show("loginCliente.php", $dato);
