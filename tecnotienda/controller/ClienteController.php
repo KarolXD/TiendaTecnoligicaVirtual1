@@ -8,11 +8,13 @@ class ClienteController {
 
     public function cerrarSession() {
         session_start();
-
+          
         if (session_destroy()) {
-            echo "Sesión destruida correctamente";
+            echo "Sesión destruida correctamente Cliente";
+            session_unset() ;
+            
         } else {
-            echo "Error al destruir la sesión";
+            echo "Error al destruir la sesión Cliente";
         }
           $this->view->show("loginCliente.php");
     }

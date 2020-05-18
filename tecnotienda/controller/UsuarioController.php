@@ -87,6 +87,7 @@ class UsuarioController {
 
     public function menuUsuario() {
        require 'model/data/categoriaDato.php';
+    
         $PD = new categoriaDato();
         echo json_encode($PD->obtenerNombreCategorias());
     }

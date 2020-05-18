@@ -107,8 +107,8 @@ class SubCategoriaController {
           session_start();
          $filtro=$_POST['color'].",".$_POST['tamano'].",".$_POST['teclado'];
         echo $filtro;
-        $data['listado'] = ($PD->filtrardetalleSubcategoriadetalleSubcategoria($_SESSION['subcategoriaid2'],$filtro));
-        $this->view->show("filtrarmostrardetallesSubcategoria.php", $data);
+        $data['listado'] = ($PD->filtrardetalleSubcategoria($_SESSION['subcategoriaid2'],$filtro));
+        $this->view->show("filtrardetallesSubcategoria.php", $data);
     }
     public function mostrardetallesSubCategoriaCliente() {
         require 'model/data/subcategoriaDato.php';
@@ -120,9 +120,11 @@ class SubCategoriaController {
         $data['listado'] = ($PD->listadetalleSubcategoria($_GET['subcategoriaid']));
         $this->view->show("mostrardetallesSubCategoriaCliente.php", $data);
         }
+        
+        
       public function filtrarmostrardetallesSubcategoriaCliente() {
         require 'model/data/subcategoriaDato.php';
-             session_start();
+         session_start();
         $PD = new subcategoriaDato();
         $filtro=$_POST['color'].",".$_POST['tamano'].",".$_POST['teclado'];
        

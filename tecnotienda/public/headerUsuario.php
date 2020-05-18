@@ -22,7 +22,7 @@
                 <nav class="navbar navbar-light bg-light animated infinite ">
                     <a class="navbar-brand" href="?controlador=Usuario&accion=menuPrincipalUsuario">
                         <img src="./public/img/logo.png" width="30" height="30" class="d-inline-block align-top" alt="">
-                        <strong>  Bienvenidos a TecnoTienda </strong>
+                        <strong>  Bienvenidos a TecnoTienda d </strong>
                     </a>
                 </nav>
                 <nav class="navbar navbar-expand-lg navbar-light bg-light" >
