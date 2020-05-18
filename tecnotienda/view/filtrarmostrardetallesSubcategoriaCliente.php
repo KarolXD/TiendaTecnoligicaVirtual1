@@ -41,11 +41,7 @@ include_once 'public/headerCliente.php';
 
     <form method="post" action="?controlador=SubCategoria&accion=filtrarmostrardetallesSubcategoriaCliente">
         <div class="row">
-
-
-
             <div class="col-md-4">
-
                 <div class="form-group"> 
                     Color
                     <select class="form-control" id="color" name="color"> 
@@ -56,35 +52,31 @@ include_once 'public/headerCliente.php';
                         <option value="Verde">Verde</option>
                         <option value="Celeste">Celeste</option>
                     </select>
+
                 </div>
             </div>
             <div class="col-md-4">
+                Tamaño
                 <div class="form-group"> 
-                    Tamaño
                     <select class="form-control" id="tamano" name="tamano"> 
                         <option value="Estandar">Estandar</option>
                         <option value="Extendido">Extendido</option>
                         <option value="Mini">Mini</option>
-                        <option value="Ultra delgado">Mini</option>
-                    </select>
-                    <button type="submit" class="btn btn-outline-success">Filtrar Subcategorias</button>
+                        <option value="Ultra delgado">Mini</option></select>
 
                 </div>
+                <button type="submit" class="btn btn-outline-success">Filtrar Subcategorias</button>
+
             </div>
             <div class="col-md-4">
-
+                Distri. teclado
                 <div class="form-group"> 
-                    Distri. teclado
                     <select class="form-control" id="teclado" name="teclado"> 
-                    <option value="Estandar">Estandar</option>
-                    <option value="Juego">Juego</option>
-                    <option value="Contable">Contable</option>
-                    </select>
+                        <option value="Estandar">Estandar</option>
+                        <option value="Juego">Juego</option>
+                        <option value="Contable">Contable</option></select>
                 </div>
-
-
-
-           </div>
+            </div>
         </div>
     </form>
 

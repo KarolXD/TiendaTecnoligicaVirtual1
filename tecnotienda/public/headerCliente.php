@@ -47,7 +47,7 @@
 
 
                 <nav class="navbar navbar-light bg-light">
-                    <a class="navbar-brand" href="?controlador=Cliente&accion=menuPrincipal">
+                    <a class="navbar-brand" href="?controlador=Cliente&accion=menuPrincipalCliente1">
                         <img src="./public/img/logo.png" width="30" height="30" class="d-inline-block align-top" alt="">
                         Bienvenido a TiendaTienda
                     </a>
@@ -76,28 +76,8 @@
 
                             
                         </div>
-                        <div class="dropdown">
-                            <button class=" btn btn-outline-info my-2 my-sm-0 dropdown-toggle" href=""  id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                Producto
-                            </button>
-                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                <a class="dropdown-item" href="?controlador=Producto&accion=menuProductoVista">Producto</a>
-                                <a class="dropdown-item" href="?controlador=Categoria&accion=menuCategoriaVista">Categoria</a>
-                                <a class="dropdown-item" href="?controlador=SubCategoria&accion=menuSubCategoriaVista">Sub Categoria</a>
-                            </div>
-                        </div>
-
-                        <div class="dropdown">
-                            <button class=" btn btn-outline-info my-2 my-sm-0 dropdown-toggle" href=""  id="dropdownMenuButton3" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                Usuarios
-                            </button>
-                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton3">
-                                <a class="dropdown-item" href="?controlador=Cliente&accion=listarClientes">Administrar Clientes</a>
-                                <a class="dropdown-item" href="?controlador=Proveedor&accion=listarProveedor">Administrar Proveedores</a>
-                                <a class="dropdown-item" href="?controlador=Usuario&accion=listarUsuarios">Administrar Administradores</a>
-
-                            </div>
-                        </div>
+                    
+                      
                         <button class=" btn btn-outline-info my-2 my-sm-0" >
                             Detalles Pago
                         </button>

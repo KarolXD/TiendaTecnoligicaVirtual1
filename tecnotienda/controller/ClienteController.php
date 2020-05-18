@@ -14,7 +14,7 @@ class ClienteController {
         } else {
             echo "Error al destruir la sesión";
         }
-        header("Location: loginCliente.php ");
+          $this->view->show("loginCliente.php");
     }
 
     public function loginCliente() {
@@ -292,7 +292,11 @@ class ClienteController {
         $PD = new categoriaDato();
         echo json_encode($PD->obtenerNombreCategorias());
     }
-
+  public function menuPrincipalCliente1() {
+           $this->view->show("menuPrincipalCliente.php");
+    
+    }
+   
 }
 
 //fin

@@ -38,7 +38,51 @@ include_once 'public/headerUsuario.php';
     <center class="">    <font style="text-transform: uppercase;">   <p class="card-text"><strong>  Contenidos </strong>  </p>    </font> 
     </center>
 
-    <br><br>
+    <br>    <form method="post" action="?controlador=SubCategoria&accion=filtrarmostrardetallesSubcategoria">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="form-group"> 
+                    Color
+                    <select class="form-control" id="color" name="color"> 
+                        <option value="Negro">Negro</option>
+                        <option value="Gris">Gris</option>
+                        <option value="Blanco">Blanco</option>
+                        <option value="Rosado">Rosado</option>
+                        <option value="Verde">Verde</option>
+                        <option value="Celeste">Celeste</option>
+                    </select>
+
+                </div>
+            </div>
+            <div class="col-md-4">
+                Tamaño
+                <div class="form-group"> 
+                    <select class="form-control" id="tamano" name="tamano"> 
+                        <option value="Estandar">Estandar</option>
+                        <option value="Extendido">Extendido</option>
+                        <option value="Mini">Mini</option>
+                        <option value="Ultra delgado">Mini</option></select>
+
+                </div>
+                <button type="submit" class="btn btn-outline-success">Filtrar Subcategorias</button>
+
+            </div>
+            <div class="col-md-4">
+                Distri. teclado
+                <div class="form-group"> 
+                    <select class="form-control" id="teclado" name="teclado"> 
+                        <option value="Estandar">Estandar</option>
+                        <option value="Juego">Juego</option>
+                        <option value="Contable">Contable</option></select>
+                </div>
+            </div>
+        </div>
+    </form>
+
+
+
+<br><br>
+
 
 
     <div class="row">

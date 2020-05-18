@@ -90,17 +90,47 @@ class SubCategoriaController {
     public function mostrardetallesSubCategoria() {
         require 'model/data/subcategoriaDato.php';
         $PD = new subcategoriaDato();
+        session_start();
+        if (!isset($_SESSION['subcategoriaid2'])) {
+            $_SESSION['subcategoriaid2'] = '';
+        }
+
+        $_SESSION['subcategoriaid2'] = $_GET['subcategoriaid'];
+
         $data['listado'] = ($PD->listadetalleSubcategoria($_GET['subcategoriaid']));
         $this->view->show("mostrardetallesSubCategoria.php", $data);
     }
 
-    
+    public function filtrarmostrardetallesSubcategoria() {
+        require 'model/data/subcategoriaDato.php';
+        $PD = new subcategoriaDato();
+          session_start();
+         $filtro=$_POST['color'].",".$_POST['tamano'].",".$_POST['teclado'];
+        echo $filtro;
+        $data['listado'] = ($PD->filtrardetalleSubcategoriadetalleSubcategoria($_SESSION['subcategoriaid2'],$filtro));
+        $this->view->show("filtrarmostrardetallesSubcategoria.php", $data);
+    }
     public function mostrardetallesSubCategoriaCliente() {
         require 'model/data/subcategoriaDato.php';
         $PD = new subcategoriaDato();
+         session_start();
+            if (!isset($_SESSION['subcategoriaid'])) {
+                $_SESSION['subcategoriaid'] = ''; }
+            $_SESSION['subcategoriaid'] = $_GET['subcategoriaid'];
         $data['listado'] = ($PD->listadetalleSubcategoria($_GET['subcategoriaid']));
         $this->view->show("mostrardetallesSubCategoriaCliente.php", $data);
+        }
+      public function filtrarmostrardetallesSubcategoriaCliente() {
+        require 'model/data/subcategoriaDato.php';
+             session_start();
+        $PD = new subcategoriaDato();
+        $filtro=$_POST['color'].",".$_POST['tamano'].",".$_POST['teclado'];
+       
+        $data['listado'] = ($PD->filtrardetalleSubcategoriaCliente( $_SESSION['subcategoriaid'],$filtro));
+        $this->view->show("filtrarmostrardetallesSubcategoriaCliente.php", $data);
+        
     }
+    
     
     public function listarSubCategorias() {
         require 'model/data/subcategoriaDato.php';

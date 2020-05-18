@@ -152,7 +152,43 @@ c.tbproductoid=p.tbproductoid and   p.tbproductoestado=0 and s.tbsubcategoriaid=
         $consulta->CloseCursor();
         return $resultado;
     }
+    public function filtrardetalleSubcategoria($subcategoriaid, $filtro) {
+        $consulta = $this->db->prepare('select i.tbproductoimagenruta,c.tbproductocaracteristicastitulo, pr.tbproductoprecioventa,
+s.tbsubcategorianombre,p.tbproductoid, s.tbcategoriaid
+ from  tbsubcategoria s
+join tbproducto p on  s.tbsubcategoriaid=p.tbsubcategoriaid
+join tbproductoprecio pr on pr.tbproductoid=p.tbproductoid
+join tbproductoimagen i on i.tbproductoid=p.tbproductoid
+join tbproductocaracteristica c on c.tbproductoid=p.tbproductoid
+where 
+s.tbsubcategoriaid=p.tbsubcategoriaid and
+pr.tbproductoid=p.tbproductoid and
+i.tbproductoid=p.tbproductoid and
+c.tbproductoid=p.tbproductoid and    i.tbproductoimagennombre="' . $filtro . '" and  p.tbproductoestado=0 and s.tbsubcategoriaid="' . $subcategoriaid . '"');
+        $consulta->execute();
+        $resultado = $consulta->fetchAll();
+        $consulta->CloseCursor();
+        return $resultado;
+    }
 
+    public function filtrardetalleSubcategoriaCliente($subcategoriaid,$filtro) {
+        $consulta = $this->db->prepare('select i.tbproductoimagenruta,c.tbproductocaracteristicastitulo, pr.tbproductoprecioventa,
+s.tbsubcategorianombre,p.tbproductoid, s.tbcategoriaid
+ from  tbsubcategoria s
+join tbproducto p on  s.tbsubcategoriaid=p.tbsubcategoriaid
+join tbproductoprecio pr on pr.tbproductoid=p.tbproductoid
+join tbproductoimagen i on i.tbproductoid=p.tbproductoid
+join tbproductocaracteristica c on c.tbproductoid=p.tbproductoid
+where 
+s.tbsubcategoriaid=p.tbsubcategoriaid and
+pr.tbproductoid=p.tbproductoid and
+i.tbproductoid=p.tbproductoid and
+c.tbproductoid=p.tbproductoid and  i.tbproductoimagennombre="'.$filtro.'" and  p.tbproductoestado=0 and s.tbsubcategoriaid="' . $subcategoriaid . '"');
+        $consulta->execute();
+        $resultado = $consulta->fetchAll();
+        $consulta->CloseCursor();
+        return $resultado;
+    }
     public function obtenerSubCategorias() {
         $consulta = $this->db->prepare('select  tbsubcategoriaid,tbsubcategorianombre  from  tbsubcategoria   where tbsubcategoriaestado=0 ');
         $consulta->execute();
