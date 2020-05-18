@@ -79,6 +79,14 @@ class SubCategoriaController {
         $this->view->show("mostrarSubCategorias.php", $data);
     }
 
+    public function mostrarSubCategoriaCliente() {
+        require 'model/data/subcategoriaDato.php';
+        $PD = new subcategoriaDato();
+        $data['listado'] = ($PD->listaMenuSubcategoria($_GET['categoriaid']));
+        $this->view->show("mostrarSubCategoriaCliente.php", $data);
+    }
+
+    
     public function mostrardetallesSubCategoria() {
         require 'model/data/subcategoriaDato.php';
         $PD = new subcategoriaDato();
@@ -86,6 +94,14 @@ class SubCategoriaController {
         $this->view->show("mostrardetallesSubCategoria.php", $data);
     }
 
+    
+    public function mostrardetallesSubCategoriaCliente() {
+        require 'model/data/subcategoriaDato.php';
+        $PD = new subcategoriaDato();
+        $data['listado'] = ($PD->listadetalleSubcategoria($_GET['subcategoriaid']));
+        $this->view->show("mostrardetallesSubCategoriaCliente.php", $data);
+    }
+    
     public function listarSubCategorias() {
         require 'model/data/subcategoriaDato.php';
         $PD = new subcategoriaDato();

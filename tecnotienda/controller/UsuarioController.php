@@ -50,7 +50,7 @@ class UsuarioController {
     public function eliminarUsuario() {
         require 'model/data/usuarioDato.php';
         $PD = new usuarioDato();
-        echo "GOLA";
+        
         echo $_POST["usuarioid"];
         $resultado = $PD->eliminarUsuario($_POST["usuarioid"]);
         if($resultado==1) {

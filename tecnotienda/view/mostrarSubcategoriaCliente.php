@@ -19,7 +19,7 @@ include_once 'public/headerCliente.php';
             foreach ($vars['listado'] as $item) {
                 ?>
                 <a  
-                    class="btn btn-outline-info"  href="?controlador=SubCategoria&accion=mostrardetallesSubCategoria&subcategoriaid=<?php echo$item[0] ?>" name="btn-categorias"  value="<?php echo$item[0] ?>"   >
+                    class="btn btn-outline-info"  href="?controlador=SubCategoria&accion=mostrardetallesSubCategoriaCliente&subcategoriaid=<?php echo$item[0] ?>" name="btn-categorias"  value="<?php echo$item[0] ?>"   >
                         <?php echo $item[1] ?>
                 </a>
 

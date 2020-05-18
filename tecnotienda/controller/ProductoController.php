@@ -57,6 +57,15 @@ class ProductoController {
         $this->view->show("mostrarDetallesProducto.php",$data);
     }
 
+    
+    
+ 
+    public function mostrarDetallesProductoCliente() {
+        require 'model/data/productoData.php';
+        $PD = new productoData();
+       $data['listado'] = $PD->mostrardetallesProducto($_GET['productoid']);
+        $this->view->show("mostrarDetallesProductoCliente.php",$data);
+    }
     public function detallesProducto() {
         require 'model/data/productoData.php';
         $PD = new productoData();

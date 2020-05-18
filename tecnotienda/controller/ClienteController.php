@@ -10,11 +10,11 @@ class ClienteController {
         session_start();
 
         if (session_destroy()) {
-         //   echo "Sesión destruida correctamente";
+            echo "Sesión destruida correctamente";
         } else {
-         //   echo "Error al destruir la sesión";
+            echo "Error al destruir la sesión";
         }
-        $this->view->show("loginAdmin.php");
+        header("Location: loginCliente.php ");
     }
 
     public function loginCliente() {
@@ -28,12 +28,17 @@ class ClienteController {
         $clienteid = $_POST["username"];
         $contra = $_POST["password"];
 
-        $_SESSION['usuario'] = $clienteid;
         $dato = $items->loginCliente($clienteid, $contra);
 
         if ($dato == 1) {
+            session_start();
+            if (!isset($_SESSION['usuario'])) {
+                $_SESSION['usuario'] = '';
+            }
+            $_SESSION['usuario'] = $clienteid;
+
             echo '<script src="./public/js/jquery-3.3.1.js" type="text/javascript"> </script>  <script>   $(function() {   $("#alertControl").html("<div > <strong>Advertencia!</strong>  Inicio de session correcto</div> ");  });</script>';
-            $this->view->show("compraArticulo.php", $dato);
+            $this->view->show("menuPrincipalCliente.php", $dato);
         } else {
             echo '<script src="./public/js/jquery-3.3.1.js" type="text/javascript"> </script>  <script>   $(function() {   $("#alertControl").html("<div > <strong>Advertencia!</strong> Usuario y/o Contraseña INCORRECTA </div> ");  });</script>';
             $this->view->show("loginCliente.php", $dato);
@@ -88,9 +93,9 @@ class ClienteController {
         $this->view->show("MenuClientes.php", $dato);
     }
 
-   public function listarClientesDetalle() {
+    public function listarClientesDetalle() {
         require 'model/data/clienteDato.php';
-        $items = new clienteDato(); 
+        $items = new clienteDato();
         $clienteid = $_GET["clienteid"];
         $dato['listado'] = $items->listarDatosClienteDetalle($clienteid);
         $this->view->show("detalleCliente.php", $dato);
@@ -151,18 +156,17 @@ class ClienteController {
         $correoid = $_POST["correoid"];
         $correos = $_POST["correo"];
         $array_num = count($correos);
-       
+
         for ($i = 0; $i < $array_num; $i++) {
             $valor .= $correos[$i] . ",";
         }
-       $resultado= $items->actualizarCorreo($correoid, $valor);
+        $resultado = $items->actualizarCorreo($correoid, $valor);
 
-       
+
         if ($resultado == 1) {
             echo '<script src="./public/js/jquery-3.3.1.js" type="text/javascript"> </script>  <script>   $(function() {   $("#alertControl").html("<div > <strong>Mensaje!</strong> Modificado exitosamente</div> ");  });</script>';
         } else {
-                  echo '<script src="./public/js/jquery-3.3.1.js" type="text/javascript"> </script>  <script>   $(function() {   $("#alertControl").html("<div > <strong>Advertencia!</strong> No se ha Modificado exitosamente</div> ");  });</script>';
-      
+            echo '<script src="./public/js/jquery-3.3.1.js" type="text/javascript"> </script>  <script>   $(function() {   $("#alertControl").html("<div > <strong>Advertencia!</strong> No se ha Modificado exitosamente</div> ");  });</script>';
         }
         $dato['listado'] = $items->filtarClienteById($_POST["id"]);
         $this->view->show("actualizarCorreo.php", $dato);
@@ -179,13 +183,12 @@ class ClienteController {
         for ($i = 0; $i < $array_num; $i++) {
             $valor .= $correos[$i] . ",";
         }
-      $resultado=  $items->actualizarTelefono($correoid, $valor);
+        $resultado = $items->actualizarTelefono($correoid, $valor);
 
-           if ($resultado == 1) {
+        if ($resultado == 1) {
             echo '<script src="./public/js/jquery-3.3.1.js" type="text/javascript"> </script>  <script>   $(function() {   $("#alertControl").html("<div > <strong>Mensaje!</strong> Modificado exitosamente</div> ");  });</script>';
         } else {
-                  echo '<script src="./public/js/jquery-3.3.1.js" type="text/javascript"> </script>  <script>   $(function() {   $("#alertControl").html("<div > <strong>Advertencia!</strong> No se ha Modificado exitosamente</div> ");  });</script>';
-      
+            echo '<script src="./public/js/jquery-3.3.1.js" type="text/javascript"> </script>  <script>   $(function() {   $("#alertControl").html("<div > <strong>Advertencia!</strong> No se ha Modificado exitosamente</div> ");  });</script>';
         }
         $dato['listado'] = $items->filtarClienteById2($_POST["id"]);
         $this->view->show("actualizarTelefono.php", $dato);
@@ -229,9 +232,9 @@ class ClienteController {
         if ($provincia == 7) {
             $provincia = "Limón";
         }
-       echo $canton = $_POST["canton"];
-      echo  $distrito = $_POST["distrito"];
-      echo  $descripcion = $_POST["direccion"];
+        echo $canton = $_POST["canton"];
+        echo $distrito = $_POST["distrito"];
+        echo $descripcion = $_POST["direccion"];
 
         $banco = $_POST["banco"];
         $numerocuenta = $_POST["numerocuenta"];
@@ -244,24 +247,23 @@ class ClienteController {
             $valor2 .= $telefono[$y] . ",";
             $temp2 .= "0" . ",";
         }
-        
-    
-              $resultado3 = $items->registrarCliente($usuario, $contra, $estado);
+
+
+        $resultado3 = $items->registrarCliente($usuario, $contra, $estado);
         if ($resultado3 == 1) {
-          
+
             echo $valor;
             echo $temp;
             $resultado1 = $items->registrarCorreo($usuario, $valor, $temp);
             $resultado2 = $items->registrarTelefono($usuario, $valor2, $temp2);
             $resultado4 = $items->registrarDireccion($usuario, $provincia, $canton, $distrito, $descripcion);
             $resultado5 = $items->registrarCuentaBancaria($usuario, $banco, $numerocuenta);
-           $resultado6 = $items->registrarClienteCategorizacion($usuario, $usuario);
+            $resultado6 = $items->registrarClienteCategorizacion($usuario, $usuario);
             if ($resultado2 == 1 && $resultado1 == 1 && $resultado4 == 1 && $resultado5 == 1 && $resultado6 == 1) {
                 echo '<script src="./public/js/jquery-3.3.1.js" type="text/javascript"> </script>  <script>   $(function() {   $("#alertControl").html("<div > <strong>Mensaje!</strong>  Se ha registrado correctamente el cliente</div> ");  });</script>';
-            }else{
-                      echo '<script src="./public/js/jquery-3.3.1.js" type="text/javascript"> </script>  <script>   $(function() {   $("#alertControl").html("<div > <strong>Mensaje!</strong> No  registrado </div> ");  });</script>';
+            } else {
+                echo '<script src="./public/js/jquery-3.3.1.js" type="text/javascript"> </script>  <script>   $(function() {   $("#alertControl").html("<div > <strong>Mensaje!</strong> No  registrado </div> ");  });</script>';
             }
-            
         } else if ($resultado3 == 0) {
             echo '<script src="./public/js/jquery-3.3.1.js" type="text/javascript"> </script>  <script>   $(function() {   $("#alertControl").html("<div > <strong>Advertencia!</strong>  Usuario existente</div> ");  });</script>';
         } else {
@@ -283,6 +285,12 @@ class ClienteController {
             echo '<script src="./public/js/jquery-3.3.1.js" type="text/javascript"> </script>  <script>   $(function() {   $("#alertControl").html("<div > <strong>Advertencia!</strong> No se ha Eliminado exitosamente</div> ");  });</script>';
         }
         $this->view->show("MenuClientes.php", $dato);
+    }
+
+    public function menuPrincipalCliente() {
+        require 'model/data/categoriaDato.php';
+        $PD = new categoriaDato();
+        echo json_encode($PD->obtenerNombreCategorias());
     }
 
 }
