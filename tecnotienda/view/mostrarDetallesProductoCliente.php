@@ -1,7 +1,8 @@
 <?php
 require 'public/headerCliente.php';
 ?>
-
+<script type='text/javascript' src='http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js?ver=1.3.2'></script>
+<script type="text/javascript" src="js/incrementing.js"></script>
 <body>
     <div class="container " 
          >
@@ -63,6 +64,9 @@ require 'public/headerCliente.php';
 
             }
         </style>
+
+
+
 
         <?php
         foreach ($vars['listado'] as $item) {
@@ -135,7 +139,7 @@ require 'public/headerCliente.php';
 
 
 
-              
+
                     <p class="bg-light"><strong>Sub Categoria: <?php echo $item[0] ?></strong></p> 
                     <hr style="color: #47748b">
                     <?php
@@ -153,7 +157,7 @@ require 'public/headerCliente.php';
                         <?php
                     }
                     ?>
-              
+  <p class="bg-light"><strong> Cantidad disponible: <?php echo $item[10] ?></strong></p> 
                 </div>   
                 <div class="col-sm-4">
 
@@ -166,29 +170,43 @@ require 'public/headerCliente.php';
                     for ($k = 0; $k <= $contadorComas2 - 1; $k++) {
                         ?>
 
-                            <p class="bg-light"><strong>   <?php echo $total2[$k] ?></strong></p> 
-                        
-                            <?php
-                        }
-                        ?>   
-                                         <hr style="color: #999">
-                        <div class="" style="border:  1px solid gray;background-color: #ddd"> 
-                     
-                            <p  class=""> <strong class="">  <center >₡<?php echo $item[1] ?></center></strong> </p>  
-                            <br>
+                        <p class="bg-light"><strong>   <?php echo $total2[$k] ?></strong></p> 
+
+                        <?php
+                    }
+                    ?>   
+                    <hr style="color: #999">
+                    <div class="" style="border:  1px solid gray;background-color: #ddd"> 
+
+                        <p  class=""> <strong class="">  <center >₡<?php echo $item[1] ?></center></strong> </p>  
+                        <br>
+                        <form action="?controlador=Compra&accion=agregaralcarrito"  method="post">
                             <div class="col-sm-12">
                                 <label class="form-control-label">Cantidad</label>
-                                <input type="number" class="form-control" name="numrango" value="25" min="10" > 
-                                <button class="btn btn-danger">+ </button>
-                                 <button class="btn btn-success">-</button>
-                            </div>
-                                <hr style="color: #999">
-                            <br>
-                            <center>     <a class="btn btn-outline-danger" href="?controlador=Cliente&accion=loginCliente">Añadir a el Carrito!</a></center>
-                            <br>
-                        </div>
+                                <input type="number" class="form-control" id="3" name="3" value="1" min="0" max="10" > 
+                                <center>
+                                    <br>
+                                    <button onclick="cantidad(3, 0)" class="btn btn-danger">-</button>
+                                    <button onclick="cantidad(3, 1)" class="btn btn-success">+</button>
 
-                    </div>  
+                                    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script> 
+
+                                    <input type="hidden" id="producto" name="producto"  value="<?php echo $item[9] ?>" >
+                                    <input type="hidden" id="cliente" name="cliente" value="<?php echo $_SESSION["usuario"] ?>">
+
+                                </center>
+                                <br>
+                                <br>
+                                <center>
+                                    <button type="submit" class="btn btn-outline-danger"> Añadir a el Carrito!</button>
+                                </center>
+                            </div>
+                        </form>   
+                        <hr style="color: #999">
+
+                    </div>
+
+                </div>  
 
 
 
@@ -217,6 +235,19 @@ require 'public/headerCliente.php';
         }
         ?>
     </div>
+
+
+    <script>
+                                    function cantidad(id_input, operacion) {
+                                        var numero = $('#' + id_input).val();
+                                        if (operacion == '1') {
+                                            numero++;
+                                        } else {
+                                            numero--;
+                                        }
+                                        $('#' + id_input).val(numero);
+                                    }
+    </script>
 
     <script  type="text/javascript">
         $(document).ready(function () {

@@ -220,9 +220,17 @@ and  imagen.tbproductoid=producto.tbproductoid
 
     public function mostrardetallesProducto($idproducto) {
         $consulta = $this->db->prepare('select 
-sub.tbsubcategorianombre,precio.tbproductoprecioventa,
-caracteristica.tbproductocartacteristicascriterio, caracteristica.tbproductocaracteristicasvalor,
-caracteristica.tbproductocaracteristicastitulo,imagen.tbproductoimagennombre,imagen.tbproductoimagenruta, producto.tbproductoestado,sub.tbsubcategoriaid
+sub.tbsubcategorianombre,
+precio.tbproductoprecioventa,
+caracteristica.tbproductocartacteristicascriterio,
+caracteristica.tbproductocaracteristicasvalor,
+caracteristica.tbproductocaracteristicastitulo,
+imagen.tbproductoimagennombre,
+imagen.tbproductoimagenruta,
+producto.tbproductoestado,
+sub.tbsubcategoriaid,
+producto.tbproductoid,
+producto.tbproductocantidad
 from tbproducto producto join tbproductoprecio precio on producto.tbproductoid=precio.tbproductoid
 join tbproductocaracteristica caracteristica on caracteristica.tbproductoid=precio.tbproductoid
 join tbproductoimagen imagen on imagen.tbproductoid=producto.tbproductoid

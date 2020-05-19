@@ -1,6 +1,6 @@
 
 <?php
-include_once 'public/headerCliente.php';
+include_once 'public/headerUsuario.php';
 ?>
 <br>
 
