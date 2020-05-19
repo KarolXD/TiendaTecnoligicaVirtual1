@@ -64,9 +64,9 @@ class productoData {
         $consulta->CloseCursor();
     }
 
-    public function modificarProducto($productoproductocodigobarras, $productocantidadgarantizada, $productocantidaddevuelto, $productosubcategoriaid, $productoestado, $productoid) {
-        $data = array($productoproductocodigobarras, $productocantidadgarantizada, $productocantidaddevuelto, $productosubcategoriaid, $productoestado, $productoid);
-        $consulta = $this->db->prepare('update tbproducto set  tbproductocodigobarras=? ,tbproductocantidadgarantiasaplicadas=?,tbproductocantidaddevoluciones=?,tbsubcategoriaid=?, tbproductoestado=? where tbproductoid=?');
+    public function modificarProducto($productoproductocodigobarras, $productocantidadgarantizada, $productocantidaddevuelto, $productosubcategoriaid, $productoestado, $productoid,$cantidad) {
+        $data = array($productoproductocodigobarras, $productocantidadgarantizada, $productocantidaddevuelto, $productosubcategoriaid, $productoestado, $productoid,$cantidad);
+        $consulta = $this->db->prepare('update tbproducto set  tbproductocodigobarras=? ,tbproductocantidadgarantiasaplicadas=?,tbproductocantidaddevoluciones=?,tbsubcategoriaid=?, tbproductoestado=?, tbproductocantidad=?  where tbproductoid=?');
         if ($consulta->execute($data)) {
             echo $consulta->errorInfo()[2];
             return 1;
@@ -75,9 +75,9 @@ class productoData {
         }
     }
 
-    public function modificarProducto2($productoproductocodigobarras, $productocantidadgarantizada, $productocantidaddevuelto, $productoestado, $productoid) {
-        $data = array($productoproductocodigobarras, $productocantidadgarantizada, $productocantidaddevuelto, $productoestado, $productoid);
-        $consulta = $this->db->prepare('update tbproducto set  tbproductocodigobarras=? ,tbproductocantidadgarantiasaplicadas=?,tbproductocantidaddevoluciones=?, tbproductoestado=? where tbproductoid=?');
+    public function modificarProducto2($productoproductocodigobarras, $productocantidadgarantizada, $productocantidaddevuelto, $productoestado,$cantidad,$productoid) {
+        $data = array($productoproductocodigobarras, $productocantidadgarantizada, $productocantidaddevuelto, $productoestado, $cantidad,$productoid);
+        $consulta = $this->db->prepare('update tbproducto set  tbproductocodigobarras=? ,tbproductocantidadgarantiasaplicadas=?,tbproductocantidaddevoluciones=?, tbproductoestado=? , tbproductocantidad=?  where tbproductoid=?');
         if ($consulta->execute($data)) {
             echo $consulta->errorInfo()[2];
             return 1;
@@ -86,7 +86,7 @@ class productoData {
         }
     }
 
-    public function registrarProducto($productosubcategoriaid, $productoproductocodigobarras, $productocantidadgarantizada, $productocantidaddevuelto, $productoestado, $productoactiovo) {
+    public function registrarProducto($productosubcategoriaid, $productoproductocodigobarras, $productocantidadgarantizada, $productocantidaddevuelto, $productoestado, $productoactiovo,$cantidad) {
         $sql = 'SELECT COUNT(*) as total FROM tbproducto where tbproductocodigobarras="' . $productoproductocodigobarras . '"';
         $del = $this->db->prepare($sql);
         if ($del->execute()) {
@@ -94,10 +94,10 @@ class productoData {
             if ($count['total'] > 0) {
                 return 0;
             } else {
-                $data = array($productosubcategoriaid, $productoproductocodigobarras, $productocantidadgarantizada, $productocantidaddevuelto, $productoestado, $productoactiovo);
+                $data = array($productosubcategoriaid, $productoproductocodigobarras, $productocantidadgarantizada, $productocantidaddevuelto, $productoestado, $productoactiovo,$cantidad);
                 $consulta = $this->db->prepare('INSERT INTO tbproducto(tbsubcategoriaid,tbproductocodigobarras,tbproductocantidadgarantiasaplicadas, '
-                        . 'tbproductocantidaddevoluciones,tbproductoestado,tbproductoactivo)'
-                        . ' VALUES(?,?,?,?,?,?)');
+                        . 'tbproductocantidaddevoluciones,tbproductoestado,tbproductoactivo,tbproductocantidad)'
+                        . ' VALUES(?,?,?,?,?,?,?)');
                 if ($consulta->execute($data)) {
                     $consulta->errorInfo()[2];
                     return 1;
@@ -201,7 +201,8 @@ producto.tbproductocodigobarras,producto.tbproductocantidadgarantiasaplicadas,pr
 sub.tbsubcategorianombre, precio.tbproductopreciocompra,precio.tbproductopreciocomprafecha,precio.tbproductoprecioventa,
 precio.tbproductoprecioventafecha, precio.tbproductoprecioganancia,
 caracteristica.tbproductocartacteristicascriterio, caracteristica.tbproductocaracteristicasvalor,
-caracteristica.tbproductocaracteristicastitulo,imagen.tbproductoimagennombre,imagen.tbproductoimagenruta, producto.tbproductoestado
+caracteristica.tbproductocaracteristicastitulo,imagen.tbproductoimagennombre,imagen.tbproductoimagenruta, producto.tbproductoestado,
+producto.tbproductocantidad
 from tbproducto producto join tbproductoprecio precio on producto.tbproductoid=precio.tbproductoid
 join tbproductocaracteristica caracteristica on caracteristica.tbproductoid=precio.tbproductoid
 join tbproductoimagen imagen on imagen.tbproductoid=producto.tbproductoid
@@ -220,7 +221,7 @@ and  imagen.tbproductoid=producto.tbproductoid
 
     public function mostrardetallesProducto($idproducto) {
         $consulta = $this->db->prepare('select 
-<<<<<<< Updated upstream
+
 sub.tbsubcategorianombre,
 precio.tbproductoprecioventa,
 caracteristica.tbproductocartacteristicascriterio,
@@ -232,13 +233,8 @@ producto.tbproductoestado,
 sub.tbsubcategoriaid,
 producto.tbproductoid,
 producto.tbproductocantidad
-=======
-sub.tbsubcategorianombre,precio.tbproductoprecioventa,
-caracteristica.tbproductocartacteristicascriterio, caracteristica.tbproductocaracteristicasvalor,
-caracteristica.tbproductocaracteristicastitulo,imagen.tbproductoimagennombre,imagen.tbproductoimagenruta,
-producto.tbproductoestado,sub.tbsubcategoriaid
 
->>>>>>> Stashed changes
+
 from tbproducto producto join tbproductoprecio precio on producto.tbproductoid=precio.tbproductoid
 join tbproductocaracteristica caracteristica on caracteristica.tbproductoid=precio.tbproductoid
 join tbproductoimagen imagen on imagen.tbproductoid=producto.tbproductoid
@@ -256,7 +252,7 @@ and  imagen.tbproductoid=producto.tbproductoid
 
     public function filtrarProductoById($idproducto) {
         $consulta = $this->db->prepare('select  p.tbproductoid, p.tbproductocodigobarras,p.tbproductocantidadgarantiasaplicadas, p.tbproductocantidaddevoluciones,
-p.tbproductoestado, s.tbsubcategorianombre
+p.tbproductoestado, s.tbsubcategorianombre, p.tbproductocantidad
  from tbproducto p join tbsubcategoria s on p.tbsubcategoriaid=s.tbsubcategoriaid 
  where p.tbsubcategoriaid=s.tbsubcategoriaid 
  and  p.tbproductoid="' . $idproducto . '"');

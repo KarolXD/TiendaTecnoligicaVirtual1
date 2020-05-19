@@ -13,8 +13,12 @@ require 'public/headerMenuP.php';
        <div  class="alertControl alert alert-primary" name="alertControl" id="alertControl"> </div>
 
                 <div class="form-group">
-                    <label class="">Código de Barras</label>
+                    <label class="form-control-label">Código de Barras</label>
                     <input class="form-control" id="productocodigobarras" name="productocodigobarras"type="number" placeholder="Código de Barras" required="">
+                </div>
+          <div class="form-group">
+                    <label class="form-control-label">Cantidad</label>
+                    <input class="form-control" id="cantidad" name="cantidad"type="number" placeholder="Cantidad de Producto" required="">
                 </div>
 <!--                <div class="form-group">
                     <label class="">Cantidad Garantia Aplicada</label>

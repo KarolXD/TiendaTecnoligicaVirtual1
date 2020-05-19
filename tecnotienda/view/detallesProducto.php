@@ -183,13 +183,14 @@ require 'public/headerMenuP.php';
                         <p class="bg-light">Cantidad devoluciones: <?php echo $item[2] ?></p> 
                         <hr style="color: #47748b">
                         <p class="bg-light">Sub Categoria: <?php echo $item[3] ?></p> 
-
-
+          <hr style="color: #47748b">
+                     <p class="bg-light">Cantidad Producto: <?php echo $item[15] ?></p> 
 
                     </div>
 
                 <div class="col-sm-4">
-                    <center class="">    <p class="bg-light"><strong>  Caracteristicas sobre el producto </strong> </p></center>
+                    <center class="">    <p class="bg-light"><strong>  Caracteristicas sobre el producto      </strong> </p></center>
+              
                     <?php
                     $contenido3 = ($item[12]);
                     $total3 = explode(",", $contenido3);
@@ -201,11 +202,11 @@ require 'public/headerMenuP.php';
                    
                             <p class="bg-light"> <?php echo $total3[$d] ?></p> 
                             <hr style="color: #47748b">
-                             <br>
+                            
                         <?php
                     }
                     ?>
-
+  Color-Tamaño-Distribucion Teclado
                 </div>
 
                 <div class="col-sm-4">

@@ -80,10 +80,14 @@ require 'public/headerCliente.php';
             <div class="animated infinite bounceInRight slow">
                 <center>  <p class="bg-light"><strong>Estado del Producto: <?php echo $item[7] ?></strong></p> </center>
             </div>
+        
+<br>
 
             <!--    <div class="container">-->
-            <div class="row" style="border-style: hidden">
+            <div class="row" style="background-color: #ddd">
+        
                 <div class="col-sm-5">
+                    <br>        <br>
                     <div class="gallery">
 
                         <?php
@@ -115,7 +119,7 @@ require 'public/headerCliente.php';
                             </div>
                         </div>
                     </div> 
-
+                
 
                 </div> 
 
@@ -139,72 +143,51 @@ require 'public/headerCliente.php';
 
 
 
+                    <p class="bg-light"><strong>Color</strong></p> 
+                    <hr style="color: #47748b">
+                            <p class="bg-light"><strong>Tamaño</strong></p> 
+                    <hr style="color: #47748b">
+                            <p class="bg-light"><strong>Distri Teclado</strong></p> 
+                    <hr style="color: #47748b">
 
                     <p class="bg-light"><strong>Sub Categoria: <?php echo $item[0] ?></strong></p> 
                     <hr style="color: #47748b">
-                    <?php
+              
+      <p class="bg-light"><strong> Cantidad disponible: <?php echo $item[10] ?></strong></p> 
+                    </div>   
+                    <div class="col-sm-4">
+
+                        <p class="text-warning"> </p>
+
+                        <?php
+                        $contenido2 = ($item[3]);
+                        $total2 = explode(",", $contenido2);
+                        $contadorComas2 = substr_count($contenido2, ',');
+                        for ($k = 0; $k <= $contadorComas2 - 1; $k++) {
+                            ?>
+
+                                <p class="bg-light"><strong>   <?php echo $total2[$k] ?></strong></p> 
+
+                                <?php
+                            }
+                            ?>   
+                        <hr style="color: #999">
+                              <?php
                     $contenido3 = ($item[5]);
                     $total3 = explode(",", $contenido3);
                     $contadorComas3 = substr_count($contenido3, ',');
 
 
                     for ($d = 0; $d <= $contadorComas3 - 1; $d++) {
-                        ?>
+                            ?>
 
-                        <p class="bg-light"><strong> <?php echo $total3[$d] ?></strong></p> 
-                        <hr style="color: #47748b">
+                                <p class="bg-light"><strong> <?php echo $total3[$d] ?></strong></p> 
+                                <hr style="color: #47748b">
 
-                        <?php
-                    }
-                    ?>
-  <p class="bg-light"><strong> Cantidad disponible: <?php echo $item[10] ?></strong></p> 
-                </div>   
-                <div class="col-sm-4">
+                                <?php
+                            }
+                            ?>
 
-                    <p class="text-warning"> </p>
-
-                    <?php
-                    $contenido2 = ($item[3]);
-                    $total2 = explode(",", $contenido2);
-                    $contadorComas2 = substr_count($contenido2, ',');
-                    for ($k = 0; $k <= $contadorComas2 - 1; $k++) {
-                        ?>
-
-                        <p class="bg-light"><strong>   <?php echo $total2[$k] ?></strong></p> 
-
-                        <?php
-                    }
-                    ?>   
-                    <hr style="color: #999">
-                    <div class="" style="border:  1px solid gray;background-color: #ddd"> 
-
-                        <p  class=""> <strong class="">  <center >₡<?php echo $item[1] ?></center></strong> </p>  
-                        <br>
-                        <form action="?controlador=Compra&accion=agregaralcarrito"  method="post">
-                            <div class="col-sm-12">
-                                <label class="form-control-label">Cantidad</label>
-                                <input type="number" class="form-control" id="3" name="3" value="1" min="0" max="10" > 
-                                <center>
-                                    <br>
-                                    <button onclick="cantidad(3, 0)" class="btn btn-danger">-</button>
-                                    <button onclick="cantidad(3, 1)" class="btn btn-success">+</button>
-
-                                    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script> 
-
-                                    <input type="hidden" id="producto" name="producto"  value="<?php echo $item[9] ?>" >
-                                    <input type="hidden" id="cliente" name="cliente" value="<?php echo $_SESSION["usuario"] ?>">
-
-                                </center>
-                                <br>
-                                <br>
-                                <center>
-                                    <button type="submit" class="btn btn-outline-danger"> Añadir a el Carrito!</button>
-                                </center>
-                            </div>
-                        </form>   
-                        <hr style="color: #999">
-
-                    </div>
 
                 </div>  
 
@@ -212,15 +195,64 @@ require 'public/headerCliente.php';
 
 
             </div> 
-            <!--    </div>-->
+      
 
 
+    <br>
+       
+            <div class="row">
+         
+                              <div class="col-sm-4"></div>
+                <div class="col-sm-4">
+                        <br>
+                        <div class="" style="background-color: #fafafa"> 
+
+                            <p  class="" style="background-color: #7386D5"> <strong class="">   <center > <font size="4">₡<?php echo $item[1] ?> </font></center></strong> </p>  
+                            <hr style="color: #999">
+
+                                <form action="?controlador=Compra&accion=agregaralcarrito"  method="post">
+                                    <div class="row">
+
+                                        <div class="col-sm-8">
+                                            <center>    <label class="form-control-label">Cantidad</label> 
+                                            <input type="number" class="form-control input-sm" id="3" name="3" value="1" min="0" max="10" > </center>
+                                        </div>
 
 
-            <br><br>
+                                        <div class="col-sm-4">
+                                         <center>    <label class="form-control-label"></label> </center>
+                                            <button type="button" onclick="cantidad(3, 0)" class="btn btn-danger"><font size="4">- </font></button>
+
+                                            <button type="button" onclick="cantidad(3, 1)" class="btn btn-success"><font size="4">+</font></button>
+                                        </div>
+                                    </div>
+                                    <center>
+                                        <input type="hidden" id="producto" name="producto"  value="<?php echo $item[9] ?>" >
+                                        <input type="hidden" id="cliente" name="cliente" value="<?php echo $_SESSION["usuario"] ?>">
+
+                                    </center>
 
 
+                                    <hr style="color: #999">
+                                    <center>
+                                        <button type="submit" class="btn btn-outline-danger"> Añadir a el Carrito!</button>
+                                    </center>
+                                    <br>
+                         
+                        </form>   
+                      
 
+                    </div>
+                    
+                </div>
+  
+                       <div class="col-sm-4"></div>
+            </div>
+<br><br>
+            <br>
+            <br>
+
+   
 
 
             <center><a  href="?controlador=SubCategoria&accion=mostrardetallesSubCategoriaCliente&subcategoriaid= <?php echo $item[8] ?>" class="btn btn-outline-info"> Regresar a el menú</a></center>
@@ -236,6 +268,7 @@ require 'public/headerCliente.php';
         ?>
     </div>
 
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script> 
 
     <script>
                                     function cantidad(id_input, operacion) {

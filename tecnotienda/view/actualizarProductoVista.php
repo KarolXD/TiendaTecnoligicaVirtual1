@@ -47,7 +47,10 @@ require 'public/headerMenuP.php';
                             <option selected="" value="-1"> Selecciona:</option>
                         </select>
                     </div>
-
+    <div class="form-group ">
+                        <label class="form-control-label">Cantidad Producto</label>
+                        <input class="form-control" id="cantidad"   value="<?php echo $item[6] ?>" name="cantidad" type="number">
+                    </div>
                 
                 
                     <div class="form-group ">

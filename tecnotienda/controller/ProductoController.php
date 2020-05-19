@@ -166,10 +166,13 @@ class ProductoController {
         require 'model/data/productoData.php';
         $PD = new productoData();
         $id = filter_input(INPUT_POST, 'productoid');
+   
         if ($_POST["subcategoriaid"] == -1) {
-            $PD->modificarProducto2($_POST["productocodigobarras"], $_POST["productogarantiasaplicadas"], $_POST["productosdevueltos"], $_POST["productoestado"], $_POST["productoid"]);
+            $PD->modificarProducto2($_POST["productocodigobarras"], $_POST["productogarantiasaplicadas"], $_POST["productosdevueltos"], 
+                    $_POST["productoestado"],$_POST["cantidad"],$_POST["productoid"]);
         } else {
-            $PD->modificarProducto($_POST["productocodigobarras"], $_POST["productogarantiasaplicadas"], $_POST["productosdevueltos"], $_POST["subcategoriaid"], $_POST["productoestado"], $_POST["productoid"]);
+            $PD->modificarProducto($_POST["productocodigobarras"], $_POST["productogarantiasaplicadas"], $_POST["productosdevueltos"], 
+                    $_POST["subcategoriaid"], $_POST["productoestado"],$_POST["cantidad"],$_POST["productoid"]);
         }
         $data['actualizarProductos'] = $PD->filtrarProductoById($id);
         $this->view->show("actualizarProductoVista.php", $data);
@@ -238,7 +241,8 @@ class ProductoController {
         $productosubcategoriaid = $_POST['subcategoriaid'];
         $productoestado = $_POST['productoestado'];
         $productoactivo = 0;
-
+       $productocantidad= $_POST['cantidad'];
+        
         //precio
         $productopreciocompra = $_POST['preciocompra'];
         $productopreciofechacompra = $_POST['preciofechacompra'];
@@ -301,7 +305,7 @@ class ProductoController {
                 echo 'Ocurrió un error al subir la imagen, intente otra vez';
             }
         }
-        $resultado1 = $PD->registrarProducto($productosubcategoriaid, $productocodigobarras, $productocantidadgarantizada, $productocantidaddevuelto, $productoestado, $productoactivo);
+        $resultado1 = $PD->registrarProducto($productosubcategoriaid, $productocodigobarras, $productocantidadgarantizada, $productocantidaddevuelto, $productoestado, $productoactivo,$productocantidad);
 
         if ($resultado1 == 1 && $flag == true) {
 

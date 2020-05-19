@@ -124,6 +124,7 @@ require 'public/headerUsuario.php';
                     $contadorComas1 = substr_count($contenido1, ',');
                     for ($j = 0; $j <= $contadorComas1 - 1; $j++) {
                         ?>
+
                         <p class="bg-light"><strong>  <?php echo $total1[$j] ?> </strong>   <strong id="valor" name="valor"> </strong></p> 
 
 
@@ -134,26 +135,22 @@ require 'public/headerUsuario.php';
                     ?>
 
 
+                    <p class="bg-light"><strong>  Color</strong></p> 
+                    <hr style="color: #47748b">
 
-                    <p class="bg-light">      <span class="input-group-text">Precio venta:  <strong>  ₡<?php echo $item[1] ?></strong> </span></p>  
+                    <p class="bg-light"><strong>  Tamaño</strong></p> 
+                    <hr style="color: #47748b">
+
+                    <p class="bg-light"><strong>  Disc.Teclado</strong></p> 
+                    <hr style="color: #47748b">
+
+                    <p class="bg-light">      <span class="">Disponibles :  <strong>  <?php echo $item[10] ?></strong> </span></p>  
+
+
                     <hr style="color: #47748b">
                     <p class="bg-light"><strong>Sub Categoria: <?php echo $item[0] ?></strong></p> 
-                    <hr style="color: #47748b">
-                    <?php
-                    $contenido3 = ($item[5]);
-                    $total3 = explode(",", $contenido3);
-                    $contadorComas3 = substr_count($contenido3, ',');
-
-
-                    for ($d = 0; $d <= $contadorComas3 - 1; $d++) {
-                        ?>
-
-                        <p class="bg-light"><strong> <?php echo $total3[$d] ?></strong></p> 
-                        <hr style="color: #47748b">
-
-                        <?php
-                    }
-                    ?>
+                         <hr style="color: #47748b">
+                    <p class="bg-light">      <span class="btn btn-outline-info">Precio :  <strong >  ₡<?php echo $item[1] ?></strong> </span></p>  
 
                 </div>   
                 <div class="col-sm-4">
@@ -172,6 +169,22 @@ require 'public/headerUsuario.php';
                         <?php
                     }
                     ?>    
+
+                    <?php
+                    $contenido3 = ($item[5]);
+                    $total3 = explode(",", $contenido3);
+                    $contadorComas3 = substr_count($contenido3, ',');
+
+
+                    for ($d = 0; $d <= $contadorComas3 - 1; $d++) {
+                        ?>
+
+                        <p class="bg-light"><strong> <?php echo $total3[$d] ?></strong></p> 
+                        <hr style="color: #47748b">
+
+                        <?php
+                    }
+                    ?> 
                 </div>  
 
 

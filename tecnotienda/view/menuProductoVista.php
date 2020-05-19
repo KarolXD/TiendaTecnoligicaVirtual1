@@ -9,7 +9,7 @@ require 'public/headerMenuP.php';
             <form class="form-inline my-2 my-lg-0"  method="post" action="?controlador=Producto&accion=filtrarBySubCategoria">
 
                 <select name="subcategorianombre" id="subcategorianombre"  class="form-control mr-sm-2">  </select>
-                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Filtrar por Sub Categoria</button>
+                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Filtrar </button>
 
             </form>
         </div>
