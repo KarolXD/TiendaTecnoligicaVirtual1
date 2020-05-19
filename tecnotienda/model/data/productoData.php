@@ -220,6 +220,7 @@ and  imagen.tbproductoid=producto.tbproductoid
 
     public function mostrardetallesProducto($idproducto) {
         $consulta = $this->db->prepare('select 
+<<<<<<< Updated upstream
 sub.tbsubcategorianombre,
 precio.tbproductoprecioventa,
 caracteristica.tbproductocartacteristicascriterio,
@@ -231,6 +232,13 @@ producto.tbproductoestado,
 sub.tbsubcategoriaid,
 producto.tbproductoid,
 producto.tbproductocantidad
+=======
+sub.tbsubcategorianombre,precio.tbproductoprecioventa,
+caracteristica.tbproductocartacteristicascriterio, caracteristica.tbproductocaracteristicasvalor,
+caracteristica.tbproductocaracteristicastitulo,imagen.tbproductoimagennombre,imagen.tbproductoimagenruta,
+producto.tbproductoestado,sub.tbsubcategoriaid
+
+>>>>>>> Stashed changes
 from tbproducto producto join tbproductoprecio precio on producto.tbproductoid=precio.tbproductoid
 join tbproductocaracteristica caracteristica on caracteristica.tbproductoid=precio.tbproductoid
 join tbproductoimagen imagen on imagen.tbproductoid=producto.tbproductoid
