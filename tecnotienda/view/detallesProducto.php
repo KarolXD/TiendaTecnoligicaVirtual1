@@ -171,9 +171,10 @@ require 'public/headerMenuP.php';
 
 
 
-            <div class="row">
+            <div class="row" style="background-color: #ddd;border: 1px dotted">
 
                     <div class="col-sm-4">
+                        <br>
                         <center class="">        <p class="bg-light"> <strong>Datos sobre el producto </strong></p></center>
 
                         <p class="bg-light">Código de barras: <?php echo $item[0] ?></p> 
@@ -187,9 +188,19 @@ require 'public/headerMenuP.php';
                      <p class="bg-light">Cantidad Producto: <?php echo $item[15] ?></p> 
 
                     </div>
-
-                <div class="col-sm-4">
-                    <center class="">    <p class="bg-light"><strong>  Caracteristicas sobre el producto      </strong> </p></center>
+  <div class="col-sm-2">
+      <br>
+          <center class="">    <p class="bg-light"><strong>  Caracteristicas      </strong> </p></center>
+               <p class="bg-light"> Color:</p> 
+                            <hr style="color: #47748b">
+                             <p class="bg-light"> Tamano:</p> 
+                            <hr style="color: #47748b">
+                             <p class="bg-light">Dis.Teclado:</p> 
+                            <hr style="color: #47748b">
+    </div>
+                <div class="col-sm-2">
+                    <br>
+                    <center class="">    <p class="bg-light"><strong>   sobre el producto      </strong> </p></center>
               
                     <?php
                     $contenido3 = ($item[12]);
@@ -197,7 +208,7 @@ require 'public/headerMenuP.php';
                     $contadorComas3 = substr_count($contenido3, ',');
 
 
-                    for ($d = 0; $d <= $contadorComas3 - 1; $d++) {
+                    for ($d = 0; $d <= $contadorComas3 ; $d++) {
                         ?>
                    
                             <p class="bg-light"> <?php echo $total3[$d] ?></p> 
@@ -206,11 +217,11 @@ require 'public/headerMenuP.php';
                         <?php
                     }
                     ?>
-  Color-Tamaño-Distribucion Teclado
+
                 </div>
 
                 <div class="col-sm-4">
-
+<br>
                         <center class=""> <p class="bg-light"> <strong> Datos sobre el precio </strong></p></center>
                         <p class="bg-light">Precio de Compra: <?php echo $item[4] ?></p> 
                         <hr style="color: #47748b">

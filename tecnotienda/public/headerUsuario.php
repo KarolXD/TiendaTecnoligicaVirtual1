@@ -3,12 +3,13 @@
 <html lang="es">
     <!DOCTYPE html>
     <html lang="en">
-        <head>
+        <head profile="http://www.w3.org/2005/10/profile">
+              <link rel="icon" type="image/png" href="../img/logo.png" />
             <title>Tienda Tecnologica Virtual</title>
             <meta charset="utf-8">
-            <link rel="icon" type="image/png" href="./public/img/logo.png" />
+          
             <meta name="viewport" content="width=device-width, initial-scale=1">
-              <link rel="stylesheet"  href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+          <link rel="stylesheet"  href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
          <link href="./public/css/animate.css" rel="stylesheet" type="text/css"/>
           <link href="./public/css/animate.min.css" rel="stylesheet" type="text/css"/>
             <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
@@ -22,7 +23,7 @@
                 <nav class="navbar navbar-light bg-light animated infinite ">
                     <a class="navbar-brand" href="?controlador=Usuario&accion=menuPrincipalUsuario">
                         <img src="./public/img/logo.png" width="30" height="30" class="d-inline-block align-top" alt="">
-                        <strong>  Bienvenidos a TecnoTienda d </strong>
+                        <strong>  Bienvenidos a TecnoTienda </strong>
                     </a>
                 </nav>
                 <nav class="navbar navbar-expand-lg navbar-light bg-light" >

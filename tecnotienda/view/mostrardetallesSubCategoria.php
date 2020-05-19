@@ -93,7 +93,7 @@ include_once 'public/headerUsuario.php';
 
             <div class="card" style="width: 18rem;">
 
-                <center class="titulo">    <font style="text-transform: uppercase;">   <p class="card-text"> <strong><?php echo$item[3] ?>   </strong> </p>    </font> 
+                <center class="btn btn-outline-success">    <font style="text-transform: uppercase;">   <p class="card-text"> <strong> <?php echo$item[3] ?>   </strong> </p>    </font> 
                 </center>
 
 
@@ -118,7 +118,7 @@ include_once 'public/headerUsuario.php';
                     <hr style="border-top: 1px solid black;">
                     <a class="etiqueta"  href="?controlador=Producto&accion=mostrarDetallesProducto&productoid=<?php echo$item[4] ?>">  <h5 class="card-title"><?php echo$item[1] ?>  </h5> </a>
                 </div>
-                   <a class="btn nav-link" href="?controlador=Cliente&accion=loginCliente">Comprar</a>
+                   <a class="btn btn-outline-success animated infinite flipInY"   href="?controlador=Cliente&accion=loginCliente"> <strong>Comprar AHORA! </strong></a>
                              
 
                 <hr style="border-top: 5px solid black;">

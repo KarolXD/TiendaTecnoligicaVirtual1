@@ -58,7 +58,7 @@ $(document).ready(function () {
                 var filas = "";
                 $.each(resultado, function (index, val) {
                  
-                    var columnaModificar = "<a class='nav-link' href='?controlador=SubCategoria&accion=mostrarSubCategorias1&categoriaid=" + val.tbcategoriaid + "'> "+val.tbcategorianombre+" </a> ";
+                    var columnaModificar = "<a class='nav-link' href='?controlador=SubCategoria&accion=mostrarSubCategorias&categoriaid=" + val.tbcategoriaid + "'> "+val.tbcategorianombre+" </a> ";
                    filas+="<div class='line'></div>" ;
                     filas+= " <li class='nav-item' >"+columnaModificar +"</li>";
                 });

@@ -169,14 +169,16 @@ require 'public/headerUsuario.php';
                         <?php
                     }
                     ?>    
-
+ 
+ 
                     <?php
+                   
                     $contenido3 = ($item[5]);
                     $total3 = explode(",", $contenido3);
                     $contadorComas3 = substr_count($contenido3, ',');
 
 
-                    for ($d = 0; $d <= $contadorComas3 - 1; $d++) {
+                    for ($d = 0; $d <= $contadorComas3 ; $d++) {
                         ?>
 
                         <p class="bg-light"><strong> <?php echo $total3[$d] ?></strong></p> 

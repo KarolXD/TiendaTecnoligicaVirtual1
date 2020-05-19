@@ -8,7 +8,7 @@ include_once 'public/headerMenuP.php';
         <div class="row">
 
             <div class="col-md-12  alert-info">
-                <label class=""> <font size="34" > Sitio Administradivo Bienvenido a   Tecno Tienda </font></label>
+                <label class=""> <font size="34" > Sitio Administrativo Bienvenido a   Tecno Tienda </font></label>
 
 
             </div>
