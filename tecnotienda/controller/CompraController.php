@@ -31,15 +31,35 @@ class CompraController {
         $dato['listado'] = $items->listarCarritoCompras($usuario);
         $this->view->show("vistaCarritoCliente.php", $dato);
     }
+
     public function quitardelCarrito() {
         session_start();
         require 'model/data/compraDato.php';
-        $items = new compraDato();     
+        $items = new compraDato();
         $usuario = $_SESSION["usuario"];
         $items->quitardelCarrito($_GET["productoid"]);
         $dato['listado'] = $items->listarCarritoCompras($usuario);
         $this->view->show("vistaCarritoCliente.php", $dato);
     }
+
+    public function vistaPago() {
+        session_start();
+        require 'model/data/compraDato.php';
+        $items = new compraDato();
+        $usuario = $_SESSION["usuario"];
+        $dato['listado'] = $items->listarPago($usuario);
+        $dato['listado2'] = $items->listarPagoDatosCliente($usuario);
+        $this->view->show("clientePago.php", $dato);
+    }
+
+    public function compraCliente() {
+        require 'model/data/compraDato.php';
+        $items = new compraDato();
+        $usuario = $_POST["cliente"];
+        $detalle = $_POST["detalle"];
+        
+    }
+
 }
 
 ?>

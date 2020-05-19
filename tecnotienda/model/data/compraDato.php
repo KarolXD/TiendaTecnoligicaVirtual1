@@ -46,7 +46,12 @@ and  imagen.tbproductoid=producto.tbproductoid
     }
 
     public function listarCarritoCompras($clienteid) {
-        $consulta = $this->db->prepare('SELECT carrito.tbproductoid,carrito.tbclientecarritocompracantidad, precioproducto.tbproductoprecioventa,productocaracteristica.tbproductocaracteristicastitulo,carrito.tbcarritocompraid
+        $consulta = $this->db->prepare('SELECT carrito.tbproductoid,
+            carrito.tbclientecarritocompracantidad, 
+            precioproducto.tbproductoprecioventa,
+            productocaracteristica.tbproductocaracteristicastitulo,
+            carrito.tbcarritocompraid,
+CONCAT(carrito.tbclientecarritocompracantidad*precioproducto.tbproductoprecioventa) AS SubTotal
             FROM bdtecnotienda.tbclientecarritocompra carrito 
 join tbproductoprecio precioproducto on precioproducto.tbproductoid = carrito.tbproductoid
 join tbproductocaracteristica productocaracteristica on productocaracteristica.tbproductoid  = carrito.tbproductoid
@@ -59,13 +64,75 @@ where tbclienteid = "' . $clienteid . '" and precioproducto.tbproductoid = carri
 
     public function quitardelCarrito($productoid) {
         $consulta = $this->db->prepare('DELETE FROM `bdtecnotienda`.`tbclientecarritocompra`
-        WHERE tbproductoid="' . $productoid . '"');
+        WHERE tbcarritocompraid="' . $productoid . '"');
         $consulta->execute();
         $resultado = $consulta->fetchAll();
         $consulta->CloseCursor();
         return $resultado;
     }
 
+    public function registrarCompra($idcliente, $detallecompra, $ventaporcobrar, $ventacontado) {
+        $data = array($idcliente, $detallecompra, $ventaporcobrar, $ventacontado);
+        $consulta = $this->db->prepare('INSERT INTO `bdtecnotienda`.`tbclientecompra`
+        (`tbclienteid`,
+        `tbcompradetalle`,
+        `tbventaporcobrar`,
+        `tbventacontado`)
+        VALUES (?,?,?,?);');
+        if ($consulta->execute($data)) {
+            $consulta->errorInfo()[2];
+            return 0;
+        } else {
+            return 1;
+        }
+    }
+
+    public function listarPago($clienteid) {
+        $consulta = $this->db->prepare('SELECT
+CONCAT("Cantidad: ",carrito.tbclientecarritocompracantidad, ", Titulo: ",caracteristica.tbproductocaracteristicastitulo, ", precio: " ,precio.tbproductoprecioventa, ", subTotal: ", carrito.tbclientecarritocompracantidad*precio.tbproductoprecioventa, ".") AS detalle
+, carrito.tbclientecarritocompracantidad, precio.tbproductoprecioventa
+ FROM bdtecnotienda.tbcliente cliente 
+join  bdtecnotienda.tbclientecarritocompra carrito on carrito.tbclienteid=cliente.tbclienteusuario 
+join bdtecnotienda.tbproducto producto on producto.tbproductoid=carrito.tbproductoid 
+join bdtecnotienda.tbproductocaracteristica caracteristica on caracteristica.tbproductoid=producto.tbproductoid
+join bdtecnotienda.tbproductoprecio precio on precio.tbproductoid = producto.tbproductoid
+where cliente.tbclienteusuario=carrito.tbclienteid and producto.tbproductoid = caracteristica.tbproductoid 
+and cliente.tbclienteusuario = "' . $clienteid . '";');
+        $consulta->execute();
+        $resultado = $consulta->fetchAll();
+        $consulta->CloseCursor();
+        return $resultado;
+    }
+
+    public function listarPagoDatosCliente($clienteid) {
+        $consulta = $this->db->prepare('SELECT 
+cliente.tbclienteusuario,correo.tbcorreoatributo,banco.tbclientedatosbancarionumerocuenta
+ FROM bdtecnotienda.tbcliente cliente
+join bdtecnotienda.tbcorreo correo on correo.tbtbclienteid=cliente.tbclienteusuario
+join bdtecnotienda.tbclientedatobancario banco on banco.tbtbclienteid=cliente.tbclienteusuario
+where cliente.tbclienteusuario=correo.tbtbclienteid and cliente.tbclienteusuario=correo.tbtbclienteid
+and cliente.tbclienteusuario= "' . $clienteid . '";');
+        $consulta->execute();
+        $resultado = $consulta->fetchAll();
+        $consulta->CloseCursor();
+        return $resultado;
+    }
+
+      public function registrarCompra($idcliente, $detallecompra, $ventaporcobrar, $ventacontado) {
+        $data = array($idcliente, $detallecompra, $ventaporcobrar, $ventacontado);
+        $consulta = $this->db->prepare('INSERT INTO `bdtecnotienda`.`tbclientecompra`
+        (`tbclienteid`,
+        `tbcompradetalle`,
+        `tbventaporcobrar`,
+        `tbventacontado`)
+        VALUES (?,?,?,?);');
+        if ($consulta->execute($data)) {
+            $consulta->errorInfo()[2];
+            return 0;
+        } else {
+            return 1;
+        }
+    }
 }
 
 ?>
