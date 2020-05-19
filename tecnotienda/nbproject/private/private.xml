@@ -20,9 +20,9 @@
     </editor-bookmarks>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/Archivos%20de%20programa%20(x86)/EasyPHP-Devserver-17/eds-www/tecnotienda/tecnotienda/view/mostrardetallesSubCategoria.php</file>
-            <file>file:/D:/Archivos%20de%20programa%20(x86)/EasyPHP-Devserver-17/eds-www/tecnotienda/tecnotienda/view/mostrarDetallesProducto.php</file>
-            <file>file:/D:/Archivos%20de%20programa%20(x86)/EasyPHP-Devserver-17/eds-www/tecnotienda/tecnotienda/public/js/vendor/productoJS.js</file>
+            <file>file:/C:/Program%20Files%20(x86)/EasyPHP-Devserver-17/eds-www/tecnotienda/tecnotienda/controller/CompraController.php</file>
+            <file>file:/C:/Program%20Files%20(x86)/EasyPHP-Devserver-17/eds-www/tecnotienda/tecnotienda/view/vistaCarritoCliente.php</file>
+            <file>file:/C:/Program%20Files%20(x86)/EasyPHP-Devserver-17/eds-www/tecnotienda/tecnotienda/model/data/compraDato.php</file>
         </group>
     </open-files>
 </project-private>
