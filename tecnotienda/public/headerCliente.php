@@ -46,11 +46,15 @@
             <header>
 
 
-                <nav class="navbar navbar-light bg-light">
-                    <a class="navbar-brand" href="?controlador=Cliente&accion=menuPrincipalCliente1">
-                        <img src="./public/img/logo.png" width="30" height="30" class="d-inline-block align-top" alt="">
+                             <nav class="navbar   " style="background-color: #ddd">
+                                 <a class="navbar-brand" href="?controlador=Cliente&accion=menuPrincipalCliente1" style="color:white">
+                        <img src="./public/img/logo.png" width="50" height="50" class="d-inline-block align-top" alt="">
                         Bienvenido a TiendaTienda
                     </a>
+                                  <li class="nav-item" style="color:#ddd">
+                              
+                                    <a class=" btn btn-outline-dark" href="?controlador=Cliente&accion=cerrarSession">        <img src="./public/img/signs.png" alt=""/>Cerrar</a>
+                                </li>
                 </nav>
 
                 <div class="content">
@@ -65,6 +69,13 @@
                                 <a class="dropdown-item" href="#">Pagina Princpal</a>
                             </div>
                         </div>
+                           <button class=" btn btn-outline-info my-2 my-sm-0" >
+                            Detalles Pago
+                        </button>
+                          
+                        <a href="?controlador=Compra&accion=listarcarrito" class=" btn btn-outline-info my-2 my-sm-0 " >
+                            Carrito
+                        </a>
                         <div class="line"></div>
                         <div class="collapse navbar-collapse" id="navbarSupportedContent">
                             <ul class="navbar-nav mr-auto" id="tblmenuUsuario1" name="tblmenuUsuario1">
@@ -78,27 +89,22 @@
                         </div>
 
 
-                        <button class=" btn btn-outline-info my-2 my-sm-0" >
-                            Detalles Pago
-                        </button>
-                        <a href="?controlador=Compra&accion=listarcarrito" class=" btn btn-outline-info my-2 my-sm-0 " >
-                            Carrito
-                        </a>
+                   
                         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                             <span class="navbar-toggler-icon"></span>
                         </button>
 
 
-
                         <div class="collapse navbar-collapse" id="navbarNav">
                             <ul class="navbar-nav ml-auto">
                                 <li class="nav-item active">
-                                    <a class="nav-link  alert-info"><strong >Bienvenido  <?php echo $_SESSION['usuario'] ?></strong> </a>
+                                    <a class="nav-link  alert-info"><strong >
+                        <img src="./public/img/avatar.png"  alt=""/>  Bienvenido  <?php echo $_SESSION['usuario'] ?></strong> </a>
                                 </li>
-
-                                <li class="nav-item">
-                                    <a class="nav-link  btn btn-outline-warning" href="?controlador=Cliente&accion=cerrarSession">Cerrar</a>
-                                </li>
+ <li class="line">
+                                  
+                               </li>
+                               
                             </ul>
                         </div>
                     </nav>

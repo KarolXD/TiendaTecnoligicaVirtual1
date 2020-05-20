@@ -258,7 +258,7 @@ class ClienteController {
             $resultado2 = $items->registrarTelefono($usuario, $valor2, $temp2);
             $resultado4 = $items->registrarDireccion($usuario, $provincia, $canton, $distrito, $descripcion);
             $resultado5 = $items->registrarCuentaBancaria($usuario, $banco, $numerocuenta);
-            $resultado6 = $items->registrarClienteCategorizacion($usuario, $usuario);
+            $resultado6 = $items->registrarClienteCategorizacion($usuario, $contra);
             if ($resultado2 == 1 && $resultado1 == 1 && $resultado4 == 1 && $resultado5 == 1 && $resultado6 == 1) {
                 echo '<script src="./public/js/jquery-3.3.1.js" type="text/javascript"> </script>  <script>   $(function() {   $("#alertControl").html("<div > <strong>Mensaje!</strong>  Se ha registrado correctamente el cliente</div> ");  });</script>';
             } else {

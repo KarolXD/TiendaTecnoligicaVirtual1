@@ -51,7 +51,7 @@ require 'public/headerCliente.php';
                 }
             }
             .gallery {
-                filter:brightness(130%);
+         
                 animation:escalar;
                 cursor:pointer;
                 animation:escalar 1.4s infinite alternate; 
@@ -72,7 +72,8 @@ require 'public/headerCliente.php';
         foreach ($vars['listado'] as $item) {
             ?>
             <div class="animated infinite bounceIn slow">
-                <center>  <label class="bg-light"> 
+                <center>  <label class="btn btn-outline-danger" style=""> 
+                        
                         <font  SIZE=5 style="text-transform: uppercase;"> <strong><?php echo $item[4] ?> </strong> </font>
                     </label></center>
                 <br>
@@ -80,12 +81,12 @@ require 'public/headerCliente.php';
             <div class="animated infinite bounceInRight slow">
                 <center>  <p class="bg-light"><strong>Estado del Producto: <?php echo $item[7] ?></strong></p> </center>
             </div>
-        
-<br>
+
+            <br>
 
             <!--    <div class="container">-->
-            <div class="row" style="background-color: #ddd">
-        
+            <div class="row">
+
                 <div class="col-sm-5">
                     <br>        <br>
                     <div class="gallery">
@@ -119,7 +120,7 @@ require 'public/headerCliente.php';
                             </div>
                         </div>
                     </div> 
-                
+
 
                 </div> 
 
@@ -132,7 +133,7 @@ require 'public/headerCliente.php';
                     $contadorComas1 = substr_count($contenido1, ',');
                     for ($j = 0; $j <= $contadorComas1 - 1; $j++) {
                         ?>
-                        <p class="bg-light"><strong>  <?php echo $total1[$j] ?> </strong>   <strong id="valor" name="valor"> </strong></p> 
+                        <p class=""><strong>  <?php echo $total1[$j] ?> </strong>   <strong id="valor" name="valor"> </strong></p> 
 
 
                         <hr style="color: #47748b">
@@ -143,116 +144,182 @@ require 'public/headerCliente.php';
 
 
 
-                    <p class="bg-light"><strong>Color</strong></p> 
+                    <p class=""><strong>Color</strong></p> 
                     <hr style="color: #47748b">
-                            <p class="bg-light"><strong>Tamaño</strong></p> 
+                    <p class=""><strong>Tamaño</strong></p> 
                     <hr style="color: #47748b">
-                            <p class="bg-light"><strong>Distri Teclado</strong></p> 
+                    <p class=""><strong>Distri Teclado</strong></p> 
                     <hr style="color: #47748b">
 
-                    <p class="bg-light"><strong>Sub Categoria: <?php echo $item[0] ?></strong></p> 
+                    <p class=""><strong>Sub Categoria: <?php echo $item[0] ?></strong></p> 
                     <hr style="color: #47748b">
-              
-      <p class="bg-light"><strong> Cantidad disponible: <?php echo $item[10] ?></strong></p> 
-                    </div>   
-                    <div class="col-sm-4">
 
-                        <p class="text-warning"> </p>
+                    <p class=""><strong> Cantidad disponible: <?php echo $item[10] ?></strong></p> 
+                </div>   
+                <div class="col-sm-4">
 
+                    <p class="text-warning"> </p>
+
+                    <?php
+                    $contenido2 = ($item[3]);
+                    $total2 = explode(",", $contenido2);
+                    $contadorComas2 = substr_count($contenido2, ',');
+                    for ($k = 0; $k <= $contadorComas2 - 1; $k++) {
+                        ?>
+
+                        <p class=""><strong>   <?php echo $total2[$k] ?></strong></p> 
+     <hr style="color: #47748b">
                         <?php
-                        $contenido2 = ($item[3]);
-                        $total2 = explode(",", $contenido2);
-                        $contadorComas2 = substr_count($contenido2, ',');
-                        for ($k = 0; $k <= $contadorComas2 - 1; $k++) {
-                            ?>
-
-                                <p class="bg-light"><strong>   <?php echo $total2[$k] ?></strong></p> 
-
-                                <?php
-                            }
-                            ?>   
-                        <hr style="color: #999">
-                              <?php
+                    }
+                    ?>   
+                
+                    <?php
                     $contenido3 = ($item[5]);
                     $total3 = explode(",", $contenido3);
                     $contadorComas3 = substr_count($contenido3, ',');
 
 
-                    for ($d = 0; $d <= $contadorComas3 - 1; $d++) {
-                            ?>
+                    for ($d = 0; $d <= $contadorComas3; $d++) {
+                        ?>
 
-                                <p class="bg-light"><strong> <?php echo $total3[$d] ?></strong></p> 
-                                <hr style="color: #47748b">
+                        <p class=""><strong> <?php echo $total3[$d] ?></strong></p> 
+                          <hr style="color: #47748b">
 
-                                <?php
-                            }
-                            ?>
+                        <?php
+                    }
+                    ?>
+
+                    <div class="" style="background-color: #ffffff;border: 1px solid #cccccc"> 
+                        <div style=" ">
+                            <br>
+                            <center><p  class=" btn btn-outline-dark" ><font size="5"> ₡<?php echo $item[1] ?> </font></p>  </center>
+                        </div>
+                        <hr style="color: #fff">
+
+                        <form action="?controlador=Compra&accion=agregaralcarrito"  method="post">
+                            <div class="row" >
+                                <div class="col-sm-1"> </div>
+
+                                <div class="col-sm-4" style="background-color: #ddd">
+                                    <div class="form-group">
+                                        <center>    <label class="form-control-label">Cantidad</label> 
+                                            <input  type="number" class="form-control col-sm-10" id="3" name="3" value="1" min="0" max="10" > </center>
+                                    </div>
+                                </div>
+                                <div class="col-sm-2">
+                                    <div class="form-group">
+                                        <center style="">    <label class="form-control-label"></label> </center>
+                                        <input type="button" onclick="cantidad(3, 0)"  value ="-" class="btn btn-danger"><strong > </strong></>
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-2">
+                                    <div class="form-group">
+                                        <center >    <label  class="form-control-label" ></label>    </center>
+                                        <input type="button" onclick="cantidad(3, 1)" value="+" class="btn btn-success"><strong ></strong></>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6"> </div>  
+
+                            </div>
+                            <div class="form-group">
+                                <center>
+                                    <input type="hidden" id="producto" name="producto"  value="<?php echo $item[9] ?>" >
+                                    <input type="hidden" id="cliente" name="cliente" value="<?php echo $_SESSION["usuario"] ?>">
+
+                                </center>
+                            </div>
+
+                            <hr style="color: #999">
+                            <div class="form-group">
+                                <center>
+                                    <button type="submit" class="btn btn-outline-danger">  <img  width="40" height="40" src="./public/img/car.svg"/> Añadir a el Carrito!</button>
+                                </center>
+                                <br>
+                            </div>
+                        </form>   
 
 
+                    </div>
+                    <br><br>
                 </div>  
 
 
 
 
             </div> 
-      
 
 
-    <br>
-       
-            <div class="row">
-         
-                              <div class="col-sm-4"></div>
+
+            <br>
+
+<!--            <div class="row">
+
+                <div class="col-sm-4"></div>
                 <div class="col-sm-4">
-                        <br>
-                        <div class="" style="background-color: #fafafa"> 
+                    <br>
+                    <div class="" style="background-color: #ffffff;border: 1px solid #cccccc"> 
+                        <div style="filter:brightness(130%); ">
+                            <br>
+                            <center><p  class=" btn btn-outline-dark" ><font size="5"> ₡<?php echo $item[1] ?> </font></p>  </center>
+                        </div>
+                        <hr style="color: #fff">
 
-                            <p  class="" style="background-color: #7386D5"> <strong class="">   <center > <font size="4">₡<?php echo $item[1] ?> </font></center></strong> </p>  
-                            <hr style="color: #999">
+                        <form action="?controlador=Compra&accion=agregaralcarrito"  method="post">
+                            <div class="row" >
+                                <div class="col-sm-1"> </div>
 
-                                <form action="?controlador=Compra&accion=agregaralcarrito"  method="post">
-                                    <div class="row">
-
-                                        <div class="col-sm-8">
-                                            <center>    <label class="form-control-label">Cantidad</label> 
-                                            <input type="number" class="form-control input-sm" id="3" name="3" value="1" min="0" max="10" > </center>
-                                        </div>
-
-
-                                        <div class="col-sm-4">
-                                         <center>    <label class="form-control-label"></label> </center>
-                                            <button type="button" onclick="cantidad(3, 0)" class="btn btn-danger"><font size="4">- </font></button>
-
-                                            <button type="button" onclick="cantidad(3, 1)" class="btn btn-success"><font size="4">+</font></button>
-                                        </div>
+                                <div class="col-sm-4" style="background-color: #ddd">
+                                    <div class="form-group">
+                                        <center>    <label class="form-control-label">Cantidad</label> 
+                                            <input  type="number" class="form-control col-sm-10" id="3" name="3" value="1" min="0" max="10" > </center>
                                     </div>
-                                    <center>
-                                        <input type="hidden" id="producto" name="producto"  value="<?php echo $item[9] ?>" >
-                                        <input type="hidden" id="cliente" name="cliente" value="<?php echo $_SESSION["usuario"] ?>">
+                                </div>
+                                <div class="col-sm-2">
+                                    <div class="form-group">
+                                        <center style="">    <label class="form-control-label"></label> </center>
+                                        <input type="button" onclick="cantidad(3, 0)"  value ="-" class="btn btn-danger"><strong > </strong></>
+                                    </div>
+                                </div>
 
-                                    </center>
+                                <div class="col-sm-2">
+                                    <div class="form-group">
+                                        <center >    <label  class="form-control-label" ></label>    </center>
+                                        <input type="button" onclick="cantidad(3, 1)" value="+" class="btn btn-success"><strong ></strong></>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6"> </div>  
 
+                            </div>
+                            <div class="form-group">
+                                <center>
+                                    <input type="hidden" id="producto" name="producto"  value="<?php echo $item[9] ?>" >
+                                    <input type="hidden" id="cliente" name="cliente" value="<?php echo $_SESSION["usuario"] ?>">
 
-                                    <hr style="color: #999">
-                                    <center>
-                                        <button type="submit" class="btn btn-outline-danger"> Añadir a el Carrito!</button>
-                                    </center>
-                                    <br>
-                         
+                                </center>
+                            </div>
+
+                            <hr style="color: #999">
+                            <div class="form-group">
+                                <center>
+                                    <button type="submit" class="btn btn-outline-danger">  <img  width="40" height="40" src="./public/img/car.svg"/> Añadir a el Carrito!</button>
+                                </center>
+                                <br>
+                            </div>
                         </form>   
-                      
+
 
                     </div>
-                    
+
                 </div>
-  
-                       <div class="col-sm-4"></div>
-            </div>
-<br><br>
+
+                <div class="col-sm-4"></div>
+            </div>-->
+            <br><br>
             <br>
             <br>
 
-   
+
 
 
             <center><a  href="?controlador=SubCategoria&accion=mostrardetallesSubCategoriaCliente&subcategoriaid= <?php echo $item[8] ?>" class="btn btn-outline-info"> Regresar a el menú</a></center>
@@ -268,18 +335,18 @@ require 'public/headerCliente.php';
         ?>
     </div>
 
-   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script> 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script> 
 
     <script>
-                                    function cantidad(id_input, operacion) {
-                                        var numero = $('#' + id_input).val();
-                                        if (operacion == '1') {
-                                            numero++;
-                                        } else {
-                                            numero--;
+                                        function cantidad(id_input, operacion) {
+                                            var numero = $('#' + id_input).val();
+                                            if (operacion == '1') {
+                                                numero++;
+                                            } else {
+                                                numero--;
+                                            }
+                                            $('#' + id_input).val(numero);
                                         }
-                                        $('#' + id_input).val(numero);
-                                    }
     </script>
 
     <script  type="text/javascript">

@@ -44,23 +44,7 @@ include_once 'public/headerUsuario.php';
     </div>
 
 
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
+
     <br>
     <br>
     <br>

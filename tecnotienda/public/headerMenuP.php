@@ -47,10 +47,11 @@
             <header>
 
 
-                <nav class="navbar navbar-light bg-light">
+              
+                <nav class="navbar   " style="background-color: #ddd">
                     <a class="navbar-brand" href="?controlador=Cliente&accion=menuPrincipal">
                         <img src="./public/img/logo.png" width="30" height="30" class="d-inline-block align-top" alt="">
-                        Tienda Tecnologica Virtual
+                        <strong  style="color: #333333">   Tienda Tecnologica Virtual </strong>
                     </a>
                 </nav>
                 <div class="line"></div>

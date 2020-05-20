@@ -44,12 +44,15 @@ include_once 'public/headerUsuario.php';
                 <div class="form-group"> 
                     Color
                     <select class="form-control" id="color" name="color"> 
-                        <option value="Negro">Negro</option>
+                                     <option value="Negro">Negro</option>
                         <option value="Gris">Gris</option>
                         <option value="Blanco">Blanco</option>
                         <option value="Rosado">Rosado</option>
-                        <option value="Verde">Verde</option>
+                        <option value="Rojo">Rojo</option>
                         <option value="Celeste">Celeste</option>
+                         <option value="Amarillo">Amarillo</option>
+                            <option value="Verde">Verde</option>
+                  
                     </select>
 
                 </div>
@@ -61,8 +64,8 @@ include_once 'public/headerUsuario.php';
                         <option value="Estandar">Estandar</option>
                         <option value="Extendido">Extendido</option>
                         <option value="Mini">Mini</option>
-                        <option value="Ultra delgado">Mini</option></select>
-
+                        <option value="Ultra delgado">Ultra Delgada</option>
+                 </select>
                 </div>
                 <button type="submit" class="btn btn-outline-success">Filtrar Subcategorias</button>
 
@@ -92,8 +95,7 @@ include_once 'public/headerUsuario.php';
 
 
             <div class="card" style="width: 18rem;">
-
-                <center class="titulo">    <font style="text-transform: uppercase;">   <p class="card-text"> <strong><?php echo$item[3] ?>   </strong> </p>    </font> 
+                <center class="btn btn-outline-success">    <font style="text-transform: uppercase;">    <p class="card-text"> <strong><?php echo$item[3] ?>   </strong> </p>    </font> 
                 </center>
 
 
@@ -114,11 +116,11 @@ include_once 'public/headerUsuario.php';
                     
                 <div class="card-body">
 
-                    <p class="card-text ">     <strong> <font size="6"> <span class="input-group-append">₡ <?php echo$item[2] ?> </span></font></strong>  </p>
+                <center>    <p class="card-text ">     <strong> <font size="6"> <span class="input-group-append">₡ <?php echo$item[2] ?> </span></font></strong>  </p></center>
                     <hr style="border-top: 1px solid black;">
-                    <a class="etiqueta"  href="?controlador=Producto&accion=mostrarDetallesProducto&productoid=<?php echo$item[4] ?>">  <h5 class="card-title"><?php echo$item[1] ?>  </h5> </a>
+                    <a class="etiqueta"  href="?controlador=Producto&accion=mostrarDetallesProducto&productoid=<?php echo$item[4] ?>">  <h5 class="card-title "><?php echo$item[1] ?>  </h5> </a>
                 </div>
-                   <a class="btn nav-link" href="?controlador=Cliente&accion=loginCliente">Comprar</a>
+                           <a class="btn btn-outline-success animated infinite flipInY"  href="?controlador=Cliente&accion=loginCliente">Comprar</a>
                              
 
                 <hr style="border-top: 5px solid black;">

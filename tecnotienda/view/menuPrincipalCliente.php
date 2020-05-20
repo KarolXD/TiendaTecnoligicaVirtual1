@@ -43,23 +43,7 @@ include_once 'public/headerCliente.php';
    <br>
     <br>
     <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
+
 <?php
 include_once 'public/footer.php';
 ?>

@@ -20,11 +20,17 @@
             <header>
 
               
-                <nav class="navbar navbar-light bg-light animated infinite ">
+                <nav class="navbar   " style="background-color: #ddd">
                     <a class="navbar-brand" href="?controlador=Usuario&accion=menuPrincipalUsuario">
-                        <img src="./public/img/logo.png" width="30" height="30" class="d-inline-block align-top" alt="">
-                        <strong>  Bienvenidos a TecnoTienda </strong>
+                        <img src="./public/img/logo.png" width="60" height="60" class="d-inline-block align-top" alt="">
+                        <strong  style="color: #333333">  Bienvenidos a TecnoTienda </strong>
                     </a>
+                    <li class="nav-item active  " style="color:#ddd">
+                                        <a class="btn btn-outline-dark" href="?controlador=Cliente&accion=loginCliente">
+                                            <img src="./public/img/avatar.png" alt=""/>
+                                            Iniciar Sesion <span class="sr-only">(%)</span></a>
+                                </li>
+
                 </nav>
                 <nav class="navbar navbar-expand-lg navbar-light bg-light" >
                     <a class="navbar-brand" href="?controlador=Usuario&accion=menuPrincipalUsuario">Inicio</a>
@@ -40,12 +46,9 @@
                         </ul>
 
                     </div>
-                         <div class="collapse navbar-collapse" id="navbarNav">
+                         <div class="" id="navbarNav">
                             <ul class="navbar-nav ml-auto">
-                                <li class="nav-item active">
-                                        <a class="nav-link" href="?controlador=Cliente&accion=loginCliente">Iniciar Sesion <span class="sr-only">(%)</span></a>
-                                </li>
-
+                             
                               
                             </ul>
                         </div>

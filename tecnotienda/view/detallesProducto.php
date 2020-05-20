@@ -56,7 +56,7 @@ require 'public/headerMenuP.php';
             }
             .gallery {
 
-                filter:brightness(140%);
+             
                 animation:escalar;
                 cursor:pointer;
                 animation:escalar 1.4s infinite alternate; 
@@ -139,7 +139,7 @@ require 'public/headerMenuP.php';
                     }
                     ?>
                 </div>   
-                <div class="col-sm-4" style="border-style: #47748b">
+                <div class="col-sm-4">
 
                     <p class="text-warning"> </p>
 
@@ -150,7 +150,7 @@ require 'public/headerMenuP.php';
                     for ($k = 0; $k <= $contadorComas2 - 1; $k++) {
                         ?>
 
-                        <p class="bg-light"><strong>   <?php echo $total2[$k] ?></strong></p>
+                        <p class="btn btn-outline-info"><strong>   <?php echo $total2[$k] ?></strong></p>
                         <hr style="color: #47748b">
 
                         <?php

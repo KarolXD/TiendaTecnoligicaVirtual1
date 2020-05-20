@@ -1,8 +1,6 @@
 create database bdtecnotienda;
 use bdtecnotienda;
 
-alter table tbdireccion MODIFY tbtbclienteid varchar(255)
-
 create table tbusuario(
 tbusuarioid  int auto_increment not null, 
 tbusuarionombre varchar(50) not null,
@@ -47,8 +45,11 @@ tbproductocantidadgarantiasaplicadas int  not null,
 tbproductocantidaddevoluciones int  not null,
 tbproductoestado varchar(50) not null,
 tbproductoactivo int not null,
+tbproductocantidad int not null,
 CONSTRAINT PK_tbproductoid PRIMARY KEY (tbproductoid));
 
+
+alter table tbclientecompra modify tbcompradetalle varchar(4000);
 
 create table tbproductoimagen(
 tbproductoimagenid int auto_increment not null,
@@ -89,7 +90,23 @@ tbtelefononid int auto_increment not null,
 tbclienteid int not null, 
 tbtelefonoatributo varchar(400) not null,
 tbtelefonovalor   varchar(400) not null,
-CONSTRAINT PK_tbtelefononid PRIMARY KEY (tbtelefononid))
+CONSTRAINT PK_tbtelefononid PRIMARY KEY (tbtelefononid));
+
+create table tbclientecarritocompra(
+tbcarritocompraid int auto_increment,
+tbproductoid int not null,
+tbclienteid varchar(50) not null,
+CONSTRAINT PK_tbcarritocompraid PRIMARY KEY (tbcarritocompraid)
+)
+
+create table tbclientecompra(
+tbclientecompraid int auto_increment,
+tbclienteid varchar(50) not null,
+tbcompradetalle varchar(50) not null,
+tbventaporcobrar int not null,		
+tbventacontado int not null,										
+CONSTRAINT PK_tbclientecompraid PRIMARY KEY (tbclientecompraid)
+)
 
 create table tbdireccion(
 tbdireccionid int auto_increment not null,
@@ -99,7 +116,6 @@ tbdireccioncanton    varchar(50) not null,
 tbdirecciondistricto varchar(50) not null,
 tbdireccionotrassenas varchar(60) not null,
 CONSTRAINT PK_tbdireccionid PRIMARY KEY (tbdireccionid))
-
 create table tbcliente(
 tbclienteid int auto_increment not null,
 tbclienteusuario varchar(40)  not null, 

@@ -13,18 +13,12 @@ require 'public/headerUsuario.php';
                 max-width: 600px;
                 margin: 40px auto;
             }
-
-
-
             .modal-body {
                 position:relative;
                 padding:10px;
                 min-height:400px;
                 background:#fff;
             }
-
-
-
 
             .close {
                 position:absolute;
@@ -50,7 +44,7 @@ require 'public/headerUsuario.php';
                 }
             }
             .gallery {
-                filter:brightness(130%);
+              
                 animation:escalar;
                 cursor:pointer;
                 animation:escalar 1.4s infinite alternate; 
@@ -125,7 +119,7 @@ require 'public/headerUsuario.php';
                     for ($j = 0; $j <= $contadorComas1 - 1; $j++) {
                         ?>
 
-                        <p class="bg-light"><strong>  <?php echo $total1[$j] ?> </strong>   <strong id="valor" name="valor"> </strong></p> 
+                        <p class=""><strong>  <?php echo $total1[$j] ?> </strong>   <strong id="valor" name="valor"> </strong></p> 
 
 
                         <hr style="color: #47748b">
@@ -135,23 +129,22 @@ require 'public/headerUsuario.php';
                     ?>
 
 
-                    <p class="bg-light"><strong>  Color</strong></p> 
+                    <p class=""><strong>  Color</strong></p> 
                     <hr style="color: #47748b">
 
-                    <p class="bg-light"><strong>  Tamaño</strong></p> 
+                    <p class=""><strong>  Tamaño</strong></p> 
                     <hr style="color: #47748b">
 
-                    <p class="bg-light"><strong>  Disc.Teclado</strong></p> 
+                    <p class=""><strong>  Disc.Teclado</strong></p> 
                     <hr style="color: #47748b">
 
-                    <p class="bg-light">      <span class="">Disponibles :  <strong>  <?php echo $item[10] ?></strong> </span></p>  
+                    <p class="">      <span class="">Disponibles :  <strong>  <?php echo $item[10] ?></strong> </span></p>  
 
 
                     <hr style="color: #47748b">
-                    <p class="bg-light"><strong>Sub Categoria: <?php echo $item[0] ?></strong></p> 
+                    <p class=""><strong>Sub Categoria: <?php echo $item[0] ?></strong></p> 
                          <hr style="color: #47748b">
-                    <p class="bg-light">      <span class="btn btn-outline-info">Precio :  <strong >  ₡<?php echo $item[1] ?></strong> </span></p>  
-
+                  
                 </div>   
                 <div class="col-sm-4">
 
@@ -164,7 +157,7 @@ require 'public/headerUsuario.php';
                     for ($k = 0; $k <= $contadorComas2 - 1; $k++) {
                         ?>
 
-                        <p class="bg-light"><strong>   <?php echo $total2[$k] ?></strong></p> 
+                        <p class=""><strong>   <?php echo $total2[$k] ?></strong></p> 
                         <hr style="color: #47748b">
                         <?php
                     }
@@ -181,12 +174,14 @@ require 'public/headerUsuario.php';
                     for ($d = 0; $d <= $contadorComas3 ; $d++) {
                         ?>
 
-                        <p class="bg-light"><strong> <?php echo $total3[$d] ?></strong></p> 
-                        <hr style="color: #47748b">
 
+                        <p class=""><strong> <?php echo $total3[$d] ?></strong></p> 
+                        <hr style="color: #47748b">
                         <?php
                     }
                     ?> 
+                          <p class="btn btn-outline-info  animated infinite flipInY slow">      <span class="">Precio :  <strong >  ₡<?php echo $item[1] ?></strong> </span></p>  
+
                 </div>  
 
 

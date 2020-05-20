@@ -45,11 +45,12 @@ class clienteDato {
     }
 
     public function registrarClienteCategorizacion($cliente, $contrasenia) {
+          $data = array($cliente, $contrasenia);
         $consulta = $this->db->prepare('INSERT INTO `bdtecnotienda`.`tbclientecategorizacion`(`tbtbclienteid`,`tbclientecategorizacionnombre`,`tbclientecategorizaciondescuento`,`tbclientecategorizacionpuntoscompra`)
-VALUES(' . $cliente . ',' . $contrasenia . ',0,0);');
-        if ($consulta->execute()) {
+VALUES(?,?,0,0);');
+        if ($consulta->execute($data)) {
             $resultado = $consulta->fetchAll();
-            $consulta->CloseCursor();
+          $consulta->errorInfo()[2];
             return 1;
         } else {
             return -1;

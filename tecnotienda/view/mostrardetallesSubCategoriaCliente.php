@@ -53,8 +53,10 @@ include_once 'public/headerCliente.php';
                         <option value="Gris">Gris</option>
                         <option value="Blanco">Blanco</option>
                         <option value="Rosado">Rosado</option>
-                        <option value="Verde">Verde</option>
+                        <option value="Rojo">Rojo</option>
                         <option value="Celeste">Celeste</option>
+                         <option value="Amarillo">Amarillo</option>
+                            <option value="Verde">Verde</option>
                     </select>
                 </div>
             </div>
@@ -65,9 +67,10 @@ include_once 'public/headerCliente.php';
                         <option value="Estandar">Estandar</option>
                         <option value="Extendido">Extendido</option>
                         <option value="Mini">Mini</option>
-                        <option value="Ultra delgado">Mini</option>
+                        <option value="Ultra delgado">Ultra Delgada</option>
                     </select>
-                    <button type="submit" class="btn btn-outline-success">Filtrar Subcategorias</button>
+                    <br>
+                 <center>   <button type="submit" class="btn btn-outline-success">Filtrar Subcategorias</button></center>
 
                 </div>
             </div>
@@ -101,7 +104,7 @@ include_once 'public/headerCliente.php';
 
             <div class="card" style="width: 18rem;">
 
-                <center class="titulo">    <font style="text-transform: uppercase;">   <p class="card-text"> <strong><?php echo$item[3] ?>   </strong> </p>    </font> 
+                <center class="btn btn-outline-success">    <font style="text-transform: uppercase;">   <p class="card-text"> <strong><?php echo$item[3] ?>   </strong> </p>    </font> 
                 </center>
 
 

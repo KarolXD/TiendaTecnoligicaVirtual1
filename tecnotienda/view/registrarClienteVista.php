@@ -26,7 +26,7 @@ include_once 'public/header.php';
                         <div class="form-group">
                             <label class="form-control-label">Clave</label>
 
-                            <input type="text" class="form-control" id="contra" name="contra" aria-describedby="emailHelp" placeholder="Contraseña" required="">
+                            <input type="password"  pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Debe contener al menos 1 número y una letra mayuscula y minuscula, y minimo 8 caracteres" class="form-control" id="contra" name="contra" aria-describedby="emailHelp" placeholder="Contraseña" required="">
                         </div>
                         <div class="form-group" style="display: none">
                             <input type="number" class="form-control" id="estado" name="estado" aria-describedby="emailHelp" value="0" required="">
@@ -38,7 +38,7 @@ include_once 'public/header.php';
                             <table class="table table-bordered" id="dynamic_field">
                                 <tr>
                                 <label class="form-control-label">Correos</label>
-                                <td><input type="email"  pattern="[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*@[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[.][a-zA-Z]{1,5}"  name="name[]" id="id_mail"  placeholder="Escriba su correo" class="form-control name_list" /></td>
+                                <td><input type="email" required=""  pattern="[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*@[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[.][a-zA-Z]{1,5}"  name="name[]" id="id_mail"  placeholder="Escriba su correo" class="form-control name_list" /></td>
                                 <td><button type="button" name="add" id="add"  class="btn btn-success" ><strong>+</strong></button></td>
                                 </tr>
                             </table>
@@ -47,7 +47,7 @@ include_once 'public/header.php';
                             <table class="table table-bordered" id="dynamic_fieldd">
                                 <label class="form-control-label">Telefono</label>
                                 <tr>
-                                    <td><input  type="tel"  minlength="8" required"  name="names[]" placeholder="Escriba su telefono" class="form-control name_list" /></td>
+                                    <td><input type="tel"  minlength="8"  required name="names[]" placeholder="Escriba su telefono" class="form-control name_list" /></td>
                                     <td><button type="button" name="addd" id="addd"  class="btn btn-success" ><strong>+</strong> </button></td>
                                 </tr>
                             </table>
@@ -104,7 +104,7 @@ include_once 'public/header.php';
                         </div>
                         <div class="form-group">
                             <label class="form-control-label">Número Cuenta</label>
-                            <input type="text" class="form-control" id="numerocuenta" name="numerocuenta" aria-describedby="emailHelp" placeholder="Numero de Cuenta" required="">
+                            <input type="text" class="form-control"  minlength="16"  id="numerocuenta" name="numerocuenta" aria-describedby="emailHelp" placeholder="Numero de Cuenta" required="">
                         </div>
        <div class="form-group ">   <div  class="alertControl alert alert-primary" name="alertControl" id="alertControl"> </div>
                     </div>
