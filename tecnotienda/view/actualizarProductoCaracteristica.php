@@ -15,7 +15,7 @@ require 'public/headerMenuP.php';
 
 
                 <div class="form-group" >
-                    <label class="form-control-label"> Titulo:</label>
+                    <center><label class="form-control-label"> Nombre del producto:</label></center>
                     <input  value="<?php echo $item[0] ?>"   type="hidden" name="productoid" placeholder="Escriba caracteristica" class="form-control" />
                     <input   value="<?php echo $item[3] ?>" type="texto" name="productocaracteristicatitulo" placeholder="Añade un titulo" class="form-control" />
                 </div>      
@@ -79,7 +79,7 @@ require 'public/headerMenuP.php';
          <div  class="alertControl alert alert-primary" name="alertControl" id="alertControl"> </div>
 
             <div class="form-group ">
-            <button class="btn btn-warning" type="submit" value="Modificar">Modificar caracteristicas del Producto</button>
+            <center><button class="btn btn-outline-warning" type="submit" value="Modificar">Modificar </button></center>
           
     </div>
             <div class="col-sm-4" ></div>
@@ -146,7 +146,7 @@ require 'public/headerMenuP.php';
                 
 <!--                <button  type="submit" class="btn btn-success">Agregar más caracteristicas </button>
                 <br><br>-->
-                  <a class="btn btn-info" href="?controlador=Producto&accion=menuProductoVista" > Regresar al menú</a> </div></center> 
+                  <a class="" href="?controlador=Producto&accion=menuProductoVista" > Regresar al menú</a> </div></center> 
         
             </div>
 

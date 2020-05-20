@@ -1,5 +1,5 @@
 <?php
-include_once 'public/header.php';
+include_once 'public/headerMenuP.php';
 ?>
 
 <div class="container">
@@ -8,7 +8,7 @@ include_once 'public/header.php';
         <div class="col-md-4" >
             <br>
             <hr style="color: #47748b">
-            <h5><center> Modificación de Teléfonos</center></h5>
+            <h5><center> Modificación</center></h5>
             <hr style="color: #47748b">
             <br>
             <center>
@@ -38,11 +38,11 @@ include_once 'public/header.php';
                             <input type="hidden" class="form-control" id="correoid"  value= "<?php echo $item[3] ?>" name="correoid" aria-describedby="emailHelp" readonly="" required="">
 
                         </div>
-                        <br>    <br>
+                        <br>    
                         <div class="form-group ">   <div  class="alertControl alert alert-primary" name="alertControl" id="alertControl"> </div>
                         </div>
-                        <br>
-                        <br>
+                    
+                       
                         <br>  <div class="form-group ">   
                             <input type="submit" name="submit"  id="submit" class="btn btn-warning" value="Modificar Telefonos" />
                             <a href="?controlador=Cliente&accion=listarClientes" class="btn btn-info" >Regresar</a>

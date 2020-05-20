@@ -316,7 +316,7 @@ and  p.tbproductoactivo=0
 
     public function filtrarBySubCategoria($subcategorianombre) {
         $consulta = $this->db->prepare('select p.tbproductoid, p.tbproductocodigobarras, cat.tbcategorianombre,
-s.tbsubcategorianombre, c.tbproductocaracteristicastitulo
+s.tbsubcategorianombre, c.tbproductocaracteristicastitulo,pp.tbproductoprecioventa 
 from tbproducto p join tbproductoprecio pp on p.tbproductoid=pp.tbproductoid
 join tbproductocaracteristica c on c.tbproductoid=p.tbproductoid
 join tbsubcategoria s on s.tbsubcategoriaid=p.tbsubcategoriaid

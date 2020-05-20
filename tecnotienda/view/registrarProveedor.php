@@ -1,5 +1,5 @@
 <?php
-include_once 'public/header.php';
+include_once 'public/headerMenuP.php';
 ?>
 <div class="container">
  <div class="row">
@@ -17,11 +17,10 @@ include_once 'public/header.php';
                              <hr style="color: #47748b">
                         <div class="form-group">
                             Pasaporte/Cédula
-                            <input type="tel" required pattern="[0-9]{10,15}"
-         title="Solo números. Tamaño mínimo: 10. Tamaño máximo: 15"   class="form-control" id="usuario" name="usuario" aria-describedby="emailHelp" placeholder="Usuario" required="">
+                            <input type="text" pattern="^[9|8|7|6|5|4|3|2|1]\d{8}$" required=""  class="form-control" id="usuario" name="usuario" aria-describedby="emailHelp" placeholder="Usuario" required="">
                         </div>
                         <div class="form-group">
-                            <input type="text" class="form-control" id="contra" name="contra" aria-describedby="emailHelp" placeholder="Contraseña" required="">
+                            <input  class="form-control"  pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Debe contener al menos 1 número y una letra mayuscula y minuscula, y minimo 8 caracteres"  type="password" id="contra" name="contra" aria-describedby="emailHelp" placeholder="Contraseña" required="">
                         </div>
                         <div class="form-group">
                             <input type="text" class="form-control" id="empresa" name="empresa" aria-describedby="emailHelp" placeholder="Nombre Empresa" required="">

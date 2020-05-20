@@ -6,6 +6,8 @@ class CompraController {
         $this->view = new View();
     }
 
+ 
+
     public function agregaralcarrito() {
         require 'model/data/compraDato.php';
         $items = new compraDato();
@@ -101,6 +103,13 @@ class CompraController {
         $items = new compraDato();
        $dato['listado'] = $items->listarPagoAdmin();
         $this->view->show("adminPago.php", $dato);  
+    }
+    
+       public function detallecompraadmin() {
+        require 'model/data/compraDato.php';
+        $items = new compraDato();
+        $dato['listado'] = $items->listarDetallePagoAdmin($_GET["clientecompraid"]);
+        $this->view->show("detallecompraadmin.php", $dato);
     }
 
 }

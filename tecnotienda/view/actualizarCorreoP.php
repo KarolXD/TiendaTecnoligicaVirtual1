@@ -1,14 +1,13 @@
 <?php
-include_once 'public/header.php';
+include_once 'public/headerMenuP.php';
 ?>
-
 <div class="container">
     <div class="row">
         <div class="col-md-4"></div>
         <div class="col-md-4" >
             <br>
             <hr style="color: #47748b">
-            <h4><center>Modificar  correo Proveedores</center></h4>
+            <h4><center>Modificar </center></h4>
             <hr style="color: #47748b">
 
             <center>
@@ -37,13 +36,11 @@ include_once 'public/header.php';
                             <input type="hidden" class="form-control" id="correoid"  value= "<?php echo $item[3] ?>" name="correoid" aria-describedby="emailHelp" readonly="" required="">
 
                         </div>
+                    
                         <div class="form-group ">   <div  class="alertControl alert alert-primary" name="alertControl" id="alertControl"> </div>
                         </div>
+                     <br>
                         <div class="form-group ">   
-                            <br>
-                            <br>
-                            <br>
-
                             <input type="submit" name="submit"  id="submit" class="btn btn-warning" value="Modificar Correo" />
                             <a href="?controlador=Proveedor&accion=menuProveedor" class="btn btn-info" >Regresar</a>
                         </div>

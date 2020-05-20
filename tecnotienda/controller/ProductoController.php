@@ -168,11 +168,19 @@ class ProductoController {
         $id = filter_input(INPUT_POST, 'productoid');
    
         if ($_POST["subcategoriaid"] == -1) {
-            $PD->modificarProducto2($_POST["productocodigobarras"], $_POST["productogarantiasaplicadas"], $_POST["productosdevueltos"], 
+            $respuesta=$PD->modificarProducto2($_POST["productocodigobarras"], $_POST["productogarantiasaplicadas"], $_POST["productosdevueltos"], 
                     $_POST["productoestado"],$_POST["cantidad"],$_POST["productoid"]);
         } else {
-            $PD->modificarProducto($_POST["productocodigobarras"], $_POST["productogarantiasaplicadas"], $_POST["productosdevueltos"], 
+          $respuesta==   $PD->modificarProducto($_POST["productocodigobarras"], $_POST["productogarantiasaplicadas"], $_POST["productosdevueltos"], 
                     $_POST["subcategoriaid"], $_POST["productoestado"],$_POST["cantidad"],$_POST["productoid"]);
+        }
+        
+        if( $respuesta==1){
+                           echo '<script src="./public/js/jquery-3.3.1.js" type="text/javascript"> </script>  <script>   $(function() {   $("#alertControl").html("<div > <strong>Mensaje!</strong>  Modificado correctamente </div> ");  });</script>';
+    
+        }else{
+                           echo '<script src="./public/js/jquery-3.3.1.js" type="text/javascript"> </script>  <script>   $(function() {   $("#alertControl").html("<div > <strong>Advertencia!</strong>  No se ha modificado! </div> ");  });</script>';
+    
         }
         $data['actualizarProductos'] = $PD->filtrarProductoById($id);
         $this->view->show("actualizarProductoVista.php", $data);

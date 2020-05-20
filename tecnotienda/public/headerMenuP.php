@@ -53,6 +53,10 @@
                         <img src="./public/img/logo.png" width="30" height="30" class="d-inline-block align-top" alt="">
                         <strong  style="color: #333333">   Tienda Tecnologica Virtual </strong>
                     </a>
+                    <li class="nav-item" style="color:#ddd">
+                              
+                                    <a class=" btn btn-outline-dark" href="?controlador=Cliente&accion=cerrarSession">        <img src="./public/img/signs.png" alt=""/>Cerrar</a>
+                                </li>
                 </nav>
                 <div class="line"></div>
                 <div class="content">
@@ -117,9 +121,6 @@
                                     <a class="nav-link  alert-info"><strong >Bienvenido  <?php echo $_SESSION['usuario'] ?></strong> </a>
                                 </li>
 
-                                <li class="nav-item">
-                                    <a class="nav-link  btn btn-outline-warning" href="?controlador=Cliente&accion=cerrarSession">Cerrar</a>
-                                </li>
                             </ul>
                         </div>
                     </nav>

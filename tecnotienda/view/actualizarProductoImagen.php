@@ -15,7 +15,7 @@ require 'public/headerMenuP.php';
                 <div class="col-sm-4" >
                     <hr style="color: #47748b">
                     <strong> Modifica las caracteristicas del producto  </strong>     <hr style="color: #47748b">
-
+           <div  class="alertControl alert alert-primary" name="alertControl" id="alertControl"> </div>
 
                     <div class="form-group" >
                         <input  value="<?php echo $item[0] ?>"   type="hidden" name="productoid" id="productoid" placeholder="Escriba caracteristica" class="form-control" />
@@ -78,13 +78,23 @@ require 'public/headerMenuP.php';
                         
                     </tr>
                 </table>
-                
-               
-                
-                
-            </div>
-            <div class="col-sm-4" >
-                <table class="table table-bordered" id="dynamic_field4">
+
+
+                    <center>
+                        <div class="form-group ">
+
+                            <br>
+                            <button class="btn btn-warning" type="submit" value="Registrar">Modificando </button>
+                            <br>
+                                </div>
+                                     <div class="form-group ">
+                            <a class="" href="?controlador=Producto&accion=menuProductoVista" > Regresar al menú</a>
+                        </div>
+                    </center>
+
+                </div>
+                <div class="col-sm-4" >
+                    <table class="table table-bordered" id="dynamic_field4">
                     <tr>
                         <td> 
                         
@@ -102,6 +112,7 @@ require 'public/headerMenuP.php';
                         </td>
                     </tr>
                 </table>
+            
             </div>
 
 
@@ -110,14 +121,7 @@ require 'public/headerMenuP.php';
 
     <?php
         }    ?>
-        <center>
-            <div class="form-group ">
-                 <div  class="alertControl alert alert-primary" name="alertControl" id="alertControl"> </div>
-<br>
-                <button class="btn btn-warning" type="submit" value="Registrar">Modificando Producto</button>
-                <a class="btn btn-info" href="?controlador=Producto&accion=menuProductoVista" > Regresar al menú</a>
-            </div>
-    </center>
+   
 
     </form>
 </div>

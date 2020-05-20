@@ -9,7 +9,7 @@ require 'public/headerMenuP.php';
            <div class="col-md-4"></div>
         <div class="col-md-4">
          <br>
-             <center><h5 style="background-color: #aaa">Detalle sobre el Proveedor</h5></center>
+             <center><h5 >Detalle sobre el Proveedor</h5></center>
     <hr style="color: #999">
     <br>
             <?php
@@ -56,8 +56,8 @@ require 'public/headerMenuP.php';
             }
             ?>
              <br><br>
-      <a href="?controlador=Proveedor&accion=listarProveedor" class="btn btn-outline-info" >Regresar</a>
-     
+    <center>  <a href="?controlador=Proveedor&accion=listarProveedor" class="btn btn-outline-info" >Regresar</a>
+     </center>
         </div>
               <div class="col-md-4"></div>
     </div>
