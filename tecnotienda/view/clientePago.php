@@ -30,6 +30,8 @@ global $total;
                     <div class="form-group"> 
                         <textarea class="form-control" id="detalle" name="detalle[]" readonly> <?php echo $item[0] ?> </textarea>
                     </div>                 
+                <input type="hidden"  value="<?php echo $item[1] ?>" class="form-control"  id="cantidadarticulos" name="cantidadarticulos[]">
+                <input type="hidden"  value="<?php echo $item[3] ?>" class="form-control"  id="idproducto" name="idproducto[]">
 
 
                     <?php
@@ -66,15 +68,21 @@ global $total;
                 ?>
                 <div class="form-group">
                     <label for="pago">Forma de pago</label>
-                    <select class="form-control" id="pago">
+                    <select class="form-control" id="tipopago" name="tipopago" required="">
+                        <option selected="" >Elige una opcion</option>
                         <option value="1">Contado</option>
                         <option value="0">Credito</option>
                     </select>
+                    <br>
+                    <label style="display: none;"  class="form-control-label" name="titulocc" id="titulocc">Añade la cantidad  </label>
+                    <input type="number"  class="form-control" style="display: none;" id="cuentaporcobrar" name="cuentaporcobrar">
                 </div>
 
 
                 <label for="cliente">Total de la compra: </label>
                 <div class="form-group">
+                    <input type="hidden"  value="<?php echo $total ?>" class="form-control"  id="totalpago" name="totalpago">
+
                     <input type="text" class="form-control" id="monto" name="monto" readonly value=" <?php
                     if ($total != null) {
                         echo $total;
@@ -84,9 +92,15 @@ global $total;
                     ?>" >
                 </div>
 
-
+            
                 <div class="form-group">
                     <center><button type="submit" class="btn btn-success">Pagar</button> </center> </div>  
+
+                <div>
+                    <div  class="alertControl alert alert-primary" name="alertControl" id="alertControl"> </div>
+
+
+                </div>
             </form>
         </div>
         <div class="form-group col-md-4">   
@@ -98,7 +112,24 @@ global $total;
 
 
 
+<script>
 
+    $('#tipopago').on('change', function () {
+        var selectValor = $(this).val();
+
+
+        if (selectValor == '0') {
+            $('#cuentaporcobrar').show();
+            $('#titulocc').show();
+
+        } else {
+            $('#cuentaporcobrar').hide();
+            $('#titulocc').hide();
+
+        }
+    });
+
+</script>
 
 
 <?php

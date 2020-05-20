@@ -103,12 +103,10 @@
                       
                             </div>
                         </div>
-                        <button class=" btn btn-outline-info my-2 my-sm-0" >
+                        <a href="?controlador=Compra&accion=adminPago" class=" btn btn-outline-info my-2 my-sm-0" >
                             Detalles Pago
-                        </button>
-                        <button class=" btn btn-outline-info my-2 my-sm-0 " >
-                            Carrito
-                        </button>
+                        </a>
+                      
                         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                             <span class="navbar-toggler-icon"></span>
                         </button>

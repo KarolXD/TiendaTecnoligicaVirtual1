@@ -163,8 +163,6 @@ class ClienteController {
             $valor .= $correos[$i] . ",";
         }
         $resultado = $items->actualizarCorreo($correoid, $valor);
-
-
         if ($resultado == 1) {
             echo '<script src="./public/js/jquery-3.3.1.js" type="text/javascript"> </script>  <script>   $(function() {   $("#alertControl").html("<div > <strong>Mensaje!</strong> Modificado exitosamente</div> ");  });</script>';
         } else {
