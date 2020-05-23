@@ -30,8 +30,8 @@ global $total;
                     <div class="form-group"> 
                         <textarea class="form-control" id="detalle" name="detalle[]" readonly> <?php echo $item[0] ?> </textarea>
                     </div>                 
-                <input type="hidden"  value="<?php echo $item[1] ?>" class="form-control"  id="cantidadarticulos" name="cantidadarticulos[]">
-                <input type="hidden"  value="<?php echo $item[3] ?>" class="form-control"  id="idproducto" name="idproducto[]">
+                    <input type="hidden"  value="<?php echo $item[1] ?>" class="form-control"  id="cantidadarticulos" name="cantidadarticulos[]">
+                    <input type="hidden"  value="<?php echo $item[3] ?>" class="form-control"  id="idproducto" name="idproducto[]">
 
 
                     <?php
@@ -66,6 +66,9 @@ global $total;
                     <?php
                 }
                 ?>
+
+
+
                 <div class="form-group">
                     <label for="pago">Forma de pago</label>
                     <select class="form-control" id="tipopago" name="tipopago" required="">
@@ -74,9 +77,21 @@ global $total;
                         <option value="0">Credito</option>
                     </select>
                     <br>
-                    <label style="display: none;"  class="form-control-label" name="titulocc" id="titulocc">Añade la cantidad  </label>
-                    <input type="number"  class="form-control" style="display: none;" id="cuentaporcobrar" name="cuentaporcobrar">
+                    <div class="form-group" style="display: none;" id="divplazo" name="divplazo">
+                        <label for="plazo">Escoja su plazo de pago.</label>
+                        <select class="form-control" id="plazo" name="plazo" required="">
+                            <option selected="" >Elige una opcion</option>
+                            <option value="3">3 Meses</option>
+                            <option value="6">6 Meses</option>
+                            <option value="12">1 Año</option>
+                            <option value="24">2 Años</option>
+                        </select>
+                    </div>
+                    <br>
+                    <label style="display: none;"  class="form-control-label" name="titulocc" id="titulocc">Cantidad a pagar por mes </label>
+                    <input type="number"  class="form-control" style="display: none;" id="cuentaporcobrar" name="cuentaporcobrar" readonly="">
                 </div>
+
 
 
                 <label for="cliente">Total de la compra: </label>
@@ -92,7 +107,7 @@ global $total;
                     ?>" >
                 </div>
 
-            
+
                 <div class="form-group">
                     <center><button type="submit" class="btn btn-success">Pagar</button> </center> </div>  
 
@@ -121,14 +136,22 @@ global $total;
         if (selectValor == '0') {
             $('#cuentaporcobrar').show();
             $('#titulocc').show();
+            $('#divplazo').show();
 
         } else {
             $('#cuentaporcobrar').hide();
             $('#titulocc').hide();
+            $('#divplazo').hide();
 
         }
     });
-
+      $('#plazo').on('change', function () {
+        var selectValor = $(this).val();        
+        var valortotal = $("#totalpago").val();        
+        var totalPagoDividido = valortotal/selectValor;
+        $("#cuentaporcobrar").val(totalPagoDividido);
+        
+      });
 </script>
 
 

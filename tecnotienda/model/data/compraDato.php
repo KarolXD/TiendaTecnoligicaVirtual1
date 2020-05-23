@@ -111,14 +111,16 @@ and cliente.tbclienteusuario= "' . $clienteid . '";');
         $consulta->CloseCursor();
         return $resultado;
     }
+
     public function listarDetallePagoAdmin($clientecompraid) {
         $consulta = $this->db->prepare('SELECT 
-* from tbclientecompra where tbclientecompraid="'.$clientecompraid.'"');
+* from tbclientecompra where tbclientecompraid="' . $clientecompraid . '"');
         $consulta->execute();
         $resultado = $consulta->fetchAll();
         $consulta->CloseCursor();
         return $resultado;
     }
+
     public function registrarPago($idcliente, $detallecompra, $ventaporcobrar, $ventacontado) {
         $data = array($idcliente, $detallecompra, $ventaporcobrar, $ventacontado);
         $consulta = $this->db->prepare('INSERT INTO `bdtecnotienda`.`tbclientecompra`
@@ -159,6 +161,35 @@ WHERE tbproductoid="' . $producto . '"');
         } else {
             return -1;
         }
+    }
+
+    public function registrarventaporcobrar($idcliente, $tbcantidadpagada, $tbfechaAbono, $tbtotaldeuda, $tbtotalfactura, $fechalimite) {
+        $data = array($idcliente, $tbcantidadpagada, $tbfechaAbono, $tbtotaldeuda, $tbtotalfactura, $fechalimite);
+        $consulta = $this->db->prepare('INSERT INTO `bdtecnotienda`.`tbventaporcobrar`
+                                        (`tbclienteid`,
+                                        `tbcantidadpagada`,
+                                        `tbfechaAbono`,
+                                        `tbtotaldeuda`,
+                                        `tbtotalfactura`,
+                                        `tbfechalimite`)
+                                        VALUES(?,?,?,?,?,?);');
+        if ($consulta->execute($data)) {
+            $consulta->errorInfo()[2];
+            return 0;
+        } else {
+            return 1;
+        }
+    }
+
+    public function listarmontoaDeber($clientecompraid) {
+        $consulta = $this->db->prepare('SELECT 
+        `tbventaporcobrar`.`tbcantidadpagada`,
+        `tbventaporcobrar`.`tbtotaldeuda`
+        FROM `bdtecnotienda`.`tbventaporcobrar` where `tbventaporcobrar`.`tbclienteid` = "' . $clientecompraid . '"');
+        $consulta->execute();
+        $resultado = $consulta->fetchAll();
+        $consulta->CloseCursor();
+        return $resultado;
     }
 
 }

@@ -76,6 +76,9 @@
                         <a href="?controlador=Compra&accion=listarcarrito" class=" btn btn-outline-info my-2 my-sm-0 " >
                             Carrito
                         </a>
+                        <a href="?controlador=Compra&accion=abono" class=" btn btn-outline-info my-2 my-sm-0" >
+                          Abono
+                        </a>
                         <div class="line"></div>
                         <div class="collapse navbar-collapse" id="navbarSupportedContent">
                             <ul class="navbar-nav mr-auto" id="tblmenuUsuario1" name="tblmenuUsuario1">
