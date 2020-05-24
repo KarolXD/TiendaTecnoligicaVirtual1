@@ -188,8 +188,9 @@ WHERE tbproductoid="' . $producto . '"');
                                         `tbfechaAbono`,
                                         `tbtotaldeuda`,
                                         `tbtotalfactura`,
-                                        `tbfechalimite`)
-                                        VALUES(?,?,now(),?,?,?);');
+                                        `tbfechalimite`,
+                                       `tbestadomoroso`)
+                                        VALUES(?,?,now(),?,?,?,0);');
         if ($consulta->execute($data)) {
             $consulta->errorInfo()[2];
             return 0;
@@ -207,7 +208,6 @@ WHERE tbproductoid="' . $producto . '"');
         return $resultado;   
          
      }
-    
 
     public function listarmontoaDeber($clientecompraid) {
         $consulta = $this->db->prepare('SELECT 
@@ -218,6 +218,22 @@ WHERE tbproductoid="' . $producto . '"');
         $resultado = $consulta->fetchAll();
         $consulta->CloseCursor();
         return $resultado;
+    }
+
+    public function validarSiPagado($clienteid) {
+        $consulta = $this->db->prepare('SELECT count(*) as total
+        FROM `bdtecnotienda`.`tbventaporcobrar` where `tbventaporcobrar`.`tbclienteid` = "' . $clienteid . '"');
+       
+        if ($consulta->execute()) {
+            $count = $consulta->fetch();
+            if ($count['total'] > 0) {
+                return 1;
+            }else{
+                return 0;
+            }
+        } else {
+            return -1;
+        }
     }
 
 }

@@ -64,8 +64,9 @@ class CompraController {
         for ($i = 0; $i < $array_num; $i++) {
             $valor .= $detalle[$i] . ",";
         }
-        $resultado = "";
-
+        $resultado = ""; $valor="";
+      echo $valor=  $items->validarSiPagado($usuario);
+if($valor>0){
         $totalcontado = $_POST["totalpago"];
         if ($tipopago == 1) {// pago al contado
             $resultado = $items->registrarPago($usuario, $valor, 0, $totalcontado);
@@ -77,7 +78,7 @@ class CompraController {
             $obtenerMeses = $_POST["plazo"];
             $sumarmeses = "+" . $obtenerMeses . "month";
             $fechalimite = date("Y-m-d", strtotime($fechaActual . $sumarmeses));
-            //$fechaActual
+            
             $items->registrarventaporcobrar($usuario, $cuentaporpagar, ($totalcontado - $cuentaporpagar), $totalcontado, $fechalimite);
 
             $resultado = $items->registrarPago($usuario, $valor, 1, 0);
@@ -102,6 +103,11 @@ class CompraController {
         } else {
             echo '<script src="./public/js/jquery-3.3.1.js" type="text/javascript"> </script>  <script>   $(function() {   $("#alertControl").html("<div > <strong>Advertencia!</strong> No se ha podido realizar su compra! </div> ");  });</script>';
         }
+    }else{
+        echo '<script src="./public/js/jquery-3.3.1.js" type="text/javascript"> </script>  <script>   $(function() {   $("#alertControl").html("<div > <strong>Advertencia!</strong> No ha pagado su abono. Compra NO realizada! </div> ");  });</script>';
+       
+    }
+        
         $dato['listado'] = $items->listarPago($usuario);
         $dato['listado2'] = $items->listarPagoDatosCliente($usuario);
         $this->view->show("clientePago.php", $dato);
