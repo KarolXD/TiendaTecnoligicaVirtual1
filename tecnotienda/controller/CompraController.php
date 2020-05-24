@@ -71,7 +71,8 @@ class CompraController {
             $resultado = $items->registrarPago($usuario, $valor, 0, $totalcontado);
         } else if ($tipopago == 0) {//pago al credito
             $cuentaporpagar = $_POST["cuentaporcobrar"];
-            $fechaActual = date("Y/m/d");
+             $fechaActual = date("Y-m-d H:i:s");//Y-m-d H:i:s
+        //    $fechaActual = date("Y/m/d");//Y-m-d H:i:s
             $obtenerMeses = $_POST["plazo"];
             $sumarmeses = "+" . $obtenerMeses . "month";
             $fechalimite = date("Y-m-d", strtotime($fechaActual . $sumarmeses));
