@@ -21,7 +21,8 @@ class usuarioDato {
         require 'libs/SPDO.php';
         $this->db = SPDO::singleton();
     }
-
+    
+    
     public function guardarUsuario($usuarionombre, $contrassenia,$activo) {
         $sql = 'SELECT COUNT(*) as total FROM tbusuario where tbusuarionombre ="' . $usuarionombre . '" ';
         $del = $this->db->prepare($sql);
@@ -98,18 +99,6 @@ class usuarioDato {
         }
     }
     
-     public function obtenerMorosos() {
-        $consulta = $this->db->prepare('SELECT 
-    `tbventaporcobrar`.`tbclienteid`,
-    `tbventaporcobrar`.`tbcantidadpagada`,
-    `tbventaporcobrar`.`tbfechaAbono`,
-    `tbventaporcobrar`.`tbtotaldeuda`,
-    `tbventaporcobrar`.`tbtotalfactura`
-FROM `bdtecnotienda`.`tbventaporcobrar` where tbestadomoroso = 0;' );
-        $consulta->execute();
-        $resultado = $consulta->fetchAll();
-        $consulta->CloseCursor();
-        return $resultado;
-    }
+    
 
 }

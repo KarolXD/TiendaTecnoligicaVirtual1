@@ -8,6 +8,14 @@ class compraDato {
         require 'libs/SPDO.php';
         $this->db = SPDO::singleton();
     }
+    public function obtenerMorosos(){
+          $consulta = $this->db->prepare('select * from tbclientemoroso' );
+        $consulta->execute();
+        $resultado = $consulta->fetchAll();
+        $consulta->CloseCursor();
+        return $resultado;
+    }
+
 
     public function agregaralcarrito($producto, $usuario, $cantidad) {
         $data = array($producto, $usuario, $cantidad);

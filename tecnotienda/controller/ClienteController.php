@@ -18,6 +18,8 @@ class ClienteController {
         }
           $this->view->show("loginCliente.php");
     }
+ 
+    
 
     public function loginCliente() {
 

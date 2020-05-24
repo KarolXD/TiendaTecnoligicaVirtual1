@@ -5,7 +5,13 @@ class CompraController {
     public function __construct() {
         $this->view = new View();
     }
-
+       public function listarMorosos() {
+        require 'model/data/compraDato.php';
+        $PD = new compraDato();
+        $dato["listado"] = $PD->obtenerMorosos();
+        $this->view->show("vistalistaMorosos.php", $dato);
+    }
+    
     public function agregaralcarrito() {
         require 'model/data/compraDato.php';
         $items = new compraDato();

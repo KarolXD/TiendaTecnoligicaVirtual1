@@ -1,6 +1,6 @@
 
 <?php
-include_once 'public/headerUsuario.php';
+include_once 'public/headerMenuP.php';
 ?>
 
 <div class="container">
@@ -50,7 +50,8 @@ include_once 'public/headerUsuario.php';
         </div>
     </div>
 </div>
+<BR><BR>
 
 <?php
-include_once 'public/footerUsuario.php';
+include_once 'public/footer.php';
 ?>
