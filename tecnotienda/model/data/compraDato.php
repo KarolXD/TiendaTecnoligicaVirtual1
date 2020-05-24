@@ -9,7 +9,13 @@ class compraDato {
         $this->db = SPDO::singleton();
     }
     public function obtenerMorosos(){
-          $consulta = $this->db->prepare('select * from tbclientemoroso' );
+          $consulta = $this->db->prepare('SELECT 
+    `tbventaporcobrar`.`tbclienteid`,
+    `tbventaporcobrar`.`tbcantidadpagada`,
+    `tbventaporcobrar`.`tbfechaAbono`,
+    `tbventaporcobrar`.`tbtotaldeuda`,
+    `tbventaporcobrar`.`tbtotalfactura`
+FROM `bdtecnotienda`.`tbventaporcobrar` where tbfechalimite < now() tbestadomoroso = 0;' );
         $consulta->execute();
         $resultado = $consulta->fetchAll();
         $consulta->CloseCursor();
