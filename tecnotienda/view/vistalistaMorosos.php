@@ -16,11 +16,11 @@ include_once 'public/headerMenuP.php';
                 <hr style="color: #6d7fcc">
                 <thead>
                     <tr>
-                        <th scope="col">Cliente</th>
-                        <th scope="col">Cantidad Pagada</th>       
-                        <th scope="col">Fecha de abono </th>
+                        <th scope="col">Código Moroso</th>
+                        <th scope="col">Cliente </th>       
+                        <th scope="col">Código Venta por cobrar  </th>
                         <th scope="col">Total Deuda</th>
-                        <th scope="col">Total Factura</th>
+                        <th scope="col">Fecha Limite</th>
                     </tr>
                 </thead>
 
