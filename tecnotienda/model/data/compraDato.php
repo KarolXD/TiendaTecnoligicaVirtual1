@@ -163,8 +163,25 @@ WHERE tbproductoid="' . $producto . '"');
         }
     }
 
-    public function registrarventaporcobrar($idcliente, $tbcantidadpagada, $tbfechaAbono, $tbtotaldeuda, $tbtotalfactura, $fechalimite) {
-        $data = array($idcliente, $tbcantidadpagada, $tbfechaAbono, $tbtotaldeuda, $tbtotalfactura, $fechalimite);
+    public function modificarventaporcobrar($idcliente, $tbcantidadpagada, $tbtotaldeuda, $ventacobrarid){
+           $data = array($idcliente, $tbcantidadpagada, $tbtotaldeuda,$ventacobrarid);
+        $consulta = $this->db->prepare('update  `bdtecnotienda`.`tbventaporcobrar`
+                                       set  `tbclienteid`=?,
+                                        `tbcantidadpagada` =?,
+                                        `tbfechaAbono` =now(),
+                                        `tbtotaldeuda` =? where tbventacobrarid=?
+                                      
+                                     
+                                  ');
+        if ($consulta->execute($data)) {
+            $consulta->errorInfo()[2];
+            return 0;
+        } else {
+            return 1;
+        } 
+    }
+    public function registrarventaporcobrar($idcliente, $tbcantidadpagada, $tbtotaldeuda, $tbtotalfactura, $fechalimite) {
+        $data = array($idcliente, $tbcantidadpagada, $tbtotaldeuda, $tbtotalfactura, $fechalimite);
         $consulta = $this->db->prepare('INSERT INTO `bdtecnotienda`.`tbventaporcobrar`
                                         (`tbclienteid`,
                                         `tbcantidadpagada`,
@@ -172,7 +189,7 @@ WHERE tbproductoid="' . $producto . '"');
                                         `tbtotaldeuda`,
                                         `tbtotalfactura`,
                                         `tbfechalimite`)
-                                        VALUES(?,?,?,?,?,?);');
+                                        VALUES(?,?,now(),?,?,?);');
         if ($consulta->execute($data)) {
             $consulta->errorInfo()[2];
             return 0;
@@ -180,6 +197,17 @@ WHERE tbproductoid="' . $producto . '"');
             return 1;
         }
     }
+    
+     public function listarVentaCobrar($clienteid){
+              $consulta = $this->db->prepare('SELECT *
+        FROM `bdtecnotienda`.`tbventaporcobrar` where `tbventaporcobrar`.`tbclienteid` = "' . $clienteid . '"');
+        $consulta->execute();
+        $resultado = $consulta->fetchAll();
+        $consulta->CloseCursor();
+        return $resultado;   
+         
+     }
+    
 
     public function listarmontoaDeber($clientecompraid) {
         $consulta = $this->db->prepare('SELECT 

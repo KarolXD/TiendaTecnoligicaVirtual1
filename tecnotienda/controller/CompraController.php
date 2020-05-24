@@ -75,7 +75,8 @@ class CompraController {
             $obtenerMeses = $_POST["plazo"];
             $sumarmeses = "+" . $obtenerMeses . "month";
             $fechalimite = date("Y-m-d", strtotime($fechaActual . $sumarmeses));
-            $items->registrarventaporcobrar($usuario, $cuentaporpagar, $fechaActual, ($totalcontado - $cuentaporpagar), $totalcontado, $fechalimite);
+            //$fechaActual
+            $items->registrarventaporcobrar($usuario, $cuentaporpagar, ($totalcontado - $cuentaporpagar), $totalcontado, $fechalimite);
 
             $resultado = $items->registrarPago($usuario, $valor, 1, 0);
         }
@@ -121,7 +122,32 @@ class CompraController {
     public function abono() {
         require 'model/data/compraDato.php';
         $items = new compraDato();
-        $this->view->show("vistaPagoAbonos.php");
+        session_start();
+        $resultad["listado"]= $items->listarVentaCobrar($_SESSION["usuario"]);
+        $this->view->show("vistaPagoAbonosCliente.php",$resultad);
+    }
+
+    public function modificarventaporcobrar() {
+        require 'model/data/compraDato.php';
+        $items = new compraDato();
+
+    
+
+         $totalPago=$_POST["deudapendiente"] ;
+         $cuentaPagar= $_POST["cuentaporpagar"];
+      
+        $cantidadDebe =$totalPago-$cuentaPagar;
+
+
+        $resul = $items->modificarventaporcobrar($_POST["usuario"], $_POST["cuentaporpagar"], $cantidadDebe, $_POST["id"]);
+        if ($resul == 0) {
+            echo '<script src="./public/js/jquery-3.3.1.js" type="text/javascript"> </script>  <script>   $(function() {   $("#alertControl").html("<div > <strong>Mensaje!</strong> Abono  realizado </div> ");  });</script>';
+        } else {
+            echo '<script src="./public/js/jquery-3.3.1.js" type="text/javascript"> </script>  <script>   $(function() {   $("#alertControl").html("<div > <strong>ADVERTENCIA!</strong> Abono  NO realizado </div> ");  });</script>';
+        }
+
+        $resultad["listado"] = $items->listarVentaCobrar($_POST["usuario"]);
+        $this->view->show("vistaPagoAbonosCliente.php", $resultad);
     }
 
 }

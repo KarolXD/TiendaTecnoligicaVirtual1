@@ -126,11 +126,17 @@ require 'public/headerMenuP.php';
                     <?php
                     $contenido1 = ($item[9]);
                     $total1 = explode(",", $contenido1);
-                    $contadorComas1 = substr_count($contenido1, ',');
+                    $contadorComas1 = substr_count($contenido1, ',');//Cuenta pr un delimitador
                     for ($j = 0; $j <= $contadorComas1 - 1; $j++) {
-                        ?>
+                        
+         
+    ?>
 
-                        <p class="bg-light"><strong>  <?php echo $total1[$j] ?> :</strong>   <strong id="valor" name="valor"> </strong></p> 
+                    <p class="bg-light"><strong>  <?php 
+                    
+     echo ($total1[$j]);
+                            
+                            ?> :</strong>   <strong id="valor" name="valor"> </strong></p> 
                         <hr style="color: #47748b">
 
 
@@ -150,7 +156,7 @@ require 'public/headerMenuP.php';
                     for ($k = 0; $k <= $contadorComas2 - 1; $k++) {
                         ?>
 
-                        <p class="btn btn-outline-info"><strong>   <?php echo $total2[$k] ?></strong></p>
+                        <p class=""><strong>   <?php echo $total2[$k] ?></strong></p>
                         <hr style="color: #47748b">
 
                         <?php
@@ -171,7 +177,7 @@ require 'public/headerMenuP.php';
 
 
 
-            <div class="row" style="background-color: #ddd;border: 1px dotted">
+            <div class="row" >
 
                     <div class="col-sm-4">
                         <br>
@@ -188,19 +194,10 @@ require 'public/headerMenuP.php';
                      <p class="bg-light">Cantidad Producto: <?php echo $item[15] ?></p> 
 
                     </div>
-  <div class="col-sm-2">
-      <br>
-          <center class="">    <p class="bg-light"><strong>  Caracteristicas      </strong> </p></center>
-               <p class="bg-light"> Color:</p> 
-                            <hr style="color: #47748b">
-                             <p class="bg-light"> Tamano:</p> 
-                            <hr style="color: #47748b">
-                             <p class="bg-light">Dis.Teclado:</p> 
-                            <hr style="color: #47748b">
-    </div>
-                <div class="col-sm-2">
+
+                <div class="col-sm-4">
                     <br>
-                    <center class="">    <p class="bg-light"><strong>   sobre el producto      </strong> </p></center>
+                    <center class="">    <p class="bg-light"><strong>   Caracteristicas imagen      </strong> </p></center>
               
                     <?php
                     $contenido3 = ($item[12]);
@@ -212,12 +209,12 @@ require 'public/headerMenuP.php';
                         ?>
                    
                             <p class="bg-light"> <?php echo $total3[$d] ?></p> 
-                            <hr style="color: #47748b">
+                          
                             
                         <?php
                     }
                     ?>
-
+  <hr style="color: #47748b">
                 </div>
 
                 <div class="col-sm-4">
