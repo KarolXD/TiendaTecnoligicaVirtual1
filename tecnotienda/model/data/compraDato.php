@@ -15,7 +15,7 @@ class compraDato {
     `tbventaporcobrar`.`tbfechaAbono`,
     `tbventaporcobrar`.`tbtotaldeuda`,
     `tbventaporcobrar`.`tbtotalfactura`
-FROM `bdtecnotienda`.`tbventaporcobrar` where tbfechalimite < now() tbestadomoroso = 0;' );
+FROM `bdtecnotienda`.`tbventaporcobrar` where tbfechalimite < now() and tbestadomoroso = 0;' );
         $consulta->execute();
         $resultado = $consulta->fetchAll();
         $consulta->CloseCursor();

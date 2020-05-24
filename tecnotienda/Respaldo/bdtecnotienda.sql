@@ -1,5 +1,73 @@
 create database bdtecnotienda;
 use bdtecnotienda;
+drop trigger trigggerMoroso; drop trigger trigggerRegistrarcc;
+update  tbventaporcobrar set tbfechalimite='2020-05-23 22:38:34' where tbventacobrarid=1;
+truncate table tbventaporcobrar;truncate table tbclientecompra; truncate table tbclientemoroso;
+select * from tbventaporcobrar; select * from tbclientemoroso;
+DELIMITER \\
+create TRIGGER trigggerMoroso
+AFTER update ON
+tbventaporcobrar for each row
+begin
+if (new.tbfechalimite >now()) then 
+if ((select count(*)  from tbclientemoroso where tbclienteid= new.tbclienteid)=0)then
+insert into tbclientemoroso(tbclienteid,tbventaporcobrarid,tbclientemorosodeuda,tbclientemorosofecha)
+ values(new.tbclienteid,new.tbventacobrarid,new.tbtotaldeuda,new.tbfechalimite);
+ end if;
+  else 
+ delete from  tbclientemoroso where tbclienteid= new.tbclienteid;
+ end if;
+end \\
+
+select @tbclientemorosoid:=tbclientemorosoid from tbclientemoroso where tbclienteid='KarolMG1996';
+select  @tbclientemorosoid;
+
+DELIMITER \\
+create TRIGGER trigggerRegistrarcc
+AFTER insert ON
+tbclientemoroso for each row
+begin
+
+if ((select count(*) from tbclientemoroso where tbclienteid=new.tbclienteid)<=0) then /*2020-02-02  <  NO MOROSO*/
+update tbventaporcobrar set tbestadomoroso=0  where tbclienteid=new.tbclienteid;
+else
+update tbventaporcobrar set tbestadomoroso=1 where tbclienteid=new.tbclienteid;
+end if;
+end \\
+
+select * from tbventaporcobrar
+create table tbclientemoroso(
+tbclientemorosoid int auto_increment primary key,
+tbclienteid varchar(40) not null,
+tbventaporcobrarid int not null,
+tbclientemorosodeuda double,
+tbclientemorosofecha datetime
+)
+
+select * from tbventaporcobrar
+'2020-08-24 00:00:00' < 02/23/2020
+update tbventaporcobrar  set tbfechalimite='2020-03-24 20:10:10'  where tbventacobrarid=1
+select * from proba
+
+
+create table proba(
+id int auto_increment,
+nombre varchar(40),
+PRIMARY KEY (id)
+)
+
+create table tbventaporcobrar
+(
+tbventacobrarid int auto_increment,
+tbclienteid varchar(40),
+tbcantidadpagada float,
+tbfechaAbono datetime,
+tbtotaldeuda float,
+tbtotalfactura float,
+tbfechalimite datetime,
+PRIMARY KEY (tbventacobrarid)
+)
+
 
 create table tbusuario(
 tbusuarioid  int auto_increment not null, 
