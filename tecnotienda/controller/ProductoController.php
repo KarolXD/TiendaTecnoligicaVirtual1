@@ -259,60 +259,60 @@ class ProductoController {
          $productoprecioventa = $productopreciocompra+($productopreciocompra/$productoprecioganacia);
 
 
-        //caracteristicas
-        $productocaractericticatitulo = $_POST['caractericticatitulo'];
-        $productocaracteristicacriterio=$_POST['skill'];
-    $estadoCriterio="";
-      $valorInicialc=0;
-        $cantidadCa= ($_POST["cantidadCa"]);
-        $productocaracteristicavalor= $_POST['name'];
-         $valorcriterio=""; $valoratributo="";
-                 for ($d = 0; $d < $cantidadCa; $d++) {
-                $valorcriterio.= ($d+1). $productocaracteristicavalor[$d].",";
-                 $estadoCriterio .= $valorInicialc . ",";
-       
-                 }
-          
-                  $cantidadCa2= count($productocaracteristicacriterio);
-             for ($ka = 0; $ka < $cantidadCa2; $ka++) {
-                  for ($jj = 0; $jj < $cantidadCa; $jj++) {
-                      $valor= substr($productocaracteristicacriterio[$ka], 0,1);
-                       //  2==1
-                      if($valor==($jj+1)){
-                     $valoratributo .= $productocaracteristicacriterio[$ka] . ",";
-                   echo "Iguales";
-                      }else{
-                      $valoratributo = $productocaracteristicacriterio[$ka] . ".";
-                             echo "NO Iguales";
-                      }
-                  }
-              
-                
-            }
-             echo "Carac: ". $valoratributo;
-        
-        
+        //caracteristicas la q hay q hacer
+//        $productocaractericticatitulo = $_POST['caractericticatitulo'];
+//        $productocaracteristicacriterio=$_POST['skill'];
+//    $estadoCriterio="";
+//      $valorInicialc=0;
+//        $cantidadCa= ($_POST["cantidadCa"]);
+//        $productocaracteristicavalor= $_POST['name'];
+//         $valorcriterio=""; $valoratributo="";
+//                 for ($d = 0; $d < $cantidadCa; $d++) {
+//                $valorcriterio.= ($d+1). $productocaracteristicavalor[$d].",";
+//                 $estadoCriterio .= $valorInicialc . ",";
+//       
+//                 }
+//          
+//                  $cantidadCa2= count($productocaracteristicacriterio);
+//             for ($ka = 0; $ka < $cantidadCa2; $ka++) {
+//                  for ($jj = 0; $jj < $cantidadCa; $jj++) {
+//                      $valor= substr($productocaracteristicacriterio[$ka], 0,1);
+//                       //  2==1
+//                      if($valor==($jj+1)){
+//                     $valoratributo .= $productocaracteristicacriterio[$ka] . ",";
+//                   echo "Iguales";
+//                      }else{
+//                      $valoratributo = $productocaracteristicacriterio[$ka] . ".";
+//                             echo "NO Iguales";
+//                      }
+//                  }
+//              
+//                
+//            }
+//             echo "Carac: ". $valoratributo;
+//        
+//        
                  
                  //CARACTERISTICA ANTIGUA
-//        $valorcriterio = "";
-//        $valoratributo = "";
-//          $estadoCriterio="";
-//          $valorInicialc=0;
-//        $array_num = count($productocaracteristicavalor);
-//        $array_num2 = count($productocaracteristicacriterio);
-//        if ((!empty($_POST["caracteristicacriterio"]) && is_array($_POST["caracteristicacriterio"]))) {
-//            for ($k = 0; $k < $array_num2; $k++) {
-//                $valorcriterio .= $productocaracteristicacriterio[$k] . ",";
-//               $estadoCriterio .= $valorInicialc . ",";
-//            }
-//        }
-//        
-//           if ((!empty($_POST["caracteristicavalor"]) && is_array($_POST["caracteristicavalor"]))) {
-//            for ($ka = 0; $ka < $array_num; $ka++) {
-//               // $valorcriterio .= $productocaracteristicacriterio[$k] . ",";
-//                $valoratributo .= $productocaracteristicavalor[$ka] . ",";
-//            }
-//        }
+        $valorcriterio = "";
+        $valoratributo = "";
+          $estadoCriterio="";
+          $valorInicialc=0;
+        $array_num = count($productocaracteristicavalor);
+        $array_num2 = count($productocaracteristicacriterio);
+        if ((!empty($_POST["caracteristicacriterio"]) && is_array($_POST["caracteristicacriterio"]))) {
+            for ($k = 0; $k < $array_num2; $k++) {
+                $valorcriterio .= $productocaracteristicacriterio[$k] . ",";
+               $estadoCriterio .= $valorInicialc . ",";
+            }
+        }
+        
+           if ((!empty($_POST["caracteristicavalor"]) && is_array($_POST["caracteristicavalor"]))) {
+            for ($ka = 0; $ka < $array_num; $ka++) {
+               // $valorcriterio .= $productocaracteristicacriterio[$k] . ",";
+                $valoratributo .= $productocaracteristicavalor[$ka] . ",";
+            }
+        }
 //        
 //IMAGENEEEEEEEEEEEEEEEEEEEEEEE/
        $valornombre = "";

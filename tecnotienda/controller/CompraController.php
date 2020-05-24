@@ -73,6 +73,7 @@ class CompraController {
             $cuentaporpagar = $_POST["cuentaporcobrar"];
              $fechaActual = date("Y-m-d H:i:s");//Y-m-d H:i:s
         //    $fechaActual = date("Y/m/d");//Y-m-d H:i:s
+             
             $obtenerMeses = $_POST["plazo"];
             $sumarmeses = "+" . $obtenerMeses . "month";
             $fechalimite = date("Y-m-d", strtotime($fechaActual . $sumarmeses));

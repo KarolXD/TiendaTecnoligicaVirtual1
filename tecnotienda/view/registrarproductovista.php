@@ -97,9 +97,8 @@ require 'public/headerMenuP.php';
             <div class="col-md-4"></div>
         </div>
 
-        <div class="container">
-
-            <div class="row">
+        
+<!--            <div class="row">
                 <div class="col-sm-4" ></div>
                 <div class="col-sm-4" id="" name="">
                     <div class="form-group">
@@ -115,41 +114,38 @@ require 'public/headerMenuP.php';
                     </div>
                 </div>
                 <div class="col-sm-4" ></div>
-            </div>
+            </div>-->
 
 
 
 
 
-            <div class="row">
-                <div class="col-sm-3" ></div>
-                <div class="col-sm-7" id="item" name="item">
-
-                </div>
-                <div class="col-sm-2" ></div>
-            </div>
-            <!--                        <div class="col-lg-6" >
-                                        <table class="table table-bordered" id="dynamic_field">
-                                            <tr>
-                                                <td><input type="text" name="caracteristicacriterio[]" placeholder="Escriba su criterio" class="form-control name_list" /></td>
-                                                <td><button type="button" name="add" id="add"  class="btn btn-success" ><strong>+</strong>  </button></td>
-                                            </tr>
-                                        </table>
-                                    </div>
-                                    <div class="col-lg-6" >
-                                        <table class="table table-bordered" id="dynamic_field2">
-                                            <tr>
-                                                 <td><a>Agregar Valores</a> </td>
-                                                <td><input type="text" name="caracteristicavalor[]" placeholder="Escriba su valor" class="form-control name_list" /></td>
-                                               
-                                                <td><button type="button" name="add" id="add2"  class="btn btn-success" ><strong>+</strong>  </button></td>
-                                        
-                                            </tr>
-                                        </table>
-                                    </div>-->
-
-
+<div class="row">
+    
+        <div class="col-lg-6" >
+            <table class="table table-bordered" id="dynamic_field">
+                <tr>
+                    <td><input type="text" name="caracteristicacriterio[]" placeholder="Escriba su criterio" class="form-control name_list" /></td>
+                    <td><button type="button" name="add" id="add"  class="btn btn-success" ><strong>+</strong>  </button></td>
+                </tr>
+            </table>
         </div>
+        <div class="col-lg-6" >
+            <table class="table table-bordered" id="dynamic_field2">
+                <tr>
+                    <td><input type="text" name="caracteristicavalor[]" placeholder="Escriba su valor" class="form-control name_list" /></td>
+
+                    <td><button type="button" name="add" id="add2"  class="btn btn-success" ><strong>+</strong>  </button></td>
+
+                </tr>
+            </table>
+      
+    </div>
+</div>
+
+
+
+    
 
 
         <div class="row">
@@ -282,71 +278,6 @@ require 'public/headerMenuP.php';
 
     });
 </script>
-
-<script type="text/javascript">
-    $(document).ready(function () {
-
-        $('#a').click(function () {
-            alert("hola");
-
-        });
-
-
-        $("item").empty();
-        var select = document.getElementById('provincia');
-        select.addEventListener('change',
-                function () {
-                    var selectedOption = this.options[select.selectedIndex];
-                  //  console.log(selectedOption.value + ': ' + selectedOption.text);
-                    var cantidad = selectedOption.value;
-document.getElementById("cantidadCa").value=cantidad;
-                    var resultado = "";
-                    var cantidadInputs = "";
-                    var cantidadRepeater = "";
-
-                    var a = "";
-
-                    for (var i = 1; i <= cantidad; i++) {
-
-                        var idIp = "name" + i;
-                        var idRepetear = "repeater" + i;
-                        cantidadRepeater += "    <div class='form-groups'>  <input type='text' name='name[]'  class='form-control'  value=" + i + " required /> </div>        <div id=" + idRepetear + "> <div class='repeater-heading' align='center'>  <button  id='a' type='button' class='btn btn-primary repeater-add-btn'>+</button>   </div>  <br> <div class='clearfix'></div> <div class='items' data-group='programming_languages'>  <div class='item-content'>   <div class='form-group'> <div class='row'> <div class='col-md-9'>   <label>Agregue en cada campo un " + i + " DELANTE el valor  </label><input type='text' class='form-control' data-skip-name='true' name='skill[] ' data-group='hola'   required  />   </div><div class='col-md-3' style='margin-top:24px;' align='center'> <button id='remove-btn' name='remove-btn' class='btn btn-danger' type='button' > Remove</button>  </div> </div>  </div>  </div>   </div>  </div>    ";
-                        document.getElementById("item").innerHTML = cantidadRepeater;
-
-
-                        $("#repeater1").createRepeater();
-                        $("#repeater2").createRepeater();
-                        $("#repeater3").createRepeater();
-                        $("#repeater4").createRepeater();
-                        $("#repeater5").createRepeater();
-                        $("#repeater6").createRepeater();
-                        $("#repeater7").createRepeater();
-                        $("#repeater8").createRepeater();
-                        $("#repeater9").createRepeater();
-                        $("#repeater10").createRepeater();
-
-                    }
-
-
-
-
-                });
-
-
-
-
-
-
-
-
-
-        //    $(this).parents('.items').remove();
-
-
-    });//fin document
-
-</script>
-
 
 <?php
 
