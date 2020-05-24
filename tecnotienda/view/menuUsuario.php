@@ -52,5 +52,5 @@ include_once 'public/headerUsuario.php';
 <?php
 include_once 'public/footerUsuario.php';
 
-
+?>
 

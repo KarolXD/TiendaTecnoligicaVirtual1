@@ -112,7 +112,9 @@
                         <a href="?controlador=Compra&accion=adminPago" class=" btn btn-outline-info my-2 my-sm-0" >
                             Detalles Pago
                         </a>
-                      
+                      <a href="?controlador=Usuario&accion=listarMorosos" class=" btn btn-outline-info my-2 my-sm-0" >
+                            Listado Morosos
+                        </a>
                         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                             <span class="navbar-toggler-icon"></span>
                         </button>

@@ -97,5 +97,19 @@ class usuarioDato {
             return -1;
         }
     }
+    
+     public function obtenerMorosos() {
+        $consulta = $this->db->prepare('SELECT 
+    `tbventaporcobrar`.`tbclienteid`,
+    `tbventaporcobrar`.`tbcantidadpagada`,
+    `tbventaporcobrar`.`tbfechaAbono`,
+    `tbventaporcobrar`.`tbtotaldeuda`,
+    `tbventaporcobrar`.`tbtotalfactura`
+FROM `bdtecnotienda`.`tbventaporcobrar` where tbestadomoroso = 0;' );
+        $consulta->execute();
+        $resultado = $consulta->fetchAll();
+        $consulta->CloseCursor();
+        return $resultado;
+    }
 
 }
