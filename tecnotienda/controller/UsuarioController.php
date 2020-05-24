@@ -92,7 +92,12 @@ class UsuarioController {
         echo json_encode($PD->obtenerNombreCategorias());
     }
 
-    
+       public function listarMorosos() {
+        require 'model/data/usuarioDato.php';
+        $PD = new usuarioDato();
+        $dato["listado"] = $PD->obtenerMorosos();
+        $this->view->show("vistalistaMorosos.php", $dato);
+    }
     
     
 }
