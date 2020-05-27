@@ -82,27 +82,78 @@ require 'public/headerCliente.php';
                 <center>  <p class="bg-light"><strong>Estado del Producto: <?php echo $item[7] ?></strong></p> </center>
             </div>
 
-            <br>
+        <br>
 
             <!--    <div class="container">-->
             <div class="row">
 
-                <div class="col-sm-5">
+                    <div class="col-sm-5">
+                        <div class="form-group">
+                            <?php
+                            $pizza1 = ($item[6]);
+                            $pieces1 = explode(",", $pizza1);
+                            $contadorComas4 = substr_count($pizza1, ',');
+                            for ($i = 0; $i <= $contadorComas4 - 1; $i++) {
+                                ?>
+
+                        <img  width="50" height="50"  alt="Los Angeles" src= "<?php echo $pieces1[$i] ?>" >
+
+                                <?php
+                            }
+                            ?>
+                        </div>   
+                    
                     <br>        <br>
                     <div class="gallery">
+ <div id="demo" class="carousel slide" data-ride="carousel">
+                        <!-- Indicators -->
+                        <ul class="carousel-indicators">
+                            <li data-target="#demo" data-slide-to="0" class="active"></li>
+                            <li data-target="#demo" data-slide-to="1"></li>
+                            <li data-target="#demo" data-slide-to="2"></li>
+                        </ul>
 
-                        <?php
+                        <!-- The slideshow -->
+                    
+                        <center>
+                           
+                            <div class="carousel-inner gallery">
+                           
+                                //fin
+                                <div class="carousel-item active">
+                                    <img src="./public/img/logo.png" class="container-fluid" alt="Los Angeles" width="850" height="300">
+                                </div>
+                           
+                                    <?php
                         $pizza = ($item[6]);
                         $pieces = explode(",", $pizza);
                         $contadorComas = substr_count($pizza, ',');
                         for ($i = 0; $i <= $contadorComas - 1; $i++) {
                             ?>
-                            <center>
-                                <img  width="300" height="300" src= "<?php echo $pieces[$i] ?>" alt="" data-toggle="modal" data-bigimage="<?php echo $pieces[$i] ?>" data-target="#myModal" class="img-fluid">
-                            </center>                     
+                             
+                  <div class="carousel-item">
+                                <img  width="300" height="300" class="container-fluid" alt="Los Angeles" width="850" height="300" src= "<?php echo $pieces[$i] ?>" alt="" data-toggle="modal" data-bigimage="<?php echo $pieces[$i] ?>" data-target="#myModal" class="img-fluid">
+                            </div>                     
                             <?php
                         }
                         ?>
+                                
+                                </div>
+                         
+                            </center>
+                      
+                            <!-- Left and right controls -->
+                            <a id="j" class="carousel-control-prev" href="#demo" data-slide="prev">
+                                <span class="carousel-control-prev-icon"></span>
+                            </a>
+                            <a class="carousel-control-next" href="#demo" data-slide="next">
+                                <span class="carousel-control-next-icon"></span>
+                            </a>
+                       
+                    </div>
+                    
+                        
+                        
 
                     </div>
                     <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">

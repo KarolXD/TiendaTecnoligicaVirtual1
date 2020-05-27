@@ -40,46 +40,48 @@ include_once 'public/headerUsuario.php';
 
     <br>    <form method="post" action="?controlador=SubCategoria&accion=filtrarmostrardetallesSubcategoria">
         <div class="row">
-            <div class="col-md-4">
-                <div class="form-group"> 
-                    Color
-                    <select class="form-control" id="color" name="color"> 
-                               <option value="Negro">Negro</option>
-                        <option value="Gris">Gris</option>
-                        <option value="Blanco">Blanco</option>
-                        <option value="Rosado">Rosado</option>
-                        <option value="Rojo">Rojo</option>
-                        <option value="Celeste">Celeste</option>
-                         <option value="Amarillo">Amarillo</option>
-                            <option value="Verde">Verde</option>
-                      </select>
+               <div class="col-md-4">
 
-                </div>
-            </div>
-            <div class="col-md-4">
-                Tamaño
                 <div class="form-group"> 
-                    <select class="form-control" id="tamano" name="tamano"> 
-                        <option value="Estandar">Estandar</option>
-                        <option value="Extendido">Extendido</option>
-                        <option value="Mini">Mini</option>
-                        <option value="Ultra delgado">Ultra Delgada</option>
+                    Criterios
+                    <select class="form-control" id="criterioid" name="criterioid" onchange="ShowSelected();"> 
+                        <?php
+                        foreach ($vars['listado2'] as $item2) {
+                            ?>
+                            <option value="<?php echo $item2[0] ?>"><?php echo $item2[1] ?></option>
+
+                            <?php
+                        }
+                        ?>
+
+
                     </select>
-                </div>
-                <button type="submit" class="btn btn-outline-success">Filtrar Subcategorias</button>
 
+
+                </div>
             </div>
             <div class="col-md-4">
-                Distri. teclado
-                <div class="form-group"> 
-                    <select class="form-control" id="teclado" name="teclado"> 
-                        <option value="Estandar">Estandar</option>
-                        <option value="Juego">Juego</option>
-                        <option value="Contable">Contable</option></select>
-                          
+                <div class="form-group" style="" id="divvalores"> 
+                       Valores
+                         <input  type="number" value="" id="valor" name="valor">
+                         Criterios
+                      <input  type="number" value="" id="criteriovalor" name="criteriovalor">
+              
+                      Valores
+                    <select class="form-control" id="valorid" name="valorid" onchange="ShowSelected1();"> 
+                        <option selected="0">Elija un valor</option>
+                    </select>
+                    <br>
+                    <center>   <button type="submit" class="btn btn-outline-success">Filtrar Subcategorias</button></center>
+
                 </div>
+            </div>
+            <div class="col-md-4">
+
+
             </div>
         </div>
+       
     </form>
 
 
@@ -144,6 +146,67 @@ include_once 'public/headerUsuario.php';
     <center><a  href="?controlador=SubCategoria&accion=mostrarSubCategorias&categoriaid=<?php echo$item[5] ?>" class="btn btn-outline-info"> Regresar a el menu</a></center>
 
 </div>
+
+
+<script type="text/javascript">
+    function ShowSelected()
+    {
+        /* Para obtener el valor */
+        var cod = document.getElementById("criterioid").value;
+        document.getElementById("criteriovalor").value = cod;
+        var filtro = cod;
+
+        //limpiar compo
+        var select1 = document.getElementById("valorid");
+        for (let i = select1.options.length; i >= 0; i--) {
+            select1.remove(i);
+        }
+
+
+///* Para obtener el texto */
+//var combo = document.getElementById("criterioid");
+//var selected = combo.options[combo.selectedIndex].text;
+//alert(selected);
+
+        $.ajax({
+            type: 'POST',
+
+            url: "?controlador=SubCategoria&accion=obtenerValores1",
+            data: {criterioid: filtro},
+            success: function (response) {
+                console.log(response);
+                $.each(JSON.parse(response), function (i, item) {
+                    var textSeparado = item.tbproductocaracteristica1valor.split(",");
+                    var arrayDeCadenas = textSeparado.length;
+                    // alert(arrayDeCadenas);
+                    $("#valorid").append('  <option selected value="2">Valores </option>   ');
+
+                    for (i = 0; i < arrayDeCadenas - 1; i++) {
+
+                        $("#valorid").append('    <option value="' + i + '">' + textSeparado[i] + '</option>');
+                    
+
+                    }
+                         var idP=item.tbproductocaracteristica1id;
+                        alert("idC"+idP);
+                });
+
+            }
+        });
+
+
+
+    }//fin metoo
+
+    function ShowSelected1() {
+        var cod = document.getElementById("valorid").value;
+          alert("cod"+cod);
+document.getElementById("valor").value=cod;
+//
+    }
+</script>
+
+
 
 
 <br><br><br><br><br>
