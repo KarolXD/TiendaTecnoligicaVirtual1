@@ -170,10 +170,20 @@ class productoData {
             return -1;
         }
     }
-
-    public function registrarproductocaracteristicas($productoproductocodigobarras, $productocaracteristicacriterio, $productocaracteristicavalor, $productocaracteristicatitulo) {
+ public function registrarproductocaracteristicas1($productoproductocodigobarras, $productocaracteristicacriterio, $productocaracteristicavalor, $productocaracteristicatitulo) {
         $consulta = $this->db->prepare(' select  @productoid:=tbproductoid from tbproducto where tbproductocodigobarras="' . $productoproductocodigobarras . '";
       INSERT INTO tbproductocaracteristica(tbproductoid,tbproductocartacteristicascriterio,tbproductocaracteristicasvalor,tbproductocaracteristicastitulo) VALUES(@productoid,"' . $productocaracteristicacriterio . '","' . $productocaracteristicavalor . '", "' . $productocaracteristicatitulo . '")');
+        if ($consulta->execute()) {
+            $resultado = $consulta->fetchAll();
+            $consulta->CloseCursor();
+            return 1;
+        } else {
+            return -1;
+        }
+    }
+    public function registrarproductocaracteristicas($productoproductocodigobarras, $productocaracteristicacriterio, $productocaracteristicavalor, $productocaracteristicatitulo, $url) {
+        $consulta = $this->db->prepare('  select  @productoid:=tbproductoid from tbproducto where tbproductocodigobarras="' . $productoproductocodigobarras . '";
+      INSERT INTO temporalArticulos(tbproductoid,tbproductocaracteristica1criterio,tbproductocaracteristica1valor,tbproductocaracteristica1titulo,tbproductocaracteristicafoto) VALUES(@productoid,"' . $productocaracteristicacriterio . '","' . $productocaracteristicavalor . '", "' . $productocaracteristicatitulo . '" , "' .$url.'" )');
         if ($consulta->execute()) {
             $resultado = $consulta->fetchAll();
             $consulta->CloseCursor();
@@ -292,6 +302,7 @@ p.tbproductoestado, s.tbsubcategorianombre, p.tbproductocantidad
         return $consulta->fetchALL(PDO::FETCH_ASSOC);
     }
 
+  
 //lista
     public function listarProductos() {
         $consulta = $this->db->prepare('

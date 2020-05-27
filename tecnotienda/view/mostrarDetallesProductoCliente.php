@@ -144,13 +144,6 @@ require 'public/headerCliente.php';
 
 
 
-                    <p class=""><strong>Color</strong></p> 
-                    <hr style="color: #47748b">
-                    <p class=""><strong>Tamaño</strong></p> 
-                    <hr style="color: #47748b">
-                    <p class=""><strong>Distri Teclado</strong></p> 
-                    <hr style="color: #47748b">
-
                     <p class=""><strong>Sub Categoria: <?php echo $item[0] ?></strong></p> 
                     <hr style="color: #47748b">
 

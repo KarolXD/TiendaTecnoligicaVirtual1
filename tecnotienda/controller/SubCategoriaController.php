@@ -97,6 +97,7 @@ class SubCategoriaController {
 
         $_SESSION['subcategoriaid2'] = $_GET['subcategoriaid'];
 
+       
         $data['listado'] = ($PD->listadetalleSubcategoria($_GET['subcategoriaid']));
         $this->view->show("mostrardetallesSubCategoria.php", $data);
     }
@@ -117,16 +118,26 @@ class SubCategoriaController {
             if (!isset($_SESSION['subcategoriaid'])) {
                 $_SESSION['subcategoriaid'] = ''; }
             $_SESSION['subcategoriaid'] = $_GET['subcategoriaid'];
+        
+      
+         $data['listado2'] = ($PD->obtenerCriterios($_GET['subcategoriaid']));
         $data['listado'] = ($PD->listadetalleSubcategoria($_GET['subcategoriaid']));
         $this->view->show("mostrardetallesSubCategoriaCliente.php", $data);
         }
         
+        //    $data['listado3'] = ($PD->obtenerValores($_GET['subcategoriaid']));
+        public function obtenerValores(){
+        require 'model/data/subcategoriaDato.php';
+        $PD = new subcategoriaDato();
+             session_start();
+        echo json_encode($PD->obtenerValores($_POST['criterioid'],  $_SESSION['subcategoriaid']));
+        }
         
       public function filtrarmostrardetallesSubcategoriaCliente() {
         require 'model/data/subcategoriaDato.php';
          session_start();
         $PD = new subcategoriaDato();
-        $filtro=$_POST['color'].",".$_POST['tamano'].",".$_POST['teclado'].",";
+        $filtro=$_POST['criterioid'];
      
         $data['listado'] = ($PD->filtrardetalleSubcategoriaCliente( $_SESSION['subcategoriaid'],$filtro));
         $this->view->show("filtrarmostrardetallesSubcategoriaCliente.php", $data);

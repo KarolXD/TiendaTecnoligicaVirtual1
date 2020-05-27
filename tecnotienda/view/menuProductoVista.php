@@ -22,13 +22,17 @@ require 'public/headerMenuP.php';
         <div class="col-md-4">
             <center>
                 <a href="?controlador=Producto&accion=registrarProductoVista" class="bg-light"> Registrar nuevo producto</a>
-
-
+            </center>
+            
+          <center>
+                <a href="?controlador=Producto&accion=temporal" class="bg-light"> TEMPORAL</a>
             </center>
         </div>
         <div class="col-md-4">
 
-
+          <center>
+                <a href="?controlador=Producto&accion=registrarCaracteristica" class="bg-light"> Registrar nueva Carc</a>
+            </center>
             <center>
                 <a href="?controlador=Producto&accion=registrarDevolucion" class="bg-light"> Registrar nueva devolución</a>
             </center>

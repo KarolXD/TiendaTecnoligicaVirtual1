@@ -10,6 +10,28 @@ class subcategoriaDato {
         $this->db = SPDO::singleton();
     }
 
+      public function obtenerCriterios($subcategoriaid) {
+  $consulta = $this->db->prepare('SELECT tbproductocaracteristica1id, tbproductocaracteristica1criterio from tbproducto p join temporalArticulos t
+on p.tbproductoid =t.tbproductoid where  p.tbproductoid =t.tbproductoid
+and p.tbsubcategoriaid= "' . $subcategoriaid . '" ');
+        $consulta->execute();
+        $resultado = $consulta->fetchAll();
+        $consulta->CloseCursor();
+        return $resultado;
+    }
+    
+    //AQUI OBTENGO LOS VALORES DEPENDIENDO EL CRITERIO oki
+      //public function obtenerValores() {
+     public function obtenerValores($criterioid,$subcategoriaid) { 
+  $consulta = $this->db->prepare('SELECT tbproductocaracteristica1id, tbproductocaracteristica1valor from tbproducto p join temporalArticulos t
+on p.tbproductoid =t.tbproductoid where  p.tbproductoid =t.tbproductoid
+and p.tbsubcategoriaid="' . $subcategoriaid . '"  and tbproductocaracteristica1id=  "' . $criterioid . '" ');
+
+        $consulta->execute();
+        $resultado = $consulta->fetchAll();
+        $consulta->CloseCursor();
+        return $resultado;
+    }
     public function registrarSubCategorias($subcategorianombre, $categoriaid, $subcategoriadescripcion, $usuarioid, $subcategoriafecha) {
         $sql = 'SELECT COUNT(*) as total FROM tbsubcategoria where tbsubcategorianombre="' . $subcategorianombre . '"';
         $del = $this->db->prepare($sql);
@@ -183,7 +205,7 @@ where
 s.tbsubcategoriaid=p.tbsubcategoriaid and
 pr.tbproductoid=p.tbproductoid and
 i.tbproductoid=p.tbproductoid and
-c.tbproductoid=p.tbproductoid and  i.tbproductoimagennombre="'.$filtro.'" and  p.tbproductoestado=0 and s.tbsubcategoriaid="' . $subcategoriaid . '"');
+c.tbproductoid=p.tbproductoid  and  p.tbproductoestado=0 and s.tbsubcategoriaid="' . $subcategoriaid . '"');
         $consulta->execute();
         $resultado = $consulta->fetchAll();
         $consulta->CloseCursor();

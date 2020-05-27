@@ -96,31 +96,109 @@ require 'public/headerMenuP.php';
             </div>
             <div class="col-md-4"></div>
         </div>
+ <div class="row" >
+        <div class="col-sm-4" ></div>
+        <div class="col-sm-4" >
+            <h5>  <center>Registra una Producto </center></h5>
+            <hr style="color: #47748b">
+            <form method="post" id="repeater_form">
 
-        
-<!--            <div class="row">
-                <div class="col-sm-4" ></div>
-                <div class="col-sm-4" id="" name="">
-                    <div class="form-group">
-                        <select name="provincia" id="provincia" class="form-control">
-                            <option value="" disabled selected>Cantidad Caracteristicas...</option>
-                            <option value="1">1</option>
-                            <option value="2">2</option>
-                            <option value="3">3</option>
-                            <option value="4">4</option>
-                            <option value="5">5</option>
-                        </select>
-                        <input  id="cantidadCa" name="cantidadCa"  type="hidden" />
+
+                <div class="form-group">
+                    <label>Ingrese Criterios</label>
+                    <input type="text" name="name" id="name" class="form-control" required />
+                </div>
+                <div id="repeater">
+                    <div class="repeater-heading" align="right">
+                        <button type="button" class="btn btn-primary repeater-add-btn">+</button>
+                    </div>
+                    <div class="clearfix"></div>
+                    <div class="items" data-group="programming_languages">
+                        <div class="item-content">
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class="col-md-9">
+                                        <label>Ingrese valores</label>
+                                        <input class="form-control" data-skip-name="true" data-name="skill[]" required>
+
+                                    </div>
+                                    <div class="col-md-3" style="margin-top:24px;" align="center">
+                                        <button id="remove-btn" class="btn btn-danger" onclick="$(this).parents('.items').remove()">Remove</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+        </div>
+    </div>
+    ----
+    <div class="row">
+      <div class="col-sm-4" ></div>
+        <div class="col-sm-4" >
+    <div class="form-group">
+        <label>Ingrese Criterios</label>
+        <input type="text" name="name1" id="name1" class="form-control" required />
+    </div>
+    <div id="repeater1">
+        <div class="repeater-heading" align="right">
+            <button type="button" class="btn btn-primary repeater-add-btn">+</button>
+        </div>
+        <div class="clearfix"></div>
+        <div class="items" data-group="programming_languages">
+            <div class="item-content">
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-md-9">
+                            <label>Escribe Valores</label>
+                            <input class="form-control" data-skip-name="true" data-name="skill1[]" required>
+
+                        </div>
+                        <div class="col-md-3" style="margin-top:24px;" align="center">
+                            <button id="remove-btn" class="btn btn-danger" onclick="$(this).parents('.items').remove()">Remove</button>
+                        </div>
                     </div>
                 </div>
-                <div class="col-sm-4" ></div>
-            </div>-->
+            </div>
+        </div>
+    </div>
+</div>
+      
+      <div class="col-sm-4" ></div>
+      </div>
+<!--
+        <div class="row">
+            <div class="col-sm-4" ></div>
+            <div class="col-sm-4" id="" name="">
+                <div class="form-group">
+                    <select name="provincia" id="provincia" class="form-control">
+                        <option value="" disabled selected>Cantidad Caracteristicas...</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                    </select>
+                    <input  id="cantidadCa" name="cantidadCa"  type="hidden" />
+                </div>
+            </div>
+            <div class="col-sm-4" ></div>
+        </div>
 
 
+        <div class="row">
+            <div class="col-lg-3" >
+            </div>
+            <div class="col-lg-6" id="item"  name="item">
+            </div>
+            <div class="col-lg-3" >
+            </div>
+       
+        </div>-->
 
-
-
-<div class="row">
+        <!--
+        <div class="row">
     
         <div class="col-lg-6" >
             <table class="table table-bordered" id="dynamic_field">
@@ -141,7 +219,7 @@ require 'public/headerMenuP.php';
             </table>
       
     </div>
-</div>
+</div>-->
 
 
 
@@ -276,8 +354,92 @@ require 'public/headerMenuP.php';
         });
 
 
+                                $("#repeater").createRepeater();
+                                $("#repeater1").createRepeater();
     });
 </script>
+
+<!--        <script type="text/javascript">
+            $(document).ready(function () {
+                $("item").empty();
+                var select = document.getElementById('provincia');
+                select.addEventListener('change',
+                        function () {
+                            var selectedOption = this.options[select.selectedIndex];
+                            console.log(selectedOption.value + ': ' + selectedOption.text);
+                            var cantidad = selectedOption.value;
+
+                            var resultado = "";
+                            var cantidadInputs = "";
+                            var cantidadRepeater = "";
+
+                            var a = "";
+
+                            for (var i = 1; i <= cantidad; i++) {
+
+                                var idIp = "name" + i;
+                                var idRepetear = "repeater" + i;
+                                cantidadRepeater += " <div class='form-groups'>  <input type='text' name='name[]'  class='form-control'  placeholder=" + i + " required /> </div>    <br>    <div id=" + idRepetear + ">\n\
+           <div class='repeater-heading' align='right'> <button  id='a' type='button' class='btn btn-primary repeater-add-btn'>Add More Skill</button>  </div> \n\
+      <div class='clearfix'></div> <div class='items' data-group='programming_languages'>  <div class='item-content'>   <div class='form-group'> \n\
+<div class='row'> <div class='col-md-9'>   <label>Agregue Criterios</label>\n\
+<input type='text' class='form-control' data-skip-name='true' name='skill[]' value="+ i +" required  />   </div>\n\
+<div class='col-md-2' style='margin-top:24px;' align='center'> <button id='remove-btn'  name='remove-btn' class='btn btn-danger' type='button' > Remove</button>  </div> </div>  </div>  </div>   </div>  </div>    ";
+                                document.getElementById("item").innerHTML = cantidadRepeater;
+
+                                $("#remove-btn").click(function () {
+                                    alert("hola soy ");
+
+                                });
+                                document.getElementById("remove-btn");
+
+
+                                $("#repeater1").createRepeater();
+                                $("#repeater2").createRepeater();
+                                $("#repeater3").createRepeater();
+                                $("#repeater4").createRepeater();
+                                $("#repeater5").createRepeater();
+                                $("#repeater6").createRepeater();
+                                $("#repeater7").createRepeater();
+                                $("#repeater8").createRepeater();
+                                $("#repeater9").createRepeater();
+                                $("#repeater10").createRepeater();
+
+                            }
+
+
+
+
+                        });
+
+
+
+
+
+
+
+      $('#repeater_form').on('submit', function(event){
+            event.preventDefault();
+            $.ajax({
+                url:"insert.php",
+                method:"POST",
+                data:$(this).serialize(),
+                success:function(data)
+                {
+                    $('#repeater_form')[0].reset();
+                    $("#repeater").createRepeater();
+                    $('#success_result').html(data);
+                    /*setInterval(function(){
+                        location.reload();
+                    }, 3000);*/
+                }
+            });
+        });
+
+    });
+            });//fin document
+
+        </script>-->
 
 <?php
 

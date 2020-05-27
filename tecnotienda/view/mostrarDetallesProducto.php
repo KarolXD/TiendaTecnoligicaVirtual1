@@ -129,15 +129,7 @@ require 'public/headerUsuario.php';
                     ?>
 
 
-                    <p class=""><strong>  Color</strong></p> 
-                    <hr style="color: #47748b">
-
-                    <p class=""><strong>  Tamaño</strong></p> 
-                    <hr style="color: #47748b">
-
-                    <p class=""><strong>  Disc.Teclado</strong></p> 
-                    <hr style="color: #47748b">
-
+               
                     <p class="">      <span class="">Disponibles :  <strong>  <?php echo $item[10] ?></strong> </span></p>  
 
 

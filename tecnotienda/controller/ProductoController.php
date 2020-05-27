@@ -6,6 +6,41 @@ class ProductoController {
         $this->view = new View();
     }
 
+    
+       public function registrarCaracteristica() {
+        $this->view->show("registrarCaracteristica.php", null);
+    }
+
+    
+    
+    public function temporal(){
+        
+        
+          $this->view->show("temporal.php", null);  
+    }
+
+    public function guardarCaracteristica() {
+        require 'model/data/productoData.php';
+        $PD = new productoData();
+        $productocaracteristicavalor = "";
+        $productocaracteristicacriterio = "";
+
+        if (isset($_POST["name"]) and isset($_POST["name1"])) {
+
+            $skill = "1 " . implode("&", $_POST["skill"]) . ",";
+            $skill1 = "2 " . implode("&", $_POST["skill1"]) . ",";
+            $val1="1 " .$_POST["name"].","; 
+            $val2= "2 " .$_POST["name1"].",";
+            
+            $productocaracteristicacriterio .= $val1.$val2; 
+             $productocaracteristicavalor .= $skill . $skill1;
+          
+        }
+       //   $PD->registrarproductocaracteristicas(1, $productocaracteristicacriterio, $productocaracteristicavalor, "temporaaall");
+
+        $this->view->show("registrarCaracteristica.php", null);
+    }
+
     public function registrarProductoVista() {
         $this->view->show("registrarproductovista.php", null);
     }
@@ -166,20 +201,19 @@ class ProductoController {
         require 'model/data/productoData.php';
         $PD = new productoData();
         $id = filter_input(INPUT_POST, 'productoid');
-   
+   $respuesta="";
         if ($_POST["subcategoriaid"] == -1) {
             $respuesta=$PD->modificarProducto2($_POST["productocodigobarras"], $_POST["productogarantiasaplicadas"], $_POST["productosdevueltos"], 
                     $_POST["productoestado"],$_POST["cantidad"],$_POST["productoid"]);
         } else {
           $respuesta==   $PD->modificarProducto($_POST["productocodigobarras"], $_POST["productogarantiasaplicadas"], $_POST["productosdevueltos"], 
-                    $_POST["subcategoriaid"], $_POST["productoestado"],$_POST["cantidad"],$_POST["productoid"]);
-        }
+                    $_POST["subcategoriaid"], $_POST["productoestado"],$_POST["cantidad"],$_POST["productoid"]);    }
         
         if( $respuesta==1){
-                           echo '<script src="./public/js/jquery-3.3.1.js" type="text/javascript"> </script>  <script>   $(function() {   $("#alertControl").html("<div > <strong>Mensaje!</strong>  Modificado correctamente </div> ");  });</script>';
+       echo '<script src="./public/js/jquery-3.3.1.js" type="text/javascript"> </script>  <script>   $(function() {   $("#alertControl").html("<div > <strong>Mensaje!</strong>  Modificado correctamente </div> ");  });</script>';
     
         }else{
-                           echo '<script src="./public/js/jquery-3.3.1.js" type="text/javascript"> </script>  <script>   $(function() {   $("#alertControl").html("<div > <strong>Advertencia!</strong>  No se ha modificado! </div> ");  });</script>';
+       echo '<script src="./public/js/jquery-3.3.1.js" type="text/javascript"> </script>  <script>   $(function() {   $("#alertControl").html("<div > <strong>Advertencia!</strong>  No se ha modificado! </div> ");  });</script>';
     
         }
         $data['actualizarProductos'] = $PD->filtrarProductoById($id);
@@ -260,7 +294,7 @@ class ProductoController {
 
 
         //caracteristicas la q hay q hacer
-//        $productocaractericticatitulo = $_POST['caractericticatitulo'];
+       $productocaractericticatitulo = $_POST['caractericticatitulo'];
 //        $productocaracteristicacriterio=$_POST['skill'];
 //    $estadoCriterio="";
 //      $valorInicialc=0;
@@ -293,28 +327,44 @@ class ProductoController {
 //        
 //        
                  
-                 //CARACTERISTICA ANTIGUA
-        $valorcriterio = "";
-        $valoratributo = "";
-          $estadoCriterio="";
-          $valorInicialc=0;
-        $array_num = count($productocaracteristicavalor);
-        $array_num2 = count($productocaracteristicacriterio);
-        if ((!empty($_POST["caracteristicacriterio"]) && is_array($_POST["caracteristicacriterio"]))) {
-            for ($k = 0; $k < $array_num2; $k++) {
-                $valorcriterio .= $productocaracteristicacriterio[$k] . ",";
-               $estadoCriterio .= $valorInicialc . ",";
-            }
-        }
-        
-           if ((!empty($_POST["caracteristicavalor"]) && is_array($_POST["caracteristicavalor"]))) {
-            for ($ka = 0; $ka < $array_num; $ka++) {
-               // $valorcriterio .= $productocaracteristicacriterio[$k] . ",";
-                $valoratributo .= $productocaracteristicavalor[$ka] . ",";
-            }
-        }
+                 //CARACTERISTICA real
+//        $valorcriterio = "";
+//        $valoratributo = "";
+//          $estadoCriterio="";
+//          $valorInicialc=0;
+//        $array_num = count($productocaracteristicavalor);
+//        $array_num2 = count($productocaracteristicacriterio);
+//        if ((!empty($_POST["caracteristicacriterio"]) && is_array($_POST["caracteristicacriterio"]))) {
+//            for ($k = 0; $k < $array_num2; $k++) {
+//                $valorcriterio .= $productocaracteristicacriterio[$k] . ",";
+//               $estadoCriterio .= $valorInicialc . ",";
+//            }
+//        }
 //        
-//IMAGENEEEEEEEEEEEEEEEEEEEEEEE/
+//           if ((!empty($_POST["caracteristicavalor"]) && is_array($_POST["caracteristicavalor"]))) {
+//            for ($ka = 0; $ka < $array_num; $ka++) {
+//               // $valorcriterio .= $productocaracteristicacriterio[$k] . ",";
+//                $valoratributo .= $productocaracteristicavalor[$ka] . ",";
+//            }
+//        }
+////        
+        $productocaracteristicacriterio="";$productocaracteristicavalor="";
+         //estoy probando con est
+            if (isset($_POST["name"]) and isset($_POST["name1"])) {
+
+            $skill = "1 " . implode("&", $_POST["skill"]) . ",";
+            $skill1 = "2 " . implode("&", $_POST["skill1"]) . ",";
+            $val1="1 " .$_POST["name"].","; 
+            $val2= "2 " .$_POST["name1"].",";
+            
+            $productocaracteristicacriterio .= $val1.$val2; 
+             $productocaracteristicavalor .= $skill . $skill1;
+          
+             
+        }
+         ////////////////////fin
+         
+        
        $valornombre = "";
       $productoimagenesnombre = $_POST['imagenesnombre'];
         $array_num3= count($productoimagenesnombre);
@@ -349,10 +399,24 @@ class ProductoController {
         if ($resultado1 == 1 && $flag == true) {
 
             $resultado2 = $PD->registrarproductoprecio($productocodigobarras, $productopreciocompra, $productopreciofechacompra, $productoprecioventa, $productopreciofechaventa, $productoprecioganacia);
-            $resultado3 = $PD->registrarproductocaracteristicas($productocodigobarras, $valorcriterio, $valoratributo, $productocaractericticatitulo, $estadoCriterio);
+            $resultado3 = $PD->registrarproductocaracteristicas1($productocodigobarras, $productocaracteristicacriterio, $productocaracteristicavalor, $productocaractericticatitulo);
+          
+                 
+      
+            
             for ($j = 0; $j < $array_num3; $j++) {
                 $valornombre .= $productoimagenesnombre[$j] . ",";
             }
+            
+                  if (isset($_POST["name"]) and isset($_POST["name1"])) {
+            echo   $temporal1 = implode(",", $_POST["skill"]) . ",";
+          echo     $temporal2 =  implode(",", $_POST["skill1"]) . ",";
+                //$temporal2=implode(",".$_POST["skill1"]) . ",";
+                $PD->registrarproductocaracteristicas($productocodigobarras, $_POST["name"], $temporal1, $productocaractericticatitulo,$rutaFinal);
+                 $PD->registrarproductocaracteristicas($productocodigobarras, $_POST["name1"], $temporal2, $productocaractericticatitulo,$rutaFinal);
+          
+            }
+             
             $resultado4 = $PD->registrarproductoimagen($productocodigobarras, $valornombre, $rutaFinal, $estadoImagen);
 
             if ($resultado2 == 1 && $resultado3 == 1 && $resultado4 == 1) {
@@ -381,6 +445,18 @@ class ProductoController {
         echo json_encode($PD->obtenerSubCategoriaProductos());        
     }
     
+    //borrar
+    
+    public function obtenerCriterios() {
+
+        require 'model/data/productoData.php';
+        $PD = new productoData();
+        session_start();
+        $subcategoriaid = $_SESSION['subcategoriaid'];
+        $criterio = $PD->obtenerCriterios($subcategoriaid);
+          echo json_encode($criterio);        
+    }
+
     public function eliminarProducto() {
         require 'model/data/productoData.php';
         $PD = new productoData();

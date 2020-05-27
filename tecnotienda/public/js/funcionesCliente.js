@@ -1,8 +1,7 @@
 
 
 $(document).ready(function () {
-
-
+ 
     $.ajax({
         type: 'POST',
         url: "?controlador=Cliente&accion=menuPrincipalCliente",

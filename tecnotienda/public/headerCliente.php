@@ -15,6 +15,7 @@
             <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
             <script src="./public/js/funcionesCliente.js" type="text/javascript"></script>
             <script src="./public/js/js_provincias.js" type="text/javascript"></script>
+            
         </head>
         <body><div class="container">
                 <div class="row">
