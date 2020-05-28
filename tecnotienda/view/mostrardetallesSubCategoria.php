@@ -48,7 +48,7 @@ include_once 'public/headerUsuario.php';
                         <?php
                         foreach ($vars['listado2'] as $item2) {
                             ?>
-                            <option value="<?php echo $item2[0] ?>"><?php echo $item2[1] ?></option>
+                              <option value="<?php echo $item2[0] ?>"><?php echo     $item2[1]. "  " .$item2[2]   ?></option>
 
                             <?php
                         }
@@ -63,9 +63,9 @@ include_once 'public/headerUsuario.php';
             <div class="col-md-4">
                 <div class="form-group" style="" id="divvalores"> 
                        Valores
-                         <input  type="number" value="" id="valor" name="valor">
+                       <input  type="hidden" value="" id="valor" name="valor">
                          Criterios
-                      <input  type="number" value="" id="criteriovalor" name="criteriovalor">
+                         <input  type="hidden" value="" id="criteriovalor" name="criteriovalor">
               
                       Valores
                     <select class="form-control" id="valorid" name="valorid" onchange="ShowSelected1();"> 
@@ -188,7 +188,7 @@ include_once 'public/headerUsuario.php';
 
                     }
                          var idP=item.tbproductocaracteristica1id;
-                        alert("idC"+idP);
+                      //  alert("idC"+idP);
                 });
 
             }
@@ -200,7 +200,7 @@ include_once 'public/headerUsuario.php';
 
     function ShowSelected1() {
         var cod = document.getElementById("valorid").value;
-          alert("cod"+cod);
+        //  alert("cod"+cod);
 document.getElementById("valor").value=cod;
 //
     }

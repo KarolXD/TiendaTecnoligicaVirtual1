@@ -11,7 +11,7 @@ class subcategoriaDato {
     }
 
       public function obtenerCriterios($subcategoriaid) {
-  $consulta = $this->db->prepare('SELECT tbproductocaracteristica1id, tbproductocaracteristica1criterio from tbproducto p join temporalArticulos t
+  $consulta = $this->db->prepare('SELECT tbproductocaracteristica1id, tbproductocaracteristica1criterio,tbproductocaracteristica1titulo from tbproducto p join temporalArticulos t
 on p.tbproductoid =t.tbproductoid where  p.tbproductoid =t.tbproductoid
 and p.tbsubcategoriaid= "' . $subcategoriaid . '" ');
         $consulta->execute();
