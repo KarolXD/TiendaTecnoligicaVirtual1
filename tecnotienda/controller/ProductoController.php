@@ -293,75 +293,9 @@ class ProductoController {
          $productoprecioventa = $productopreciocompra+($productopreciocompra/$productoprecioganacia);
 
 
-        //caracteristicas la q hay q hacer
-       $productocaractericticatitulo = $_POST['caractericticatitulo'];
-//        $productocaracteristicacriterio=$_POST['skill'];
-//    $estadoCriterio="";
-//      $valorInicialc=0;
-//        $cantidadCa= ($_POST["cantidadCa"]);
-//        $productocaracteristicavalor= $_POST['name'];
-//         $valorcriterio=""; $valoratributo="";
-//                 for ($d = 0; $d < $cantidadCa; $d++) {
-//                $valorcriterio.= ($d+1). $productocaracteristicavalor[$d].",";
-//                 $estadoCriterio .= $valorInicialc . ",";
-//       
-//                 }
-//          
-//                  $cantidadCa2= count($productocaracteristicacriterio);
-//             for ($ka = 0; $ka < $cantidadCa2; $ka++) {
-//                  for ($jj = 0; $jj < $cantidadCa; $jj++) {
-//                      $valor= substr($productocaracteristicacriterio[$ka], 0,1);
-//                       //  2==1
-//                      if($valor==($jj+1)){
-//                     $valoratributo .= $productocaracteristicacriterio[$ka] . ",";
-//                   echo "Iguales";
-//                      }else{
-//                      $valoratributo = $productocaracteristicacriterio[$ka] . ".";
-//                             echo "NO Iguales";
-//                      }
-//                  }
-//              
-//                
-//            }
-//             echo "Carac: ". $valoratributo;
-//        
-//        
-                 
-                 //CARACTERISTICA real
-//        $valorcriterio = "";
-//        $valoratributo = "";
-//          $estadoCriterio="";
-//          $valorInicialc=0;
-//        $array_num = count($productocaracteristicavalor);
-//        $array_num2 = count($productocaracteristicacriterio);
-//        if ((!empty($_POST["caracteristicacriterio"]) && is_array($_POST["caracteristicacriterio"]))) {
-//            for ($k = 0; $k < $array_num2; $k++) {
-//                $valorcriterio .= $productocaracteristicacriterio[$k] . ",";
-//               $estadoCriterio .= $valorInicialc . ",";
-//            }
-//        }
-//        
-//           if ((!empty($_POST["caracteristicavalor"]) && is_array($_POST["caracteristicavalor"]))) {
-//            for ($ka = 0; $ka < $array_num; $ka++) {
-//               // $valorcriterio .= $productocaracteristicacriterio[$k] . ",";
-//                $valoratributo .= $productocaracteristicavalor[$ka] . ",";
-//            }
-//        }
-////        
-        $productocaracteristicacriterio="";$productocaracteristicavalor="";
-         //estoy probando con est
-            if (isset($_POST["name"]) and isset($_POST["name1"])) {
+      
 
-            $skill = "1 " . implode("&", $_POST["skill"]) . ",";
-            $skill1 = "2 " . implode("&", $_POST["skill1"]) . ",";
-            $val1="1 " .$_POST["name"].","; 
-            $val2= "2 " .$_POST["name1"].",";
-            
-            $productocaracteristicacriterio .= $val1.$val2; 
-             $productocaracteristicavalor .= $skill . $skill1;
-          
-             
-        }
+  
          ////////////////////fin
          
         
@@ -399,27 +333,20 @@ class ProductoController {
         if ($resultado1 == 1 && $flag == true) {
 
             $resultado2 = $PD->registrarproductoprecio($productocodigobarras, $productopreciocompra, $productopreciofechacompra, $productoprecioventa, $productopreciofechaventa, $productoprecioganacia);
-            $resultado3 = $PD->registrarproductocaracteristicas1($productocodigobarras, $productocaracteristicacriterio, $productocaracteristicavalor, $productocaractericticatitulo);
+       //     $resultado3 = $PD->registrarproductocaracteristicas1($productocodigobarras, $productocaracteristicacriterio, $productocaracteristicavalor, $productocaractericticatitulo);
           
-                 
-      
+  //$name=$_POST["name"]; $name1=$_POST["name1"];$name2=$_POST["name2"]; $name3=$_POST["name3"];   $name4=$_POST["name4"];   $name5=$_POST["name5"];  $name6=$_POST["name6"]; $name7=$_POST["name7"]; $name8=$_POST["name8"]; $name9=$_POST["name9"];  $name10=$_POST["name10"]; $name11=$_POST["name11"]; $name12=$_POST["name12"];       $name14=$_POST["name14"];
             
             for ($j = 0; $j < $array_num3; $j++) {
                 $valornombre .= $productoimagenesnombre[$j] . ",";
             }
-            
-                  if (isset($_POST["name"]) and isset($_POST["name1"])) {
-            echo   $temporal1 = implode(",", $_POST["skill"]) . ",";
-          echo     $temporal2 =  implode(",", $_POST["skill1"]) . ",";
-                //$temporal2=implode(",".$_POST["skill1"]) . ",";
-                $PD->registrarproductocaracteristicas($productocodigobarras, $_POST["name"], $temporal1, $productocaractericticatitulo,$rutaFinal);
-                 $PD->registrarproductocaracteristicas($productocodigobarras, $_POST["name1"], $temporal2, $productocaractericticatitulo,$rutaFinal);
-          
-            }
-             
+
+       
+//    
+
             $resultado4 = $PD->registrarproductoimagen($productocodigobarras, $valornombre, $rutaFinal, $estadoImagen);
 
-            if ($resultado2 == 1 && $resultado3 == 1 && $resultado4 == 1) {
+            if ($resultado2 == 1 && $resultado4 == 1) {
                 echo '<script src="./public/js/jquery-3.3.1.js" type="text/javascript"> </script>  <script>   $(function() {   $("#alertControl").html("<div > <strong>Mensaje!</strong> Producto registrado  </div> ");  });</script>';
             } else {
                 echo '<script src="./public/js/jquery-3.3.1.js" type="text/javascript"> </script>  <script>   $(function() {   $("#alertControl").html("<div > <strong>Mensaje!</strong>Opps Producto NO registado :( </div> ");  });</script>';
@@ -438,7 +365,159 @@ class ProductoController {
         $PD = new productoData();
         echo json_encode($PD->obtenerProductos());
     }
+    public function registrarCaracteristicas1() {
+         require 'model/data/productoData.php';
+        $PD = new productoData();
+       echo   $productocodigobarras=$_POST["productocodigobarras2"];
+       echo $productocaractericticatitulo = $_POST['titulo'];
+        $productocaracteristicacriterio="";$productocaracteristicavalor=""; 
+        //echo $cantidadInpus = $_POST["valorselect"];
 
+
+            if (isset($_POST["name"]) and isset($_POST["name1"]) and isset($_POST["name2"])) {
+
+            $skill = "1 " . implode("&", $_POST["skill"]) . ",";
+            $skill1 = "2 " . implode("&", $_POST["skill1"]) . ",";
+            $skill2 = "3 " . implode("&", $_POST["skill2"]) . ",";
+            
+            $val1 = "1 " . $_POST["name"] . ",";
+            $val2 = "2 " . $_POST["name1"] . ",";
+            $val3 = "3 " . $_POST["name2"] . ",";
+          $temporal11=" ".implode(",", $_POST["skill"]) . ",";
+          $temporal22=" ".implode(",", $_POST["skill1"]) . ",";
+          $temporal33=" ".implode(",", $_POST["skill2"]) . ",";
+          
+            $temporal1= $temporal11;
+            $temporal2 =$temporal22;
+            $temporal3= $temporal33;
+            
+            $productocaracteristicacriterio .= $val1 . $val2 . $val3;
+           $productocaracteristicavalor .= $skill . $skill1 . $skill2;
+        }
+
+         $resultado3 = $PD->registrarproductocaracteristicas1($productocodigobarras, $productocaracteristicacriterio, $productocaracteristicavalor, $productocaractericticatitulo);
+
+         $resultado0 = $PD->registrarproductocaracteristicas($productocodigobarras, $_POST["name"], $temporal1, $productocaractericticatitulo, "1");
+         $resultado1 = $PD->registrarproductocaracteristicas($productocodigobarras, $_POST["name1"], $temporal2, $productocaractericticatitulo, "2");
+         $resultado2 = $PD->registrarproductocaracteristicas($productocodigobarras, $_POST["name2"], $temporal3, $productocaractericticatitulo, "3");
+
+        $this->view->show("registrarproductovista.php", null);
+   
+    }
+      public function registrarCaracteristicas2() {
+        require 'model/data/productoData.php';
+        $PD = new productoData();
+           $productocodigobarras=$_POST["productocodigobarras3"];$productocaractericticatitulo = $_POST['titulo1'];
+        $productocaracteristicacriterio="";$productocaracteristicavalor=""; 
+
+         
+             if (isset($_POST["name3"]) and isset($_POST["name4"]) and isset($_POST["name5"]) and isset($_POST["name6"]) and isset($_POST["name7"])) {
+
+                $skil3 = "1 " . implode("&", $_POST["skill3"]) . ",";
+                $skill4 = "2 " . implode("&", $_POST["skill4"]) . ",";
+                $skill5 = "4 " . implode("&", $_POST["skill5"]) . ",";
+                $skill6 = "5 " . implode("&", $_POST["skill6"]) . ",";
+                $skill7 = "6 " . implode("&", $_POST["skill7"]) . ",";
+
+                $val4 = "1 " . $_POST["name3"] . ",";
+                $val5 = "2 " . $_POST["name4"] . ",";
+                $val6 = "3 " . $_POST["name5"] . ",";
+                $val7 = "4" . $_POST["name6"] . ",";
+                $val8 = "5 " . $_POST["name7"] . ",";
+
+
+                $productocaracteristicacriterio .= $val4 . $val5 . $val6.$val7.$val8;
+                $productocaracteristicavalor .= $skil3 . $skill4 . $skill5.$skill6.$skill7;
+            }    
+                      $resultado3 = $PD->registrarproductocaracteristicas1($productocodigobarras, $productocaracteristicacriterio, $productocaracteristicavalor, $productocaractericticatitulo);
+             
+                if (isset($_POST["name3"]) and isset($_POST["name4"])and isset($_POST["name5"]) and isset($_POST["name6"]) and isset($_POST["name7"])) {
+                    
+                    $temporal44="".implode(",", $_POST["skill3"]) . ",";
+                    $temporal55= " ".implode(",", $_POST["skill4"]) . ",";
+                    $temporal66=" ".implode("," . $_POST["skill5"]) . ",";
+                    $temporal77= " ".implode("," . $_POST["skill6"]) . ",";
+                    $temporal88=" ".implode("," . $_POST["skill7"]) . ",";
+                    
+                    $temporal4 = $temporal44;
+                    $temporal5 =$temporal55;
+                    $temporal6 = $temporal66;
+                    $temporal7 =$temporal77;
+                    $temporal8 =   $temporal88;
+ 
+                }
+                $PD->registrarproductocaracteristicas($productocodigobarras, $_POST["name3"], $temporal4, $productocaractericticatitulo, ".");
+                $PD->registrarproductocaracteristicas($productocodigobarras, $_POST["name4"], $temporal5, $productocaractericticatitulo, ".");
+                $PD->registrarproductocaracteristicas($productocodigobarras, $_POST["name5"], $temporal6, $productocaractericticatitulo, ".");
+                $PD->registrarproductocaracteristicas($productocodigobarras, $_POST["name6"], $temporal7, $productocaractericticatitulo, ".");
+                $PD->registrarproductocaracteristicas($productocodigobarras, $_POST["name7"], $temporal8, $productocaractericticatitulo, ".");
+             
+                 $this->view->show("registrarproductovista.php", null);
+   
+    }
+  public function registrarCaracteristicas3() {
+           require 'model/data/productoData.php';
+        $PD = new productoData();
+          //caracteristicas la q hay q hacer
+       $productocaractericticatitulo = $_POST['titulo2'];$productocodigobarras=$_POST["productocodigobarras4"];
+        $productocaracteristicacriterio="";$productocaracteristicavalor="";
+        
+
+            if (isset($_POST["name8"]) and isset($_POST["name9"]) and isset($_POST["name10"]) and isset($_POST["name11"])
+                    and isset($_POST["name12"]) and isset($_POST["name13"]) and isset($_POST["name14"])) {
+
+                $skil3 = "1 " . implode("&", $_POST["skill8"]) . ",";
+                $skill4 = "2 " . implode("&", $_POST["skill9"]) . ",";
+                $skill5 = "4 " . implode("&", $_POST["skill10"]) . ",";
+                $skill6 = "5 " . implode("&", $_POST["skill11"]) . ",";
+                $skill7 = "6 " . implode("&", $_POST["skill12"]) . ",";
+                $skill8 = "7 " . implode("&", $_POST["skill13"]) . ",";
+                $skill9 = "8 " . implode("&", $_POST["skill14"]) . ",";
+
+                $val4 = "1 " . $_POST["name8"] . ",";
+                $val5 = "2 " . $_POST["name9"] . ",";
+                $val6 = "3 " . $_POST["name10"] . ",";
+                $val7 = "4" . $_POST["name11"] . ",";
+                $val8 = "5 " . $_POST["name12"] . ",";
+                $val9 = "6" . $_POST["name13"] . ",";
+                $val10 = "7 " . $_POST["name14"] . ",";
+
+                $productocaracteristicacriterio .= $val4 . $val5 . $val6 . $val7 . $val8 . $val9 . $val10;
+                $productocaracteristicavalor .= $skil3 . $skill4 . $skill5 . $skill6 . $skill7 . $skill8 . $skill9;
+            }
+                      $resultado3 = $PD->registrarproductocaracteristicas1($productocodigobarras, $productocaracteristicacriterio, $productocaracteristicavalor, $productocaractericticatitulo);
+             
+
+
+
+            if (isset($_POST["name8"]) and isset($_POST["name9"])and isset($_POST["name10"]) and isset($_POST["name11"]) and
+                    isset($_POST["name12"]) and isset($_POST["name13"]) and isset($_POST["name14"])) {
+                
+                $temporal99=" ".implode(",", $_POST["skill8"]) . ",";
+                $temporal100=" ".implode(",", $_POST["skill9"]) . ",";
+                $temporal111=" ".implode("," . $_POST["skill10"]) . ",";
+                $temporal122=" ".implode("," . $_POST["skill11"]) . ",";
+                $temporal133= implode("," . $_POST["skill12"]) . ",";
+                $temporal144=" ".implode("," . $_POST["skill13"]) . ",";
+                $temporal155=" ". implode("," . $_POST["skill14"]) . ",";
+                
+                $temporal9 = $temporal99;
+                $temporal10 = $temporal100;
+                $temporal11 = $temporal111;
+                $temporal12 = $temporal122;
+                $temporal13 =$temporal133;
+                $temporal14 = $temporal144;
+                $temporal15 =$temporal155;
+            }
+            $PD->registrarproductocaracteristicas($productocodigobarras, $_POST["name8"], $temporal9, $productocaractericticatitulo, "");
+            $PD->registrarproductocaracteristicas($productocodigobarras, $_POST["name9"], $temporal10, $productocaractericticatitulo, "");
+            $PD->registrarproductocaracteristicas($productocodigobarras, $_POST["name10"], $temporal11, $productocaractericticatitulo, "1");
+            $PD->registrarproductocaracteristicas($productocodigobarras, $_POST["name11"], $temporal12, $productocaractericticatitulo, "2");
+            $PD->registrarproductocaracteristicas($productocodigobarras, $_POST["name12"], $temporal13, $productocaractericticatitulo, "3");
+            $PD->registrarproductocaracteristicas($productocodigobarras, $_POST["name13"], $temporal14, $productocaractericticatitulo, "4");
+            $PD->registrarproductocaracteristicas($productocodigobarras, $_POST["name14"], $temporal15, $productocaractericticatitulo, "6");
+        
+    }
     public function obtenerSubCategoriaProductos(){
        require 'model/data/productoData.php';
         $PD = new productoData();
@@ -457,6 +536,26 @@ class ProductoController {
           echo json_encode($criterio);        
     }
 
+    public function registrarCaracteristicasIm(){
+       require 'model/data/productoData.php';
+        $PD = new productoData();
+        $productoproductocodigobarras=$_POST["codigoB"];$productocaracteristicatitulo=$_POST["titulo"];
+        $datos=count($_POST["criterios"]);   $datos2=count($_POST["valores"]);
+        $productocaracteristicacriterio="";$productocaracteristicavalor="";
+        for($i=0;$i<$datos;$i++){
+         $productocaracteristicavalor.=implode($datos, $_POST["criterios"][$datos]."&") . ",";   
+            
+        }
+         for($i=0;$i<$datos2;$i++){
+         $productocaracteristicacriterio.=implode($datos2, $_POST["valores"][$datos2]) . ",";   
+            
+        }
+        $PD->registrarproductocaracteristicas1($productoproductocodigobarras, $productocaracteristicacriterio, 
+      $productocaracteristicavalor, $productocaracteristicatitulo);
+    $this->view->show("registrarproductovista.php", null);
+//       
+    }
+    
     public function eliminarProducto() {
         require 'model/data/productoData.php';
         $PD = new productoData();

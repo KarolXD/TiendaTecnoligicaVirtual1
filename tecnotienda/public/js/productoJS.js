@@ -5,6 +5,19 @@ $(document).ready(function () {
   
     $.ajax({
         type: 'POST',
+        url: "?controlador=Oferta&accion=obtenerProductos",
+        success: function (response) {
+            console.log(""+response);
+            $.each(JSON.parse(response), function (i, item) {
+                  $("#producid").append('<option value="' + item.tbproductoid + '">' + item.tbproductocaracteristica1titulo + '</option>');
+          });
+
+        }
+    });
+    
+    
+    $.ajax({
+        type: 'POST',
         url: "?controlador=Categoria&accion=obtenerCategorias",
         success: function (response) {
             console.log(response);

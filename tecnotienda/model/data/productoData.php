@@ -183,7 +183,9 @@ class productoData {
     }
     public function registrarproductocaracteristicas($productoproductocodigobarras, $productocaracteristicacriterio, $productocaracteristicavalor, $productocaracteristicatitulo, $url) {
         $consulta = $this->db->prepare('  select  @productoid:=tbproductoid from tbproducto where tbproductocodigobarras="' . $productoproductocodigobarras . '";
-      INSERT INTO temporalArticulos(tbproductoid,tbproductocaracteristica1criterio,tbproductocaracteristica1valor,tbproductocaracteristica1titulo,tbproductocaracteristicafoto) VALUES(@productoid,"' . $productocaracteristicacriterio . '","' . $productocaracteristicavalor . '", "' . $productocaracteristicatitulo . '" , "' .$url.'" )');
+    select @foto:=tbproductoimagenruta from tbproductoimagen where tbproductoid=@productoid;
+      INSERT INTO temporalArticulos(tbproductoid,tbproductocaracteristica1criterio,tbproductocaracteristica1valor,tbproductocaracteristica1titulo,tbproductocaracteristicafoto) 
+      VALUES(@productoid,"' . $productocaracteristicacriterio . '","' . $productocaracteristicavalor . '", "' . $productocaracteristicatitulo . '" ,  @foto )');
         if ($consulta->execute()) {
             $resultado = $consulta->fetchAll();
             $consulta->CloseCursor();

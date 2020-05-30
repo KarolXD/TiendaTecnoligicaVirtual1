@@ -93,7 +93,7 @@
                                 Combos
                             </button>
                             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton3">
-                                <a class="dropdown-item" href="#">Ofertas</a>
+                                <a class="dropdown-item" href="?controlador=Oferta&accion=menuOfertas">Ofertas</a>
                                 <a class="dropdown-item" href="#">Descuentos</a>
                                 <a class="dropdown-item" href="#">Promociones</a>
                             </div>

@@ -9,7 +9,7 @@
 /**
  * Description of usuarioDato
  *
- * @author Usuario
+ * @author Jahanel
  */
 class usuarioDato {
 
