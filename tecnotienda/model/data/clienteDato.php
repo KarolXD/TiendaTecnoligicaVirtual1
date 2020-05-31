@@ -21,6 +21,17 @@ class clienteDato {
         $this->db = SPDO::singleton();
     }
     
+        public function obtenerOfertaEspeciales() {
+        $consulta = $this->db->prepare('select o.tbofertaid,o.tbofertaprecio,o.tbproductoid, o.tbofertafechainicio,o.tbofertafechafin,
+a.tbproductocaracteristica1titulo,a.tbproductocaracteristicafoto from tboferta o join temporalArticulos a
+on o.tbproductoid=a.tbproductoid group by(o.tbproductoid)
+  ');
+        $consulta->execute();
+        $resultado = $consulta->fetchAll();
+        $consulta->CloseCursor();
+        return $resultado;
+    }
+
    public function registrarCliente($usuario, $contrasenia, $estado) {
         $sql = 'SELECT COUNT(*) as total FROM tbcliente where tbclienteusuario = " ' . $usuario . ' " ';
         $del = $this->db->prepare($sql);

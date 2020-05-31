@@ -39,10 +39,15 @@ global $filtro;
     <center class="">    <font style="text-transform: uppercase;">   <p class="card-text"><strong>  Contenidos </strong>  </p>    </font> 
     </center>
     <br>
-
     <form method="post" action="?controlador=SubCategoria&accion=filtrarmostrardetallesSubcategoriaCliente">
         <div class="row">
+      
+      <div class="col-md-4">
+      Subcategorias
+                    <select class="form-control" id="subcategoriaid" name="subcategoriaid"   
+                            onchange='ShowSelectedSubCa();'  > </select>
 
+            </div>
 
 
             <div class="col-md-4">
@@ -74,17 +79,16 @@ global $filtro;
               
                       Valores
                     <select class="form-control" id="valorid" name="valorid" onchange="ShowSelected1();"> 
-                        <option selected="0">Elija un valor</option>
+                      
                     </select>
                     <br>
-                    <center>   <button type="submit" class="btn btn-outline-success">Filtrar Subcategorias</button></center>
+                    <div style="display: none">
+                    <center>   <button type="submit" class="autoclick" >Filtrar </button></center>
+                    </div>
 
                 </div>
             </div>
-            <div class="col-md-4">
-
-
-            </div>
+      
         </div>
     </form>
 
@@ -200,11 +204,22 @@ global $filtro;
     }//fin metoo
 
     function ShowSelected1() {
-        var cod = document.getElementById("valorid").value;
-    //      alert("cod"+cod);
-document.getElementById("valor").value=cod;
-//
+        var valor = document.getElementById("valorid").value; document.getElementById("valor").value=valor;
+        var criteriovalor= document.getElementById("criteriovalor").value;
+    $('.autoclick').trigger('click');
     }
+    
+    
+       let contador=0;
+      function ShowSelectedSubCa() {
+          alert(++contador);
+  var idSub = document.getElementById("subcategoriaid").value;  document.getElementById("valor").value=idSub;
+       
+location.href = "?controlador=SubCategoria&accion=mostrardetallesSubCategoriaCliente&subcategoriaid="+idSub;
+
+    }
+    
+    
 </script>
 
 

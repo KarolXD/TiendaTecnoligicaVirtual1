@@ -17,6 +17,14 @@ class ofertaDato {
         return $resultado;
     }
 
+    public function eliminarProducto($id) {
+        $consulta = $this->db->prepare('delete from tboferta where tbofertaid= "' . $id . ' "  ');
+        $consulta->execute();
+        $resultado = $consulta->fetchAll();
+        $consulta->CloseCursor();
+        return $resultado;
+    }
+
     public function obtenerOferta() {
         $consulta = $this->db->prepare('SELECT * from tboferta;  ');
         $consulta->execute();
@@ -24,6 +32,7 @@ class ofertaDato {
         $consulta->CloseCursor();
         return $resultado;
     }
+
     public function registrarOferta($precio, $codigoProducto, $porcentaje, $fechaIn, $fechaFin) {
         $data = array($precio, $codigoProducto, $porcentaje, $fechaIn, $fechaFin);
         $consulta = $this->db->prepare('INSERT INTO tboferta(tbofertaprecio,tbproductoid,tbofertadescuento,tbofertafechainicio,tbofertafechafin)
@@ -31,7 +40,7 @@ class ofertaDato {
 
         select  @precio:=tbproductoprecioventa from tbproductoprecio where tbproductoid="' . $codigoProducto . ' ";
        select @id:=tbofertaid from tboferta where tbproductoid=" ' . $codigoProducto . ' "; 
-update tboferta set tbofertaprecio= (@precio/"'. $porcentaje.'") where  tbofertaid =@id;        
+update tboferta set tbofertaprecio= (@precio/"' . $porcentaje . '") where  tbofertaid =@id;        
 '
         );
         if ($consulta->execute($data)) {
@@ -41,11 +50,18 @@ update tboferta set tbofertaprecio= (@precio/"'. $porcentaje.'") where  tboferta
             return 1;
         }
     }
-    
-       public function modificarOferta($precio, $codigoProducto, $porcentaje, $fechaIn, $fechaFin, $codigoOferta) {
-        $data = array($precio, $codigoProducto, $porcentaje, $fechaIn, $fechaFin,$codigoOferta);
-        $consulta = $this->db->prepare('update  tboferta  set tbofertaprecio=?,tbproductoid=?,tbofertadescuento=?,tbofertafechainicio=?,tbofertafechafin=?
-        where tbofertaid=?');
+
+    public function modificarOferta($codigoProducto, $porcentaje, $fechaIn, $fechaFin, $codigoOferta) {
+        $data = array($codigoProducto, $porcentaje, $fechaIn, $fechaFin, $codigoOferta);
+        $consulta = $this->db->prepare('
+select  @precio:=tbproductoprecioventa from tbproductoprecio where tbproductoid="' . $codigoProducto . ' ";            
+update  tboferta  set tbproductoid=?,tbofertadescuento=?,tbofertafechainicio=?,tbofertafechafin=?,
+tbofertaprecio=(@precio/"' . $porcentaje . '")
+        where tbofertaid=?;
+        
+
+
+');
         if ($consulta->execute($data)) {
             $consulta->errorInfo()[2];
             return 0;

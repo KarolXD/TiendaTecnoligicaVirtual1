@@ -63,28 +63,33 @@ $(document).ready(function () {
     
     
     
-    
-        $.ajax({
+
+
+
+    $.ajax({
         type: 'POST',
         url: "?controlador=Usuario&accion=menuUsuario",
         dataType: "json"})
             .done(function (resultado) {
                 var filas = "";
                 $.each(resultado, function (index, val) {
-                 
-                    var columnaModificar = "<a class='nav-link' href='?controlador=SubCategoria&accion=mostrarSubCategorias&categoriaid=" + val.tbcategoriaid + "'> "+val.tbcategorianombre+" </a> ";
-                   filas+="<div class='line'></div>" ;
-                    filas+= " <li class='nav-item' >"+columnaModificar +"</li>";
+
+                    var columnaModificar = "   <a   \n\
+  class='nav-link'   href='?controlador=SubCategoria&accion=mostrarSubCategorias&categoriaid=" + val.tbcategoriaid + "'> "
+                            + val.tbcategorianombre + " </a> ";
+
+
+                    filas += "<div class='line'></div>";
+                    filas += "  <li class='nav-item' >" + columnaModificar + "</li>";
                 });
                 $("#tblmenuUsuario ul").empty();
                 $("#tblmenuUsuario ul").append(filas);
 
                 console.log(resultado);
             });
-            
-          //fin
-             
-    
-    //fin
- 
+
+
+
+
+
 });//fin document

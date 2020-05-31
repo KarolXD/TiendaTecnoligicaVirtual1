@@ -42,7 +42,8 @@ class ClienteController {
             $_SESSION['usuario'] = $clienteid;
 
             echo '<script src="./public/js/jquery-3.3.1.js" type="text/javascript"> </script>  <script>   $(function() {   $("#alertControl").html("<div > <strong>Advertencia!</strong>  Inicio de session correcto</div> ");  });</script>';
-            $this->view->show("menuPrincipalCliente.php", $dato);
+           $lista["listado"]=$items->obtenerOfertaEspeciales();
+            $this->view->show("menuPrincipalCliente.php", $lista);
         } else {
             echo '<script src="./public/js/jquery-3.3.1.js" type="text/javascript"> </script>  <script>   $(function() {   $("#alertControl").html("<div > <strong>Advertencia!</strong> Usuario y/o Contraseña INCORRECTA </div> ");  });</script>';
             $this->view->show("loginCliente.php", $dato);
@@ -294,8 +295,11 @@ class ClienteController {
         $PD = new categoriaDato();
         echo json_encode($PD->obtenerNombreCategorias());
     }
-  public function menuPrincipalCliente1() {
-           $this->view->show("menuPrincipalCliente.php");
+  public function menuPrincipalCliente1() {        
+         require 'model/data/clienteDato.php';
+        $PD = new clienteDato();
+      $lista["listado"]=$PD->obtenerOfertaEspeciales();
+            $this->view->show("menuPrincipalCliente.php", $lista);
     
     }
    

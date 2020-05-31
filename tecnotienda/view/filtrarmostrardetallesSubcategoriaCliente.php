@@ -45,6 +45,12 @@ global $filtro;
         <div class="row">
 
 
+     <div class="col-md-4">
+      Subcategorias
+                    <select class="form-control" id="subcategoriaid" name="subcategoriaid"   
+                            onchange='ShowSelectedSubCa();'  > </select>
+
+            </div>
 
             <div class="col-md-4">
 
@@ -78,14 +84,12 @@ global $filtro;
                         <option selected="0">Elija un valor</option>
                     </select>
                     <br>
-                    <center>   <button type="submit" class="btn btn-outline-success">Filtrar Subcategorias</button></center>
-
+                      <div style="display: none">
+                    <center>   <button type="submit" class="autoclick" >Filtrar </button></center>
+                    </div>
                 </div>
             </div>
-            <div class="col-md-4">
-
-
-            </div>
+         
         </div>
     </form>
 
@@ -207,6 +211,13 @@ global $filtro;
      //     alert("cod"+cod);
 document.getElementById("valor").value=cod;
 //
+    }
+    
+         function ShowSelectedSubCa() {
+  var idSub = document.getElementById("subcategoriaid").value;  document.getElementById("valor").value=idSub;
+       
+location.href = "?controlador=SubCategoria&accion=mostrardetallesSubCategoriaCliente&subcategoriaid="+idSub;
+
     }
 </script>
 

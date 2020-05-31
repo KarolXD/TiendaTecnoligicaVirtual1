@@ -15,6 +15,7 @@
             <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
             <script src="./public/js/funcionesCliente.js" type="text/javascript"></script>
             <script src="./public/js/js_provincias.js" type="text/javascript"></script>
+                  <script src="./public/js/contadorClicks.js" type="text/javascript"></script>
             
         </head>
         <body><div class="container">
@@ -61,16 +62,7 @@
 
                 <div class="content">
                     <nav class="navbar navbar-expand-lg navbar-light bg-light">
-                        <div class="dropdown">
-                            <button class="btn btn-outline-info my-2 my-sm-0 dropdown-toggle" href="#homeSubmenu"  id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                Inicio
-                            </button>
-                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" >
-                                <a class="dropdown-item" href="#">Galeria Imagenes</a>
-                                <a class="dropdown-item" href="#">Recorrido por Pagina</a>
-                                <a class="dropdown-item" href="#">Pagina Princpal</a>
-                            </div>
-                        </div>
+                   
                            <button class=" btn btn-outline-info my-2 my-sm-0" >
                             Detalles Pago
                         </button>
@@ -84,6 +76,7 @@
                         <div class="line"></div>
                         <div class="collapse navbar-collapse" id="navbarSupportedContent">
                             <ul class="navbar-nav mr-auto" id="tblmenuUsuario1" name="tblmenuUsuario1">
+                           
                                 <ul  class="navbar-nav mr-auto">
 
                                 </ul>
@@ -94,7 +87,7 @@
                         </div>
 
 
-                   
+
                         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                             <span class="navbar-toggler-icon"></span>
                         </button>
@@ -104,12 +97,12 @@
                             <ul class="navbar-nav ml-auto">
                                 <li class="nav-item active">
                                     <a class="nav-link  alert-info"><strong >
-                        <img src="./public/img/avatar.png"  alt=""/>  Bienvenido  <?php echo $_SESSION['usuario'] ?></strong> </a>
+                                            <img src="./public/img/avatar.png"  alt=""/>  Bienvenido  <?php echo $_SESSION['usuario'] ?></strong> </a>
                                 </li>
- <li class="line">
-                                  
-                               </li>
-                               
+                                <li class="line">
+
+                                </li>
+
                             </ul>
                         </div>
                     </nav>
