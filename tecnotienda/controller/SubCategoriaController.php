@@ -82,6 +82,8 @@ class SubCategoriaController {
     public function mostrarSubCategoriaCliente() {
         require 'model/data/subcategoriaDato.php';
         $PD = new subcategoriaDato();
+           session_start();
+           echo $resul=  $PD->registroCategoriaClicks($_SESSION['usuario'], 1, 0, 0,  0, 0, 1);
         $data['listado'] = ($PD->listaMenuSubcategoria($_GET['categoriaid']));
         $this->view->show("mostrarSubCategoriaCliente.php", $data);
     }
@@ -96,8 +98,6 @@ class SubCategoriaController {
         }
 
         $_SESSION['subcategoriaid2'] = $_GET['subcategoriaid'];
-
-       
         $data['listado2'] = ($PD->obtenerCriterios($_GET['subcategoriaid']));
         $data['listado'] = ($PD->listadetalleSubcategoria($_GET['subcategoriaid']));
         $this->view->show("mostrardetallesSubCategoria.php", $data);
@@ -124,10 +124,12 @@ class SubCategoriaController {
         require 'model/data/subcategoriaDato.php';
         $PD = new subcategoriaDato();
          session_start();
+         $clicksofertasubcategoria=1;
             if (!isset($_SESSION['subcategoriaid'])) {
             $_SESSION['subcategoriaid'] = ''; }
             $_SESSION['subcategoriaid'] = $_GET['subcategoriaid'];
-        
+      echo $resul=  $PD->registroSubcategoriaClicks($_SESSION['usuario'], 1, $clicksofertasubcategoria, 0, 
+                0, 0, 1);
       
         $data['listado2'] = ($PD->obtenerCriterios($_GET['subcategoriaid']));
         $data['listado'] = ($PD->listadetalleSubcategoria($_GET['subcategoriaid']));
@@ -160,7 +162,8 @@ class SubCategoriaController {
                 $_SESSION['imagen'] = ''; }
                 
                $_SESSION["imagen"]=$_POST['valor'];
-           
+           $PD->registroValoresClicks( $_SESSION["usuario"], 0, 0, 1,
+                   0, 0, 1);
            $data['listado2'] = ($PD->obtenerCriterios($_SESSION['subcategoriaid']));
               
         $data['listado'] = ($PD->filtrardetalleSubcategoriaCliente( $_SESSION['subcategoriaid'],$filtro));

@@ -2,9 +2,16 @@
 <?php
 include_once 'public/headerCliente.php';
 global $filtro;
+global $contador;
 ?>
-<link href="./public/css/animate.css" rel="stylesheet" type="text/css"/>
-<link href="./public/css/animate.min.css" rel="stylesheet" type="text/css"/>
+
+
+
+
+
+
+<link href="./public/css/animate.css"         rel="stylesheet"   type="text/css"/>
+<link href="./public/css/animate.min.css" rel="stylesheet"    type="text/css"/>
 <div class="container">
     <style>
         @keyframes escalar {
@@ -36,61 +43,55 @@ global $filtro;
 
     </style>
     <br>
-    <center class="">    <font style="text-transform: uppercase;">   <p class="card-text"><strong>  Contenidos </strong>  </p>    </font> 
-    </center>
+    <center class="">    <font style="text-transform: uppercase;">   <p class="card-text"><strong>  Contenidos </strong>  </p>    </font>   </center>
     <br>
-    <form method="post" action="?controlador=SubCategoria&accion=filtrarmostrardetallesSubcategoriaCliente">
-        <div class="row">
-      
-      <div class="col-md-4">
-      Subcategorias
-                    <select class="form-control" id="subcategoriaid" name="subcategoriaid"   
-                            onchange='ShowSelectedSubCa();'  > </select>
+       <div class="row">
 
+            <div class="col-md-4">
+                Subcategorias
+                <select class="form-control" id="subcategoriaid" name="subcategoriaid"   
+                        onchange='ShowSelectedSubCa();'  >
+                </select>
             </div>
 
 
             <div class="col-md-4">
-
                 <div class="form-group"> 
                     Criterios
                     <select class="form-control" id="criterioid" name="criterioid" onchange="ShowSelected();"> 
                         <?php
                         foreach ($vars['listado2'] as $item2) {
                             ?>
-                            <option value="<?php echo $item2[0] ?>"><?php echo     $item2[1]. "  " .$item2[2]   ?></option>
-
+                            <option value="<?php echo $item2[0] ?>"><?php echo $item2[1] . "  " . $item2[2] ?></option>
                             <?php
                         }
                         ?>
-
-
                     </select>
 
 
                 </div>
             </div>
             <div class="col-md-4">
+                  <form method="post" action="?controlador=SubCategoria&accion=filtrarmostrardetallesSubcategoriaCliente">
+   
                 <div class="form-group" style="" id="divvalores"> 
-                       Valores
-                       <input  type="hidden" value="" id="valor" name="valor">
-                         Criterios
-                         <input  type="hidden" value="" id="criteriovalor" name="criteriovalor">
-              
-                      Valores
-                    <select class="form-control" id="valorid" name="valorid" onchange="ShowSelected1();"> 
-                      
-                    </select>
+                    Valores
+                    <input  type="hidden" value="" id="valor" name="valor">
+                    Criterios
+                    <input  type="hidden" value="" id="criteriovalor" name="criteriovalor">
+                    Valores
+                    <select class="form-control" id="valorid" name="valorid" onchange="ShowSelected1();">  </select>
                     <br>
                     <div style="display: none">
-                    <center>   <button type="submit" class="autoclick" >Filtrar </button></center>
+                        <center>   <button type="submit" class="autoclick" >Filtrar </button></center>
                     </div>
 
                 </div>
+                    </form>
             </div>
-      
+
         </div>
-    </form>
+
 
 
 
@@ -104,11 +105,8 @@ global $filtro;
 
 
             <div class="card" style="width: 18rem;">
-
                 <center class="btn btn-outline-success">    <font style="text-transform: uppercase;">   <p class="card-text"> <strong><?php echo$item[3] ?>   </strong> </p>    </font> 
                 </center>
-
-
                 <hr style="border-top: 1px solid black;">
                 <?php
                 $pizza = ($item[0]);
@@ -125,7 +123,6 @@ global $filtro;
 
 
                 <div class="card-body">
-
                     <p class="card-text ">     <strong> <font size="6"> <span class="input-group-append">₡ <?php echo$item[2] ?> </span></font></strong>  </p>
                     <hr style="border-top: 1px solid black;">
                     <a class="etiqueta"  href="?controlador=Producto&accion=mostrarDetallesProductoCliente&productoid=<?php echo$item[4] ?>">  <h5 class="card-title"><?php echo$item[1] ?>  </h5> </a>
@@ -189,11 +186,11 @@ global $filtro;
                     for (i = 0; i < arrayDeCadenas - 1; i++) {
 
                         $("#valorid").append('    <option value="' + i + '">' + textSeparado[i] + '</option>');
-                    
+
 
                     }
-                         var idP=item.tbproductocaracteristica1id;
-                      //  alert("idC"+idP);
+                    var idP = item.tbproductocaracteristica1id;
+                    //  alert("idC"+idP);
                 });
 
             }
@@ -204,22 +201,31 @@ global $filtro;
     }//fin metoo
 
     function ShowSelected1() {
-        var valor = document.getElementById("valorid").value; document.getElementById("valor").value=valor;
-        var criteriovalor= document.getElementById("criteriovalor").value;
-    $('.autoclick').trigger('click');
+        var valor = document.getElementById("valorid").value;
+        document.getElementById("valor").value = valor;
+        var criteriovalor = document.getElementById("criteriovalor").value;
+        $('.autoclick').trigger('click');
     }
+
+function mostrarcontador(){
     
     
-       let contador=0;
-      function ShowSelectedSubCa() {
-          alert(++contador);
-  var idSub = document.getElementById("subcategoriaid").value;  document.getElementById("valor").value=idSub;
-       
-location.href = "?controlador=SubCategoria&accion=mostrardetallesSubCategoriaCliente&subcategoriaid="+idSub;
+        var resultad= localStorage.getItem('contador');
+        alert(resultad);
+    
+}
+
+    function ShowSelectedSubCa() {
+        var contador = 0;
+        var suma = contador + 1;
+        localStorage.setItem('contador', suma);
+        var idSub = document.getElementById("subcategoriaid").value;
+        document.getElementById("valor").value = idSub;
+        location.href = "?controlador=SubCategoria&accion=mostrardetallesSubCategoriaCliente&subcategoriaid=" + idSub;
 
     }
-    
-    
+
+
 </script>
 
 

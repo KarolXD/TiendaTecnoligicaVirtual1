@@ -11,6 +11,7 @@ class subcategoriaDato {
     }
 
       public function obtenerCriterios($subcategoriaid) {
+   $this->registroCriteriosClicks($_SESSION["usuario"], 0, 0, 0,  1, 0, 1);
   $consulta = $this->db->prepare('SELECT tbproductocaracteristica1id, tbproductocaracteristica1criterio,tbproductocaracteristica1titulo from tbproducto p join temporalArticulos t
 on p.tbproductoid =t.tbproductoid where  p.tbproductoid =t.tbproductoid
 and p.tbsubcategoriaid= "' . $subcategoriaid . '" ');
@@ -20,8 +21,6 @@ and p.tbsubcategoriaid= "' . $subcategoriaid . '" ');
         return $resultado;
     }
     
-    //AQUI OBTENGO LOS VALORES DEPENDIENDO EL CRITERIO oki
-      //public function obtenerValores() {
      public function obtenerValores($criterioid,$subcategoriaid) { 
   $consulta = $this->db->prepare('SELECT tbproductocaracteristica1id, tbproductocaracteristica1valor from tbproducto p join temporalArticulos t
 on p.tbproductoid =t.tbproductoid where  p.tbproductoid =t.tbproductoid
@@ -65,31 +64,7 @@ and p.tbsubcategoriaid="' . $subcategoriaid . '"  and tbproductocaracteristica1i
             return -1;
         }
     }
-//
-//    public function modificiacionSubCategoria($subcategorianombre, $categorianombre, $subcategoriaid) {
-//        $sql = 'SELECT COUNT(*) as total FROM tbproducto where tbproductosubcategoriaid="' . $subcategoriaid . '"';
-//        $del = $this->db->prepare($sql);
-//        $del->execute();
-//        $count = $del->fetch();
-//        echo $count['total'];
-//        if ($count['total'] <= 0) {
-//            echo '<script>  alert("Es  Modificarlo ' . $count['total'] . '");</script>';
-//            $this->modificarSubCategorias($subcategorianombre, $categorianombre, $subcategoriaid);
-//            print('<div class="alert alert-warning" role="alert">  Se ha modificado Exitosamente!</div>');
-//        } else if ($count['total'] > 0) {
-//            echo ('<div class="alert alert-warning" role="alert">  Se ha modificado Exitosamente!</div>');
-//            $this->modificarSubCategorias($subcategorianombre, $categorianombre, $subcategoriaid);
-//            $consulta = $this->db->prepare('update  tbproducto  set tbproductosubcategoriaid = "' . $subcategoriaid . '"   where tbproductosubcategoriaid= "' . $subcategoriaid . '"');
-//            $consulta->execute();
-//            $resultado = $consulta->fetchAll();
-//            $consulta->CloseCursor();
-//            return $resultado;
-//        } else if ($count['total'] == null) {
-//            echo '<script>  alert("Datos nulos");</script>';
-//        }
-//        $del->CloseCursor();
-//        return $del;
-//    }
+
 
     public function eliminarSubCategoria($subcategoriaid) {
         $consulta = $this->db->prepare('update   tbsubcategoria set tbsubcategoriaestado=1 WHERE tbsubcategoriaid = "' . $subcategoriaid . '"');
@@ -155,6 +130,162 @@ select  tbsubcategoriaid,tbsubcategorianombre  from  tbsubcategoria  where tbcat
         $consulta->CloseCursor();
         return $resultado;
     }
+
+    public function registroSubcategoriaClicks($clienteid, $clicksofertacategoria, $clicksofertasubcategoria, $clicksofertavalor, $clicksofertacriterio,
+            $clicksofertaregular, $clicksofertanormalm) {
+        $sql = 'select  @cantidad:= count(*) as total from tbclicksoferta  where tbclienteid="'.$clienteid.'";';
+        $del = $this->db->prepare($sql);
+        if ($del->execute()) {
+            $count = $del->fetch();
+            if ($count['total'] > 0) {//si ya existe un registro uptualizao
+                $data = array( $clicksofertasubcategoria,$clienteid);
+                $consulta = $this->db->prepare('update tbclicksoferta set '
+                        . '  tbclicksofertasubcategoria=tbclicksofertasubcategoria+?, '
+                       
+                        . ' tbclicksfertafecha=now() '
+                        . 'where tbclienteid=?; ');
+                if ($consulta->execute($data)) {
+                    $consulta->errorInfo()[2];
+                    return 25;
+                } else {
+                    return -1;
+                }
+            } else {
+                $data = array($clienteid, $clicksofertacategoria, $clicksofertasubcategoria, $clicksofertavalor, $clicksofertacriterio,
+                    $clicksofertaregular, $clicksofertanormalm);
+                $consulta = $this->db->prepare('insert into tbclicksoferta(tbclienteid,tbclicksofertacategoria,tbclicksofertasubcategoria,tbclicksofertavalor,
+tbclicksofertacriterio,tbclicksofertaregular,tbclicksofertanormalm,tbclicksfertafecha) 
+values(?,?,?,?,?,?,?,now())');
+
+                if ($consulta->execute($data)) {
+                    $consulta->errorInfo()[2];
+                    return 1;
+                } else {
+                    return -1;
+                }
+            }
+        }
+        return -1;
+
+    }
+//fin
+    
+        public function registroCategoriaClicks($clienteid, $clicksofertacategoria, $clicksofertasubcategoria, $clicksofertavalor, $clicksofertacriterio,
+            $clicksofertaregular, $clicksofertanormalm) {
+        $sql = 'select  @cantidad:= count(*) as total from tbclicksoferta  where tbclienteid="'.$clienteid.'";';
+        $del = $this->db->prepare($sql);
+        if ($del->execute()) {
+            $count = $del->fetch();
+            if ($count['total'] > 0) {//si ya existe un registro uptualizao
+                $data = array($clicksofertacategoria ,$clienteid);
+                $consulta = $this->db->prepare('update tbclicksoferta set  '
+                        . '  tbclicksofertacategoria=tbclicksofertacategoria+?, '
+                       
+                        . ' tbclicksfertafecha=now() '
+                        . 'where tbclienteid=?; ');
+                if ($consulta->execute($data)) {
+                    $consulta->errorInfo()[2];
+                    return 25;
+                } else {
+                    return -1;
+                }
+            } else {
+                $data = array($clienteid, $clicksofertacategoria, $clicksofertasubcategoria, $clicksofertavalor, $clicksofertacriterio,
+                    $clicksofertaregular, $clicksofertanormalm);
+                $consulta = $this->db->prepare('insert into tbclicksoferta(tbclienteid,tbclicksofertacategoria,tbclicksofertasubcategoria,tbclicksofertavalor,
+tbclicksofertacriterio,tbclicksofertaregular,tbclicksofertanormalm,tbclicksfertafecha) 
+values(?,?,?,?,?,?,?,now())');
+
+                if ($consulta->execute($data)) {
+                    $consulta->errorInfo()[2];
+                    return 1;
+                } else {
+                    return -1;
+                }
+            }
+        }
+        return -1;
+
+    }
+    
+    
+      
+        public function registroCriteriosClicks($clienteid, $clicksofertacategoria, $clicksofertasubcategoria, $clicksofertavalor, $clicksofertacriterio,
+            $clicksofertaregular, $clicksofertanormalm) {
+        $sql = 'select  @cantidad:= count(*) as total from tbclicksoferta  where tbclienteid="'.$clienteid.'";';
+        $del = $this->db->prepare($sql);
+        if ($del->execute()) {
+            $count = $del->fetch();
+            if ($count['total'] > 0) {//si ya existe un registro uptualizao
+                $data = array($clicksofertacriterio ,$clienteid);
+                $consulta = $this->db->prepare('update tbclicksoferta set  '
+                        . '  tbclicksofertacriterio=tbclicksofertacriterio+?, '
+                       
+                        . ' tbclicksfertafecha=now() '
+                        . 'where tbclienteid=?; ');
+                if ($consulta->execute($data)) {
+                    $consulta->errorInfo()[2];
+                    return 25;
+                } else {
+                    return -1;
+                }
+            } else {
+                $data = array($clienteid, $clicksofertacategoria, $clicksofertasubcategoria, $clicksofertavalor, $clicksofertacriterio,
+                    $clicksofertaregular, $clicksofertanormalm);
+                $consulta = $this->db->prepare('insert into tbclicksoferta(tbclienteid,tbclicksofertacategoria,tbclicksofertasubcategoria,tbclicksofertavalor,
+tbclicksofertacriterio,tbclicksofertaregular,tbclicksofertanormalm,tbclicksfertafecha) 
+values(?,?,?,?,?,?,?,now())');
+
+                if ($consulta->execute($data)) {
+                    $consulta->errorInfo()[2];
+                    return 1;
+                } else {
+                    return -1;
+                }
+            }
+        }
+        return -1;
+
+    }
+    
+          public function registroValoresClicks($clienteid, $clicksofertacategoria, $clicksofertasubcategoria, $clicksofertavalor, $clicksofertacriterio,
+            $clicksofertaregular, $clicksofertanormalm) {
+        $sql = 'select  @cantidad:= count(*) as total from tbclicksoferta  where tbclienteid="'.$clienteid.'";';
+        $del = $this->db->prepare($sql);
+        if ($del->execute()) {
+            $count = $del->fetch();
+            if ($count['total'] > 0) {//si ya existe un registro uptualizao
+                $data = array($clicksofertavalor ,$clienteid);
+                $consulta = $this->db->prepare('update tbclicksoferta set  '
+                        . '  tbclicksofertavalor=tbclicksofertavalor+?, '
+                       
+                        . ' tbclicksfertafecha=now() '
+                        . 'where tbclienteid=?; ');
+                if ($consulta->execute($data)) {
+                    $consulta->errorInfo()[2];
+                    return 25;
+                } else {
+                    return -1;
+                }
+            } else {
+                $data = array($clienteid, $clicksofertacategoria, $clicksofertasubcategoria, $clicksofertavalor, $clicksofertacriterio,
+                    $clicksofertaregular, $clicksofertanormalm);
+                $consulta = $this->db->prepare('insert into tbclicksoferta(tbclienteid,tbclicksofertacategoria,tbclicksofertasubcategoria,tbclicksofertavalor,
+tbclicksofertacriterio,tbclicksofertaregular,tbclicksofertanormalm,tbclicksfertafecha) 
+values(?,?,?,?,?,?,?,now())');
+
+                if ($consulta->execute($data)) {
+                    $consulta->errorInfo()[2];
+                    return 1;
+                } else {
+                    return -1;
+                }
+            }
+        }
+        return -1;
+
+    }
+
 
     public function listadetalleSubcategoria($subcategoriaid) {
         $consulta = $this->db->prepare('select i.tbproductoimagenruta,c.tbproductocaracteristicastitulo, pr.tbproductoprecioventa,

@@ -207,9 +207,11 @@ global $filtro;
     }//fin metoo
 
     function ShowSelected1() {
-        var cod = document.getElementById("valorid").value;
-     //     alert("cod"+cod);
-document.getElementById("valor").value=cod;
+   
+          var valor = document.getElementById("valorid").value;
+        document.getElementById("valor").value = valor;
+        var criteriovalor = document.getElementById("criteriovalor").value;
+        $('.autoclick').trigger('click');
 //
     }
     
