@@ -57,6 +57,15 @@ class CompraController {
         $dato['listado2'] = $items->listarPagoDatosCliente($usuario);
         $this->view->show("clientePago.php", $dato);
     }
+    
+    public function detalleAbono() {
+        session_start();
+        require 'model/data/compraDato.php';
+        $items = new compraDato();
+        $usuario = $_SESSION["usuario"];
+        $dato['listado'] = $items->listarDetalleAbono($usuario);
+        $this->view->show("detalleAbono.php", $dato);
+    }
 
     public function compraCliente() {
         require 'model/data/compraDato.php';
@@ -71,8 +80,9 @@ class CompraController {
             $valor .= $detalle[$i] . ",";
         }
         $resultado = ""; $valor="";
-      echo $valor=  $items->validarSiPagado($usuario);
-if($valor>0){
+        
+       $valor=  $items->validarSiPagado($usuario);
+if($valor==0){
         $totalcontado = $_POST["totalpago"];
         if ($tipopago == 1) {// pago al contado
             $resultado = $items->registrarPago($usuario, $valor, 0, $totalcontado);

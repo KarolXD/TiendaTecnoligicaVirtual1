@@ -134,7 +134,14 @@ and cliente.tbclienteusuario= "' . $clienteid . '";');
         $consulta->CloseCursor();
         return $resultado;
     }
-
+public function listarDetalleAbono($clienteid) {
+        $consulta = $this->db->prepare('SELECT 
+* from tbclientedetalleabono where tbclienteid="' . $clienteid . '"');
+        $consulta->execute();
+        $resultado = $consulta->fetchAll();
+        $consulta->CloseCursor();
+        return $resultado;
+}
     public function registrarPago($idcliente, $detallecompra, $ventaporcobrar, $ventacontado) {
         $data = array($idcliente, $detallecompra, $ventaporcobrar, $ventacontado);
         $consulta = $this->db->prepare('INSERT INTO `bdtecnotienda`.`tbclientecompra`

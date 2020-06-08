@@ -8,18 +8,15 @@ class ClienteController {
 
     public function cerrarSession() {
         session_start();
-          
+
         if (session_destroy()) {
             echo "Sesión destruida correctamente Cliente";
-            session_unset() ;
-            
+            session_unset();
         } else {
             echo "Error al destruir la sesión Cliente";
         }
-          $this->view->show("loginCliente.php");
+        $this->view->show("loginCliente.php");
     }
- 
-    
 
     public function loginCliente() {
 
@@ -42,7 +39,7 @@ class ClienteController {
             $_SESSION['usuario'] = $clienteid;
 
             echo '<script src="./public/js/jquery-3.3.1.js" type="text/javascript"> </script>  <script>   $(function() {   $("#alertControl").html("<div > <strong>Advertencia!</strong>  Inicio de session correcto</div> ");  });</script>';
-           $lista["listado"]=$items->obtenerOfertaEspeciales();
+            $lista["listado"] = $items->obtenerOfertaEspeciales();
             $this->view->show("menuPrincipalCliente.php", $lista);
         } else {
             echo '<script src="./public/js/jquery-3.3.1.js" type="text/javascript"> </script>  <script>   $(function() {   $("#alertControl").html("<div > <strong>Advertencia!</strong> Usuario y/o Contraseña INCORRECTA </div> ");  });</script>';
@@ -295,14 +292,14 @@ class ClienteController {
         $PD = new categoriaDato();
         echo json_encode($PD->obtenerNombreCategorias());
     }
-  public function menuPrincipalCliente1() {        
-         require 'model/data/clienteDato.php';
+
+    public function menuPrincipalCliente1() {
+        require 'model/data/clienteDato.php';
         $PD = new clienteDato();
-      $lista["listado"]=$PD->obtenerOfertaEspeciales();
-            $this->view->show("menuPrincipalCliente.php", $lista);
-    
+        $lista["listado"] = $PD->obtenerOfertaEspeciales();
+        $this->view->show("menuPrincipalCliente.php", $lista);
     }
-   
+
 }
 
 //fin

@@ -6,10 +6,12 @@ global $total;
 <div class="container">
 
     <div class="form-row">
-
         <div class="form-group col-md-4">            
         </div>
         <div class="form-group col-md-4">    
+            
+        <a href="?controlador=Compra&accion=detalleAbono">Mostrar mis movimientos</a>
+        <br><br>
             <form action="?controlador=Compra&accion=modificarventaporcobrar"  method="post">
                 <center><h4>Abono a la compra</h4></center>
                 <hr style="color: #47748b">

@@ -1,6 +1,5 @@
 <?php
 
-
 class CategoriaController {
 
     //put your code here
@@ -38,8 +37,8 @@ class CategoriaController {
         } else {
             echo '<script src="./public/js/jquery-3.3.1.js" type="text/javascript"> </script>  <script>   $(function() {   $("#alertControl").html("<div > <strong>Advertencia!</strong> Categoria no modificada </div> ");  });</script>';
         }
-            $data['actualizarCategorias'] = $PD->filtrarCategoriaById($_POST["categoriaid"]);
-        
+        $data['actualizarCategorias'] = $PD->filtrarCategoriaById($_POST["categoriaid"]);
+
         $this->view->show("actualizarCategoriaVista.php", $data);
     }
 

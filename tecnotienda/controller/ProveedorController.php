@@ -27,9 +27,9 @@ class ProveedorController {
         $this->view->show("menuProveedor.php", $dato);
     }
 
- public function listarProveedorDetalle() {
+    public function listarProveedorDetalle() {
         require 'model/data/proveedorDato.php';
-        $items = new proveedorDato();        
+        $items = new proveedorDato();
         $clienteid = $_GET["clienteid"];
         $dato['listado'] = $items->listarDatosProveedorDetalle($clienteid);
         $this->view->show("detalleProveedor.php", $dato);
@@ -101,7 +101,7 @@ class ProveedorController {
         $correoid = $_POST["correoid"];
         $correos = $_POST["correo"];
         $array_num = count($correos);
-     
+
         for ($i = 0; $i < $array_num; $i++) {
             $valor .= $correos[$i] . ",";
         }
@@ -127,7 +127,7 @@ class ProveedorController {
             echo '<script src="./public/js/jquery-3.3.1.js" type="text/javascript"> </script>  <script>   $(function() {   $("#alertControl").html("<div > <strong>Mensaje!</strong> Modificado exitosamente </div> ");  });</script>';
         } else {
             echo '<script src="./public/js/jquery-3.3.1.js" type="text/javascript"> </script>  <script>   $(function() {   $("#alertControl").html("<div > <strong>Advertencia!</strong>No se ha modificado </div> ");  });</script>';
-       }
+        }
 
         $dato['listado'] = $items->filtarClienteById3($_POST["id"]);
         $this->view->show("actualizarDescripcionProveedor.php", $dato);
@@ -151,7 +151,7 @@ class ProveedorController {
         } else {
             echo '<script src="./public/js/jquery-3.3.1.js" type="text/javascript"> </script>  <script>   $(function() {   $("#alertControl").html("<div > <strong>Advertencia!</strong>No se ha modificado </div> ");  });</script>';
         }
- 
+
         $dato['listado'] = $items->filtarClienteById2($_POST["id"]);
         $this->view->show("actualizarTelefonoP.php", $dato);
     }

@@ -26,21 +26,21 @@ include_once 'public/headerMenuP.php';
                         <input type="text" class="form-control" id="categoriadescripcion" value="<?php echo $item[2] ?>"  name="categoriadescripcion" placeholder="Descripción" required="">
                     </div>
                     <div class="form-group">
-                      <input type="hidden" class="form-control" id="categoriafecha" value="<?php echo $item[3] ?>" name="categoriafecha" placeholder="Descripción" required="">
+                        <input type="hidden" class="form-control" id="categoriafecha" value="<?php echo $item[3] ?>" name="categoriafecha" placeholder="Descripción" required="">
                     </div>
                     <div class="form-group">
                         <input type="hidden" class="form-control" id="usuarioid" readonly="" value="<?php echo $_SESSION["usuario"] ?>" name="usuarioid" placeholder="Descripción" required="">
-                           </div>
-                        <!--
-
-
                     </div>
-                    <div class="form-group">
-                        <label for="username">Modificar el usuario</label>
-                        <select  name="usuarioid" id="usuarioid" class="form-control">
-                            <option selected>Selecciona:</option>
-                        </select>
-                    </div>-->
+                    <!--
+
+
+                </div>
+                <div class="form-group">
+                    <label for="username">Modificar el usuario</label>
+                    <select  name="usuarioid" id="usuarioid" class="form-control">
+                        <option selected>Selecciona:</option>
+                    </select>
+                </div>-->
 
                     <div class="form-group">
                         <center>
