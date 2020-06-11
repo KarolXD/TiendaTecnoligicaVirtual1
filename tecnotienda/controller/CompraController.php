@@ -5,13 +5,14 @@ class CompraController {
     public function __construct() {
         $this->view = new View();
     }
-       public function listarMorosos() {
+
+    public function listarMorosos() {
         require 'model/data/compraDato.php';
         $PD = new compraDato();
         $dato["listado"] = $PD->obtenerMorosos();
         $this->view->show("vistalistaMorosos.php", $dato);
     }
-    
+
     public function agregaralcarrito() {
         require 'model/data/compraDato.php';
         $items = new compraDato();
@@ -57,7 +58,7 @@ class CompraController {
         $dato['listado2'] = $items->listarPagoDatosCliente($usuario);
         $this->view->show("clientePago.php", $dato);
     }
-    
+
     public function detalleAbono() {
         session_start();
         require 'model/data/compraDato.php';
@@ -79,51 +80,72 @@ class CompraController {
         for ($i = 0; $i < $array_num; $i++) {
             $valor .= $detalle[$i] . ",";
         }
-        $resultado = ""; $valor="";
-        
-       $valor=  $items->validarSiPagado($usuario);
-if($valor==0){
+        $resultado = "";
+        $valor = "";
+        $resultado2 = "";
+
+
+
+
         $totalcontado = $_POST["totalpago"];
-        if ($tipopago == 1) {// pago al contado
-            $resultado = $items->registrarPago($usuario, $valor, 0, $totalcontado);
-        } else if ($tipopago == 0) {//pago al credito
-            $cuentaporpagar = $_POST["cuentaporcobrar"];
-             $fechaActual = date("Y-m-d H:i:s");//Y-m-d H:i:s
-        //    $fechaActual = date("Y/m/d");//Y-m-d H:i:s
-             
-            $obtenerMeses = $_POST["plazo"];
-            $sumarmeses = "+" . $obtenerMeses . "month";
-            $fechalimite = date("Y-m-d", strtotime($fechaActual . $sumarmeses));
-            
-            $items->registrarventaporcobrar($usuario, $cuentaporpagar, ($totalcontado - $cuentaporpagar), $totalcontado, $fechalimite);
 
-            $resultado = $items->registrarPago($usuario, $valor, 1, 0);
-        }
+        $valor = $items->validarSiPagado($usuario);
 
-        if ($resultado == 0) {
+
+        if ($tipopago == 0) {//pago al credito
+            if ($valor == 0) {
+                $cuentaporpagar = $_POST["cuentaporcobrar"];
+                $fechaActual = date("Y-m-d H:i:s"); //Y-m-d H:i:s
+                //    $fechaActual = date("Y/m/d");//Y-m-d H:i:s
+
+                $obtenerMeses = $_POST["plazo"];
+                $sumarmeses = "+" . $obtenerMeses . "month";
+                $fechalimite = date("Y-m-d", strtotime($fechaActual . $sumarmeses));
+
+                $items->registrarventaporcobrar($usuario, $cuentaporpagar, ($totalcontado - $cuentaporpagar), $totalcontado, $fechalimite);
+
+                $resultado = $items->registrarPago($usuario, $valor, 1, 0);
+                if ($resultado == 0) {
+                    $idproducto = $_POST["idproducto"];
+                    $cantidadAr = $_POST["cantidadarticulos"];
+                    $count = count($cantidadAr);
+                    for ($j = 0; $j < $count; $j++) {
+                        $resul1 = $items->actualizarCantiadadProductos($cantidadAr[$j], $idproducto[$j]);
+                    }
+                    for ($k = 0; $k < $count; $k++) {
+                        $resul2 = $items->eliminarDelCarrito($idproducto[$k]);
+                    }
+
+                    if ($resul1 == 1 && $resul2 == 1) {
+                        echo '<script src="./public/js/jquery-3.3.1.js" type="text/javascript"> </script>  <script>   $(function() {   $("#alertControl").html("<div > <strong>Mensaje!</strong> Compra  realizada </div> ");  });</script>';
+                    } else {
+                        echo '<script src="./public/js/jquery-3.3.1.js" type="text/javascript"> </script>  <script>   $(function() {   $("#alertControl").html("<div > <strong>Advertencia!</strong> No se ha podido realizar su compra! </div> ");  });</script>';
+                    }
+                } else {
+                    echo '<script src="./public/js/jquery-3.3.1.js" type="text/javascript"> </script>  <script>   $(function() {   $("#alertControl").html("<div > <strong>Advertencia!</strong> No se ha podido realizar su compra! </div> ");  });</script>';
+                }
+            } else {
+                echo '<script src="./public/js/jquery-3.3.1.js" type="text/javascript"> </script>  <script>   $(function() {   $("#alertControl").html("<div > <strong>Advertencia!</strong> Existe un abono pendiente. Debe cancelarlo antes!! </div> ");  });</script>';
+            }
+        }else{
+        $resultado2 = $items->registrarPago($usuario, $valor, 0, $totalcontado);
+        if ($resultado2 == 0) {
             $idproducto = $_POST["idproducto"];
             $cantidadAr = $_POST["cantidadarticulos"];
-            $count = count($cantidadAr);
-            for ($j = 0; $j < $count; $j++) {
-                $resul1 = $items->actualizarCantiadadProductos($cantidadAr[$j], $idproducto[$j]);
+            $count2 = count($cantidadAr);
+            for ($j = 0; $j < $count2; $j++) {
+                echo $resul1 = $items->actualizarCantiadadProductos($cantidadAr[$j], $idproducto[$j]);
             }
-            for ($k = 0; $k < $count; $k++) {
-                $resul2 = $items->eliminarDelCarrito($idproducto[$k]);
+            for ($k = 0; $k < $count2; $k++) {
+                echo $resul2 = $items->eliminarDelCarrito($idproducto[$k]);
             }
 
-            if ($resul1 == 1 && $resul2 == 1) {
-                echo '<script src="./public/js/jquery-3.3.1.js" type="text/javascript"> </script>  <script>   $(function() {   $("#alertControl").html("<div > <strong>Mensaje!</strong> Compra  realizada </div> ");  });</script>';
-            } else {
-                echo '<script src="./public/js/jquery-3.3.1.js" type="text/javascript"> </script>  <script>   $(function() {   $("#alertControl").html("<div > <strong>Advertencia!</strong> No se ha podido realizar su compra! </div> ");  });</script>';
-            }
+            echo '<script src="./public/js/jquery-3.3.1.js" type="text/javascript"> </script>  <script>   $(function() {   $("#alertControl").html("<div > <strong>Mensaje!</strong> Compra  realizada </div> ");  });</script>';
         } else {
-            echo '<script src="./public/js/jquery-3.3.1.js" type="text/javascript"> </script>  <script>   $(function() {   $("#alertControl").html("<div > <strong>Advertencia!</strong> No se ha podido realizar su compra! </div> ");  });</script>';
+            echo '<script src="./public/js/jquery-3.3.1.js" type="text/javascript"> </script>  <script>   $(function() {   $("#alertControl").html("<div > <strong>Mensaje!</strong> Compra NO  realizada </div> ");  });</script>';
         }
-    }else{
-        echo '<script src="./public/js/jquery-3.3.1.js" type="text/javascript"> </script>  <script>   $(function() {   $("#alertControl").html("<div > <strong>Advertencia!</strong> No ha pagado su abono. Compra NO realizada! </div> ");  });</script>';
-       
-    }
-        
+        }
+
         $dato['listado'] = $items->listarPago($usuario);
         $dato['listado2'] = $items->listarPagoDatosCliente($usuario);
         $this->view->show("clientePago.php", $dato);
@@ -147,20 +169,20 @@ if($valor==0){
         require 'model/data/compraDato.php';
         $items = new compraDato();
         session_start();
-        $resultad["listado"]= $items->listarVentaCobrar($_SESSION["usuario"]);
-        $this->view->show("vistaPagoAbonosCliente.php",$resultad);
+        $resultad["listado"] = $items->listarVentaCobrar($_SESSION["usuario"]);
+        $this->view->show("vistaPagoAbonosCliente.php", $resultad);
     }
 
     public function modificarventaporcobrar() {
         require 'model/data/compraDato.php';
         $items = new compraDato();
 
-    
 
-         $totalPago=$_POST["deudapendiente"] ;
-         $cuentaPagar= $_POST["cuentaporpagar"];
-      
-        $cantidadDebe =$totalPago-$cuentaPagar;
+
+        $totalPago = $_POST["deudapendiente"];
+        $cuentaPagar = $_POST["cuentaporpagar"];
+
+        $cantidadDebe = $totalPago - $cuentaPagar;
 
 
         $resul = $items->modificarventaporcobrar($_POST["usuario"], $_POST["cuentaporpagar"], $cantidadDebe, $_POST["id"]);
