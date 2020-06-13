@@ -54,6 +54,14 @@ class usuarioDato {
         $consulta->CloseCursor();
         return $resultado;
     }
+        public function obtenerCategorias() {
+        $consulta = $this->db->prepare('select * from tbclientecategorizacion ' );
+        $consulta->execute();
+        $resultado = $consulta->fetchAll();
+        $consulta->CloseCursor();
+        return $resultado;
+    }
+
 
     public function eliminandoUsuario($usuarioid) {
         $consulta = $this->db->prepare('update tbusuario set tbusuarioactivo=1 where tbusuarioid="' . $usuarioid . '"');

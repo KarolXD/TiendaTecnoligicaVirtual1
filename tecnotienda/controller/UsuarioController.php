@@ -18,6 +18,14 @@ class UsuarioController {
     public function __construct() {
         $this->view = new View();
     }
+    
+    public function admcategorizacion(){
+          require 'model/data/usuarioDato.php';
+        $PD = new usuarioDato();
+        $dato["categorizacion"]=$PD->obtenerCategorias();
+                $this->view->show("admcategorizacion.php",$dato);
+    }
+    
 
     public function cerrarSession() {
         session_start();

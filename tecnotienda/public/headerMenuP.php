@@ -62,16 +62,7 @@
                 <div class="line"></div>
                 <div class="content">
                     <nav class="navbar navbar-expand-lg navbar-light bg-light">
-                        <div class="dropdown">
-                            <button class="btn btn-outline-info my-2 my-sm-0 dropdown-toggle" href="#homeSubmenu"  id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                Inicio
-                            </button>
-                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" >
-                                <a class="dropdown-item" href="#">Galeria Imagenes</a>
-                                <a class="dropdown-item" href="#">Recorrido por Pagina</a>
-                                <a class="dropdown-item" href="#">Pagina Princpal</a>
-                            </div>
-                        </div>
+                    
 
                         <div class="dropdown">
                             <button class=" btn btn-outline-info my-2 my-sm-0 dropdown-toggle" href=""  id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -106,6 +97,8 @@
                                 <a class="dropdown-item" href="?controlador=Cliente&accion=listarClientes">Administrar Clientes</a>
                                 <a class="dropdown-item" href="?controlador=Proveedor&accion=listarProveedor">Administrar Proveedores</a>
                                            <a class="dropdown-item" href="?controlador=Usuario&accion=listarUsuarios">Administrar Administradores</a>
+                                           
+                                           <a class="dropdown-item" href="?controlador=Usuario&accion=admcategorizacion">Categorizacion </a>
                       
                             </div>
                         </div>
