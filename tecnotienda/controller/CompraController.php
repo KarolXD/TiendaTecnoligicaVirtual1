@@ -6,6 +6,15 @@ class CompraController {
         $this->view = new View();
     }
 
+    
+    
+      public function adminCxc() {
+        require 'model/data/compraDato.php';
+        $PD = new compraDato();
+        $dato["listado"] = $PD->obtenerCxc();
+        $this->view->show("adminCxc.php", $dato);
+    }
+    
     public function listarMorosos() {
         require 'model/data/compraDato.php';
         $PD = new compraDato();

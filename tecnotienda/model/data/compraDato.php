@@ -8,6 +8,14 @@ class compraDato {
         require 'libs/SPDO.php';
         $this->db = SPDO::singleton();
     }
+     public function obtenerCxc(){
+          $consulta = $this->db->prepare('select * from tbclientedetalleabono' );
+        $consulta->execute();
+        $resultado = $consulta->fetchAll();
+        $consulta->CloseCursor();
+        return $resultado;
+    }
+
     public function obtenerMorosos(){
           $consulta = $this->db->prepare('SELECT 
     `tbventaporcobrar`.`tbclienteid`,

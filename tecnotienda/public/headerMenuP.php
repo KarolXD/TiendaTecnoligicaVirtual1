@@ -102,9 +102,17 @@
                       
                             </div>
                         </div>
-                        <a href="?controlador=Compra&accion=adminPago" class=" btn btn-outline-info my-2 my-sm-0" >
-                            Detalles Pago
-                        </a>
+                            <div class="dropdown">
+                            <button class=" btn btn-outline-info my-2 my-sm-0 dropdown-toggle" href=""  id="dropdownMenuButtonP" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Detalles de Pago
+                            </button>
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButtonP">
+                                <a class="dropdown-item" href="?controlador=Compra&accion=adminCxc">CxC</a>
+                                <a class="dropdown-item" href="?controlador=Compra&accion=adminPago">Pago Contado</a>
+                                    
+                            </div>
+                        </div>
+                  
                       <a href="?controlador=Compra&accion=listarMorosos" class=" btn btn-outline-info my-2 my-sm-0" >
                             Listado Morosos
                         </a>
