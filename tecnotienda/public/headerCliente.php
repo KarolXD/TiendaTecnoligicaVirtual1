@@ -73,6 +73,9 @@
                         <a href="?controlador=Compra&accion=abono" class=" btn btn-outline-info my-2 my-sm-0" >
                           Abono
                         </a>
+                          <a href="?controlador=Producto&accion=mostrarCombos2" class=" btn btn-outline-info my-2 my-sm-0" >
+                          Combos
+                        </a>
                         <div class="line"></div>
                         <div class="collapse navbar-collapse" id="navbarSupportedContent">
                             <ul class="navbar-nav mr-auto" id="tblmenuUsuario1" name="tblmenuUsuario1">

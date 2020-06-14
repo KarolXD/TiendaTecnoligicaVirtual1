@@ -41,6 +41,10 @@ class ProductoController {
         $this->view->show("registrarproductovista.php", null);
     }
 
+    public function registrarComboVista() {
+        $this->view->show("RegistrarCombo.php", null);
+    }
+
     public function registrarDevolucion() {
         $this->view->show("registrarDevolucion.php", null);
     }
@@ -198,11 +202,9 @@ class ProductoController {
         $id = filter_input(INPUT_POST, 'productoid');
         $respuesta = "";
         if ($_POST["subcategoriaid"] == -1) {
-            $respuesta = $PD->modificarProducto2($_POST["productocodigobarras"], $_POST["productogarantiasaplicadas"], $_POST["productosdevueltos"],
-                    $_POST["productoestado"], $_POST["cantidad"], $_POST["productoid"]);
+            $respuesta = $PD->modificarProducto2($_POST["productocodigobarras"], $_POST["productogarantiasaplicadas"], $_POST["productosdevueltos"], $_POST["productoestado"], $_POST["cantidad"], $_POST["productoid"]);
         } else {
-            $respuesta == $PD->modificarProducto($_POST["productocodigobarras"], $_POST["productogarantiasaplicadas"], $_POST["productosdevueltos"],
-                            $_POST["subcategoriaid"], $_POST["productoestado"], $_POST["cantidad"], $_POST["productoid"]);
+            $respuesta == $PD->modificarProducto($_POST["productocodigobarras"], $_POST["productogarantiasaplicadas"], $_POST["productosdevueltos"], $_POST["subcategoriaid"], $_POST["productoestado"], $_POST["cantidad"], $_POST["productoid"]);
         }
 
         if ($respuesta == 1) {
@@ -349,6 +351,107 @@ class ProductoController {
         $this->view->show("registrarproductovista.php", null);
     }
 
+    public function listarCombo() {
+        require 'model/data/productoData.php';
+        $PD = new productoData();
+        $data['listado'] = $PD->listarCombos();
+        $this->view->show("VistaCombos.php", $data);
+    }
+
+    public function modificarCombo() {
+        require 'model/data/productoData.php';
+        $PD = new productoData();
+        $data['listado'] = $PD->listarCombos();
+        $this->view->show("actualizarCombo.php", $data);
+    }
+
+    public function registrarCombo() {
+        require 'model/data/productoData.php';
+        $PD = new productoData();
+        //producto
+        $codigobarra = $_POST['productocodigobarras'];
+        $cantidad = $_POST['cantidad'];
+        $precio = $_POST['preciocompra'];
+        $caractericticatitulo = $_POST['caractericticatitulo'];
+
+
+        $array_num1 = count($_FILES['imagenesruta']['name']);
+
+        $rutaFinal = "";
+        $flag = false;
+        $date = new DateTime();
+        $indicaro = $date->getTimestamp();
+
+        $nombreImagen = $_FILES['imagenesruta']['name'];
+        $tipoImagen = $_FILES['imagenesruta']['type'];
+        $tamaño = $_FILES['imagenesruta']['size'];
+        $pathParcial = "/tecnotienda/tecnotienda/public/img/";
+        $tmp_name_array = $_FILES['imagenesruta']['tmp_name'];
+        $carpetaDestino = $_SERVER['DOCUMENT_ROOT'] . $pathParcial;
+        $valorInicial = 0;
+        for ($i = 0; $i < $array_num1; $i++) {
+            if (move_uploaded_file($_FILES['imagenesruta']['tmp_name'][$i], $carpetaDestino . $indicaro . $nombreImagen[$i])) {
+                //     if (move_uploaded_file($tmp_name_array[$i], $carpetaDestino . $indicaro . $nombreImagen[$i])) {
+                $rutaFinal .= $pathParcial . $indicaro . $nombreImagen[$i];
+                $flag = true;
+                echo 'Success';
+            } else {
+                echo 'Ocurrió un error al subir la imagen, intente otra vez';
+            }
+        }
+
+        $resultado = $PD->registrarCombo2($codigobarra, $cantidad, $precio, $caractericticatitulo, $rutaFinal);
+        echo $resultado;
+        if ($resultado == 1) {
+            echo '<script src="./public/js/jquery-3.3.1.js" type="text/javascript"> </script>  <script>   $(function() {   $("#alertControl").html("<div > <strong>Mensaje!</strong> Devolución  Registrada </div> ");  });</script>';
+        } else {
+            echo '<script src="./public/js/jquery-3.3.1.js" type="text/javascript"> </script>  <script>   $(function() {   $("#alertControl").html("<div > <strong>Mensaje!</strong> Devolución  NO registrada </div> ");  });</script>';
+        }
+
+        $this->view->show("registrarCombo.php", null);
+    }
+
+    public function actualizarCombo() {
+        require 'model/data/productoData.php';
+        $PD = new productoData();
+
+        $id = $_POST["id"];
+        $codigoBarra = $_POST["codigoBarra"];
+        $cantidad = $_POST["cantidad"];
+        $precio = $_POST["precio"];
+        $titulo = $_POST["titulo"];
+
+        $array_num1 = count($_FILES['imagenesruta2']['name']);
+
+        $rutaFinal = "";
+        $flag = false;
+        $date = new DateTime();
+        $indicaro = $date->getTimestamp();
+
+        $nombreImagen = $_FILES['imagenesruta2']['name'];
+        $tipoImagen = $_FILES['imagenesruta2']['type'];
+        $tamaño = $_FILES['imagenesruta2']['size'];
+        $pathParcial = "/tecnotienda/tecnotienda/public/img/";
+        $tmp_name_array = $_FILES['imagenesruta2']['tmp_name'];
+        $carpetaDestino = $_SERVER['DOCUMENT_ROOT'] . $pathParcial;
+        $valorInicial = 0;
+        for ($i = 0; $i < $array_num1; $i++) {
+            if (move_uploaded_file($_FILES['imagenesruta2']['tmp_name'][$i], $carpetaDestino . $indicaro . $nombreImagen[$i])) {
+                //     if (move_uploaded_file($tmp_name_array[$i], $carpetaDestino . $indicaro . $nombreImagen[$i])) {
+                $rutaFinal .= $pathParcial . $indicaro . $nombreImagen[$i];
+                $flag = true;
+                echo 'Success';
+            } else {
+                echo 'Ocurrió un error al subir la imagen, intente otra vez';
+            }
+        }
+
+        echo $resultado = $PD->modificarComobo($id, $codigoBarra, $cantidad, $precio, $titulo, $rutaFinal);
+
+        $data['listado'] = $PD->listarCombos();
+        $this->view->show("VistaCombos.php", $data);
+    }
+
     public function obtenerProductos() {
         require 'model/data/productoData.php';
         $PD = new productoData();
@@ -370,8 +473,7 @@ class ProductoController {
         for ($i = 0; $i < $datos2; $i++) {
             $productocaracteristicacriterio .= implode($datos2, $_POST["valores"][$datos2]) . ",";
         }
-        $PD->registrarproductocaracteristicas1($productoproductocodigobarras, $productocaracteristicacriterio,
-                $productocaracteristicavalor, $productocaracteristicatitulo);
+        $PD->registrarproductocaracteristicas1($productoproductocodigobarras, $productocaracteristicacriterio, $productocaracteristicavalor, $productocaracteristicatitulo);
         $this->view->show("registrarproductovista.php", null);
 //       
     }
@@ -403,6 +505,15 @@ class ProductoController {
             echo '<script src="./public/js/jquery-3.3.1.js" type="text/javascript"> </script>  <script>   $(function() {   $("#alertControl").html("<div > <strong>Mensaje!</strong> Producto  No eliminado </div> ");  });</script>';
         }
         $this->view->show("menuProductoVista.php", null);
+    }
+
+    public function eliminarCombo() {
+        require 'model/data/productoData.php';
+        $PD = new productoData();
+        $resultado = $PD->eliminarCombo($_GET['correoid']);
+        $re = $_GET['correoid'];
+        $data['listado'] = $PD->listarCombos();
+        $this->view->show("VistaCombos.php", $data);
     }
 
     public function registrarCaracteristicas1() {
@@ -560,6 +671,14 @@ class ProductoController {
         $PD->registrarproductocaracteristicas($productocodigobarras, $_POST["name12"], $temporal13, $productocaractericticatitulo, "3");
         $PD->registrarproductocaracteristicas($productocodigobarras, $_POST["name13"], $temporal14, $productocaractericticatitulo, "4");
         $PD->registrarproductocaracteristicas($productocodigobarras, $_POST["name14"], $temporal15, $productocaractericticatitulo, "6");
+    }
+
+    public function mostrarCombos2() {
+
+        require 'model/data/productoData.php';
+        $PD = new productoData();
+        $data['listado'] = $PD->listarCombos();
+        $this->view->show("VistaCombosCliente.php", $data);
     }
 
 }

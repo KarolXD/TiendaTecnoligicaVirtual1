@@ -64,8 +64,8 @@ class productoData {
         $consulta->CloseCursor();
     }
 
-    public function modificarProducto($productoproductocodigobarras, $productocantidadgarantizada, $productocantidaddevuelto, $productosubcategoriaid, $productoestado, $productoid,$cantidad) {
-        $data = array($productoproductocodigobarras, $productocantidadgarantizada, $productocantidaddevuelto, $productosubcategoriaid, $productoestado, $productoid,$cantidad);
+    public function modificarProducto($productoproductocodigobarras, $productocantidadgarantizada, $productocantidaddevuelto, $productosubcategoriaid, $productoestado, $productoid, $cantidad) {
+        $data = array($productoproductocodigobarras, $productocantidadgarantizada, $productocantidaddevuelto, $productosubcategoriaid, $productoestado, $productoid, $cantidad);
         $consulta = $this->db->prepare('update tbproducto set  tbproductocodigobarras=? ,tbproductocantidadgarantiasaplicadas=?,tbproductocantidaddevoluciones=?,tbsubcategoriaid=?, tbproductoestado=?, tbproductocantidad=?  where tbproductoid=?');
         if ($consulta->execute($data)) {
             echo $consulta->errorInfo()[2];
@@ -75,8 +75,8 @@ class productoData {
         }
     }
 
-    public function modificarProducto2($productoproductocodigobarras, $productocantidadgarantizada, $productocantidaddevuelto, $productoestado,$cantidad,$productoid) {
-        $data = array($productoproductocodigobarras, $productocantidadgarantizada, $productocantidaddevuelto, $productoestado, $cantidad,$productoid);
+    public function modificarProducto2($productoproductocodigobarras, $productocantidadgarantizada, $productocantidaddevuelto, $productoestado, $cantidad, $productoid) {
+        $data = array($productoproductocodigobarras, $productocantidadgarantizada, $productocantidaddevuelto, $productoestado, $cantidad, $productoid);
         $consulta = $this->db->prepare('update tbproducto set  tbproductocodigobarras=? ,tbproductocantidadgarantiasaplicadas=?,tbproductocantidaddevoluciones=?, tbproductoestado=? , tbproductocantidad=?  where tbproductoid=?');
         if ($consulta->execute($data)) {
             echo $consulta->errorInfo()[2];
@@ -86,7 +86,7 @@ class productoData {
         }
     }
 
-    public function registrarProducto($productosubcategoriaid, $productoproductocodigobarras, $productocantidadgarantizada, $productocantidaddevuelto, $productoestado, $productoactiovo,$cantidad) {
+    public function registrarProducto($productosubcategoriaid, $productoproductocodigobarras, $productocantidadgarantizada, $productocantidaddevuelto, $productoestado, $productoactiovo, $cantidad) {
         $sql = 'SELECT COUNT(*) as total FROM tbproducto where tbproductocodigobarras="' . $productoproductocodigobarras . '"';
         $del = $this->db->prepare($sql);
         if ($del->execute()) {
@@ -94,7 +94,7 @@ class productoData {
             if ($count['total'] > 0) {
                 return 0;
             } else {
-                $data = array($productosubcategoriaid, $productoproductocodigobarras, $productocantidadgarantizada, $productocantidaddevuelto, $productoestado, $productoactiovo,$cantidad);
+                $data = array($productosubcategoriaid, $productoproductocodigobarras, $productocantidadgarantizada, $productocantidaddevuelto, $productoestado, $productoactiovo, $cantidad);
                 $consulta = $this->db->prepare('INSERT INTO tbproducto(tbsubcategoriaid,tbproductocodigobarras,tbproductocantidadgarantiasaplicadas, '
                         . 'tbproductocantidaddevoluciones,tbproductoestado,tbproductoactivo,tbproductocantidad)'
                         . ' VALUES(?,?,?,?,?,?,?)');
@@ -109,6 +109,25 @@ class productoData {
             return -1;
         }
     }
+
+    public function registrarCombo2($codigoBarra, $cantidad, $precio, $titulo,$imagen) {
+        $data = array($codigoBarra, $cantidad, $precio, $titulo,$imagen);
+        $consulta = $this->db->prepare('INSERT INTO `bdtecnotienda`.`tbcombo`
+                                        (tbcombocodigoBarra,
+                                         tbcombocantidad,
+                                         tbcomboprecio,
+                                         tbcombotitulo,
+                                         tbcomboimagen)
+                                          VALUES(?,?,?,?,?)');
+        if ($consulta->execute($data)) {
+            echo $consulta->errorInfo()[2];
+            return 1;
+        } else {
+            return -1;
+        }
+    }
+
+   
 
     public function registrarproductoimagen($productoproductocodigobarras, $productoimagennombre, $productoimagenruta, $productoimagenestado) {
         $consulta = $this->db->prepare(' select  @productoid:=tbproductoid from tbproducto where tbproductocodigobarras="' . $productoproductocodigobarras . '";
@@ -170,7 +189,8 @@ class productoData {
             return -1;
         }
     }
- public function registrarproductocaracteristicas1($productoproductocodigobarras, $productocaracteristicacriterio, $productocaracteristicavalor, $productocaracteristicatitulo) {
+
+    public function registrarproductocaracteristicas1($productoproductocodigobarras, $productocaracteristicacriterio, $productocaracteristicavalor, $productocaracteristicatitulo) {
         $consulta = $this->db->prepare(' select  @productoid:=tbproductoid from tbproducto where tbproductocodigobarras="' . $productoproductocodigobarras . '";
       INSERT INTO tbproductocaracteristica(tbproductoid,tbproductocartacteristicascriterio,tbproductocaracteristicasvalor,tbproductocaracteristicastitulo) VALUES(@productoid,"' . $productocaracteristicacriterio . '","' . $productocaracteristicavalor . '", "' . $productocaracteristicatitulo . '")');
         if ($consulta->execute()) {
@@ -181,6 +201,7 @@ class productoData {
             return -1;
         }
     }
+
     public function registrarproductocaracteristicas($productoproductocodigobarras, $productocaracteristicacriterio, $productocaracteristicavalor, $productocaracteristicatitulo, $url) {
         $consulta = $this->db->prepare('  select  @productoid:=tbproductoid from tbproducto where tbproductocodigobarras="' . $productoproductocodigobarras . '";
     select @foto:=tbproductoimagenruta from tbproductoimagen where tbproductoid=@productoid;
@@ -225,6 +246,14 @@ and  imagen.tbproductoid=producto.tbproductoid
  and  producto.tbproductoid=
 
 "' . $idproducto . '"');
+        $consulta->execute();
+        $resultado = $consulta->fetchAll();
+        $consulta->CloseCursor();
+        return $resultado;
+    }
+
+    public function listarCombos() {
+        $consulta = $this->db->prepare('select * from tbcombo');
         $consulta->execute();
         $resultado = $consulta->fetchAll();
         $consulta->CloseCursor();
@@ -304,7 +333,6 @@ p.tbproductoestado, s.tbsubcategorianombre, p.tbproductocantidad
         return $consulta->fetchALL(PDO::FETCH_ASSOC);
     }
 
-  
 //lista
     public function listarProductos() {
         $consulta = $this->db->prepare('
@@ -361,6 +389,34 @@ GROUP BY s.tbsubcategorianombre');
 
     public function eliminarProducto($idproducto) {
         $consulta = $this->db->prepare('update   tbproducto set  tbproductoactivo=1 WHERE tbproductoid = "' . $idproducto . '"');
+        if ($consulta->execute()) {
+            $resultado = $consulta->fetchAll();
+            $consulta->CloseCursor();
+            return 1;
+        } else {
+            return 0;
+        }
+    }
+
+    public function eliminarCombo($idproducto) {
+        $consulta = $this->db->prepare('DELETE FROM `bdtecnotienda`.`tbcombo` WHERE tbcombocomboid= "' . $idproducto . '"');
+        if ($consulta->execute()) {
+            $resultado = $consulta->fetchAll();
+            $consulta->CloseCursor();
+            return 1;
+        } else {
+            return 0;
+        }
+    }
+
+    public function modificarComobo($id, $codigoBarra, $cantidad, $precio, $titulo,$imagen) {
+        $consulta = $this->db->prepare('UPDATE `bdtecnotienda`.`tbcombo` SET
+            `tbcombocodigoBarra` = "'.$codigoBarra.'",
+            `tbcombocantidad` = "'.$cantidad.'",
+            `tbcomboprecio` = "'.$precio.'",
+            `tbcombotitulo` = "'.$titulo.'",
+            `tbcomboimagen` = "'.$imagen.'"
+            WHERE `tbcombocomboid`="'.$id.'"');
         if ($consulta->execute()) {
             $resultado = $consulta->fetchAll();
             $consulta->CloseCursor();
