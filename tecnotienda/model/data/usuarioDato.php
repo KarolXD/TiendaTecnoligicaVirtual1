@@ -22,6 +22,14 @@ class usuarioDato {
         $this->db = SPDO::singleton();
     }
     
+        public function obtenerMorosos(){
+          $consulta = $this->db->prepare('
+select * from tbclientemoroso;' );
+        $consulta->execute();
+        $resultado = $consulta->fetchAll();
+        $consulta->CloseCursor();
+        return $resultado;
+    }
     
     public function guardarUsuario($usuarionombre, $contrassenia,$activo) {
         $sql = 'SELECT COUNT(*) as total FROM tbusuario where tbusuarionombre ="' . $usuarionombre . '" ';

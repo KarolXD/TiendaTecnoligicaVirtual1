@@ -63,8 +63,8 @@ class ClienteController {
 
             $_SESSION['usuario'] = $clienteid;
             echo '<script src="./public/js/jquery-3.3.1.js" type="text/javascript"> </script>  <script>   $(function() {   $("#alertControl").html("<div > <strong>Advertencia!</strong>  Inicio de session correcto</div> ");  });</script>';
-
-            $this->view->show("menuPrincipal.php");
+$data["listado"]=$items->obtenerMorosos();
+            $this->view->show("menuPrincipal.php",$data);
         } else {
             echo '<script src="./public/js/jquery-3.3.1.js" type="text/javascript"> </script>  <script>   $(function() {   $("#alertControl").html("<div > <strong>Advertencia!</strong> Usuario y/o Contraseña INCORRECTA </div> ");  });</script>';
 

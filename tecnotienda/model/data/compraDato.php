@@ -17,13 +17,8 @@ class compraDato {
     }
 
     public function obtenerMorosos(){
-          $consulta = $this->db->prepare('SELECT 
-    `tbventaporcobrar`.`tbclienteid`,
-    `tbventaporcobrar`.`tbcantidadpagada`,
-    `tbventaporcobrar`.`tbfechaAbono`,
-    `tbventaporcobrar`.`tbtotaldeuda`,
-    `tbventaporcobrar`.`tbtotalfactura`
-FROM `bdtecnotienda`.`tbventaporcobrar` where tbfechalimite < now() and tbestadomoroso = 0;' );
+          $consulta = $this->db->prepare('
+select * from tbclientemoroso;' );
         $consulta->execute();
         $resultado = $consulta->fetchAll();
         $consulta->CloseCursor();

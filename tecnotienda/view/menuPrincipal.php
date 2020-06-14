@@ -20,9 +20,9 @@ include_once 'public/headerMenuP.php';
                 <hr style="color: #6d7fcc">
                 <thead>
                     <tr>
-                        <th scope="col">Cliente</th>
-                        <th scope="col">Cantidad Abonada </th>       
-                        <th scope="col">Fecha Ultimo Abono  </th>
+                        <th scope="col">#</th>
+                        <th scope="col">Cliente </th>       
+                        <th scope="col">CXC  </th>
                         <th scope="col">Total Deuda</th>
                         <th scope="col">Fecha Limite</th>
                     </tr>
