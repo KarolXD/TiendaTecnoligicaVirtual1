@@ -79,16 +79,21 @@
                             Publicidad
                         </button>
 
+                        
                         <div class="dropdown">
                             <button class=" btn btn-outline-info my-2 my-sm-0 dropdown-toggle" href=""  id="dropdownMenuButton3" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                Combos
+                                Ofertas y Combos
                             </button>
                             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton3">
                                 <a class="dropdown-item" href="?controlador=Oferta&accion=menuOfertas">Ofertas</a>
                                 <a class="dropdown-item" href="#">Descuentos</a>
                                 <a class="dropdown-item" href="#">Promociones</a>
+                                 <a class="dropdown-item" href="?controlador=Producto&accion=listarCombo">Combos</a> 
+                        
                             </div>
                         </div>
+                        
+                        
                         <div class="dropdown">
                             <button class=" btn btn-outline-info my-2 my-sm-0 dropdown-toggle" href=""  id="dropdownMenuButton3" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 Usuarios

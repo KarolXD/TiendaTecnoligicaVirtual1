@@ -3,6 +3,7 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+<<<<<<< HEAD
             <file>file:/D:/Archivos%20de%20programa%20(x86)/EasyPHP-Devserver-17/eds-www/tecnotienda/tecnotienda/public/headerMenuP.php</file>
             <file>file:/D:/Archivos%20de%20programa%20(x86)/EasyPHP-Devserver-17/eds-www/tecnotienda/tecnotienda/view/admcategorizacion.php</file>
             <file>file:/D:/Archivos%20de%20programa%20(x86)/EasyPHP-Devserver-17/eds-www/tecnotienda/tecnotienda/model/data/usuarioDato.php</file>
@@ -10,6 +11,15 @@
             <file>file:/D:/Archivos%20de%20programa%20(x86)/EasyPHP-Devserver-17/eds-www/tecnotienda/tecnotienda/public/headerUsuario.php</file>
             <file>file:/D:/Archivos%20de%20programa%20(x86)/EasyPHP-Devserver-17/eds-www/tecnotienda/tecnotienda/controller/CompraController.php</file>
             <file>file:/D:/Archivos%20de%20programa%20(x86)/EasyPHP-Devserver-17/eds-www/tecnotienda/tecnotienda/model/data/compraDato.php</file>
+=======
+            <file>file:/C:/Program%20Files%20(x86)/EasyPHP-Devserver-17/eds-www/tecnotienda/tecnotienda/view/menuPrincipalCliente.php</file>
+            <file>file:/C:/Program%20Files%20(x86)/EasyPHP-Devserver-17/eds-www/tecnotienda/tecnotienda/view/registrarCombo.php</file>
+            <file>file:/C:/Program%20Files%20(x86)/EasyPHP-Devserver-17/eds-www/tecnotienda/tecnotienda/view/VistaCombosCliente.php</file>
+            <file>file:/C:/Program%20Files%20(x86)/EasyPHP-Devserver-17/eds-www/tecnotienda/tecnotienda/model/data/productoData.php</file>
+            <file>file:/C:/Program%20Files%20(x86)/EasyPHP-Devserver-17/eds-www/tecnotienda/tecnotienda/view/actualizarCombo.php</file>
+            <file>file:/C:/Program%20Files%20(x86)/EasyPHP-Devserver-17/eds-www/tecnotienda/tecnotienda/view/VistaCombos.php</file>
+            <file>file:/C:/Program%20Files%20(x86)/EasyPHP-Devserver-17/eds-www/tecnotienda/tecnotienda/controller/ProductoController.php</file>
+>>>>>>> master
         </group>
     </open-files>
 </project-private>
