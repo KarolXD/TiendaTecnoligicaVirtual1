@@ -43,54 +43,9 @@ global $contador;
 
     </style>
     <br>
-    <center class="">    <font style="text-transform: uppercase;">   <p class="card-text"><strong>  Contenidos </strong>  </p>    </font>   </center>
+    <center class="">    <font style="text-transform: uppercase;">   <p class="card-text"><strong>  Mi lista de deseos </strong>  </p>    </font>   </center>
     <br>
-       <div class="row">
 
-            <div class="col-md-4">
-                Subcategorias
-                <select class="form-control" id="subcategoriaid" name="subcategoriaid"   
-                        onchange='ShowSelectedSubCa();'  >
-                </select>
-            </div>
-
-
-            <div class="col-md-4">
-                <div class="form-group"> 
-                    Criterios
-                    <select class="form-control" id="criterioid" name="criterioid" onchange="ShowSelected();"> 
-                        <?php
-                        foreach ($vars['listado2'] as $item2) {
-                            ?>
-                            <option value="<?php echo $item2[0] ?>"><?php echo $item2[1] . "  " . $item2[2] ?></option>
-                            <?php
-                        }
-                        ?>
-                    </select>
-
-
-                </div>
-            </div>
-            <div class="col-md-4">
-                  <form method="post" action="?controlador=SubCategoria&accion=filtrarmostrardetallesSubcategoriaCliente">
-   
-                <div class="form-group" style="" id="divvalores"> 
-                    Valores
-                    <input  type="hidden" value="" id="valor" name="valor">
-                    Criterios
-                    <input  type="hidden" value="" id="criteriovalor" name="criteriovalor">
-                    Valores
-                    <select class="form-control" id="valorid" name="valorid" onchange="ShowSelected1();">  </select>
-                    <br>
-                    <div style="display: none">
-                        <center>   <button type="submit" class="autoclick" >Filtrar </button></center>
-                    </div>
-
-                </div>
-                    </form>
-            </div>
-
-        </div>
 
 
 
@@ -122,32 +77,22 @@ global $contador;
                 ?>
 
 
-                        <div class="card-body">
-                            <p class="card-text ">     <strong> <font size="6"> <span class="input-group-append">₡ <?php echo$item[2] ?> </span></font></strong>  </p>
-                            <hr style="border-top: 1px solid black;">
-                            <a class="etiqueta"  href="?controlador=Producto&accion=mostrarDetallesProductoCliente&productoid=<?php echo$item[4] ?>">  <h5 class="card-title"><?php echo$item[1] ?>  </h5> </a>
-                        </div>
-                        <form method="post" action="?controlador=SubCategoria&accion=agregarListaDeseos">
-
-                            <input type="hidden" id="usuario" name="usuario" value="<?php echo $_SESSION['usuario'] ?> ">
-                            <input type="hidden" id="subcategoria" name="subcategoria" value="<?php echo $_SESSION['subcategoriaid'] ?> ">
-                            <input type="hidden" id="productoid" name="productoid" value="<?php echo$item[4] ?> ">
-                            <hr style="border-top: 5px solid black;">
-                            <button class="btn btn-outline-secondary" 
-                            >  <h6 class="card-title">
-                                    <img  width="30" height="30" src="./public/img/heart.svg" />Añadir a tu lista de deseos  </h6> </button>
-                        </form>
+                <div class="card-body">
+                    <p class="card-text ">     <strong> <font size="6"> <span class="input-group-append">₡ <?php echo$item[2] ?> </span></font></strong>  </p>
+                    <hr style="border-top: 1px solid black;">
+                    <a class="etiqueta"  href="?controlador=Producto&accion=mostrarDetallesProductoCliente&productoid=<?php echo$item[4] ?>">  <h5 class="card-title"><?php echo$item[1] ?>  </h5> </a>
                 </div>
 
+            </div>
 
-                <hr style="border-top: 5px solid black;">
 
-                <br>
+            <hr style="border-top: 5px solid black;">
+
+            <br>
 
 
             <?php
-        } echo $_SESSION['subcategoriaid'];
-          
+        } 
         ?>
 
     </div>
@@ -215,13 +160,13 @@ global $contador;
         $('.autoclick').trigger('click');
     }
 
-function mostrarcontador(){
-    
-    
-        var resultad= localStorage.getItem('contador');
+    function mostrarcontador() {
+
+
+        var resultad = localStorage.getItem('contador');
         alert(resultad);
-    
-}
+
+    }
 
     function ShowSelectedSubCa() {
         var contador = 0;

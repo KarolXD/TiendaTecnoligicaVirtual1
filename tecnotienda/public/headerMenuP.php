@@ -69,6 +69,11 @@
                                 Producto
                             </button>
                             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                
+                                <a class="dropdown-item" href="?controlador=Producto&accion=adm_productomasvendido">Producto Mas vendido</a>
+                                <a class="dropdown-item" href="?controlador=Producto&accion=admi_productosmenosvendido">Producto menos vendido</a>
+                                <a class="dropdown-item" href="?controlador=Producto&accion=admi_productosmasvistos">Producto mas visto</a>
+                                  <a class="dropdown-item" href="?controlador=Producto&accion=adm_productovendidocxcc">Producto mas vendido (crédito/contado)</a>
                                 <a class="dropdown-item" href="?controlador=Producto&accion=menuProductoVista">Producto</a>
                                 <a class="dropdown-item" href="?controlador=Categoria&accion=menuCategoriaVista">Categoria</a>
                                 <a class="dropdown-item" href="?controlador=SubCategoria&accion=menuSubCategoriaVista">Sub Categoria</a>
@@ -117,10 +122,29 @@
                                     
                             </div>
                         </div>
-                  
-                      <a href="?controlador=Compra&accion=listarMorosos" class=" btn btn-outline-info my-2 my-sm-0" >
-                            Listado Morosos
-                        </a>
+                     <div class="dropdown">
+                            <button class=" btn btn-outline-info my-2 my-sm-0 dropdown-toggle" href=""  id="dropdownMenuButtonV" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Ventas 
+                            </button>
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButtonV">
+                                <a class="dropdown-item" href="?controlador=Compra&accion=adminCxc">Ventas Mensuales</a>
+                                <a class="dropdown-item" href="?controlador=Compra&accion=adminPago">Ventas Diarias</a>
+                                    
+                            </div>
+                        </div>
+                            <div class="dropdown">
+                            <button class=" btn btn-outline-info my-2 my-sm-0 dropdown-toggle" href=""  id="dropdownMenuButtonMoro" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Morosidad 
+                            </button>
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButtonMoro">
+                                <a class="dropdown-item" href="?controlador=Compra&accion=listarMorosos">Lista Morosos</a>
+                                <a class="dropdown-item" href="?controlador=Compra&accion=listarMorososByCat">Lista Morosos por Categoria</a>
+                                
+                                <a class="dropdown-item" href="?controlador=Compra&accion=listarMorososByCat">Lista Morosos Mensual</a>
+                                    
+                            </div>
+                        </div>
+                      
                         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                             <span class="navbar-toggler-icon"></span>
                         </button>

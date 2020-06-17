@@ -76,6 +76,12 @@
                           <a href="?controlador=Producto&accion=mostrarCombos2" class=" btn btn-outline-info my-2 my-sm-0" >
                           Combos
                         </a>
+                          <a href="?controlador=Compra&accion=listarCompras" class=" btn btn-outline-info my-2 my-sm-0" >
+                          Compras
+                        </a>
+                            <a href="?controlador=SubCategoria&accion=listaDeseos" class=" btn btn-outline-info my-2 my-sm-0" >
+                          Mi lista de deseos
+                        </a>
                         <div class="line"></div>
                         <div class="collapse navbar-collapse" id="navbarSupportedContent">
                             <ul class="navbar-nav mr-auto" id="tblmenuUsuario1" name="tblmenuUsuario1">

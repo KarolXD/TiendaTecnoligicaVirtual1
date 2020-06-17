@@ -3,8 +3,13 @@ include_once 'public/headerCliente.php';
 ?>
 
 <div class="container" >
+        <br>
+            <hr style="color: #999">
+    <center><h5>Lista de Combos</h5></center>
+    <hr style="color: #999">
+           <br>       <br>       <br>       <br>
     <div class="row ">
-
+       <br>       <br>       <br>
         <?php
         foreach ($vars['listado'] as $item) {
             ?>
@@ -37,6 +42,7 @@ include_once 'public/headerCliente.php';
         }
         ?>
     </div>
+           <br>       <br>       <br>       <br>
 </div>
 <?php
 include_once 'public/footer.php';

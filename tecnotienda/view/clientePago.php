@@ -30,9 +30,10 @@ global $total;
                     <div class="form-group"> 
                         <textarea class="form-control" id="detalle" name="detalle[]" readonly> <?php echo $item[0] ?> </textarea>
                     </div>                 
-                    <input type="hidden"  value="<?php echo $item[1] ?>" class="form-control"  id="cantidadarticulos" name="cantidadarticulos[]">
-                    <input type="hidden"  value="<?php echo $item[3] ?>" class="form-control"  id="idproducto" name="idproducto[]">
-
+                <input type="hidden"  value="<?php echo $item[1] ?>" class="form-control"  id="cantidadarticulos" name="cantidadarticulos[]">
+                <input type="hidden"  value="<?php echo $item[3] ?>" class="form-control"  id="idproducto" name="idproducto[]">
+                    
+                <input type="hidden"  value="<?php echo $item[3] ?>" class="form-control"  id="id" name="id">
 
                     <?php
                 }

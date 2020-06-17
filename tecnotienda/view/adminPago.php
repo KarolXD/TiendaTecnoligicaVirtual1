@@ -18,6 +18,7 @@ require 'public/headerMenuP.php';
                         <th scope="col">Detalle</th>
                         <th scope="col">CxC</th>
                        <th scope="col">Contado</th>
+                           <th scope="col">Fecha</th>
                     </tr>
                 </thead>
 
@@ -37,6 +38,7 @@ require 'public/headerMenuP.php';
                             <td><?php echo $item[2] ?></td>
                             <td><?php echo $item[3] ?></td>
                              <td><?php echo $item[4] ?></td>
+                               <td><?php echo $item[5] ?></td>
                         </tr>
 
                         <?php

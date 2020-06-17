@@ -17,6 +17,7 @@ include_once 'public/headerCliente.php';
                     <th scope="col">Total Deuda</th>
                       <th scope="col">Total Factura</th>
                     <th scope="col">Fecha Limite de Pago</th>
+                     <th scope="col">Producto</th>
                 </tr>
             </thead>
             <tbody>
@@ -31,7 +32,8 @@ include_once 'public/headerCliente.php';
                         <th ><?php echo $item[4] ?></th>
                         <th ><?php echo $item[5] ?></th>
                        <th ><?php echo $item[6] ?></th>
-
+                       <th ><?php echo $item[7] ?></th>
+ 
                     </tr>
                     <?php
                 }
@@ -39,6 +41,8 @@ include_once 'public/headerCliente.php';
             </tbody>
         </table>
     </div>
+    
+<hr style="color:black">
 </div>
 <br><br><br>
 <?php

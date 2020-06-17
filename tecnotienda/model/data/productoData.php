@@ -260,6 +260,14 @@ and  imagen.tbproductoid=producto.tbproductoid
         return $resultado;
     }
 
+    public function listarCombos2() {
+        $consulta = $this->db->prepare('select * from tbcombo  ');
+        $consulta->execute();
+        $resultado = $consulta->fetchAll();
+        $consulta->CloseCursor();
+        return $resultado;
+    }
+
     public function mostrardetallesProducto($idproducto) {
         $consulta = $this->db->prepare('select 
 

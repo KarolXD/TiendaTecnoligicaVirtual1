@@ -15,6 +15,16 @@ class CompraController {
         $this->view->show("adminCxc.php", $dato);
     }
     
+    public function listarCompras() {
+        require 'model/data/compraDato.php';
+        $PD = new compraDato();
+       
+         session_start();
+        $usuario = $_SESSION["usuario"];
+        $dato["listado"] = $PD->listarCompras($usuario);
+        $this->view->show("listarCompras.php",$dato);
+    }
+    
     public function listarMorosos() {
         require 'model/data/compraDato.php';
         $PD = new compraDato();
@@ -30,7 +40,9 @@ class CompraController {
         $cantidad = $_POST["3"];
         $resultad = $items->agregaralcarrito($idproducto, $usuario, $cantidad);
         if ($resultad == 0) {
-            echo "<script> alert('Agregado al carrito'); </script>";
+            
+        echo $resul=   $items->productoVendido($idproducto, $usuario, $cantidad);
+            echo "<script> alert('Agregado al carrito' ); </script>";
         } else {
             echo "<script> alert('No agregado al carrito'); </script>";
         }
@@ -53,7 +65,10 @@ class CompraController {
         require 'model/data/compraDato.php';
         $items = new compraDato();
         $usuario = $_SESSION["usuario"];
+        
+          $items->borrarproductoVendido($_GET["productoid"]);
         $items->quitardelCarrito($_GET["productoid"]);
+          
         $dato['listado'] = $items->listarCarritoCompras($usuario);
         $this->view->show("vistaCarritoCliente.php", $dato);
     }
@@ -76,18 +91,20 @@ class CompraController {
         $dato['listado'] = $items->listarDetalleAbono($usuario);
         $this->view->show("detalleAbono.php", $dato);
     }
-
+    
+   
     public function compraCliente() {
         require 'model/data/compraDato.php';
         $items = new compraDato();
         $usuario = $_POST["cliente"];
-        $valor = "";
+        $idProducto=$_POST["id"];
+        $valor1 = "";
         $detalle = $_POST["detalle"];
         $array_num = count($detalle);
         $tipopago = $_POST["tipopago"];
 
         for ($i = 0; $i < $array_num; $i++) {
-            $valor .= $detalle[$i] . ",";
+            $valor1 .= $detalle[$i] . ",";
         }
         $resultado = "";
         $valor = "";
@@ -111,9 +128,9 @@ class CompraController {
                 $sumarmeses = "+" . $obtenerMeses . "month";
                 $fechalimite = date("Y-m-d", strtotime($fechaActual . $sumarmeses));
 
-                $items->registrarventaporcobrar($usuario, $cuentaporpagar, ($totalcontado - $cuentaporpagar), $totalcontado, $fechalimite);
+                $items->registrarventaporcobrar($usuario, $cuentaporpagar, ($totalcontado - $cuentaporpagar), $totalcontado, $fechalimite,$idProducto);
 
-                $resultado = $items->registrarPago($usuario, $valor, 1, 0);
+                $resultado = $items->registrarPago($usuario, $valor1, 1, 0,$idProducto);
                 if ($resultado == 0) {
                     $idproducto = $_POST["idproducto"];
                     $cantidadAr = $_POST["cantidadarticulos"];
@@ -126,6 +143,7 @@ class CompraController {
                     }
 
                     if ($resul1 == 1 && $resul2 == 1) {
+                     
                         echo '<script src="./public/js/jquery-3.3.1.js" type="text/javascript"> </script>  <script>   $(function() {   $("#alertControl").html("<div > <strong>Mensaje!</strong> Compra  realizada </div> ");  });</script>';
                     } else {
                         echo '<script src="./public/js/jquery-3.3.1.js" type="text/javascript"> </script>  <script>   $(function() {   $("#alertControl").html("<div > <strong>Advertencia!</strong> No se ha podido realizar su compra! </div> ");  });</script>';
@@ -137,7 +155,7 @@ class CompraController {
                 echo '<script src="./public/js/jquery-3.3.1.js" type="text/javascript"> </script>  <script>   $(function() {   $("#alertControl").html("<div > <strong>Advertencia!</strong> Existe un abono pendiente. Debe cancelarlo antes!! </div> ");  });</script>';
             }
         }else{
-        $resultado2 = $items->registrarPago($usuario, $valor, 0, $totalcontado);
+        $resultado2 = $items->registrarPago($usuario, $valor1, 0, $totalcontado,$idProducto );
         if ($resultado2 == 0) {
             $idproducto = $_POST["idproducto"];
             $cantidadAr = $_POST["cantidadarticulos"];

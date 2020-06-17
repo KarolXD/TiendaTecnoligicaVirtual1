@@ -57,8 +57,8 @@ global $total;
                    </div>
        <hr style="color: #47748b">
                     <div class="form-group" >
-                        <label for="detalle">Cantidad Abonar: </label>
-                        <input  style="border:1px solid red" type="number" readonly=""  value="<?php echo $item[2] ?>" class="form-control"  id="cuentaporpagar" name="cuentaporpagar">
+                        <label for="detalle">Cantidad Abonar:  la cantidad debe ser mayor a :<?php echo $item[2] ?>"</label>
+                        <input  style="border:1px solid red" type="number"   value="<?php echo $item[2] ?>" class="form-control"  id="cuentaporpagar" name="cuentaporpagar">
                     </div>
 
        <hr style="color: #47748b">
@@ -90,7 +90,14 @@ global $total;
 
     </div>
 </div>
-
+<script>
+    $(document).ready(function () {
+    var cuentaporpagar=    $("#cuentaporpagar").val;
+      
+        
+    }
+//cuentaporpagar
+</script>
 <br><br>
 <?php
 require 'public/footer.php';

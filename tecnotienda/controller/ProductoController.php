@@ -10,10 +10,43 @@ class ProductoController {
         $this->view->show("registrarCaracteristica.php", null);
     }
 
-    public function temporal() {
+    public function admi_productosmenosvendido(){
+     require 'model/data/compraDato.php';
+        $items = new compraDato();
+        $dato['listado'] = $items->adm_listarmenosvendido();
+        $this->view->show("admi_productosmenosvendido.php", $dato);   
+    }
+    
+    public function adm_productomasvendido() {
 
+        $this->view->show("adm_productomasvendido.php", null);
+    }
+    
+    
+  public function admi_productosmasvistos() {
+    require 'model/data/compraDato.php';
+        $items = new compraDato();
+        $dato['listado'] = $items->adm_listarmasvistos();
+        $this->view->show("admi_productosmasvistos.php", $dato);
+    }
+    //menu
+    public function adm_productovendidocxcc() {
 
-        $this->view->show("temporal.php", null);
+        $this->view->show("adm_productovendidocxcc.php");
+    }
+
+    public function adm_productovendidocxc() {
+        require 'model/data/compraDato.php';
+        $items = new compraDato();
+        $dato['listado'] = $items->adm_listarcxc();
+        $this->view->show("adm_productovendidocxc.php", $dato);
+    }
+
+    public function adm_productovendidocontado() {
+        require 'model/data/compraDato.php';
+        $items = new compraDato();
+        $dato['listado'] = $items->adm_listarcredito();
+        $this->view->show("adm_productovendidocontado.php", $dato);
     }
 
     public function guardarCaracteristica() {

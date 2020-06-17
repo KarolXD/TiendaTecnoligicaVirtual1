@@ -17,6 +17,15 @@ class SubCategoriaController {
         $this->view = new View();
     }
 
+      public function listaDeseos() {
+        require 'model/data/subcategoriaDato.php';
+        $PD = new subcategoriaDato();
+        session_start();
+    
+        $dato["listado"] = $PD->listarDeseos($_SESSION["usuario"]);
+        $this->view->show("listaDeseos.php",$dato);
+    }
+
     public function registrarSubCategoriaVista() {
         $this->view->show("registrarSubCategoriaVista.php");
     }
@@ -79,6 +88,7 @@ class SubCategoriaController {
         $this->view->show("mostrarSubCategorias.php", $data);
     }
 
+    
     public function mostrarSubCategoriaCliente() {
         require 'model/data/subcategoriaDato.php';
         $PD = new subcategoriaDato();
@@ -120,6 +130,16 @@ class SubCategoriaController {
         $data['listado'] = ($PD->filtrardetalleSubcategoria($_SESSION['subcategoriaid2'], $filtro));
         $this->view->show("filtrardetallesSubcategoria.php", $data);
     }
+      public function agregarListaDeseos() {
+             require 'model/data/subcategoriaDato.php';
+        $PD = new subcategoriaDato();
+     
+        $PD->agregarListaDeseos(  $_POST["productoid"], $_POST["usuario"]);
+       $data['listado2'] = ($PD->obtenerCriterios($_POST['subcategoria']));
+        $data['listado'] = ($PD->listadetalleSubcategoria($_POST['subcategoria']));
+        $this->view->show("mostrardetallesSubCategoriaCliente.php", $data);
+    }
+
 
     public function mostrardetallesSubCategoriaCliente() {
         require 'model/data/subcategoriaDato.php';

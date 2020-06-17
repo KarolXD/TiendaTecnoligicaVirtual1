@@ -9,8 +9,42 @@ class subcategoriaDato {
         require 'libs/SPDO.php';
         $this->db = SPDO::singleton();
     }
+    
+    
+    public function listarDeseos($clienteid) {
+        $consulta = $this->db->prepare(' select i.tbproductoimagenruta,c.tbproductocaracteristicastitulo, pr.tbproductoprecioventa,
+s.tbsubcategorianombre,p.tbproductoid, s.tbcategoriaid
+ from  tbsubcategoria s
+join tbproducto p on  s.tbsubcategoriaid=p.tbsubcategoriaid
+join tbproductoprecio pr on pr.tbproductoid=p.tbproductoid
+join tbproductoimagen i on i.tbproductoid=p.tbproductoid
+join tbproductocaracteristica c on c.tbproductoid=p.tbproductoid
+join tbclientedeseo  d on d.tbproductoid=p.tbproductoid
+where 
+s.tbsubcategoriaid=p.tbsubcategoriaid and
+pr.tbproductoid=p.tbproductoid and
+i.tbproductoid=p.tbproductoid and
+c.tbproductoid=p.tbproductoid and   p.tbproductoestado=0 and  d.tbclienteid="'.$clienteid.'"   ');
+        $consulta->execute();
+        $resultado = $consulta->fetchAll();
+        $consulta->CloseCursor();
+        return $resultado;
+    }
+
+    public function agregarListaDeseos($productoid,$usuario){
+              $data = array( $productoid,$usuario);
+        $consulta = $this->db->prepare('insert into tbclientedeseo (tbproductoid,tbclienteid) values(?,?)');
+
+        if ($consulta->execute($data)) {
+            $consulta->errorInfo()[2];
+            return 1;
+        } else {
+            return -1;
+        } 
+    }
 
       public function obtenerCriterios($subcategoriaid) {
+           
    $this->registroCriteriosClicks($_SESSION["usuario"], 0, 0, 0,  1, 0, 1);
   $consulta = $this->db->prepare('SELECT tbproductocaracteristica1id, tbproductocaracteristica1criterio,tbproductocaracteristica1titulo from tbproducto p join temporalArticulos t
 on p.tbproductoid =t.tbproductoid where  p.tbproductoid =t.tbproductoid

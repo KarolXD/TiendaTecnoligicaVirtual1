@@ -8,23 +8,33 @@ class compraDato {
         require 'libs/SPDO.php';
         $this->db = SPDO::singleton();
     }
-     public function obtenerCxc(){
-          $consulta = $this->db->prepare('select * from tbclientedetalleabono' );
+
+    public function obtenerCxc() {
+        $consulta = $this->db->prepare('select * from tbclientedetalleabono');
         $consulta->execute();
         $resultado = $consulta->fetchAll();
         $consulta->CloseCursor();
         return $resultado;
     }
 
-    public function obtenerMorosos(){
-          $consulta = $this->db->prepare('
-select * from tbclientemoroso;' );
+    public function listarCompras($usuario) {
+        $consulta = $this->db->prepare('
+
+select tbclientecompraid,tbclienteid,tbcompradetalle,tbventacontado,tbclientecomprafechacompra from tbclientecompra where tbclienteid="' . $usuario . '";');
         $consulta->execute();
         $resultado = $consulta->fetchAll();
         $consulta->CloseCursor();
         return $resultado;
     }
 
+    public function obtenerMorosos() {
+        $consulta = $this->db->prepare('
+select * from tbclientemoroso;');
+        $consulta->execute();
+        $resultado = $consulta->fetchAll();
+        $consulta->CloseCursor();
+        return $resultado;
+    }
 
     public function agregaralcarrito($producto, $usuario, $cantidad) {
         $data = array($producto, $usuario, $cantidad);
@@ -32,7 +42,45 @@ select * from tbclientemoroso;' );
         (tbproductoid,tbclienteid,tbclientecarritocompracantidad) 
         VALUES (?,?,?)');
         if ($consulta->execute($data)) {
+
             $consulta->errorInfo()[2];
+            return 0;
+        } else {
+            return 1;
+        }
+    }
+
+    public function productoVendido($productoid, $clienteid, $productovendidocantidad) {
+        $consulta = $this->db->prepare('
+      select @id:=p.tbproductoid, @subca:=p.tbsubcategoriaid,  @nombre:=c.tbproductocaracteristicastitulo,
+ @precio:=pp.tbproductoprecioventa from 
+tbproducto p join tbproductocaracteristica c on p.tbproductoid=c.tbproductoid
+join tbproductoprecio pp on pp.tbproductoid=p.tbproductoid
+where p.tbproductoid="' . $productoid . '";   
+    
+insert into tbproductovendido (tbclienteid,tbproductoid,tbsubcategoriaid,tbproductovendidocantidad,
+tbproductovendidonombre,tbproductovendidonombreprecio,
+tbproductovendidofecha,tbproductocancelado)
+values("' . $clienteid . '", @id,@subca, "' . $productovendidocantidad . '",@nombre,(@precio*"' . $productovendidocantidad . '"), now(),0 );');
+        if ($consulta->execute()) {
+            $resultado = $consulta->fetchAll();
+            $consulta->CloseCursor();
+
+            return 0;
+        } else {
+            return 1;
+        }
+    }
+
+    //fatlta afinar
+    public function borrarproductoVendido($idCarritoC) {
+        $consulta = $this->db->prepare('  select @idproducto:= tbproductoid    from tbclientecarritocompra where tbcarritocompraid="' . $idCarritoC . '";
+	select @id:=tbproductovendidoid from tbproductovendido where tbproductoid=@idproducto; 
+		delete from tbproductovendido where tbproductovendidoid=@id; ');
+        if ($consulta->execute()) {
+            $resultado = $consulta->fetchAll();
+            $consulta->CloseCursor();
+
             return 0;
         } else {
             return 1;
@@ -137,22 +185,84 @@ and cliente.tbclienteusuario= "' . $clienteid . '";');
         $consulta->CloseCursor();
         return $resultado;
     }
-public function listarDetalleAbono($clienteid) {
-        $consulta = $this->db->prepare('SELECT 
-* from tbclientedetalleabono where tbclienteid="' . $clienteid . '"');
+
+    public function adm_listarcxc() {
+        $consulta = $this->db->prepare('select v.tbclienteid, v.tbcompradetalle,v.tbclientecomprafechacompra
+from tbclientecompra v
+ join tbventaporcobrar vc on v.tbproductoid=vc.tbproductoid
+where v.tbproductoid=vc.tbproductoid  and v.tbventaporcobrar=1
+');
         $consulta->execute();
         $resultado = $consulta->fetchAll();
         $consulta->CloseCursor();
         return $resultado;
-}
-    public function registrarPago($idcliente, $detallecompra, $ventaporcobrar, $ventacontado) {
-        $data = array($idcliente, $detallecompra, $ventaporcobrar, $ventacontado);
+    }
+
+    public function adm_listarmenosvendido() {
+        $consulta = $this->db->prepare('select v.tbclienteid,v.tbproductovendidonombre
+, s.tbsubcategorianombre,v.tbproductovendidocantidad
+
+from tbproductovendido v
+join tbsubcategoria  s on
+s.tbsubcategoriaid=v.tbsubcategoriaid
+ where tbproductocancelado=0 and  tbproductovendidocantidad<5 and s.tbsubcategoriaid=v.tbsubcategoriaid
+  and tbsubcategorianombre<>"Laptops"
+order by tbproductovendidocantidad desc');
+        $consulta->execute();
+        $resultado = $consulta->fetchAll();
+        $consulta->CloseCursor();
+        return $resultado;
+    }
+
+    public function adm_listarmasvistos() {
+        $consulta = $this->db->prepare('select v.tbclienteid,v.tbproductovendidonombre
+, s.tbsubcategorianombre
+
+from tbproductovendido v
+join tbsubcategoria  s on
+s.tbsubcategoriaid=v.tbsubcategoriaid
+ where tbproductocancelado=0 and  tbproductovendidocantidad>=5 and s.tbsubcategoriaid=v.tbsubcategoriaid
+order by tbproductovendidocantidad desc');
+        $consulta->execute();
+        $resultado = $consulta->fetchAll();
+        $consulta->CloseCursor();
+        return $resultado;
+    }
+
+    public function adm_listarcredito() {
+        $consulta = $this->db->prepare('select v.tbclienteid,v.tbproductovendidonombre,v.tbproductovendidocantidad,v.tbproductovendidonombreprecio 
+, s.tbsubcategorianombre
+
+from tbproductovendido v
+join tbsubcategoria  s on
+s.tbsubcategoriaid=v.tbsubcategoriaid
+ where tbproductocancelado=0 and  tbproductovendidocantidad>=5 and s.tbsubcategoriaid=v.tbsubcategoriaid
+order by tbproductovendidocantidad desc');
+        $consulta->execute();
+        $resultado = $consulta->fetchAll();
+        $consulta->CloseCursor();
+        return $resultado;
+    }
+
+    public function listarDetalleAbono($clienteid) {
+        $consulta = $this->db->prepare('select  d.tbclienteabonoid, d.tbclienteid,d.tbcantidadpagada,d.tbfechaAbono,d.tbtotaldeuda,
+d.tbtotalfactura,d.tbfechalimite, c.tbproductocaracteristicastitulo
+ from tbclientedetalleabono  d join tbproductocaracteristica c
+on d.tbproductoid=c.tbproductoid where d.tbclienteid="' . $clienteid . '"');
+        $consulta->execute();
+        $resultado = $consulta->fetchAll();
+        $consulta->CloseCursor();
+        return $resultado;
+    }
+
+    public function registrarPago($idcliente, $detallecompra, $ventaporcobrar, $ventacontado, $tbproductoid) {
+        $data = array($idcliente, $detallecompra, $ventaporcobrar, $ventacontado, $tbproductoid);
         $consulta = $this->db->prepare('INSERT INTO `bdtecnotienda`.`tbclientecompra`
 (`tbclienteid`,
 `tbcompradetalle`,
 `tbventaporcobrar`,
-`tbventacontado`)
-        VALUES (?,?,?,?);');
+`tbventacontado`, tbclientecomprafechacompra,tbproductoid)
+        VALUES (?,?,?,?,now(),?);');
         if ($consulta->execute($data)) {
             $consulta->errorInfo()[2];
             return 0;
@@ -181,14 +291,15 @@ WHERE tbproductoid="' . $producto . '"');
         if ($consulta->execute()) {
             $resultado = $consulta->fetchAll();
             $consulta->CloseCursor();
+
             return 1;
         } else {
             return -1;
         }
     }
 
-    public function modificarventaporcobrar($idcliente, $tbcantidadpagada, $tbtotaldeuda, $ventacobrarid){
-           $data = array($idcliente, $tbcantidadpagada, $tbtotaldeuda,$ventacobrarid);
+    public function modificarventaporcobrar($idcliente, $tbcantidadpagada, $tbtotaldeuda, $ventacobrarid) {
+        $data = array($idcliente, $tbcantidadpagada, $tbtotaldeuda, $ventacobrarid);
         $consulta = $this->db->prepare('update  `bdtecnotienda`.`tbventaporcobrar`
                                        set  `tbclienteid`=?,
                                         `tbcantidadpagada` =?,
@@ -202,10 +313,11 @@ WHERE tbproductoid="' . $producto . '"');
             return 0;
         } else {
             return 1;
-        } 
+        }
     }
-    public function registrarventaporcobrar($idcliente, $tbcantidadpagada, $tbtotaldeuda, $tbtotalfactura, $fechalimite) {
-        $data = array($idcliente, $tbcantidadpagada, $tbtotaldeuda, $tbtotalfactura, $fechalimite);
+
+    public function registrarventaporcobrar($idcliente, $tbcantidadpagada, $tbtotaldeuda, $tbtotalfactura, $fechalimite, $tbproductoid) {
+        $data = array($idcliente, $tbcantidadpagada, $tbtotaldeuda, $tbtotalfactura, $fechalimite, $tbproductoid);
         $consulta = $this->db->prepare('INSERT INTO `bdtecnotienda`.`tbventaporcobrar`
                                         (`tbclienteid`,
                                         `tbcantidadpagada`,
@@ -213,8 +325,8 @@ WHERE tbproductoid="' . $producto . '"');
                                         `tbtotaldeuda`,
                                         `tbtotalfactura`,
                                         `tbfechalimite`,
-                                       `tbestadomoroso`)
-                                        VALUES(?,?,now(),?,?,?,0);');
+                                       `tbestadomoroso`,tbproductoid)
+                                        VALUES(?,?,now(),?,?,?,0,?);');
         if ($consulta->execute($data)) {
             $consulta->errorInfo()[2];
             return 0;
@@ -222,16 +334,15 @@ WHERE tbproductoid="' . $producto . '"');
             return 1;
         }
     }
-    
-     public function listarVentaCobrar($clienteid){
-              $consulta = $this->db->prepare('SELECT *
+
+    public function listarVentaCobrar($clienteid) {
+        $consulta = $this->db->prepare('SELECT *
         FROM `bdtecnotienda`.`tbventaporcobrar` where `tbventaporcobrar`.`tbclienteid` = "' . $clienteid . '"');
         $consulta->execute();
         $resultado = $consulta->fetchAll();
         $consulta->CloseCursor();
-        return $resultado;   
-         
-     }
+        return $resultado;
+    }
 
     public function listarmontoaDeber($clientecompraid) {
         $consulta = $this->db->prepare('SELECT 
@@ -247,12 +358,12 @@ WHERE tbproductoid="' . $producto . '"');
     public function validarSiPagado($clienteid) {
         $consulta = $this->db->prepare('SELECT count(*) as total
         FROM `bdtecnotienda`.`tbventaporcobrar` where `tbventaporcobrar`.`tbclienteid` = "' . $clienteid . '"');
-       
+
         if ($consulta->execute()) {
             $count = $consulta->fetch();
             if ($count['total'] > 0) {
                 return 1;
-            }else{
+            } else {
                 return 0;
             }
         } else {
