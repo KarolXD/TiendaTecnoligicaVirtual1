@@ -18,14 +18,13 @@ class UsuarioController {
     public function __construct() {
         $this->view = new View();
     }
-    
-    public function admcategorizacion(){
-          require 'model/data/usuarioDato.php';
+
+    public function admcategorizacion() {
+        require 'model/data/usuarioDato.php';
         $PD = new usuarioDato();
-        $dato["categorizacion"]=$PD->obtenerCategorias();
-                $this->view->show("admcategorizacion.php",$dato);
+        $dato["categorizacion"] = $PD->obtenerCategorias();
+        $this->view->show("admcategorizacion.php", $dato);
     }
-    
 
     public function cerrarSession() {
         session_start();
@@ -46,6 +45,38 @@ class UsuarioController {
 
     public function menuPrincipalUsuario() {
         $this->view->show("menuUsuario.php");
+    }
+
+    public function graficos() {
+        require 'model/data/usuarioDato.php';
+        $PD = new usuarioDato();
+        $dato["listado"] = $PD->estadoResultados();
+        $this->view->show("graficoCierres.php", $dato);
+    }
+
+    public function graficosD() {
+        $this->view->show("graficoDiario.php");
+    }
+
+    public function asientos() {
+        require 'model/data/usuarioDato.php';
+        $PD = new usuarioDato();
+        $dato["listado"] = $PD->asientos();
+        $this->view->show("asientos.php", $dato);
+    }
+
+    public function estadoResultado() {
+        require 'model/data/usuarioDato.php';
+        $PD = new usuarioDato();
+        $dato["listado"] = $PD->estadoResultados();
+        $this->view->show("estadoResultado.php", $dato);
+    }
+
+    public function cierreMensual() {
+        require 'model/data/usuarioDato.php';
+        $PD = new usuarioDato();
+        $dato["listado"] = $PD->estadoResultados();
+        $this->view->show("cierreMenssual.php", $dato);
     }
 
     public function listarUsuarios() {

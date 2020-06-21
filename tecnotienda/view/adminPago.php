@@ -55,3 +55,4 @@ require 'public/headerMenuP.php';
 <br><br><br><br>
 <?php
 require 'public/footer.php';
+?>

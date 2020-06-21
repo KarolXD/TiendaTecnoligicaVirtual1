@@ -144,6 +144,21 @@
                                     
                             </div>
                         </div>
+                        
+                        
+                        <div class="dropdown">
+                            <button class=" btn btn-outline-info my-2 my-sm-0 dropdown-toggle" href=""  id="dropdownMenuButton3" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Contabilidad
+                            </button>
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton3">
+                                <a class="dropdown-item" href="?controlador=Usuario&accion=estadoResultado">Estado Resultado</a>
+                                <a class="dropdown-item" href="?controlador=Usuario&accion=asientos">Asientos</a>
+                                <a class="dropdown-item" href="?controlador=Usuario&accion=cierreMensual">Cierre mensual</a>
+                                <a class="dropdown-item" href="?controlador=Usuario&accion=graficos">Grafico Mensual</a>
+                                <a class="dropdown-item" href="?controlador=Usuario&accion=graficosD">Grafico Diario</a>
+                        
+                            </div>
+                        </div>
                       
                         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                             <span class="navbar-toggler-icon"></span>
