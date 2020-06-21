@@ -8,7 +8,26 @@ class compraDato {
         require 'libs/SPDO.php';
         $this->db = SPDO::singleton();
     }
-
+     
+      public function morosidadmensual() {
+        $consulta = $this->db->prepare(' select sum(tbclientemorosodeuda),sum(tbclientemontofactura) from tbclientemoroso;
+    ');
+        $consulta->execute();
+        $resultado = $consulta->fetchAll();
+        $consulta->CloseCursor();
+        return $resultado;
+    }
+    public function morosidadByCategogia() {
+        $consulta = $this->db->prepare('   select c.tbtbclienteid, c.tbclientecategorizacionnombre,
+    m.tbclientemorosodeuda , m.tbclientemorosofecha, m.tbventaporcobrarid from tbclientecategorizacion c
+    join tbclientemoroso m
+    on c.tbtbclienteid=m.tbclienteid where  c.tbtbclienteid=m.tbclienteid
+    ');
+        $consulta->execute();
+        $resultado = $consulta->fetchAll();
+        $consulta->CloseCursor();
+        return $resultado;
+    }
     public function obtenerCxc() {
         $consulta = $this->db->prepare('select * from tbclientedetalleabono');
         $consulta->execute();

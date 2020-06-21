@@ -53,7 +53,10 @@ include_once 'public/header.php';
                             </table>
                         </div>
 
-
+                        <div class="form-group">
+                            <label class="form-control-label">Fecha Nacimiento</label>
+                            <input type="date" name="fechaNacimiento" id="fechaNacimiento">
+                        </div>
                         <div class="form-group">
                             <label class="form-control-label">Direccion</label>
 

@@ -56,7 +56,7 @@
                     </a>
                                   <li class="nav-item" style="color:#ddd">
                               
-                                    <a class=" btn btn-outline-dark" href="?controlador=Cliente&accion=cerrarSession">        <img src="./public/img/signs.png" alt=""/>Cerrar</a>
+                                    <a class=" btn btn-outline-danger" href="?controlador=Cliente&accion=cerrarSession">        <img src="./public/img/signs.png" alt=""/>Cerrar</a>
                                 </li>
                 </nav>
 

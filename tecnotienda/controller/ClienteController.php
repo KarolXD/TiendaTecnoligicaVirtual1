@@ -7,6 +7,12 @@ class ClienteController {
         $this->view = new View();
     }
 
+    public function productomascompradoByclientes(){
+        
+        
+          $this->view->show("productomascompradoByclientes.php");
+    }
+    
     public function cerrarSession() {
         session_start();
 
@@ -263,7 +269,7 @@ $data["listado"]=$items->obtenerMorosos();
             $resultado2 = $items->registrarTelefono($usuario, $valor2, $temp2);
             $resultado4 = $items->registrarDireccion($usuario, $provincia, $canton, $distrito, $descripcion);
             $resultado5 = $items->registrarCuentaBancaria($usuario, $banco, $numerocuenta);
-            $resultado6 = $items->registrarClienteCategorizacion($usuario);
+            $resultado6 = $items->registrarClienteCategorizacion($usuario,$_POST["fechaNacimiento"]);
             if ($resultado2 == 1 && $resultado1 == 1 && $resultado4 == 1 && $resultado5 == 1 && $resultado6 == 1) {
                 echo '<script src="./public/js/jquery-3.3.1.js" type="text/javascript"> </script>  <script>   $(function() {   $("#alertControl").html("<div > <strong>Mensaje!</strong>  Se ha registrado correctamente el cliente</div> ");  });</script>';
             } else {
