@@ -15,6 +15,24 @@ class CompraController {
         $this->view->show("adminCxc.php", $dato);
     }
     
+    public function productomascompradoByclientes(){
+          $this->view->show("productomascompradoByclientes.php");    
+    }
+    
+    public function morosomensual(){
+        
+        require 'model/data/compraDato.php';
+        $PD = new compraDato();
+        $dato["listado"] = $PD->morosidadmensual();
+        $this->view->show("morosomensual.php",$dato); 
+    }
+    public function morosidadcategoria(){
+        require 'model/data/compraDato.php';
+        $PD = new compraDato();
+        $dato["listado"] = $PD->morosidadByCategogia();
+        $this->view->show("morosidadcategoria.php", $dato); 
+    }
+    
     public function listarCompras() {
         require 'model/data/compraDato.php';
         $PD = new compraDato();

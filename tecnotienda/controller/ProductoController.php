@@ -9,6 +9,27 @@ class ProductoController {
     public function registrarCaracteristica() {
         $this->view->show("registrarCaracteristica.php", null);
     }
+    
+       public function productovendidoBydia() {
+        require 'model/data/compraDato.php';
+        $items = new compraDato();
+        $dato['listado'] = $items->productovendidoBydia();
+        $this->view->show("productovendidoBydia.php", $dato);
+    }
+
+    public function productovendidoBymes() {
+        require 'model/data/compraDato.php';
+        $items = new compraDato();
+        $dato['listado'] = $items->productovendidoBymes();
+        $this->view->show("productovendidoBymes.php", $dato);
+    }
+       public function productovendidoByquincena() {
+           require 'model/data/compraDato.php';
+        $items = new compraDato();
+        $dato['listado'] = $items->productovendidoByquincena();
+        $this->view->show("productovendidoByquincena.php", $dato);
+    }
+    
 
     public function admi_productosmenosvendido(){
      require 'model/data/compraDato.php';

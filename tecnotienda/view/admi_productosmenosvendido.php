@@ -14,7 +14,6 @@ require 'public/headerMenuP.php';
             <thead class="thead-dark">
                 <tr>
                   
-                    <th scope="col">Cliente</th>
                     <th scope="col">Detalle</th>
                     <th scope="col">Menos Vendidas</th>
                       <th scope="col">Cantidad</th>
@@ -28,7 +27,6 @@ require 'public/headerMenuP.php';
                     <th scope="row"><?php echo $item[0] ?></th>
                     <td><?php echo $item[1] ?></td>
                     <td><?php echo $item[2] ?></td>
-                      <td><?php echo $item[3] ?></td>
                 </tr>
      <?php
                 }

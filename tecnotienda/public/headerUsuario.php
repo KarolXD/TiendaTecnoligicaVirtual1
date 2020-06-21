@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 
-<html lang="es">
+<html lang="es" lang="es">
     <!DOCTYPE html>
     <html lang="en">
         <head profile="http://www.w3.org/2005/10/profile">

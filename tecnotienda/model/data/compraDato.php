@@ -8,7 +8,59 @@ class compraDato {
         require 'libs/SPDO.php';
         $this->db = SPDO::singleton();
     }
-
+   
+     
+                public function productovendidoBydia() {
+        $consulta = $this->db->prepare(' select tbproductovendidofecha,tbproductovendidonombre,
+   tbproductovendidocantidad,DAYNAME(tbproductovendidofecha) from tbproductovendido
+   where tbproductovendidocantidad>5
+    ');
+        $consulta->execute();
+        $resultado = $consulta->fetchAll();
+        $consulta->CloseCursor();
+        return $resultado;
+    }
+               public function productovendidoBymes() {
+        $consulta = $this->db->prepare('   select tbproductovendidofecha,tbproductovendidonombre,
+   tbproductovendidocantidad,MONTHNAME(tbproductovendidofecha) from tbproductovendido
+   where tbproductovendidocantidad>5
+    ');
+        $consulta->execute();
+        $resultado = $consulta->fetchAll();
+        $consulta->CloseCursor();
+        return $resultado;
+    }
+    
+               public function productovendidoByquincena() {
+        $consulta = $this->db->prepare('   select tbproductovendidofecha,tbproductovendidonombre,
+   tbproductovendidocantidad,MONTHNAME(tbproductovendidofecha) from tbproductovendido
+   where tbproductovendidocantidad>5
+    ');
+        $consulta->execute();
+        $resultado = $consulta->fetchAll();
+        $consulta->CloseCursor();
+        return $resultado;
+    }
+            
+      public function morosidadmensual() {
+        $consulta = $this->db->prepare(' select sum(tbclientemorosodeuda),sum(tbclientemontofactura) from tbclientemoroso;
+    ');
+        $consulta->execute();
+        $resultado = $consulta->fetchAll();
+        $consulta->CloseCursor();
+        return $resultado;
+    }
+    public function morosidadByCategogia() {
+        $consulta = $this->db->prepare('   select c.tbtbclienteid, c.tbclientecategorizacionnombre,
+    m.tbclientemorosodeuda , m.tbclientemorosofecha, m.tbventaporcobrarid from tbclientecategorizacion c
+    join tbclientemoroso m
+    on c.tbtbclienteid=m.tbclienteid where  c.tbtbclienteid=m.tbclienteid
+    ');
+        $consulta->execute();
+        $resultado = $consulta->fetchAll();
+        $consulta->CloseCursor();
+        return $resultado;
+    }
     public function obtenerCxc() {
         $consulta = $this->db->prepare('select * from tbclientedetalleabono');
         $consulta->execute();
@@ -199,7 +251,7 @@ where v.tbproductoid=vc.tbproductoid  and v.tbventaporcobrar=1
     }
 
     public function adm_listarmenosvendido() {
-        $consulta = $this->db->prepare('select v.tbclienteid,v.tbproductovendidonombre
+        $consulta = $this->db->prepare('select v.tbproductovendidonombre
 , s.tbsubcategorianombre,v.tbproductovendidocantidad
 
 from tbproductovendido v
@@ -207,7 +259,7 @@ join tbsubcategoria  s on
 s.tbsubcategoriaid=v.tbsubcategoriaid
  where tbproductocancelado=0 and  tbproductovendidocantidad<5 and s.tbsubcategoriaid=v.tbsubcategoriaid
   and tbsubcategorianombre<>"Laptops"
-order by tbproductovendidocantidad desc');
+group by v.tbproductovendidonombre');
         $consulta->execute();
         $resultado = $consulta->fetchAll();
         $consulta->CloseCursor();
@@ -215,14 +267,14 @@ order by tbproductovendidocantidad desc');
     }
 
     public function adm_listarmasvistos() {
-        $consulta = $this->db->prepare('select v.tbclienteid,v.tbproductovendidonombre
+        $consulta = $this->db->prepare('select v.tbproductovendidonombre
 , s.tbsubcategorianombre
 
 from tbproductovendido v
 join tbsubcategoria  s on
 s.tbsubcategoriaid=v.tbsubcategoriaid
  where tbproductocancelado=0 and  tbproductovendidocantidad>=5 and s.tbsubcategoriaid=v.tbsubcategoriaid
-order by tbproductovendidocantidad desc');
+group by v.tbproductovendidonombre ');
         $consulta->execute();
         $resultado = $consulta->fetchAll();
         $consulta->CloseCursor();

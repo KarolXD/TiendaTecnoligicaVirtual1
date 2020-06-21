@@ -55,10 +55,10 @@ on o.tbproductoid=a.tbproductoid group by(o.tbproductoid)
         }
     }
 
-    public function registrarClienteCategorizacion($cliente) {
-          $data = array($cliente);
-        $consulta = $this->db->prepare('INSERT INTO `bdtecnotienda`.`tbclientecategorizacion`(`tbtbclienteid`,`tbclientecategorizacionnombre`,`tbclientecategorizaciondescuento`,`tbclientecategorizacionpuntoscompra`)
-VALUES(?,"Inactivo",0,0);');
+    public function registrarClienteCategorizacion($cliente,$fecha) {
+          $data = array($cliente,$fecha);
+        $consulta = $this->db->prepare('INSERT INTO `bdtecnotienda`.`tbclientecategorizacion`(`tbtbclienteid`,`tbclientecategorizacionnombre`,`tbclientecategorizaciondescuento`,`tbclientecategorizacionpuntoscompra`,tbclientefechanacimiento)
+VALUES(?,"Inactivo",0,0,?);');
         if ($consulta->execute($data)) {
             $resultado = $consulta->fetchAll();
           $consulta->errorInfo()[2];
