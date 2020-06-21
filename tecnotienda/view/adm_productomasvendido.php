@@ -9,18 +9,18 @@ require 'public/headerMenuP.php';
     <div class="row">
         <div class="col-md-4">
             <div class="form-group">
-                <a href="#" class="btn btn-outline-primary " role="button" aria-pressed="true">Producto más vendido por día</a>
+                <a href="?controlador=Producto&accion=productovendidoBydia" class="btn btn-outline-primary " role="button" aria-pressed="true">Producto más vendido por día</a>
             </div>
         </div>
         <div class="col-md-4">
             <div class="form-group">
-                <a href="#" class="btn btn-outline-secondary " role="button" aria-pressed="true">Producto más vendido por quincenal</a>
+                <a href="?controlador=Producto&accion=productovendidoBymes" class="btn btn-outline-secondary " role="button" aria-pressed="true">Producto más vendido por quincenal</a>
             </div>
         </div>
         <div class="col-md-4">
 
             <div class="form-group">
-                <a href="#" class="btn btn-outline-dark" role="button" aria-pressed="true">Producto más vendido por  mensual</a>
+                <a href="?controlador=Producto&accion=productovendidoByquincena" class="btn btn-outline-dark" role="button" aria-pressed="true">Producto más vendido por  mensual</a>
             </div>
         </div>
 
