@@ -57,8 +57,8 @@ global $total;
                    </div>
        <hr style="color: #47748b">
                     <div class="form-group" >
-                        <label for="detalle">Cantidad Abonar:  la cantidad debe ser mayor a :<?php echo $item[2] ?>"</label>
-                        <input  style="border:1px solid red" type="number"   value="<?php echo $item[2] ?>" class="form-control"  id="cuentaporpagar" name="cuentaporpagar">
+                        <label for="detalle">Cantidad Abonar  <?php echo $item[4]/3 ?></label>
+                        <input  style="border:1px solid red" type="number"  required=""  value="" class="form-control"  id="cuentaporpagar" name="cuentaporpagar">
                     </div>
 
        <hr style="color: #47748b">

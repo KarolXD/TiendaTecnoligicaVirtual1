@@ -2,6 +2,46 @@ create database bdtecnotienda;
 use bdtecnotienda;
 
 
+    create table tbcombo(
+       tbcombocomboid int(11) auto_increment  primary key
+tbcombocodigoBarra int(11) ,
+tbcombocantidad int(11) ,
+tbcomboprecio float ,
+tbcombotitulo varchar(100) ,
+tbcomboimagen varchar(300)
+        )
+
+   create table tbclienteperfilado(
+   tbclienteperfiladoid int auto_increment primary key,
+   tbclienteid varchar(50),
+   tbclienteperfiladocantidadclick int,
+   tbclienteperfiladocantidadcxc int,
+   tbclienteperfiladocantidadcontado int,
+   tbclienteperfiladomontocxc float,
+   tbclienteperfiladomontocontado float,
+   tbclienteperfiladocantidadcompras int,
+   tbclienteperfiladomontocompras float);
+   
+create table tbclientedeseo(
+tbclientedeseoid int auto_increment primary key,
+tbproductoid int not null,
+tbclienteid varchar(40)
+)
+
+create table tbproductovendido(
+tbproductovendidoid int auto_increment primary key,
+tbclienteid varchar(50),
+tbproductoid int,
+tbsubcategoriaid int,
+tbproductovendidocantidad int,
+tbproductovendidonombre varchar(100),
+tbproductovendidonombreprecio float,
+tbproductovendidofecha datetime)
+
+
+
+
+
 create table tboferta(
 tbofertaid int auto_increment primary key,
 tbofertaprecio double not null,
@@ -9,6 +49,21 @@ tbproductoid int,
 tbofertadescuento int,
 tbofertafechainicio  datetime,
 tbofertafechafin datetime);
+
+select * from tbventaporcobrar;
+
+create table tbclientedetalleabono(
+tbclienteabonoid int auto_increment primary key,
+tbclienteid varchar(50) not null,
+tbcantidadpagada double ,
+tbfechaAbono datetime,
+tbtotaldeuda float,
+tbtotalfactura float,
+tbfechalimite datetime,
+tbproductoid int
+);
+
+
 
 create table tbclicksoferta(
 tbclicksofertaid int auto_increment primary key,
@@ -23,6 +78,9 @@ tbclicksfertafecha datetime
 );
 
 
+
+
+
 create table tbclientemoroso(
 tbclientemorosoid int auto_increment primary key,
 tbclienteid varchar(40) not null,
@@ -30,8 +88,6 @@ tbventaporcobrarid int not null,
 tbclientemorosodeuda double,
 tbclientemorosofecha datetime
 )
-
-
 
 create table tbventaporcobrar
 (
@@ -42,9 +98,10 @@ tbfechaAbono datetime,
 tbtotaldeuda float,
 tbtotalfactura float,
 tbfechalimite datetime,
+tbestadomoroso INT,
+tbproductoid int,
 PRIMARY KEY (tbventacobrarid)
 )
-
 
 create table tbusuario(
 tbusuarioid  int auto_increment not null, 
@@ -143,15 +200,26 @@ tbproductoid int not null,
 tbclienteid varchar(50) not null,
 CONSTRAINT PK_tbcarritocompraid PRIMARY KEY (tbcarritocompraid)
 )
+create table temporalArticulos(
+tbproductocaracteristica1id int auto_increment primary key,
+tbproductoid int,
+tbproductocaracteristica1criterio varchar(300),
+tbproductocaracteristica1valor varchar(300),
+tbproductocaracteristica1titulo varchar(300),
+tbproductocaracteristicafoto varchar(4000)
+);
+
 
 create table tbclientecompra(
 tbclientecompraid int auto_increment,
 tbclienteid varchar(50) not null,
 tbcompradetalle varchar(50) not null,
 tbventaporcobrar int not null,		
-tbventacontado int not null,										
+tbventacontado int not null,
+tbproductoid int,										
 CONSTRAINT PK_tbclientecompraid PRIMARY KEY (tbclientecompraid)
 )
+alter table  tbclientecompra add tbproductoid int
 
 create table tbdireccion(
 tbdireccionid int auto_increment not null,
